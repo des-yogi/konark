@@ -1,0 +1,107 @@
+// В этом файле должны быть стили для БЭМ-блока theme-toggle, его элементов,
+// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
+// Очерёдность:
+// 1. Стилевые правила для этого селектора. 2. @media этого контекста.
+// 3. Псевдоселекторы и псевдоэлементы. 4. Вложенные сторонние селекторы.
+// 5. БЭМ-элементы. 6. БЭМ-модификаторы.
+
+// Раскомментируйте нужные подключения:
+// @use 'sass:math' as *;    // math.div(), math.round(), math.ceil(), math.floor(), math.percentage(), math.max(), math.min(), math.random()
+// @use 'sass:list' as *;    // list.append(), list.join(), list.nth(), list.length(), list.index(), list.separator()
+// @use 'sass:map' as *;     // map.get(), map.set(), map.merge(), map.keys(), map.values(), map.has-key(), map.remove()
+// @use 'sass:color' as *;   // color.adjust(), color.scale(), color.mix(), color.change(), color.complement(), color.invert()
+// @use 'sass:string' as *;  // string.index(), string.slice(), string.to-upper-case(), string.to-lower-case(), string.length(), string.insert()
+
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+.theme-toggle {
+  $block-name: &; // #{$block-name}__element
+
+  $segment-size: 48px;
+  $thumb-transition: transform $transition-time ease, background-color $transition-time ease;
+
+  // Thumb offset and icon colors; the roles of the icons swap in the dark theme
+  --toggle-shift: 0;
+  --toggle-icon-light: var(--btn-primary-label);
+  --toggle-icon-dark: var(--nav-text);
+
+  position: relative;
+  display: inline-flex;
+  gap: $space-4;
+  align-items: center;
+  padding: $space-4;
+  border: 0;
+  border-radius: $radius-14;
+  background-color: var(--nav-bg);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+  cursor: pointer;
+
+  [data-theme='dark'] & {
+    --toggle-shift: calc(100% + #{$space-4});
+    --toggle-icon-light: var(--nav-text);
+    --toggle-icon-dark: var(--btn-primary-label);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--nav-bg-hover);
+      box-shadow: $shadow-s-hover;
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid var(--nav-accent);
+    outline-offset: $focus-ring-offset;
+  }
+
+  &__thumb {
+    position: absolute;
+    top: $space-4;
+    left: $space-4;
+    width: $segment-size;
+    height: $segment-size;
+    border: 2px solid transparent; // visible in forced-colors mode: keeps the active option distinguishable
+    border-radius: $radius-12;
+    background-color: var(--btn-primary-bg);
+    transform: translateX(var(--toggle-shift));
+    transition: $thumb-transition;
+
+    // Keeps the slide alive: the global .page.theme-transition * rule would replace this transition
+    :root.theme-transition & {
+      transition: $thumb-transition;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    width: $segment-size;
+    height: $segment-size;
+    padding: $space-12;
+    color: var(--nav-text);
+    transition: color $transition-time ease;
+
+    &--light {
+      color: var(--btn-primary-label);
+
+      [data-theme='dark'] & {
+        color: var(--nav-text);
+      }
+    }
+
+    &--dark {
+      [data-theme='dark'] & {
+        color: var(--btn-primary-label);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &__thumb,
+    &__icon {
+      transition: none;
+    }
+  }
+}

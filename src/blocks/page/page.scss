@@ -1,0 +1,352 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use "sass:math";
+@use "sass:color";
+
+// Native UI (scrollbars, form controls) follows the chosen theme, not the OS one
+:root {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.page { // html
+
+  $block-name: &; // #{$block-name}__element
+
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%); // no standard equivalent: removes tap flash on mobile
+  text-size-adjust: 100%; // autoprefixer adds -webkit- for iOS (prevents font inflation in landscape)
+  min-width: 320px;
+  min-height: 100%;
+  scroll-padding-top: $header-height;
+
+  // Smooth anchor scrolling only for users who haven't asked to reduce motion
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+
+  // font-size: 15px;
+
+  &__inner {
+    min-height: 100svh; // small viewport height: no extra scroll on mobile when the URL bar is visible
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content {
+    flex-grow: 1;
+    background: linear-gradient(to bottom, var(--bg-gradient-2-start), var(--bg-gradient-2-end));
+  }
+
+  &__footer-wrapper {
+    flex-shrink: 0;
+    background: linear-gradient(to bottom, var(--bg-gradient-1-start), var(--bg-gradient-1-end));
+  }
+
+  // Scrollbars: standard properties (Chrome/Edge 121+, Firefox, Safari 26.2+).
+  // scrollbar-color is inherited — nested scroll containers get the same colors;
+  // scrollbar-width is not inherited — it applies to the page scrollbar only.
+  scrollbar-color: var(--text-accent-soft); // thumb, track
+  scrollbar-width: thin;
+
+  // Fallback for browsers without the standard properties (Safari < 26.2).
+  // Chrome 121+ ignores ::-webkit-scrollbar anyway once scrollbar-color/width are set.
+  @supports not (scrollbar-color: auto) {
+    &::-webkit-scrollbar,
+    & ::-webkit-scrollbar {
+      width: 6px; // vertical scrollbar
+      height: 6px; // horizontal scrollbar
+      background-color: $gray-lightest;
+    }
+
+    &::-webkit-scrollbar-thumb,
+    & ::-webkit-scrollbar-thumb {
+      background-color: var(--text-accent-soft);
+      border-radius: 8px;
+    }
+
+    // &::-webkit-scrollbar-thumb:hover,
+    // & ::-webkit-scrollbar-thumb:hover {
+    //   background-color: color.scale($main-color, $lightness: 5%);
+    // }
+  }
+
+  // Smooth theme switch: the tokens are animated on :root (see variables.scss).
+  // Per-element transitions of colors, backgrounds and shadows are switched off while it lasts,
+  // otherwise they lag behind the tokens and inherited colors (text vs icons) go out of sync.
+  // Transform, opacity and visibility keep working (theme toggle thumb, panels, text roll).
+  &.theme-transition *,
+  &.theme-transition *::before,
+  &.theme-transition *::after {
+    transition-property: transform, opacity, visibility !important; // stylelint-disable-line declaration-no-important
+  }
+}
+
+body {
+  // Типографика проекта — в блоке typo
+  background-color: var(--bg-primary);
+  margin: 0;
+}
+
+// Programmatic focus (tabindex="-1", e.g. after a skip link) shows no ring for mouse users
+[tabindex='-1']:focus:not(:focus-visible) {
+  outline: none !important; // stylelint-disable-line  declaration-no-important
+}
+
+// iOS 'clickable elements' fix for role='button'
+[role='button'] {
+  cursor: pointer;
+}
+
+// Safari: remove the inner padding/decoration of search inputs
+[type="search"]::-webkit-search-decoration {
+  appearance: none;
+}
+
+// Disable double-tap-to-zoom on fast repeated taps (e.g. +/- quantity buttons on iOS)
+a,
+button,
+[role='button'],
+input,
+label,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+// Firefox and Safari add default margins to form controls
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+// Firefox: form controls must not inherit text-transform
+button,
+select {
+  text-transform: none;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+textarea {
+  resize: vertical; // Правильное изменение размеров
+}
+
+// Фикс для исправления закругленных углов на iPhone/Safari
+// textarea,
+// input[type="text"],
+// input[type="search"],
+// input[type="button"],
+// input[type="submit"] {
+//  -webkit-appearance: none;
+//  border-radius: 0;
+// background-image: linear-gradient(to bottom, #e4e4e4, #f7f7f7);
+// border: 1px solid #afafaf;
+// }
+
+svg {
+  fill: currentcolor;
+
+  // Clicks on an icon inside a link/button target the link/button itself
+  a &,
+  button & {
+    pointer-events: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// .fade {
+//   @include transition($transition-fade);
+
+//   &:not(.show) {
+//     opacity: 0;
+//   }
+// }
+
+// .collapse {
+//   &:not(.show) {
+//     display: none;
+//   }
+// }
+
+// .collapsing {
+//   position: relative;
+//   height: 0;
+//   overflow: hidden;
+
+//   @include transition($transition-collapse);
+// }
+
+.visually-hidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Contains floats without pseudo-element hacks (also creates a new block formatting context)
+.clearfix {
+  display: flow-root;
+}
+
+.list-nostyled {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
+  // li::before {
+  //   display: none;
+  // }
+}
+
+/* Кастомизируем выделение текста на сайте */
+*:not(img)::selection {
+  color: var(--text-inverse);
+  background-color: var(--text-accent); /* Safari, Chrome, Opera */
+
+  // :root[data-theme="dark"] & {
+  //   color: var(--yellow-400);
+  //   background-color: var(--blue-800);
+  // }
+}
+
+.container {
+  display: block;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: none;
+
+  @include media-up('sm') {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @include media-up('md') {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  // @include media-up('lg') {
+  //   padding-left: 32px;
+  //   padding-right: 32px;
+  // }
+
+  // @include media-up('xl') {
+  //   padding-left: 40px;
+  //   padding-right: 40px;
+  // }
+
+  @include media-up('xxl') {
+    $padding-min: 48px; // нужный отступ от краев экрана
+    // padding: 1em calc(50% - 600px); //600px - это $screen-xl / 2 - нужный отступ от края экрана
+    $half-screen-xxl: math.div($screen-xxl, 2) - $padding-min;
+
+    padding-left: calc(50% - #{$half-screen-xxl});
+    padding-right: calc(50% - #{$half-screen-xxl});
+  }
+}
+
+// Родитель. Указаны промежутки между ячейками: XS|SM|MD|LG|XL|XXL;
+// @include row($grid-gutter-width, 10px, 12px, 16px, 20px, 26px);
+.row {
+  @include row(
+    $xs-grid-gutter:  $grid-gutter-width,
+    $sm-grid-gutter:  $grid-gutter-width,
+    $md-grid-gutter:  $grid-gutter-width,
+    $lg-grid-gutter:  $grid-gutter-width,
+    $xl-grid-gutter:  $grid-gutter-width,
+    $xxl-grid-gutter: $grid-gutter-width
+  );
+}
+
+/* &__element {
+  @include col(); // малые ширины — 12 из 12, промежутки по умолчанию
+  @include col(sm, 6, $grid-columns, 10px);  // SM (480 по умолчанию) — 6 из 12, промежутки 10px
+  @include col(md, 4, $grid-columns, 12px);  // MD (768 по умолчанию) — 4 из 12, промежутки 12px
+  @include col(lg, 3, $grid-columns, 16px);  // LG (1024 по умолчанию) — 3 из 12, промежутки 16px
+  @include col(xl, 2, $grid-columns, 20px);  // XL (1280 по умолчанию) — 2 из 12, промежутки 20px
+  @include col(xxl, 1, $grid-columns, 26px); // XXL (1800 по умолчанию) — 1 из 12, промежутки 26px
+} */
+
+// Отключение видимости полосы прокрутки, при сохранении функционала
+.invisible-scrollbar {
+  scrollbar-width: none;
+
+  // Fallback for Safari < 26.2
+  @supports not (scrollbar-width: none) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.light-dark-gr {
+  background: linear-gradient(to bottom,
+    var(--bg-gradient-1-start),
+    var(--bg-gradient-1-end) 100%);
+}
+
+.dark-light-gr {
+  background: linear-gradient(to bottom,
+    var(--bg-gradient-2-start),
+    var(--bg-gradient-2-end) 100%);
+}
+
+// Swiper
+// .swiper-wrapper,
+// .swiper-slide {
+//   box-sizing: border-box;
+// }
+
+// .swiper-slide {
+//   height: auto;
+// }
+
+// .swiper-button-prev,
+// .swiper-button-next {}
+// .swiper-button-disabled {}
+// .swiper-slide-active {}
+
+// background-image: svg-load('../blocks/phones-modal/bg-img/phone.svg', fill=$main-color, stroke=rgba(255, 255, 255, 0));
+// background-image: svg-load('../blocks/sprite-svg/svg/asterisk.svg', fill=$main-color, stroke=rgba(255, 255, 255, 0));
+
+/*
+@include col(xs, 12);
+@include col(md, 6);
+@include col(xl, 3);
+@include col(xxl, 3);
+*/
+
+// :root[data-theme="dark"] & {}
+
+// @include media-up('md') {}            → (width >= 768px)
+// @include media-down('md') {}          → (width < 768px)
+// @include media-between('md', 'xl') {} → (768px <= width < 1280px)

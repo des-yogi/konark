@@ -1,0 +1,45 @@
+<!--DEV
+@@include('blocks/hero/hero.html')
+-->
+
+<section class="container  hero">
+  <div class="hero__emblem  js-hero-emblem" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__text">
+      <h1 class="hero__title">Ваш <strong>надійний партнер</strong> у постачанні світової фармацевтики</h1>
+
+      <div class="hero__actions">
+        <a class="btn" href="/partners/">
+          <span class="text-roll"><span class="text-roll__line">Стати партнером</span><span class="text-roll__line" aria-hidden="true">Стати партнером</span></span>
+        </a>
+
+        <a class="btn-secondary" href="/files/presentation.pdf">
+          <span class="text-roll"><span class="text-roll__line">Презентація компанії</span><span class="text-roll__line" aria-hidden="true">Презентація компанії</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#download"></use></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <a class="hero__card" href="/about/">
+      <div class="hero__card-media">
+        <picture>
+          <source srcset="img/hero-img.webp, img/hero-img.webp 2x" type="image/webp">
+          <img class="hero__card-img"
+               src="img/hero-img.jpg"
+               srcset="img/hero-img.jpg, img/hero-img.jpg 2x"
+               width="312"
+               height="234"
+               alt=""
+               decoding="async">
+        </picture>
+      </div>
+      <div class="hero__card-body">
+        <span class="hero__card-title">Заголовок</span>
+        <span class="hero__card-text">Компанія «Конарк Інтелмед» створена в 1997 році</span>
+      </div>
+    </a>
+  </div>
+</section>

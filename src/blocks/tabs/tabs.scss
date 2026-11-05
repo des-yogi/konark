@@ -1,0 +1,8 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+.tabs {
+  $block-name: &; // #{$block-name}__element
+
+}
+

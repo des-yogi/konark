@@ -1,0 +1,184 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Desktop main menu: a glass pill in the header. The tablet/mobile menu is a separate offcanvas (later).
+// Submenus are disclosures: a button with data-disclosure + aria-expanded (see blocks/disclosure).
+
+.main-nav {
+  $block-name: &; // #{$block-name}__element
+
+  // Gap between the top-level items: compact on 1366–1439 px, the design value from $menu-wide-width
+  --main-nav-gap: #{$space-12};
+
+  display: flex;
+  align-items: center;
+  height: $nav-control-size;
+  padding: 0 $space-24;
+  border-radius: $radius-16;
+  background-color: var(--nav-bg);
+  box-shadow: $shadow-s;
+  backdrop-filter: blur(10px);
+
+  @include media-up($menu-wide-width) {
+    --main-nav-gap: #{$space-24};
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: var(--main-nav-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    position: relative;
+    margin-top: 0;
+  }
+
+  &__link {
+    @include text-nav;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $space-8;
+    height: $space-40;
+    padding: 0 $space-8;
+    border: 0;
+    border-radius: $radius-12;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    // The arrow follows the label: accent color on hover and while the submenu is open
+    @media (hover: hover) {
+      &:hover #{$block-name}__arrow {
+        color: var(--text-accent);
+      }
+    }
+
+    &[aria-expanded='true'] #{$block-name}__arrow {
+      color: var(--text-accent);
+    }
+
+    // Colour change belongs to the menu, not to the text-roll effect: the rolling-in line is accent blue
+    .text-roll__line:last-child {
+      color: var(--text-accent);
+    }
+
+    // The current page (link) or the current section (item with a submenu): a static underline under the label only
+    &:is([aria-current='page'], [aria-current='true'])::after {
+      content: '';
+      position: absolute;
+      top: calc(50% + 0.5lh + #{$space-2});
+      right: $space-8;
+      left: $space-8;
+      border-top: 1px solid currentcolor; // a border survives forced-colors mode, a background does not
+    }
+
+    // With an arrow the line stops before it: arrow 12px + gap 8px + padding 8px
+    &:has(#{$block-name}__arrow):is([aria-current='page'], [aria-current='true'])::after {
+      right: calc(#{$space-8} + #{$space-8} + 12px);
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+
+    // Visited links must use the same token, otherwise the browser snaps their colour on theme switch
+    &:visited {
+      color: var(--text-primary);
+    }
+  }
+
+  &__arrow {
+    flex: none;
+    transition: color $transition-time ease;
+  }
+
+  // Submenu panel: its text is aligned with the text of the parent item
+  &__sublist-wrapper {
+    position: absolute;
+    top: calc(100% + 16px); // 8px under the pill (the item is centered in the 56px pill)
+    left: -$space-20;
+    z-index: 1;
+    width: max-content;
+    padding: $space-20;
+    border-radius: $radius-16;
+    background-color: var(--bg-primary); // bg-secondary ??
+    box-shadow: $shadow-m;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition-time ease, visibility $transition-time ease;
+  }
+
+  &__link[aria-expanded='true'] + &__sublist-wrapper {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__sublist {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    // The spacing comes from gap: reset the global `li + li` margin
+    li {
+      margin: 0;
+
+      // &.active {
+      //   #{$block-name}__sublink {
+      //     color: var(--text-accent);
+      //   }
+      // }
+    }
+  }
+
+  &__sublink {
+    @include text-nav;
+
+    display: flex;
+    align-items: center;
+    height: $space-40;
+    padding: 0 $space-8;
+    border-radius: $radius-12;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--text-primary);
+    transition: color $transition-time ease;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        color: var(--text-accent);
+      }
+    }
+
+    // The current page: the same underline as in the footer
+    &[aria-current='page'] {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__arrow,
+    &__sublist-wrapper,
+    &__sublink {
+      transition: none;
+    }
+  }
+}

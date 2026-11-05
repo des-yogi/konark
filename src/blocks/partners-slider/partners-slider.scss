@@ -1,0 +1,75 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-20, $space-40, $radius-16, $shadow-s, $shadow-s-hover
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-slide classes below beat its rules regardless of the load order.
+
+.partners-slider {
+  $block-name: &; // #{$block-name}__element
+
+  background: var(--bg-primary);
+
+  $slide-width: 258px; // size of the logo files; below lg the cards are never scaled, from lg Swiper sets the width inline
+
+  // Below lg the slider runs to the screen edges: the side paddings of .container are cancelled
+  @include media-down('lg') {
+    &.container {
+      padding-inline: 0;
+    }
+  }
+
+  // The vertical padding lives inside the slider: Swiper clips everything outside its box, the card shadows included
+  &__swiper.swiper {
+    --swiper-wrapper-transition-timing-function: linear;
+
+    padding-block: $space-20;
+
+    @include media-up('md') {
+      padding-block: $space-40;
+    }
+  }
+
+  &__list.swiper-wrapper {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item.swiper-slide {
+    width: $slide-width;
+    height: auto;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+  }
+
+  &__card {
+    display: block;
+    aspect-ratio: 258 / 112;
+    overflow: hidden;
+    border-radius: $radius-16;
+    background-color: $white;
+    box-shadow: $shadow-s;
+    transition: box-shadow $transition-time ease;
+
+    // Only linked cards react
+    &:is(a) {
+      @include button-hover {
+        box-shadow: $shadow-s-hover;
+      }
+
+      @include button-focus(var(--btn-secondary-focus-ring));
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__card {
+      transition: none;
+    }
+  }
+}

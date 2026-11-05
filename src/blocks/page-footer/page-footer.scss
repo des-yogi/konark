@@ -1,0 +1,264 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Site footer: a translucent panel with rounded top corners, pressed to the bottom of the page.
+// The panel is centered by .container. Layouts: < 768 mobile (centered), 768–1279 tablet, >= 1280 desktop.
+
+.page-footer {
+  $block-name: &; // #{$block-name}__element
+
+  padding-top: $space-40;
+
+  // Figma: the footer gradient runs from "Color 2" (top) to "Color 1" (bottom), i.e. end -> start
+  background: linear-gradient(to bottom, var(--bg-gradient-2-end), var(--bg-gradient-2-start));
+
+  @include media-up('md') {
+    padding-top: $space-64;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+    padding: $space-48 $space-16 $space-24;
+    border-radius: $radius-32 $radius-32 0 0;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('md') {
+      border-top-left-radius: $radius-48;
+      border-top-right-radius: $radius-48;
+    }
+
+    @include media-up('lg') {
+      gap: $space-24;
+      padding-right: $space-32;
+      padding-left: $space-32;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 60px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+    align-items: center;
+
+    @include media-up('md') {
+      align-items: stretch;
+    }
+
+    @include media-up('lg') {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  // Logo, short note and social networks
+  &__about {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+    align-items: center;
+
+    @include media-up('md') {
+      align-items: flex-start;
+    }
+
+    @include media-up('lg') {
+      gap: $space-24;
+      width: 411px;
+    }
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+    align-items: center;
+
+    @include media-up('md') {
+      gap: $space-12;
+      align-items: flex-start;
+    }
+
+    @include media-up('lg') {
+      gap: $space-24;
+    }
+  }
+
+  &__note,
+  &__copyright {
+    margin: 0; // the global `p` margin must not apply here
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-secondary);
+
+    @include media-up('md') {
+      text-align: left;
+    }
+  }
+
+  // Menu and legal links: stacked on mobile; from 768 two navs side by side with a gap
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    align-items: center;
+
+    @include media-up('md') {
+      flex-direction: row;
+      gap: $space-20;
+      align-items: flex-start;
+    }
+  }
+
+  // Tablet: the menu takes two thirds, the legal links one third (as in the mockup); desktop: content width
+  &__nav {
+    @include media-up('md') {
+      flex: 2;
+    }
+
+    @include media-up('lg') {
+      flex: none;
+    }
+  }
+
+  &__legal {
+    @include media-up('md') {
+      flex: 1;
+    }
+
+    @include media-up('lg') {
+      flex: none;
+    }
+  }
+
+  // One list: it flows into 2 columns (4 + 3 links) from the tablet layout; the links keep their own width
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+
+    @include media-up('md') {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, auto);
+      column-gap: $space-20;
+      justify-items: start;
+      align-items: start;
+    }
+
+    @include media-up('lg') {
+      grid-template-columns: repeat(2, 160px);
+    }
+  }
+
+  &__link {
+    @include text-button;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: $space-40; // keeps a comfortable tap target; the width is the width of the label
+    border-radius: $radius-8;
+    text-decoration: none;
+    color: var(--text-primary);
+
+    &:visited {
+      color: var(--text-primary);
+    }
+
+    // The current page: a static underline under the label (it does not roll with the text)
+    &[aria-current='page']::after {
+      content: '';
+      position: absolute;
+      top: calc(50% + 0.5lh + #{$space-1});
+      right: 0;
+      left: 0;
+      border-top: 1px solid currentcolor;
+    }
+
+    // Colour change on roll belongs to the menus, not to the text-roll effect
+    .text-roll__line:last-child {
+      color: var(--text-accent);
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__legal-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+
+    @include media-up('md') {
+      align-items: flex-start;
+    }
+  }
+
+  &__legal-link {
+    display: flex;
+    align-items: center;
+    height: $space-40;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: $radius-8;
+
+    &:visited {
+      color: var(--text-primary);
+    }
+
+    // The current page: the same underline as on hover, but permanent
+    &[aria-current='page'] {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    @media (hover: hover) {
+      &[href]:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__warning {
+    margin: 0;
+    padding: $space-20;
+    border-radius: $radius-16;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    background-color: var(--tag-bg);
+  }
+}

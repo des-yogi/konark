@@ -1,0 +1,33 @@
+@use '../../scss/variables.scss' as *;
+
+// Skip link: visually hidden until it receives keyboard focus (first Tab on the page)
+.skip-link {
+  $block-name: &; // #{$block-name}__element
+
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 8px 16px;
+  font-weight: 700;
+  color: $white;
+  text-decoration: none;
+  background-color: $link-color-hover;
+  border-radius: $border-radius;
+  transform: translateY(calc(-100% - 16px)); // moved above the viewport (top offset + spare)
+  transition: transform $transition-time;
+
+  &:focus {
+    color: $white;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// Skip-link target: <main tabindex="-1"> is not interactive — no focus ring around the whole content area
+main[tabindex='-1']:focus {
+  outline: none;
+}

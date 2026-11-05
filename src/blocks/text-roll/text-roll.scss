@@ -1,0 +1,36 @@
+@use '../../scss/variables.scss' as *;
+
+// Universal "text roll" effect for any interactive element with a text label (see text-roll.html).
+// It only moves the label; any color change belongs to the host block.
+
+.text-roll {
+  display: inline-block;
+  height: 1lh; // only one line is visible
+  overflow: hidden;
+  vertical-align: top;
+  white-space: nowrap;
+
+  &__line {
+    display: block;
+    transition: transform $transition-time ease;
+  }
+}
+
+// Host states: any enabled link or button that contains the label
+// Host states: any enabled link (with href) or button that contains the label; the current page does not roll
+@media (hover: hover) {
+  :is(a[href], button, [role='button']):not(:disabled, [aria-disabled='true'], [aria-current='page']):hover .text-roll__line {
+    transform: translateY(-100%);
+  }
+}
+
+:is(a[href], button, [role='button']):not(:disabled, [aria-disabled='true'], [aria-current='page']):focus-visible .text-roll__line,
+:is(a[href], button, [role='button'])[aria-expanded='true'] .text-roll__line {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-roll__line {
+    transition: none;
+  }
+}

@@ -1,0 +1,410 @@
+// Color primitives and light/dark theme tokens.
+// Source: Figma collections "Color Primitives" and "Color Tokens".
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+
+// Solid palette steps referenced by tokens.
+$solid-palette: (
+  'main-blue': (
+    5: #f3f6fb,
+    10: #e0e8f5,
+    15: #c1d1eb,
+    20: #9eb6e0,
+    25: #7899d3,
+    30: #557fc8,
+    40: #3063bc,
+    50: #104bb2,
+    60: #0c419d,
+    70: #093787,
+    85: #04245a,
+  ),
+  'grey': (
+    85: #484f5b,
+    90: #353a43,
+    95: #22252b,
+    100: #0f1013,
+  ),
+  'red': (
+    30: #f56845,
+    40: #f34c23,
+    50: #f13000,
+    60: #d42800,
+  ),
+  'green': (
+    30: #53b962,
+    60: #0f8c22,
+  ),
+  'yellow': (
+    40: #fbda46,
+    50: #fad429,
+  ),
+);
+
+// Transparent palette: one base color per family, alpha per step.
+$alpha-bases: (
+  'white-a': 255 255 255,
+  'black-a': 15 16 19,
+  'blue-a': 9 55 135,
+);
+
+$alpha-steps: (
+  'white-a': (
+    5: 4%,
+    10: 8%,
+    15: 12%,
+    20: 16%,
+    25: 20%,
+    30: 24%,
+    40: 32%,
+    50: 40%,
+    60: 48%,
+    70: 56%,
+    80: 64%,
+    85: 72%,
+    90: 80%,
+    100: 100%,
+  ),
+  'black-a': (
+    10: 8%,
+    15: 12%,
+    30: 24%,
+    40: 32%,
+    60: 48%,
+    70: 56%,
+    85: 72%,
+  ),
+  'blue-a': (
+    5: 4%,
+    10: 8%,
+    20: 16%,
+    30: 24%,
+    50: 40%,
+    70: 56%,
+    85: 72%,
+  ),
+);
+
+// Focus ring color: the same for all components.
+// main-blue-30 keeps ≥ 3:1 contrast on light surfaces (main-blue-25 gave ~2.7:1).
+$focus-ring-color: ('main-blue-30', 'main-blue-20');
+
+// Semantic tokens: name -> (light, dark) palette references.
+// Figma names are kept in comments for traceability.
+$tokens: (
+  // Divider
+  'divider-subtle': ('black-a-10', 'white-a-15'), // Divider/1
+  'divider': ('main-blue-15', 'main-blue-30'), // Divider/2
+  'divider-strong': ('main-blue-20', 'main-blue-30'), // Divider/3
+
+  // Background: gradients (Color 1 is assumed to be the start)
+  'bg-gradient-1-start': ('main-blue-5', 'main-blue-50'), // Gradient 1/Color 1
+  'bg-gradient-1-end': ('main-blue-10', 'main-blue-85'), // Gradient 1/Color 2
+  'bg-gradient-2-start': ('main-blue-10', 'main-blue-85'), // Gradient 2/Color 1
+  'bg-gradient-2-end': ('main-blue-5', 'main-blue-50'), // Gradient 2/Color 2
+
+   // Header: gradient behind the fixed header (appears on scroll)
+  'header-gradient': ('main-blue-10', 'main-blue-85'), // Header/Gradient start (end is transparent)
+
+  // Background: decorative shapes
+  'bg-shape-subtle': ('blue-a-5', 'white-a-15'), // Shape 2
+  'bg-shape': ('blue-a-20', 'white-a-15'), // Shape
+  'bg-shape-strong': ('blue-a-30', 'white-a-25'), // Shape 3
+
+  // Background: solid
+  'bg-primary': ('main-blue-5', 'main-blue-50'), // solid-colored/Light BG
+  'bg-secondary': ('main-blue-10', 'main-blue-85'), // solid-colored/Dark BG
+  'bg-tertiary': ('main-blue-10', 'white-a-5'), // solid-colored/Dark BG 2
+  'bg-static-dark': ('blue-a-30', 'blue-a-30'), // solid-colored/Always dark
+  'bg-static-white': ('white-a-100', 'white-a-100'), // solid-colored/White
+  'bg-modal-backdrop': ('black-a-85', 'black-a-85'), // solid-colored/Dark fo modals
+  'bg-overlay-medium': ('white-a-80', 'white-a-10'), // solid-colored/Always light 1
+  'bg-overlay-subtle': ('white-a-40', 'white-a-5'), // solid-colored/Always light 2
+  'bg-overlay-strong': ('white-a-90', 'white-a-100'), // solid-colored/Always light 3
+
+  // Text
+  'text-primary': ('grey-95', 'main-blue-5'), // Text/Black
+  'text-secondary': ('grey-90', 'main-blue-10'), // Text/Grey
+  'text-accent': ('main-blue-50', 'white-a-100'), // Text/Blue
+  'text-accent-soft': ('blue-a-85', 'white-a-85'), // Text/Blue 2
+  'text-inverse': ('white-a-100', 'main-blue-60'), // Text/White
+  'text-static-black': ('grey-95', 'grey-95'), // Text/Always Black
+  'text-static-white': ('white-a-100', 'white-a-100'), // Text/Always white
+  'text-static-white-soft': ('white-a-90', 'white-a-90'), // Text/Always white 2
+  'strong-heading': ('main-blue-50', 'white-a-100'), // heading 1-3 strong
+
+  // Tag
+  'tag-bg': ('blue-a-5', 'white-a-5'), // Tag/BG
+  'tag-bg-hover': ('blue-a-10', 'white-a-10'), // Tag/Hover
+  'tag-text': ('grey-85', 'white-a-85'), // Tag/text
+  'tag-red': ('red-50', 'red-40'), // Tag/Red
+  'tag-green': ('green-60', 'green-30'), // Tag/Green
+  'tag-yellow': ('yellow-50', 'yellow-40'), // Tag/Yellow
+  'tag-blue': ('main-blue-60', 'main-blue-20'), // Tag/Blue
+  'tag-blue-dark': ('main-blue-60', 'main-blue-50'), // Tag/Dark blue
+  'tag-blue-dark-2': ('blue-a-70', 'main-blue-20'), // Tag/Dark blue 2
+  'tag-blue-light': ('main-blue-40', 'main-blue-40'), // Tag/Light blue
+
+  // Main button
+  'btn-primary-bg': ('main-blue-60', 'white-a-100'), // Main Button/Default BG
+  'btn-primary-bg-hover': ('main-blue-40', 'white-a-100'), // Main Button/Hover & Active
+  'btn-primary-bg-disabled': ('blue-a-50', 'white-a-70'), // Main Button/Disabled
+  'btn-primary-label': ('white-a-100', 'main-blue-70'), // Main Button/Label Default
+  'btn-primary-label-disabled': ('white-a-90', 'white-a-90'), // Main Button/Label Disabled
+  'btn-primary-focus-ring': $focus-ring-color, // Main Button/Stroke (Focus)
+
+  // Secondary button
+  'btn-secondary-bg': ('white-a-60', 'white-a-10'), // Secondary/Default BG
+  'btn-secondary-bg-hover': ('white-a-80', 'white-a-15'), // Secondary/Hover & Active BG
+  'btn-secondary-bg-disabled': ('white-a-30', 'white-a-5'), // Secondary/Disabled BG
+  'btn-secondary-icon-bg': ('main-blue-60', 'white-a-100'), // Secondary/Icon BG Default
+  'btn-secondary-icon-bg-hover': ('main-blue-40', 'white-a-100'), // Secondary/Icon BG Hover
+  'btn-secondary-icon-bg-disabled': ('blue-a-50', 'white-a-70'), // Secondary/Icon BG Disabled
+  'btn-secondary-icon': ('white-a-100', 'main-blue-60'), // Secondary/Icon
+  'btn-secondary-icon-disabled': ('white-a-85', 'main-blue-70'), // Secondary/Icon Disabled
+  'btn-secondary-label': ('grey-90', 'white-a-100'), // Secondary/Label Default
+  'btn-secondary-label-disabled': ('black-a-70', 'white-a-60'), // Secondary/Label Disabled
+  'btn-secondary-focus-ring': $focus-ring-color, // Secondary/Stroke (Focus)
+
+  // Navigation
+  'nav-surface': ('white-a-60', 'white-a-5'), // Nav/Always White
+  'nav-bg': ('white-a-40', 'white-a-5'), // Nav/BG Default
+  'nav-bg-hover': ('white-a-80', 'white-a-10'), // Nav/BG Hover
+  'nav-bg-disabled': ('white-a-50', 'white-a-10'), // Nav/BG Disabled
+  'nav-text': ('grey-85', 'white-a-90'), // Nav/Icon & Text
+  'nav-text-disabled': ('black-a-60', 'white-a-50'), // Nav/Icon & Text Disabled
+  'nav-accent': $focus-ring-color, // Nav/Light Blue
+
+  // Input
+  'input-bg': ('white-a-60', 'white-a-5'), // Input/Default BG
+  'input-bg-active': ('white-a-80', 'white-a-10'), // Input/Active BG
+  'input-border': ('blue-a-20', 'white-a-20'), // Input/Stroke Default
+  'input-border-hover': ('blue-a-50', 'white-a-60'), // Input/Stroke Hover
+  'input-border-active': ('blue-a-70', 'white-a-80'), // Input/Stroke Active
+  'input-border-focus': $focus-ring-color, // Input/Stroke (Focus)
+  'input-border-error': ('red-60', 'red-30'), // Input/Stroke Error
+  'input-label': ('grey-90', 'white-a-100'), // Input/Label
+  'input-text': ('grey-90', 'white-a-90'), // Input/Text Default
+  'input-text-active': ('grey-100', 'white-a-100'), // Input/Text Active
+
+  // Effects (shadow colors, Figma collection "Effects")
+  'shadow-color-s': ('blue-a-5', 'black-a-15'), // Shadow S
+  'shadow-color-m': ('blue-a-20', 'black-a-30'), // Shadow M
+  'shadow-color-l': ('blue-a-20', 'black-a-40'), // Shadow L
+);
+
+:root {
+  @each $family, $steps in $solid-palette {
+    @each $step, $color in $steps {
+      --palette-#{$family}-#{$step}: #{$color};
+    }
+  }
+
+  @each $family, $steps in $alpha-steps {
+    @each $step, $alpha in $steps {
+      --palette-#{$family}-#{$step}: rgb(#{map.get($alpha-bases, $family)} / #{$alpha});
+    }
+  }
+
+  @each $name, $pair in $tokens {
+    --#{$name}: var(--palette-#{list.nth($pair, 1)});
+  }
+}
+
+[data-theme='dark'] {
+  @each $name, $pair in $tokens {
+    --#{$name}: var(--palette-#{list.nth($pair, 2)});
+  }
+}
+
+// Sizing tokens (Figma collection "Sizing Tokens", values from "Number Primitives")
+
+$space-0: 0;
+$space-1: 1px;
+$space-2: 2px;
+$space-4: 4px;
+$space-8: 8px;
+$space-12: 12px;
+$space-16: 16px;
+$space-20: 20px;
+$space-24: 24px;
+$space-32: 32px;
+$space-40: 40px;
+$space-48: 48px;
+$space-64: 64px;
+$space-96: 96px;
+$space-116: 116px;
+
+$radius-button-1: 8px;
+$radius-button-2: 6px;
+$radius-button-3: 4px;
+$radius-8: 8px;
+$radius-12: 12px;
+$radius-14: 14px;
+$radius-16: 16px;
+$radius-24: 24px;
+$radius-28: 28px;
+$radius-32: 32px;
+$radius-40: 40px;
+$radius-48: 48px;
+$radius-64: 64px;
+$radius-full: 999px;
+
+// Focus ring (shared by all interactive blocks)
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
+$focus-ring-offset-lg: 4px;
+$focus-ring-offset-xl: 8px;
+
+// Effects (Figma effect styles). Colors come from --shadow-color-* tokens, so they follow the theme.
+$shadow-s: 0 4px 20px 0 var(--shadow-color-s); // Shadow S Default
+$shadow-s-hover: 4px 8px 20px -2px var(--shadow-color-m); // Shadow S Hover
+$shadow-m: 10px 20px 50px -2px var(--shadow-color-s); // Shadow M Default
+$shadow-m-hover: 10px 20px 50px -2px var(--shadow-color-m); // Shadow M Hover
+
+$img-zoom: 0.07;
+
+// Базовые цвета https://colorscheme.ru/color-converter.html
+
+$black: hsl(0deg 0% 0%);
+$gray-darkest: hsl(0deg 0% 10%);
+$gray-darker: hsl(0deg 0% 20%);
+$gray-darken: hsl(0deg 0% 30%);
+$gray-dark: hsl(0deg 0% 40%);
+$gray: hsl(0deg 0% 50%);
+$gray-light: hsl(0deg 0% 60%);
+$gray-lighten: hsl(0deg 0% 70%);
+$gray-lighter: hsl(0deg 0% 80%);
+$gray-lightest: hsl(0deg 0% 90%);
+$white: hsl(0deg 0% 100%);
+$color-success: hsl(120deg 39% 54%);
+$color-danger: hsl(2deg 64% 58%);
+$color-warning: hsl(35deg 84% 62%);
+
+// Семантические цвета
+
+$main-color: #7391EA;
+$color-main: $main-color;
+$secondary-color: #ccc;
+$text-color: #575B66;
+$title-color: #393939;
+$text-muted: #BDBDBD;
+$body-bg: #F4F4F4;
+$link-color: $main-color;
+$link-color-hover: #4240CF;
+$border-color: $text-muted;
+$divider-color: $main-color;
+
+// Базовая типографика
+
+$font-size: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
+// $font-size-h1: 40px;
+// $font-size-h2: 32px;
+// $font-size-h3: 24px;
+// $font-size-h4: 18px;
+// $font-size-h5: 16px;
+// $font-size-h6: 16px;
+$line-height: 1.5;
+
+// $typo-margin-vertical:        1em;
+
+$font-family: 'Manrope', system-ui, sans-serif;
+$font-family-headings: $font-family;
+$font-weight-semibold: 600;
+
+// Практически сейчас не имеет смысла перечислять варианты дефолтных шрифтов для разных систем, если используется свойство font-size-adjust: from-font на теге body
+
+// $font-family: ['Project font'], 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', 'Arial', sans-serif;
+// $font-family-headings: ['Project font'], 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', 'Arial', sans-serif;
+$font-family-monospace: 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier new', monospace;
+
+// 'sizes': (mobile < 768, tablet >= 768, desktop >= 1280). Letter-spacing is in em (Figma %).
+$headings: (
+  'display-1': ('sizes': (68px, 105px, 155px), 'line-height': 1, 'letter-spacing': -0.04em, 'font-weight': 500),
+  'display-2': ('sizes': (60px, 70px, 100px), 'line-height': 1, 'letter-spacing': -0.04em, 'font-weight': 600),
+  'h1': ('sizes': (44px, 60px, 72px), 'line-height': 1, 'letter-spacing': -0.04em, 'font-weight': 400),
+  'h2': ('sizes': (40px, 56px, 64px), 'line-height': 1.1, 'letter-spacing': -0.04em, 'font-weight': 400),
+  'h3': ('sizes': (32px, 48px, 56px), 'line-height': 1.1, 'letter-spacing': -0.01em, 'font-weight': 400),
+  'h4': ('sizes': (28px, 36px, 40px), 'line-height': 1.1, 'letter-spacing': -0.04em, 'font-weight': 500),
+  'h5': ('sizes': (24px, 28px, 32px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
+  'h6': ('sizes': (22px, 24px, 24px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
+  'subheading': ('sizes': (18px, 20px, 20px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
+);
+
+
+// Ширины
+
+$screen-xs: 0;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 1280px;
+$screen-xl: 1366px;
+$screen-xxl: 1600px;
+$container-sm: 100%;
+$container-md: 100%;
+$container-lg: calc($screen-xl - 20px);
+$container-xl: calc($screen-xl - 20px);
+$container-xxl: calc($screen-xxl - 20px);
+
+// Single source for media queries (see mixins/breakpoints.scss): media-up / media-down / media-between
+$breakpoints: (
+  'sm': $screen-sm,
+  'md': $screen-md,
+  'lg': $screen-lg,
+  'xl': $screen-xl,
+  'xxl': $screen-xxl,
+);
+
+
+// Модульная сетка
+
+$grid-columns: 12;
+$grid-gutter-width: 20px;
+
+// Разное
+
+$field-padding-vertical: 5px;
+$field-padding-horizontal: 12px;
+$border-radius: 3px;
+$opacity: 0.7;
+$shadow: 0 4px 2px -2px rgb(0 0 0 / 30%);
+$transition-time: 0.3s;
+
+// Theme switch: the color tokens are registered custom properties, so they can be animated on :root.
+// Every element that uses them follows in sync (no per-element color transitions are needed).
+@each $name, $pair in $tokens {
+  @property --#{$name} {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: transparent;
+  }
+}
+
+$token-transitions: ();
+
+@each $name, $pair in $tokens {
+  $token-transitions: list.append($token-transitions, string.unquote('--#{$name}') $transition-time ease, comma);
+}
+
+:root.theme-transition {
+  transition: $token-transitions;
+}
+
+// BS4 vars for mixins
+// $enable-transitions: true !default;
+// $enable-prefers-reduced-motion-media-query: true !default;
+// $transition-base: all .2s ease-in-out !default;
+// $transition-fade: opacity .15s linear !default;
+// $transition-collapse: height .2s ease !default;
+
+// Header
+$menu-desktop-width: $screen-xl;
+$header-height: 88px;
+$nav-control-size: 56px; // height of the header controls (menu pill, search, theme toggle, language, burger)
+$menu-wide-width: 1440px; // from this width the menu gap returns to the design value (24px)
+
+$toggler-part-height: 3px;
+$toggler-part-bg-color: #000;

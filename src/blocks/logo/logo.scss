@@ -1,0 +1,36 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+.logo {
+  $block-name: &; // #{$block-name}__element
+
+  display: block;
+  width: fit-content;
+  color: var(--btn-primary-bg); // the SVG takes it via currentcolor
+  white-space: nowrap;
+
+  &__img {
+    display: block;
+    width: 139px;
+    height: auto; // follows the viewBox (178×36)
+    fill: currentcolor;
+
+    @include media-up('md') {
+      width: 177px;
+    }
+  }
+
+  &--footer {
+    #{$block-name}__img {
+      width: 158px;
+
+      @include media-up('md') {
+        width: 284px;
+      }
+
+      @include media-up('lg') {
+        width: 326px;
+      }
+    }
+  }
+}

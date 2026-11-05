@@ -1,0 +1,55 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use "sass:math";
+
+$border-color: hsl(0deg 0% 60%) !default;
+$line-height: 1.375em !default;
+
+.table-responsive {
+  $block-name: &;
+
+  // #{$block-name}__element
+
+  @include media-down('md') {
+    display: block;
+    border: 0;
+
+    caption {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      width: 100%;
+
+      tr {
+        display: block;
+        border: 1px solid $border-color;
+        border-bottom: 0;
+
+        &:not(:last-child) { // stylelint-disable-line  max-nesting-depth
+          margin-bottom: $line-height;
+        }
+      }
+
+      td {
+        display: block;
+        width: 100%;
+        border-right: 0 !important; // stylelint-disable-line  declaration-no-important
+        border-left: 0 !important; // stylelint-disable-line  declaration-no-important
+
+        &::before { // stylelint-disable-line  max-nesting-depth
+          display: block;
+          font-weight: 700;
+          content: attr(data-label);
+        }
+      }
+    }
+  }
+}

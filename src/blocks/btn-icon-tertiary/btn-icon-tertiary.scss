@@ -1,0 +1,18 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Icon button, flat "tag" style (44x44, no shadow): the last icon row of the mockups.
+.btn-icon-tertiary {
+  @include icon-button(
+    $bg: var(--tag-bg),
+    $bg-hover: var(--tag-bg-hover),
+    $bg-active: var(--tag-bg),
+    $bg-disabled: var(--tag-bg),
+    $icon: var(--nav-text),
+    $icon-disabled: var(--nav-text-disabled),
+    $ring-color: var(--btn-secondary-focus-ring),
+    $size: 44px,
+    $elevated: false
+  );
+}

@@ -1,0 +1,35 @@
+<!--DEV
+Text field: <input> of any text type (text, email, tel, search, password...) or <textarea>.
+The whole field is a <label>, so a click on the name focuses the input.
+
+@@include('blocks/field-text/field-text.html')
+
+Default:
+<label class="field-text">
+  <span class="field-text__name">Текст</span>
+  <span class="field-text__input-wrap">
+    <input class="field-text__input" type="text" name="" value="" placeholder="Placeholder">
+    <span class="field-text__help-text">Пояснення</span>
+  </span>
+</label>
+
+Error: add the modifier field-text--error to the label and aria-invalid="true" to the input;
+put the message into field-text__help-text (an empty help text is hidden):
+<label class="field-text  field-text--error">
+  <span class="field-text__name">Текст</span>
+  <span class="field-text__input-wrap">
+    <input class="field-text__input" type="text" name="" value="Text" aria-invalid="true" aria-describedby="demo-error">
+    <span class="field-text__help-text" id="demo-error">Повідомлення про помилку</span>
+  </span>
+</label>
+
+Textarea: the same markup, <textarea class="field-text__input" rows="4"></textarea>
+-->
+
+<label class="field-text">
+  <span class="field-text__name">Текст</span>
+  <span class="field-text__input-wrap">
+    <input class="field-text__input" type="text" name="" value="" placeholder="Placeholder">
+    <span class="field-text__help-text">Пояснення</span>
+  </span>
+</label>

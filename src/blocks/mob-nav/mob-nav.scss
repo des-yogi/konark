@@ -1,0 +1,305 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss (add if missing): $space-64, $radius-16, $radius-40, $shadow-m
+// $shadow-m: 10px 20px 50px -2px rgb(9 55 135 / 16%);
+
+// OverlayScrollbars theme for the menu list: 4px track with a 4px handle
+.os-theme-mob-nav {
+  --os-size: 4px;
+  --os-padding-perpendicular: 0;
+  --os-padding-axis: 0;
+  --os-track-border-radius: 4px;
+  --os-handle-border-radius: 4px;
+  --os-track-bg: var(--tag-bg-hover);
+  --os-track-bg-hover: var(--tag-bg-hover);
+  --os-track-bg-active: var(--tag-bg-hover);
+  --os-handle-bg: var(--btn-primary-bg-disabled);
+  --os-handle-bg-hover: var(--btn-primary-bg-disabled);
+  --os-handle-bg-active: var(--btn-primary-bg-disabled);
+}
+
+// The backdrop is created by CoreUI JS and appended to <body>, so it can't get a block class
+:root {
+  --cui-offcanvas-backdrop-bg: var(--bg-modal-backdrop);
+}
+
+.offcanvas-backdrop {
+  inset: 0;
+  width: auto;
+  height: auto;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+.mob-nav {
+  $block-name: &; // #{$block-name}__element
+
+  $inset: 18px; // 16px + 2px halo from the design
+  $inset-wide: $space-40;
+  $inset-wide-end: 30px; // leaves room for the scrollbar
+
+  --cui-offcanvas-width: 100%;
+  --cui-offcanvas-bg: var(--bg-secondary);
+  --cui-offcanvas-color: var(--text-primary);
+  --cui-offcanvas-border-width: 0;
+
+  // The menu is only for the layout without the desktop navigation
+  @include media-up($menu-desktop-width) {
+    display: none;
+  }
+
+  @include media-up('md') {
+    --cui-offcanvas-width: 492px;
+
+    border-start-end-radius: $radius-40;
+    border-end-end-radius: $radius-40;
+    box-shadow: $shadow-m; // CoreUI emits no shadow while $enable-shadows is off
+  }
+
+  // Low screens: the whole panel scrolls instead of only the list
+  @media (height < 700px) {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    #{$block-name}__scroll {
+      flex: none;
+    }
+  }
+
+  &__top {
+    display: flex;
+    flex: none;
+    gap: $space-16;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-24 $space-12 $space-8;
+
+    @include media-up('md') {
+      padding: $space-16 22px $space-16 $inset-wide;
+    }
+  }
+
+  &__close {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-16;
+    color: var(--nav-text);
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-s;
+    transition: background-color $transition-time ease, box-shadow $transition-time ease;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--nav-bg-hover);
+        box-shadow: $shadow-s-hover;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__search {
+    flex: none;
+    margin: $space-40 $inset 0;
+
+    @include media-up('md') {
+      margin-inline: $inset-wide $inset-wide-end;
+    }
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--input-text);
+    background: none;
+    outline: 0;
+    appearance: none;
+
+    &::placeholder {
+      color: var(--input-text);
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
+
+  &__search-submit {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    color: var(--input-text);
+    background: none;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-accent);
+      }
+    }
+  }
+
+  &__tools {
+    display: flex;
+    flex: none;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: $space-16 $inset 0;
+
+    @include media-up('md') {
+      margin-inline: $inset-wide $inset-wide-end;
+    }
+  }
+
+  &__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: $space-64 $inset calc(#{$space-24} + env(safe-area-inset-bottom));
+
+    // The list (and its scrollbar) ends above the rounded bottom corner
+    @include media-up('md') {
+      margin-block: $space-32 88px;
+      margin-inline: $inset-wide $inset-wide-end;
+    }
+  }
+
+  &__list,
+  &__sublist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('md') {
+      gap: $space-16;
+    }
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__sublist {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: $space-8;
+  }
+
+  // Root links and accordion buttons share one look
+  &__link,
+  &__toggle {
+    display: flex;
+    gap: $space-12;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 24px;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-8;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    @include media-up('md') {
+      justify-content: flex-start;
+      min-height: 40px;
+      margin-inline: 0;
+      font-size: 20px;
+    }
+  }
+
+  &__sublink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 44px;
+    margin-inline: auto;
+    border-radius: $radius-8;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: none;
+    color: var(--text-primary);
+
+    @include media-up('md') {
+      justify-content: flex-start;
+      margin-inline: 0;
+    }
+  }
+
+  &__link,
+  &__toggle,
+  &__sublink {
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-accent);
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // Active state: the same underline as in the header and the footer
+  &__link[aria-current='page'],
+  &__sublink[aria-current='page'],
+  &__toggle[aria-current='true'] #{$block-name}__label {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  &__arrow {
+    flex: none;
+    transition: transform $transition-time ease;
+
+    #{$block-name}__toggle[aria-expanded='true'] & {
+      transform: rotate(180deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__close,
+    &__arrow {
+      transition: none;
+    }
+  }
+}

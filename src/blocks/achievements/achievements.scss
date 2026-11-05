@@ -1,0 +1,168 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss: $space-12, $space-16, $space-20, $space-32, $space-48, $space-64, $radius-32, $radius-40, $radius-48, $shadow-m
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// The section itself is transparent: backgrounds/gradients are added with a separate class
+.achievements {
+  $block-name: &; // #{$block-name}__element
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+    padding: $space-48 $space-20;
+    border-radius: $radius-32;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      padding: $space-48 $space-32;
+      border-radius: $radius-40;
+    }
+
+    @include media-up('lg') {
+      gap: $space-64;
+      padding: 96px $space-40;
+      border-radius: $radius-48;
+    }
+
+    @include media-up('xl') {
+      padding-inline: $space-64;
+    }
+  }
+
+  &__head {
+    @include grid-12;
+
+    row-gap: $space-20;
+    align-items: start;
+  }
+
+  // The size comes from the .h1 class
+  &__title {
+    grid-column: 1 / -1;
+    margin-block: 0;
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+      grid-row: 1;
+    }
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    grid-column: 1 / -1;
+
+    @include media-up('lg') {
+      grid-column: 7 / span 6;
+      grid-row: 1;
+    }
+  }
+
+  // The design indents the first line with spaces (about 128px); 1ch is the width of "0", wider than a space
+  &__lead {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    text-indent: 10ch;
+    color: var(--text-secondary);
+
+    @include media-up('md') {
+      text-indent: 13ch;
+    }
+  }
+
+  &__accent {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  &__list {
+    @include grid-12;
+
+    row-gap: $space-16;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    grid-column: 1 / -1;
+    margin-top: 0; // the global `li + li` rule must not shift the items
+
+    @include media-up('md') {
+      grid-column: span 4;
+    }
+
+    // Desktop: the first figure on the left, the other two under the text column
+    @include media-up('lg') {
+      grid-row: 1;
+
+      &:nth-child(1) {
+        grid-column: 1 / span 3;
+      }
+
+      &:nth-child(2) {
+        grid-column: 7 / span 3;
+      }
+
+      &:nth-child(3) {
+        grid-column: 10 / span 3;
+      }
+    }
+  }
+
+  &__value {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text-accent);
+
+    @include media-up('md') {
+      font-size: 70px;
+    }
+
+    @include media-up('lg') {
+      font-size: 100px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+}

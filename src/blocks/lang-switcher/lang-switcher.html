@@ -1,0 +1,17 @@
+<!--DEV
+@@include('blocks/lang-switcher/lang-switcher.html')
+
+Another language: one more <li> in the list. The current language has aria-current="true".
+-->
+
+<div class="lang-switcher">
+  <button class="lang-switcher__toggler" type="button" data-disclosure aria-expanded="false" aria-controls="lang-switcher-list">
+    <span class="visually-hidden">Мова:</span>
+    UA
+    <svg class="lang-switcher__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+  </button>
+  <ul class="lang-switcher__list" id="lang-switcher-list">
+    <li><a class="lang-switcher__link" href="/" lang="uk" hreflang="uk" aria-label="Українська" aria-current="true">UA</a></li>
+    <li><a class="lang-switcher__link" href="/en/" lang="en" hreflang="en" aria-label="English">EN</a></li>
+  </ul>
+</div>

@@ -1,0 +1,113 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Text field (Figma: Input, states Default / Hover / Active / Filled / Error).
+// "Filled" looks like "Default": only the text color differs, and the input already uses the active text color.
+.field-text {
+  $block-name: &; // #{$block-name}__element
+
+  display: block;
+  margin-bottom: 32px;
+
+  &__name {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--input-label);
+  }
+
+  &__input-wrap {
+    display: block;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    height: 56px;
+    margin: 0;
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--input-text-active);
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: $radius-16;
+    backdrop-filter: blur(15px);
+    appearance: none;
+    transition: border-color $transition-time ease, background-color $transition-time ease;
+
+    @media (hover: hover) {
+      &:hover:not(:disabled, :focus) {
+        border-color: var(--input-border-hover);
+      }
+    }
+
+    // The border is the only focus indicator in the mockup; the transparent outline stays visible in forced-colors mode
+    &:focus {
+      outline: 2px solid transparent;
+      background-color: var(--input-bg-active);
+      border-color: var(--input-border-active);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--nav-text-disabled);
+    }
+
+    &::placeholder {
+      color: var(--input-text);
+      opacity: 1;
+    }
+
+    &[type='search']::-webkit-search-cancel-button,
+    &[type='search']::-webkit-search-decoration {
+      -webkit-appearance: none; // stylelint-disable-line  property-no-vendor-prefix
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    // Not in the mockup: the height of two lines
+    @at-root textarea#{&} {
+      height: auto;
+      min-height: 112px;
+      resize: vertical;
+    }
+  }
+
+  &__help-text {
+    display: block;
+    margin-top: 9px;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &--error {
+    #{$block-name}__input {
+      &,
+      &:hover,
+      &:focus {
+        border-color: var(--input-border-error);
+      }
+    }
+
+    // In the mockup the error message is aligned to the right
+    #{$block-name}__help-text {
+      color: var(--input-border-error);
+      text-align: right;
+    }
+  }
+}

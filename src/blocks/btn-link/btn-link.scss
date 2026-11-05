@@ -1,0 +1,48 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Link button: accent label + arrow, for special links. On hover the arrow turns from "up-right" to "right".
+.btn-link {
+  $block-name: &; // #{$block-name}__element
+
+  @include button-reset;
+  @include text-button;
+
+  gap: $space-8;
+  height: $space-32;
+  padding: 0 $space-8;
+  border-radius: $radius-8;
+  color: var(--text-accent);
+  transition: opacity $transition-time ease;
+
+  &:visited {
+    color: var(--text-accent);
+  }
+
+  @include button-hover {
+    #{$block-name}__icon {
+      transform: rotate(45deg);
+    }
+  }
+
+  @include button-active {
+    opacity: $button-active-opacity;
+  }
+
+  @include button-disabled {
+    color: var(--btn-primary-bg-disabled);
+  }
+
+  @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+  @include button-reduced-motion;
+
+  &__icon {
+    flex: none;
+    transition: transform $transition-time ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
