@@ -1,0 +1,82 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+$gray-lightest: hsl(0deg 0% 90%) !default;
+$text-color-muted: hsl(0deg 0% 50%) !default;
+$font-size-small: 0.75em !default;
+
+table,
+.table {
+  $block-name: &; // #{$block-name}__element
+
+  // table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  margin: $space-48 0;
+
+  /* Включает одинаковую ширину цифр И перечеркнутый ноль */
+  font-variant-numeric: tabular-nums slashed-zero;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  caption {
+    @include heading-style('subheading');
+
+    padding-bottom: $space-12; // + 12px top padding of the first row = 24px, as in the layout
+    text-align: left;
+    caption-side: top;
+    color: var(--headings-color);
+  }
+
+  th,
+  td {
+    padding: $space-12 $space-16 $space-4 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--divider-subtle);
+
+    &:last-child {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+
+  th {
+    font-weight: $font-weight-semibold;
+    color: var(--headings-color);
+  }
+
+  td {
+    font-weight: 400;
+    color: var(--text-color);
+  }
+
+  // No divider under the very last row of the table
+  tbody,
+  thead,
+  tfoot {
+    &:last-child {
+      tr:last-child {
+
+        // stylelint-disable  max-nesting-depth, selector-max-compound-selectors
+        td,
+        th {
+          border-bottom: 0;
+        }
+        // stylelint-enable
+      }
+    }
+  }
+
+  // &__header {}
+
+  // &__body {}
+
+  // &__footer {}
+}

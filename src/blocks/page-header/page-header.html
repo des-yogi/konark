@@ -1,0 +1,37 @@
+<!--DEV
+@@include('blocks/page-header/page-header.html')
+-->
+
+<header class="page-header  js-page-header  is-fixed" data-scroll-offset="88">
+  <div class="container  page-header__inner">
+    @@include('../../blocks/logo/logo.html')
+
+    <div class="page-header__nav">
+      @@include('../../blocks/main-nav/main-nav.html')
+    </div>
+
+    <div class="page-header__controls">
+      <button class="page-header__search"
+              type="button"
+              aria-label="Пошук"
+              data-coreui-toggle="modal"
+              data-coreui-target="#search-modal"
+              aria-controls="search-modal"
+              aria-haspopup="dialog">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+      </button>
+
+      <div class="page-header__theme">
+        @@include('../../blocks/theme-toggle/theme-toggle.html')
+      </div>
+
+      <div class="page-header__lang">
+        @@include('../../blocks/lang-switcher/lang-switcher.html')
+      </div>
+
+      <div class="page-header__burger">
+        @@include('../../blocks/burger/burger.html')
+      </div>
+    </div>
+  </div>
+</header>

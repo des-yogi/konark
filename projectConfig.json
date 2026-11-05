@@ -1,0 +1,77 @@
+{
+  "dirs": {
+    "srcPath": "src/",
+    "buildPath": "build/",
+    "blocksDirName": "blocks"
+  },
+  "blocks": {
+    "typo": [],
+    "page": [],
+    "breadcrumbs": [],
+    "btn": [],
+    "burger": [],
+    "close": [],
+    "embed-responsive": [],
+    "field-actions": [],
+    "field-checkbox": [],
+    "field-radio": [],
+    "field-text": [],
+    "form": [],
+    "lang-switcher": [],
+    "logo": [],
+    "main-nav": [],
+    "page-footer": [],
+    "page-header": [],
+    "pagination": [],
+    "sprite-svg": [],
+    "table": [],
+    "table-mobile-scroll": [],
+    "table-responsive": [],
+    "tabs": [],
+    "skip-link": [],
+    "theme-toggle": [],
+    "text-roll": [],
+    "disclosure": [],
+    "btn-secondary": [],
+    "btn-icon-primary": [],
+    "btn-icon-secondary": [],
+    "btn-icon-tertiary": [],
+    "btn-link": [],
+    "social-networks": [],
+    "mob-nav": [],
+    "search-form": [],
+    "search-modal": [],
+    "hero": [],
+    "partners-slider": [],
+    "achievements": []
+  },
+  "addCssBefore": [
+    "../../node_modules/swiper/swiper-bundle.min.css",
+    "src/scss/_coreui-custom.scss",
+    "src/scss/variables.scss",
+    "src/scss/mixins.scss"
+  ],
+  "addCssAfter": [
+    "src/scss/print.scss"
+  ],
+  "addJsBefore": [],
+  "addJsAfter": [],
+  "copiedJs": [],
+  "copiedCss": [],
+  "singleCompiled": [],
+  "allowedImageExtensions": [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "svg",
+    "ico",
+    "webp",
+    "avif"
+  ],
+  "allowedVideoExtensions": [
+    "mp4",
+    "webm",
+    "ogv"
+  ]
+}

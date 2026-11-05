@@ -1,0 +1,164 @@
+@use '../variables.scss' as *;
+@use 'breakpoints' as *;
+@use "sass:list";
+@use "sass:map";
+
+@mixin text-hide {
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+@mixin list-decorated {
+  padding-left: 50px;
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-2px);
+    left: 0;
+    content: "";
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: $main-color;
+
+    @include media-up('md') {
+      transform: translateY(-3px);
+    }
+  }
+}
+
+@mixin img-sharp {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges; /* Firefox */
+}
+
+// stylelint-disable property-blacklist
+@mixin transition($transition...) {
+  @if $enable-transitions {
+    @if list.length($transition) == 0 {
+      transition: $transition-base;
+    } @else {
+      transition: $transition;
+    }
+  }
+
+  @if $enable-prefers-reduced-motion-media-query {
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+// Heading text style from the $headings map: size per breakpoint, line-height, letter-spacing, weight
+@mixin heading-style($role) {
+  $style: map.get($headings, $role);
+  $sizes: map.get($style, 'sizes');
+
+  font-size: list.nth($sizes, 1);
+  font-weight: map.get($style, 'font-weight');
+  line-height: map.get($style, 'line-height');
+  letter-spacing: map.get($style, 'letter-spacing');
+
+  @include media-up('md') {
+    font-size: list.nth($sizes, 2);
+  }
+
+  @include media-up('lg') { // desktop sizes start at $screen-lg (1280)
+    font-size: list.nth($sizes, 3);
+  }
+}
+
+// Миксин принимает селектор элемента, который нужно изменить (по дефолту .faux-link)
+// Активируем поведение для .faux-link внутри любого блока-родителя
+// с передачей объекта изменения параметров  @include hover-trigger-for('.faux-link');
+// по-умолчания (параметры изменяются для дефолтной псевло-ссылки '.faux-link') - @include hover-trigger-for;
+// см. проект KECLab
+@mixin hover-trigger-for($target: '.faux-link') {
+  // & — это родительский блок, в котором вызван миксин
+
+  // Светлая тема: при ховере на <a> внутри родителя, меняем $target
+  @at-root &:has(a:hover) #{$target} {
+    background-color: var(--blue-100);
+  }
+
+  // Темная тема: то же самое, но в контексте темной темы на :root
+  @at-root :root[data-theme="dark"] &:has(a:hover) #{$target} {
+    background-color: var(--blue-600);
+  }
+
+  @at-root &:has(a:focus) #{$target} {
+    background-color: var(--blue-100);
+    border-color: var(--blue-700);
+    box-shadow: 0 0 0 4px rgba(#156dd1, 0.24);// rgba(21, 109, 209, 0.8)
+  }
+
+  @at-root :root[data-theme="dark"] &:has(a:focus) #{$target} {
+    background-color: var(--blue-600);
+    border-color: var(--blue-400);
+    box-shadow: 0 0 0 4px rgba(#156dd1, 0.24);
+  }
+
+  @at-root &:has(a:active) #{$target} {
+    background-color: var(--blue-300);
+    border-color: var(--blue-300);
+    box-shadow: none;
+  }
+
+  @at-root :root[data-theme="dark"] &:has(a:active) #{$target} {
+    background-color: var(--blue-800);
+    border-color: var(--blue-800);
+    color: var(--blue-300);
+    box-shadow: none;
+  }
+}
+
+// NAV text style (Figma: Genery/NAV): 14px, semibold, 120%, uppercase.
+// Letter-spacing -2% is kept as in the design: the header width calculation relies on it.
+@mixin text-nav {
+  font-family: $font-family;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  letter-spacing: normal; // -0.02em
+  text-transform: uppercase;
+}
+
+// Glass icon button of the header (search, burger, language toggler): 56×56 with nav colors, hover and focus states
+@mixin nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $nav-control-size;
+  height: $nav-control-size;
+  padding: 0;
+  border: 0;
+  border-radius: $radius-14;
+  color: var(--nav-text);
+  background-color: var(--nav-bg);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--nav-bg-hover);
+      box-shadow: $shadow-s-hover;
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid var(--nav-accent);
+    outline-offset: $focus-ring-offset;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

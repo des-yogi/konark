@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '../variables.scss' as *;
+
+/// Resolves a breakpoint name ('md') or a raw length (900px) to a length.
+/// Raw lengths are for one-off cases only — prefer names from $breakpoints.
+@function breakpoint($value) {
+  @if meta.type-of($value) == 'number' {
+    @return $value;
+  }
+
+  @if not map.has-key($breakpoints, $value) {
+    @error 'Unknown breakpoint "#{$value}". Available: #{map.keys($breakpoints)}';
+  }
+
+  @return map.get($breakpoints, $value);
+}
+
+/// Appends extra media features to a base condition with `and`.
+/// $extra is a string with one or more parenthesized features, e.g. '(orientation: landscape)'
+/// or '(hover: hover) and (height >= 700px)'. Media types ('screen', 'print') are not supported here.
+@function with-extra($base, $extra) {
+  @if $extra == null {
+    @return $base;
+  }
+
+  @return '#{$base} and #{$extra}';
+}
+
+/// Mobile-first: styles apply from the breakpoint and up.
+/// @include media-up('md') { ... }  →  @media (width >= 768px)
+/// @include media-up('md', '(orientation: landscape)') { ... }  →  @media (width >= 768px) and (orientation: landscape)
+@mixin media-up($from, $extra: null) {
+  @media #{with-extra('(width >= #{breakpoint($from)})', $extra)} {
+    @content;
+  }
+}
+
+/// Styles apply below the breakpoint.
+/// @include media-down('xl') { ... }  →  @media (width < 1366px)
+/// @include media-down('xl', '(hover: none)') { ... }  →  @media (width < 1366px) and (hover: none)
+@mixin media-down($to, $extra: null) {
+  @media #{with-extra('(width < #{breakpoint($to)})', $extra)} {
+    @content;
+  }
+}
+
+/// Styles apply in the range [from, to).
+/// @include media-between('md', 'xl') { ... }  →  @media (768px <= width < 1366px)
+/// @include media-between('md', 'xl', '(orientation: portrait)') { ... }  →  @media (768px <= width < 1366px) and (orientation: portrait)
+@mixin media-between($from, $to, $extra: null) {
+  @media #{with-extra('(#{breakpoint($from)} <= width < #{breakpoint($to)})', $extra)} {
+    @content;
+  }
+}

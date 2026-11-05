@@ -1,0 +1,43 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Main (primary) button: a label only. Works on <button> and <a>.
+.btn {
+  $block-name: &; // #{$block-name}__element
+
+  @include button-reset;
+  @include button-forced-colors;
+  @include text-button;
+
+  height: $button-height;
+  padding: 0 $space-20;
+  border-radius: $radius-16;
+  color: var(--btn-primary-label);
+  background-color: var(--btn-primary-bg);
+  box-shadow: $shadow-s;
+  transition: $button-transition;
+
+  &:visited {
+    color: var(--btn-primary-label);
+  }
+
+  @include button-hover {
+    background-color: var(--btn-primary-bg-hover);
+    box-shadow: $shadow-s-hover;
+  }
+
+  @include button-active {
+    background-color: var(--btn-primary-bg-hover);
+    box-shadow: none;
+    opacity: $button-active-opacity;
+  }
+
+  @include button-disabled {
+    color: var(--btn-primary-label-disabled);
+    background-color: var(--btn-primary-bg-disabled);
+  }
+
+  @include button-focus(var(--btn-primary-focus-ring));
+  @include button-reduced-motion;
+}

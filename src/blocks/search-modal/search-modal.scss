@@ -1,0 +1,32 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// The field sits right under the header
+$search-modal-top: 88px;
+
+.search-modal {
+  --cui-modal-width: 100%;
+
+  &__dialog {
+    max-width: var(--cui-modal-width);
+    margin: 0;
+    padding-top: $search-modal-top;
+  }
+
+  // The window has no visible box: only the field is seen. Width: the container, but not more than 910px.
+  &__content {
+    width: 100%;
+    max-width: 910px;
+    margin-inline: auto;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+// CoreUI appends the backdrop to <body>, so it cannot be styled from inside the block.
+// Same overlay as under the mobile menu.
+.modal-backdrop {
+  --cui-backdrop-bg: var(--bg-modal-backdrop);
+  --cui-backdrop-opacity: 1;
+}

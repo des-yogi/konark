@@ -1,0 +1,16 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Icon button, main color (48x48). Needs an accessible name: aria-label or a visually hidden text.
+.btn-icon-primary {
+  @include icon-button(
+    $bg: var(--btn-primary-bg),
+    $bg-hover: var(--btn-primary-bg-hover),
+    $bg-active: var(--btn-primary-bg-hover),
+    $bg-disabled: var(--btn-primary-bg-disabled),
+    $icon: var(--btn-primary-label),
+    $icon-disabled: var(--btn-primary-label-disabled),
+    $ring-color: var(--btn-primary-focus-ring)
+  );
+}

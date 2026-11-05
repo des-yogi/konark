@@ -1,0 +1,48 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// A row of social network links (icon tiles 44x44). Reusable: footer, contacts, etc.
+// Each link needs an accessible name (aria-label) and, as it opens another site, target="_blank" rel="noopener noreferrer".
+
+.social-networks {
+  $block-name: &; // #{$block-name}__element
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-8;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0; // the global `li + li` rule must not push the tiles apart
+    }
+  }
+
+  &__link {
+    @include button-reset;
+    @include button-forced-colors;
+
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-14;
+    color: var(--btn-primary-bg); // same colour as the logo: blue in the light theme, white in the dark one
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-s;
+    transition: $button-transition;
+
+    &:visited {
+      color: var(--btn-primary-bg);
+    }
+
+    @include button-hover {
+      box-shadow: $shadow-s-hover;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring));
+    @include button-reduced-motion;
+  }
+}

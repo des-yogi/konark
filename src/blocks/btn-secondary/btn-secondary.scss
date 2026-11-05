@@ -1,0 +1,72 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Secondary button: a glass pill with a label and an icon chip on the right.
+.btn-secondary {
+  $block-name: &; // #{$block-name}__element
+
+  @include button-reset;
+  @include button-forced-colors;
+  @include text-button;
+
+  gap: $space-12;
+  height: $button-height;
+  padding: $space-4 $space-4 $space-4 $space-20;
+  border-radius: $radius-16;
+  color: var(--btn-secondary-label);
+  background-color: var(--btn-secondary-bg);
+  box-shadow: $shadow-s;
+  transition: $button-transition;
+
+  &:visited {
+    color: var(--btn-secondary-label);
+  }
+
+  @include button-hover {
+    background-color: var(--btn-secondary-bg-hover);
+    box-shadow: $shadow-s-hover;
+
+    #{$block-name}__icon {
+      background-color: var(--btn-secondary-icon-bg-hover);
+    }
+  }
+
+  @include button-active {
+    background-color: var(--btn-secondary-bg-hover);
+    box-shadow: none;
+    opacity: $button-active-opacity;
+
+    #{$block-name}__icon {
+      background-color: var(--btn-secondary-icon-bg-hover);
+    }
+  }
+
+  @include button-disabled {
+    color: var(--btn-secondary-label-disabled);
+    background-color: var(--btn-secondary-bg-disabled);
+
+    #{$block-name}__icon {
+      color: var(--btn-secondary-icon-disabled);
+      background-color: var(--btn-secondary-icon-bg-disabled);
+    }
+  }
+
+  @include button-focus(var(--btn-secondary-focus-ring));
+  @include button-reduced-motion;
+
+  &__icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: $button-icon-size;
+    height: $button-icon-size;
+    border-radius: $radius-14;
+    color: var(--btn-secondary-icon);
+    background-color: var(--btn-secondary-icon-bg);
+    transition: $button-transition;
+
+    @include button-reduced-motion;
+  }
+}

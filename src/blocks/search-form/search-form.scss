@@ -1,0 +1,136 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Search field (Figma: Search). The form itself draws the "field"; the input inside is transparent,
+// so the border and the background follow :hover and :focus-within of the whole form.
+.search-form {
+  $block-name: &; // #{$block-name}__element
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 56px;
+  padding: 4px 4px 4px 20px;
+  background-color: var(--tag-bg);
+  border: 1px solid var(--input-border);
+  border-radius: $radius-16;
+  backdrop-filter: blur(15px);
+  transition: border-color $transition-time ease, background-color $transition-time ease;
+
+  @media (hover: hover) {
+    &:hover:not(:focus-within) {
+      background-color: var(--tag-bg-hover);
+      border-color: var(--input-border-hover);
+    }
+  }
+
+  &:focus-within {
+    background-color: var(--input-bg-active);
+    border-color: var(--input-border-active);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--input-text-active);
+    background: none;
+    border: 0;
+    outline: 2px solid transparent; // the form shows the focus; the outline stays visible in forced-colors mode
+    appearance: none;
+
+    &::placeholder {
+      color: var(--input-text);
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none; // stylelint-disable-line  property-no-vendor-prefix
+    }
+  }
+
+  // The button itself is the btn-icon-primary block (mix), the form only needs to keep its size
+  &__submit {
+    flex: none;
+  }
+
+  // Search in the modal window: white in both themes (as in the design), always "active".
+  // So everything inside uses the light-theme colors, the theme tokens would be unreadable on white.
+  &--modal {
+    --btn-primary-bg: var(--palette-main-blue-60);
+    --btn-primary-bg-hover: var(--palette-main-blue-70);
+    --btn-primary-label: #{$white};
+
+    &,
+    &:hover:not(:focus-within),
+    &:focus-within {
+      background-color: $white;
+      border-color: var(--palette-blue-a-70);
+    }
+
+    #{$block-name}__input {
+      color: var(--palette-grey-100);
+
+      &::placeholder {
+        color: var(--palette-black-a-60);
+      }
+    }
+  }
+
+  // Search in the mobile menu (Figma: Mobile): no inner button, only the search icon on the right;
+  // a solid panel behind it, so no blur. Always "active", so the focus is shown by a ring.
+  &--nav {
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: $radius-14;
+    backdrop-filter: none;
+
+    &,
+    &:hover:not(:focus-within),
+    &:focus-within {
+      background-color: var(--nav-bg-hover);
+      border-color: var(--input-border-active);
+    }
+
+    // Focus ring from the design: a 1px line with a 2px gap; the outline follows the radius (14px + 2px = 16px).
+    // :has() instead of :focus-within, so the ring belongs to the input and not to the submit button.
+    &:has(#{$block-name}__input:focus-visible) {
+      outline: 1px solid var(--btn-primary-focus-ring);
+      outline-offset: 2px;
+    }
+
+    // The icon button: 24px, no background (the mix with btn-icon-primary is not used here)
+    #{$block-name}__submit {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      color: var(--input-text);
+      background: none;
+      cursor: pointer;
+
+      @media (hover: hover) {
+        &:hover {
+          color: var(--text-accent);
+        }
+      }
+
+      &:focus-visible {
+        border-radius: $radius-8;
+        outline: 1px solid var(--btn-primary-focus-ring);
+        outline-offset: 2px;
+      }
+    }
+  }
+}

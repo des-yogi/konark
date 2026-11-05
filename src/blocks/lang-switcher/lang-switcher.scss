@@ -1,0 +1,94 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Language switcher: a disclosure (see blocks/disclosure) with a list of languages under the toggler.
+
+.lang-switcher {
+  $block-name: &; // #{$block-name}__element
+
+  position: relative;
+
+  &__toggler {
+    @include nav-button;
+    @include text-nav;
+
+    gap: $space-4;
+    color: var(--text-primary);
+  }
+
+  &__arrow {
+    flex: none;
+    transition: transform $transition-time ease;
+  }
+
+  &__toggler[aria-expanded='true'] &__arrow {
+    transform: rotate(180deg);
+  }
+
+  &__list {
+    position: absolute;
+    top: calc(100% + #{$space-4});
+    right: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-width: 100%;
+    margin: 0;
+    padding: $space-8;
+    list-style: none;
+    border-radius: $radius-14;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: $shadow-s-hover;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition-time ease, visibility $transition-time ease;
+
+    li {
+      margin-top: 0;
+    }
+  }
+
+  &__toggler[aria-expanded='true'] + &__list {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__link {
+    @include text-nav;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $space-40;
+    padding: $space-4 $space-8;
+    border-radius: $radius-12;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background-color $transition-time ease;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--tag-bg-hover);
+      }
+    }
+
+    &[aria-current='true'] {
+      background-color: var(--tag-bg-hover);
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__arrow,
+    &__list,
+    &__link {
+      transition: none;
+    }
+  }
+}

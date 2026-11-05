@@ -1,0 +1,140 @@
+@use '../variables.scss' as *;
+
+// Shared pieces of the button blocks: btn, btn-secondary, btn-icon-primary, btn-icon-secondary,
+// btn-icon-tertiary, btn-link. Every block keeps its own colors; only the common mechanics live here.
+// Usage: @use '../../scss/mixins/button-mixins' as *;
+
+$button-height: 56px;
+$button-icon-size: 48px;
+$button-active-opacity: 0.9; // the "Active" state in the mockups is the hover color at 90% opacity
+$button-transition: background-color $transition-time ease, box-shadow $transition-time ease, opacity $transition-time ease;
+
+// Figma style "Genery/Button L"
+@mixin text-button {
+  font-family: $font-family;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+// Makes <a> and <button> look the same before the block adds its own colors
+@mixin button-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+// Include it LAST in a block: it must come after the block's own transition declaration
+@mixin button-reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// Filled buttons have no border, so in forced-colors mode their edge would disappear
+@mixin button-forced-colors {
+  @media (forced-colors: active) {
+    border: 1px solid ButtonText;
+  }
+}
+
+// States. Hover is limited to devices that really hover; disabled controls get no hover/active styles.
+@mixin button-hover {
+  @media (hover: hover) {
+    &:hover:not(:disabled, [aria-disabled='true']) {
+      @content;
+    }
+  }
+}
+
+@mixin button-active {
+  &:active:not(:disabled, [aria-disabled='true']) {
+    @content;
+  }
+}
+
+@mixin button-disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    box-shadow: none;
+
+    @content;
+  }
+}
+
+@mixin button-focus($ring-color, $offset: $focus-ring-offset-lg) {
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring-color;
+    outline-offset: $offset;
+  }
+}
+
+// Square icon button (48x48 by default): the three btn-icon-* blocks differ only in the colors passed here
+@mixin icon-button(
+  $bg,
+  $bg-hover,
+  $bg-active,
+  $bg-disabled,
+  $icon,
+  $icon-disabled,
+  $ring-color,
+  $size: $button-icon-size,
+  $elevated: true
+) {
+  @include button-reset;
+  @include button-forced-colors;
+
+  flex: none;
+  width: $size;
+  height: $size;
+  border-radius: $radius-14;
+  color: $icon;
+  background-color: $bg;
+  transition: $button-transition;
+
+  @if $icon {
+    justify-content: center;
+  }
+
+  @if $elevated {
+    box-shadow: $shadow-s;
+  }
+
+  // An <a> must keep its color once the page has been visited
+  &:visited {
+    color: $icon;
+  }
+
+  @include button-hover {
+    background-color: $bg-hover;
+
+    @if $elevated {
+      box-shadow: $shadow-s-hover;
+    }
+  }
+
+  @include button-active {
+    background-color: $bg-active;
+    box-shadow: none;
+    opacity: $button-active-opacity;
+  }
+
+  @include button-disabled {
+    color: $icon-disabled;
+    background-color: $bg-disabled;
+  }
+
+  @include button-focus($ring-color);
+  @include button-reduced-motion;
+}

@@ -1,0 +1,38 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Wrapper that scrolls a wide table horizontally on small screens.
+// The table itself is styled by the default table rules (blocks/table).
+
+.table-mobile-scroll {
+  $block-name: &; // #{$block-name}__element
+
+  display: block;
+  width: 100%;
+  margin: $space-48 0;
+  overflow-x: auto;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid var(--btn-primary-focus-ring);
+    outline-offset: $focus-ring-offset;
+  }
+
+  table {
+    // table-layout: fixed;
+    margin: 0;
+    width: 100%;
+
+    caption {
+      position: sticky;
+      left: 0;
+    }
+  }
+}

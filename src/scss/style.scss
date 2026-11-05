@@ -1,0 +1,53 @@
+// ВНИМАНИЕ!
+// Этот файл сгенерирован автоматически на основе projectConfig.json и getFilesList().
+// Не редактируйте его вручную — изменения будут перезаписаны при следующей генерации.
+// Подключения из addCssBefore:
+@use '../../node_modules/swiper/swiper-bundle.min.css' as *;
+@use './_coreui-custom' as *;
+@use './variables' as *;
+@use './mixins' as *;
+
+// SCSS-файлы блоков из projectConfig.blocks:
+@use '../blocks/typo/typo';
+@use '../blocks/page/page';
+@use '../blocks/breadcrumbs/breadcrumbs';
+@use '../blocks/btn/btn';
+@use '../blocks/burger/burger';
+@use '../blocks/close/close';
+@use '../blocks/embed-responsive/embed-responsive';
+@use '../blocks/field-actions/field-actions';
+@use '../blocks/field-checkbox/field-checkbox';
+@use '../blocks/field-radio/field-radio';
+@use '../blocks/field-text/field-text';
+@use '../blocks/form/form';
+@use '../blocks/lang-switcher/lang-switcher';
+@use '../blocks/logo/logo';
+@use '../blocks/main-nav/main-nav';
+@use '../blocks/page-footer/page-footer';
+@use '../blocks/page-header/page-header';
+@use '../blocks/pagination/pagination';
+@use '../blocks/sprite-svg/sprite-svg';
+@use '../blocks/table/table';
+@use '../blocks/table-mobile-scroll/table-mobile-scroll';
+@use '../blocks/table-responsive/table-responsive';
+@use '../blocks/tabs/tabs';
+@use '../blocks/skip-link/skip-link';
+@use '../blocks/theme-toggle/theme-toggle';
+@use '../blocks/text-roll/text-roll';
+@use '../blocks/disclosure/disclosure';
+@use '../blocks/btn-secondary/btn-secondary';
+@use '../blocks/btn-icon-primary/btn-icon-primary';
+@use '../blocks/btn-icon-secondary/btn-icon-secondary';
+@use '../blocks/btn-icon-tertiary/btn-icon-tertiary';
+@use '../blocks/btn-link/btn-link';
+@use '../blocks/social-networks/social-networks';
+@use '../blocks/mob-nav/mob-nav';
+@use '../blocks/search-form/search-form';
+@use '../blocks/search-modal/search-modal';
+@use '../blocks/hero/hero';
+@use '../blocks/partners-slider/partners-slider';
+@use '../blocks/achievements/achievements';
+
+// Подключения из addCssAfter:
+@use './print' as *;
+

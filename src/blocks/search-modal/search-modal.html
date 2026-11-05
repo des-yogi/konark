@@ -1,0 +1,16 @@
+<!--DEV
+@@include('blocks/search-modal/search-modal.html')
+-->
+
+<div class="search-modal  modal  fade  js-search-modal" id="search-modal" tabindex="-1" aria-label="Пошук" aria-hidden="true">
+  <div class="search-modal__dialog  modal-dialog  container">
+    <div class="search-modal__content  modal-content">
+      <form class="search-form  search-form--modal" role="search" action="/search/" method="get">
+        <input class="search-form__input  js-search-modal-input" type="search" name="q" placeholder="Пошуковий запит" aria-label="Пошук" autocomplete="off" enterkeyhint="search">
+        <button class="search-form__submit  btn-icon-primary" type="submit" aria-label="Знайти">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

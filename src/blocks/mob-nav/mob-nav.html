@@ -1,0 +1,86 @@
+<!--DEV
+Mobile / tablet menu (CoreUI Offcanvas). Include it ONCE per page, AFTER the page header
+and OUTSIDE of <header> (the fixed header creates its own stacking context):
+
+@@include('blocks/mob-nav/mob-nav.html')
+
+- Opened by the burger in the header (data-coreui-toggle="offcanvas" data-coreui-target="#mob-nav").
+- Items with children are buttons; the submenus are an accordion (CoreUI Collapse, data-coreui-parent).
+- Current page link: aria-current="page". Current section (button): aria-current="true".
+- The language switcher is a copy of the lang-switcher block with unique ids (ids must not repeat on the page).
+- STUBS: hrefs, the search action and the "Про нас" submenu items are placeholders.
+-->
+
+<div class="mob-nav  offcanvas  offcanvas-start" id="mob-nav" tabindex="-1" aria-label="Меню">
+  <div class="mob-nav__top">
+    @@include('../../blocks/logo/logo.html')
+
+    <button class="mob-nav__close" type="button" aria-label="Закрити меню" data-coreui-dismiss="offcanvas">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#close"></use></svg>
+    </button>
+  </div>
+
+  <form class="mob-nav__search  search-form  search-form--nav" role="search" action="/search/" method="get">
+    <input class="search-form__input" type="search" name="q" placeholder="Пошук" aria-label="Пошук" autocomplete="off" enterkeyhint="search">
+    <button class="search-form__submit" type="submit" aria-label="Знайти">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+    </button>
+  </form>
+
+  <div class="mob-nav__tools">
+    @@include('../../blocks/theme-toggle/theme-toggle.html')
+
+    <div class="lang-switcher">
+      <button class="lang-switcher__toggler" type="button" data-disclosure aria-expanded="false" aria-controls="mob-nav-lang-list">
+        <span class="visually-hidden">Мова:</span>
+        UA
+        <svg class="lang-switcher__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+      </button>
+      <ul class="lang-switcher__list" id="mob-nav-lang-list">
+        <li><a class="lang-switcher__link" href="/" lang="uk" hreflang="uk" aria-label="Українська" aria-current="true">UA</a></li>
+        <li><a class="lang-switcher__link" href="/en/" lang="en" hreflang="en" aria-label="English">EN</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mob-nav__scroll" data-overlayscrollbars-initialize>
+    <nav class="mob-nav__nav" aria-label="Головне меню">
+      <ul class="mob-nav__list" id="mob-nav-list">
+        <li class="mob-nav__item">
+          <button class="mob-nav__toggle" type="button" data-coreui-toggle="collapse" data-coreui-target="#mob-nav-sub-products" aria-expanded="false" aria-controls="mob-nav-sub-products" aria-current="true">
+            <span class="mob-nav__label">Продукція</span>
+            <svg class="mob-nav__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+          </button>
+          <div class="collapse" id="mob-nav-sub-products" data-coreui-parent="#mob-nav-list">
+            <ul class="mob-nav__sublist">
+              <li class="mob-nav__item"><a class="mob-nav__sublink" aria-current="page">Вся продукція</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/products/therapeutic/">Терапевтичні напрямки</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/products/otc/">Безрецептурні лікарські засоби</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/products/rx/">Рецептурні лікарські засоби</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/products/devices/">Медичні вироби</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/products/supplements/">Дієтичні добавки</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mob-nav__item">
+          <button class="mob-nav__toggle" type="button" data-coreui-toggle="collapse" data-coreui-target="#mob-nav-sub-about" aria-expanded="false" aria-controls="mob-nav-sub-about">
+            <span class="mob-nav__label">Про нас</span>
+            <svg class="mob-nav__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+          </button>
+          <div class="collapse" id="mob-nav-sub-about" data-coreui-parent="#mob-nav-list">
+            <ul class="mob-nav__sublist">
+              <!-- STUB: the real items are not in the design -->
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/about/">Про компанію</a></li>
+              <li class="mob-nav__item"><a class="mob-nav__sublink" href="/about/history/">Історія</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mob-nav__item"><a class="mob-nav__link" href="/news/">Новини</a></li>
+        <li class="mob-nav__item"><a class="mob-nav__link" href="/partners/">Партнери</a></li>
+        <li class="mob-nav__item"><a class="mob-nav__link" href="/cooperation/">Співпраця</a></li>
+        <li class="mob-nav__item"><a class="mob-nav__link" href="/pharmacovigilance/">Фармаконагляд</a></li>
+        <li class="mob-nav__item"><a class="mob-nav__link" href="/contacts/">Контакти</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

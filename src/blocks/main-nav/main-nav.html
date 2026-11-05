@@ -1,0 +1,65 @@
+<!--DEV
+@@include('blocks/main-nav/main-nav.html')
+
+Items with a submenu are buttons (disclosure), plain items are links.
+The label is written twice for the text-roll effect (the second span is aria-hidden).
+-->
+
+<nav class="main-nav" aria-label="Головне меню">
+  <ul class="main-nav__list">
+    <li class="main-nav__item">
+      <button class="main-nav__link" type="button" data-disclosure aria-expanded="false" aria-controls="main-nav-products" aria-current="true">
+        <span class="text-roll"><span class="text-roll__line">Продукція</span><span class="text-roll__line" aria-hidden="true">Продукція</span></span>
+        <svg class="main-nav__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+      </button>
+      <div class="main-nav__sublist-wrapper" id="main-nav-products">
+        <ul class="main-nav__sublist">
+          <li><a class="main-nav__sublink" aria-current='page'>Терапевтичні напрями</a></li>
+          <li class="active"><a class="main-nav__sublink" href="#">Безрецептурні лікарські засоби</a></li>
+          <li><a class="main-nav__sublink" href="#">Рецептурні лікарські засоби</a></li>
+          <li><a class="main-nav__sublink" href="#">Медичні вироби</a></li>
+          <li><a class="main-nav__sublink" href="#">Дієтичні добавки</a></li>
+          <li><a class="main-nav__sublink" href="#">Косметичні засоби</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="main-nav__item">
+      <button class="main-nav__link" type="button" data-disclosure aria-expanded="false" aria-controls="main-nav-about">
+        <span class="text-roll"><span class="text-roll__line">Про нас</span><span class="text-roll__line" aria-hidden="true">Про нас</span></span>
+        <svg class="main-nav__arrow" width="12" height="12" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#chevron-down-sm"></use></svg>
+      </button>
+      <div class="main-nav__sublist-wrapper" id="main-nav-about">
+        <ul class="main-nav__sublist">
+          <li><a class="main-nav__sublink" href="#">Про компанію</a></li>
+          <li><a class="main-nav__sublink" href="#">Кар’єра</a></li>
+          <li><a class="main-nav__sublink" href="#">Фінансова звітність</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="main-nav__item">
+      <a class="main-nav__link" href="#">
+        <span class="text-roll"><span class="text-roll__line">Новини</span><span class="text-roll__line" aria-hidden="true">Новини</span></span>
+      </a>
+    </li>
+    <li class="main-nav__item">
+      <a class="main-nav__link" href="#">
+        <span class="text-roll"><span class="text-roll__line">Партнери</span><span class="text-roll__line" aria-hidden="true">Партнери</span></span>
+      </a>
+    </li>
+    <li class="main-nav__item">
+      <a class="main-nav__link" href="#">
+        <span class="text-roll"><span class="text-roll__line">Співпраця</span><span class="text-roll__line" aria-hidden="true">Співпраця</span></span>
+      </a>
+    </li>
+    <li class="main-nav__item">
+      <a class="main-nav__link" href="#">
+        <span class="text-roll"><span class="text-roll__line">Фармаконагляд</span><span class="text-roll__line" aria-hidden="true">Фармаконагляд</span></span>
+      </a>
+    </li>
+    <li class="main-nav__item">
+      <a class="main-nav__link" href="#">
+        <span class="text-roll"><span class="text-roll__line">Контакти</span><span class="text-roll__line" aria-hidden="true">Контакти</span></span>
+      </a>
+    </li>
+  </ul>
+</nav>

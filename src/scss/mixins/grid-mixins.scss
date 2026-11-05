@@ -1,0 +1,210 @@
+@use '../variables.scss' as *;
+@use 'breakpoints' as *;
+@use "sass:math";
+
+// Брейкпоинты и параметры сетки ($screen-*, $breakpoints, $container-*, $grid-*) — в variables.scss
+
+// ------------------------------------------------------------------------------
+//  Генератор правил для контейнера
+// ------------------------------------------------------------------------------
+
+@mixin container(
+  $xs-grid-gutter:  $grid-gutter-width,
+  $sm-grid-gutter:  $grid-gutter-width,
+  $md-grid-gutter:  $grid-gutter-width,
+  $lg-grid-gutter:  $grid-gutter-width,
+  $xl-grid-gutter:  $grid-gutter-width,
+  $xxl-grid-gutter: $grid-gutter-width
+) {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @if $xs-grid-gutter != 0 {
+    padding-left: math.div($xs-grid-gutter, 2);
+    padding-right: math.div($xs-grid-gutter, 2);
+  }
+
+  @include media-up('sm') {
+    width: $container-sm;
+
+    @if $sm-grid-gutter != $xs-grid-gutter {
+      padding-left: math.div($sm-grid-gutter, 2);
+      padding-right: math.div($sm-grid-gutter, 2);
+    }
+  }
+
+  @include media-up('md') {
+    width: $container-md;
+
+    @if $md-grid-gutter != $sm-grid-gutter {
+      padding-left: math.div($md-grid-gutter, 2);
+      padding-right: math.div($md-grid-gutter, 2);
+    }
+  }
+
+  @include media-up('lg') {
+    width: $container-lg;
+
+    @if $lg-grid-gutter != $md-grid-gutter {
+      padding-left: math.div($lg-grid-gutter, 2);
+      padding-right: math.div($lg-grid-gutter, 2);
+    }
+  }
+
+  @include media-up('xl') {
+    width: $container-xl;
+
+    @if $xl-grid-gutter != $lg-grid-gutter {
+      padding-left: math.div($xl-grid-gutter, 2);
+      padding-right: math.div($xl-grid-gutter, 2);
+    }
+  }
+
+  @include media-up('xxl') {
+    width: $container-xxl;
+
+    @if $xxl-grid-gutter != $xl-grid-gutter {
+      padding-left: math.div($xxl-grid-gutter, 2);
+      padding-right: math.div($xxl-grid-gutter, 2);
+    }
+  }
+}
+
+// ------------------------------------------------------------------------------
+//  Генератор правил для прямого родителя модульной сетки
+// ------------------------------------------------------------------------------
+
+@mixin row(
+  $xs-grid-gutter:  $grid-gutter-width,
+  $sm-grid-gutter:  $grid-gutter-width,
+  $md-grid-gutter:  $grid-gutter-width,
+  $lg-grid-gutter:  $grid-gutter-width,
+  $xl-grid-gutter:  $grid-gutter-width,
+  $xxl-grid-gutter: $grid-gutter-width
+) {
+  display: flex;
+  flex-wrap: wrap;
+
+  // Все маргины должны идти до вложенных правил!
+  @if $xs-grid-gutter != 0 {
+    margin-left: math.div($xs-grid-gutter, 2) * -1;
+    margin-right: math.div($xs-grid-gutter, 2) * -1;
+  }
+
+  @if $sm-grid-gutter != $xs-grid-gutter {
+    @include media-up('sm') {
+      margin-left: math.div($sm-grid-gutter, 2) * -1;
+      margin-right: math.div($sm-grid-gutter, 2) * -1;
+    }
+  }
+
+  @if $md-grid-gutter != $sm-grid-gutter {
+    @include media-up('md') {
+      margin-left: math.div($md-grid-gutter, 2) * -1;
+      margin-right: math.div($md-grid-gutter, 2) * -1;
+    }
+  }
+
+  @if $lg-grid-gutter != $md-grid-gutter {
+    @include media-up('lg') {
+      margin-left: math.div($lg-grid-gutter, 2) * -1;
+      margin-right: math.div($lg-grid-gutter, 2) * -1;
+    }
+  }
+
+  @if $xl-grid-gutter != $lg-grid-gutter {
+    @include media-up('xl') {
+      margin-left: math.div($xl-grid-gutter, 2) * -1;
+      margin-right: math.div($xl-grid-gutter, 2) * -1;
+    }
+  }
+
+  @if $xxl-grid-gutter != $xl-grid-gutter {
+    @include media-up('xxl') {
+      margin-left: math.div($xxl-grid-gutter, 2) * -1;
+      margin-right: math.div($xxl-grid-gutter, 2) * -1;
+    }
+  }
+
+  // Вложенное правило только после всех деклараций!
+  & > * {
+    flex-basis: 100%;
+  }
+}
+
+// ------------------------------------------------------------------------------
+//  Генератор ширины ячейки
+// ------------------------------------------------------------------------------
+
+@mixin get-width($column: 1, $columns: $grid-columns) {
+  $width: math.div(100%, $columns) * $column;
+
+  flex: 0 0 $width;
+  max-width: $width;
+}
+
+// ------------------------------------------------------------------------------
+//  Генератор правил для одной ячейки
+// ------------------------------------------------------------------------------
+
+@mixin make-col(
+  $column:  1,
+  $columns: $grid-columns,
+  $gutter:  $grid-gutter-width
+) {
+  @include get-width($column, $columns);
+
+  @if $gutter != false {
+    padding-left: math.div($gutter, 2);
+    padding-right: math.div($gutter, 2);
+  }
+}
+
+// ------------------------------------------------------------------------------
+//  Генератор правил для одной ячейки с возможностью указать @media
+//  $screen: xs (без медиазапроса) или имя из $breakpoints (sm, md, lg, xl, xxl)
+// ------------------------------------------------------------------------------
+
+@mixin col(
+  $screen:  xs,
+  $column:  $grid-columns,
+  $columns: $grid-columns,
+  $gutter:  $grid-gutter-width
+) {
+  @if $screen == xs {
+    @include make-col($column, $columns, $gutter);
+  } @else {
+    @include media-up($screen) {
+      @include make-col($column, $columns, $gutter);
+    }
+  }
+}
+
+// ------------------------------------------------------------------------------
+//  Генератор правил для отступа одной ячейки с возможностью указать @media
+//  $screen: xs (без медиазапроса) или имя из $breakpoints (sm, md, lg, xl, xxl)
+// ------------------------------------------------------------------------------
+
+@mixin col-offset(
+  $screen: xs,
+  $column: 1,
+  $columns: $grid-columns
+) {
+  @if $screen == xs {
+    margin-left: math.div($column * 100%, $columns);
+  } @else {
+    @include media-up($screen) {
+      margin-left: math.div($column * 100%, $columns);
+    }
+  }
+}
+
+// 12-column page grid (design: 12 columns, 20px gap). Include it on the block that has .container:
+// the padding of .container is the page margin, so the columns start exactly at the content edge.
+@mixin grid-12($gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: $gap;
+}

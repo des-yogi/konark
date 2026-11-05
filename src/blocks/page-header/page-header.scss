@@ -1,0 +1,112 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Fixed header: logo on the left, controls on the right.
+// < 768: logo + burger; 768–1365: logo + search + theme toggle + burger;
+// >= 1366 ($menu-desktop-width): logo + menu + search + theme toggle + language.
+// The search and burger are only togglers for now (modal / offcanvas come later).
+
+@property --header-glass-blur {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+.page-header {
+  $block-name: &; // #{$block-name}__element
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  --header-glass-blur: 0px;
+  transition: --header-glass-blur 300ms ease;
+  // ::before, --scrolled, reduced-motion as in the previous message
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, var(--header-gradient), transparent);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  // Must stay LAST in the block
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      transition: none;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-16;
+    height: $header-height;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; // 8px gap + 2px focus-ring space in the design
+  }
+
+  &__search {
+    @include nav-button;
+
+    display: none;
+    backdrop-filter: blur(var(--header-glass-blur));
+
+    @include media-up('md') {
+      display: inline-flex;
+    }
+  }
+
+  &__theme {
+    display: none;
+
+    @include media-up('md') {
+      display: flex;
+    }
+  }
+
+  // Desktop only
+  &__nav,
+  &__lang {
+    display: none;
+
+    @include media-up($menu-desktop-width) {
+      display: flex;
+    }
+  }
+
+  // Tablet and mobile only
+  &__burger {
+    display: flex;
+
+    @include media-up($menu-desktop-width) {
+      display: none;
+    }
+  }
+
+  .main-nav,
+  .theme-toggle,
+  .lang-switcher__toggler,
+  .lang-switcher__list,
+  .burger {
+    backdrop-filter: blur(var(--header-glass-blur));
+  }
+
+  &--scrolled {
+    --header-glass-blur: 10px;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
