@@ -1,0 +1,35 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Transparent wrapper: the gradient is added with a separate class.
+// Below lg the sliders of the groups run to the screen edges, so the side paddings of .container are cancelled
+// (the group titles get their own, see partner-group)
+.partners {
+  $shadow-extra: $space-12; // keep in sync with partner-group (the carousel padding minus the mockup's 20px)
+
+  padding-block: $space-48 ($space-48 - $shadow-extra); // the bottom is shortened: the last carousel has its own padding
+
+  @include media-up('md') {
+    padding-block: $space-64 ($space-64 - $shadow-extra);
+  }
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  @include media-down('lg') {
+    &.container {
+      padding-inline: 0;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-40 - $shadow-extra;
+
+    @include media-up('lg') {
+      gap: $space-96;
+    }
+  }
+}

@@ -43,7 +43,18 @@
     "search-modal": [],
     "hero": [],
     "partners-slider": [],
-    "achievements": []
+    "achievements": [],
+    "our-products": [],
+    "prod-card": [],
+    "therapeutic-areas": [],
+    "drug-type-card": [],
+    "info-media": [],
+    "media-card": [],
+    "partners": [],
+    "partner-group": [],
+    "partner-card": [],
+    "become-partner": [],
+    "force-theme": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

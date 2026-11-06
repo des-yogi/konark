@@ -55,7 +55,8 @@
   // Scrollbars: standard properties (Chrome/Edge 121+, Firefox, Safari 26.2+).
   // scrollbar-color is inherited — nested scroll containers get the same colors;
   // scrollbar-width is not inherited — it applies to the page scrollbar only.
-  scrollbar-color: var(--text-accent-soft); // thumb, track
+  // Цвета: первый — цвет бегунка (thumb), второй — цвет дорожки (track)
+  scrollbar-color: var(--tag-blue) var(--bg-secondary); // thumb + track
   scrollbar-width: thin;
 
   // Fallback for browsers without the standard properties (Safari < 26.2).
@@ -65,12 +66,13 @@
     & ::-webkit-scrollbar {
       width: 6px; // vertical scrollbar
       height: 6px; // horizontal scrollbar
-      background-color: $gray-lightest;
+      background-color: var(--bg-secondary);
     }
 
+    // Сам бегунок (перетаскиваемая часть)
     &::-webkit-scrollbar-thumb,
     & ::-webkit-scrollbar-thumb {
-      background-color: var(--text-accent-soft);
+      background-color: var(--tag-blue);
       border-radius: 8px;
     }
 

@@ -1,0 +1,39 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Logo card. The size is set by the parent (slide width or grid column), the 2:1 ratio is kept here.
+// The logo files are made ready in the same ratio, so the image just fills the card.
+.partner-card {
+  $block-name: &; // #{$block-name}__element
+
+  display: block;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: $radius-16;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+
+  @include media-up('md') {
+    box-shadow: $shadow-m;
+  }
+
+  @include button-reduced-motion;
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  // Only linked cards react
+  &--link {
+    @include button-hover {
+      background-color: var(--bg-overlay-medium);
+      box-shadow: $shadow-s-hover; // was $shadow-m-hover: too large for the clipped carousel
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring));
+  }
+}

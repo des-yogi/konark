@@ -1,0 +1,18 @@
+<!--DEV
+@@include('blocks/partners/partners.html', {
+  "gradient": "dark-light-gr"
+})
+-->
+
+<div class="container  partners  @@gradient">
+  <div class="partners__inner">
+    @@include('../../blocks/partner-group/partner-group.html', {
+      "title": "<strong>Міжнародні</strong> партнери",
+      "delay": "4000"
+    })
+    @@include('../../blocks/partner-group/partner-group.html', {
+      "title": "Партнери <strong>в Україні</strong>",
+      "delay": "5000"
+    })
+  </div>
+</div>

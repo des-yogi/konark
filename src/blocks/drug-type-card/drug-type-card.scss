@@ -1,0 +1,133 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-8, $space-12, $space-16, $space-20, $space-24, $radius-24,
+// $shadow-s, $shadow-m, $shadow-m-hover, $transition-time
+
+// Drug type card (a link). Mobile: a short one-row card (icon, title, arrow, no counter).
+// From md: icon + title on top, a footer with the counter and the arrow pinned to the bottom (cards stretch in a row).
+.drug-type-card {
+  $block-name: &; // #{$block-name}__element
+
+  position: relative;
+  display: flex;
+  gap: $space-8;
+  align-items: center;
+  padding: $space-20 $space-16;
+  border-radius: $radius-24;
+  text-decoration: none;
+  color: var(--text-primary);
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+
+  @include media-up('md') {
+    flex-direction: column;
+    align-items: stretch;
+    padding: $space-24;
+    box-shadow: $shadow-m;
+  }
+
+  &:visited {
+    color: var(--text-primary);
+  }
+
+  @include button-hover {
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-m-hover;
+
+    #{$block-name}__arrow {
+      translate: 4px 0;
+    }
+  }
+
+  @include button-active {
+    background-color: var(--bg-overlay-medium);
+    box-shadow: none;
+  }
+
+  @include button-focus(var(--btn-secondary-focus-ring));
+
+  &:focus-visible {
+    background-color: var(--bg-overlay-medium);
+  }
+
+  @include button-reduced-motion;
+
+  // Icon + title. Grows, so the footer stays at the bottom of a stretched card
+  &__head {
+    display: flex;
+    flex: 1 1 auto;
+    gap: $space-12;
+    align-items: center;
+    min-width: 0;
+
+    @include media-up('md') {
+      gap: $space-20;
+      padding-bottom: $space-12;
+    }
+  }
+
+  &__icon {
+    display: block;
+    flex: none;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+
+    @include media-up('md') {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  &__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  // Mobile: no footer, the arrow becomes a direct child of the card
+  &__foot {
+    display: contents;
+
+    @include media-up('md') {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: $space-12;
+      border-top: 1px solid var(--divider-subtle);
+    }
+  }
+
+  // Mobile: visually hidden (screen readers still get it)
+  &__count {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+
+    @include media-up('md') {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      line-height: 1.5;
+      clip-path: none;
+      color: var(--text-secondary);
+    }
+  }
+
+  &__arrow {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    color: var(--text-accent);
+    transition: translate $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+}

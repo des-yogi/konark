@@ -1,0 +1,82 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in grid-mixins.scss: @mixin grid-12
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-wrapper / .swiper-slide classes below beat its rules regardless of the load order.
+
+// Below lg: a Swiper carousel of fixed-size cards that runs to the screen edges (the parent cancels the .container paddings).
+// From lg: Swiper is destroyed (partner-group.js) and the list becomes a grid 10 of 12 columns wide.
+.partner-group {
+  $block-name: &; // #{$block-name}__element
+
+  $slide-width: 200px; // card width in the carousel: 200x100 (2:1)
+  $card-min: 180px; // grid: with 5+ columns the card stays within 180-220px
+  $shadow-room: $space-32; // vertical padding of the carousel, see __swiper
+  $shadow-extra: $shadow-room - $space-20; // 12px more than in the mockup (20px): taken from the gaps below
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-16 - $shadow-extra;
+
+  @include media-up('md') {
+    gap: $space-24 - $shadow-extra;
+  }
+
+  @include media-up('lg') {
+    gap: $space-40; // the grid has no extra padding
+  }
+
+  // The size comes from the .h3 class; the accent part is <strong>
+  &__title {
+    margin: 0;
+    padding-inline: $space-16;
+    text-align: center;
+    color: var(--text-primary);
+
+    @include media-up('md') {
+      padding-inline: $space-32;
+    }
+
+    @include media-up('lg') {
+      padding-inline: 0;
+    }
+  }
+
+  // The vertical padding lives inside the slider: Swiper clips everything outside its box, the card shadows included
+  &__swiper.swiper {
+    --swiper-wrapper-transition-timing-function: linear;
+
+    margin-inline: 0; // Swiper's auto margins would stop the flex stretch and shrink the slider to its content
+    padding-block: $space-32; // room for the card shadows: Swiper clips everything outside its box
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      overflow: visible;
+      padding-block: 0;
+    }
+  }
+
+  &__list.swiper-wrapper {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('lg') {
+      display: grid;
+      grid-column: 2 / span 10;
+      grid-template-columns: repeat(auto-fill, minmax($card-min, 1fr));
+      gap: $space-20;
+    }
+  }
+
+  &__item.swiper-slide {
+    width: $slide-width;
+    height: auto;
+    margin: 0; // the global `li + li` rule must not shift the slides
+
+    @include media-up('lg') {
+      width: auto;
+    }
+  }
+}

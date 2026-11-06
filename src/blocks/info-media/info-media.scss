@@ -1,0 +1,32 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+.info-media {
+  $block-name: &; // #{$block-name}__element
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  // Mobile: one column. Tablet: two equal-height vertical cards. Desktop: one column of horizontal cards.
+  &__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-20;
+
+    @include media-between('md', 'lg') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-up('lg') {
+      gap: $space-40;
+    }
+  }
+
+  // On desktop the cards mirror each other: media at the end side in the 1st, at the start side in the 2nd, and so on
+  &__item:nth-child(odd) {
+    --media-card-flip: 1;
+  }
+}

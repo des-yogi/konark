@@ -1,0 +1,27 @@
+<!--DEV
+@@include('blocks/media-card/media-card.html', {
+  "mix": "",
+  "number": "01",
+  "title": "Відповідність процесів сучасним вимогам",
+  "text": "Всі дистриб'юторські процеси в компанії відповідають сучасним вимогам фармацевтичного виробництва в Євросоюзі: GDP.",
+  "image": "media-card-img-1"
+})
+-->
+
+<article class="media-card  @@mix">
+  <div class="media-card__media">
+    <picture class="media-card__picture">
+      <source srcset="img/@@image.webp" type="image/webp">
+      <img class="media-card__img" src="img/@@image.jpg" width="657" height="492" alt="" loading="lazy" decoding="async">
+    </picture>
+  </div>
+  <div class="media-card__body">
+    <p class="media-card__number  subheading" aria-hidden="true">@@number</p>
+    <div class="media-card__content">
+      <h3 class="media-card__title  h4">@@title</h3>
+      <div class="media-card__text">
+        <p>@@text</p>
+      </div>
+    </div>
+  </div>
+</article>

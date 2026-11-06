@@ -1,0 +1,100 @@
+<!--DEV
+@@include('blocks/partner-group/partner-group.html', {
+  "title": "<strong>Міжнародні</strong> партнери",
+  "delay": "4000"
+})
+"title" is ready HTML (the accent part goes into <strong>), "delay" is the autoplay delay in ms.
+Below lg it is a Swiper carousel, from lg a plain grid (see partner-group.js). Cards: partner-card, with "href" or without.
+-->
+
+<section class="partner-group">
+  <h2 class="partner-group__title  h3">@@title</h2>
+
+  <div class="partner-group__swiper  swiper  js-partner-group" data-autoplay-delay="@@delay">
+    <ul class="partner-group__list  swiper-wrapper">
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "image": "partner-logo"
+        })
+      </li>
+      <li class="partner-group__item  swiper-slide">
+        @@include('../../blocks/partner-card/partner-card.html', {
+          "href": "https://example.com/",
+          "image": "partner-logo"
+        })
+      </li>
+    </ul>
+  </div>
+</section>
