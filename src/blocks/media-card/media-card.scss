@@ -1,0 +1,135 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Desktop sizes are measured in the mockups at two viewport widths: lg ($screen-lg) and this one.
+// Between them a size grows linearly with the viewport, outside the range it stays within $min/$max.
+$desktop-wide-width: $screen-xxl; // текущий 1600
+
+@function fluid($from-size, $to-size, $min: $from-size, $max: $to-size) {
+  $k: math.div($to-size - $from-size, $desktop-wide-width - $screen-lg);
+
+  @return clamp(#{$min}, calc(#{$from-size} + (100vw - #{$screen-lg}) * #{$k}), #{$max});
+}
+
+// Below lg the card is vertical with mobile sizes, so the title and the number keep their mobile token sizes
+$title-size-mobile: list.nth(map.get(map.get($headings, 'h4'), 'sizes'), 1);
+$number-size-mobile: list.nth(map.get(map.get($headings, 'subheading'), 'sizes'), 1);
+
+.media-card {
+  $block-name: &; // #{$block-name}__element
+
+  // 0 = media at the start side, 1 = media at the end side (desktop only).
+  // A parent can set --media-card-flip (see info-media); the --media-end modifier sets it on the card itself.
+  --flip: var(--media-card-flip, 0);
+  --flop: calc(1 - var(--flip));
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+  padding: $space-16;
+  border-radius: $radius-32;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+
+  @include media-up('md') {
+    box-shadow: $shadow-m;
+  }
+
+  // Desktop: horizontal card. The media width and the text paddings (measured from the card content edge,
+  // the 20px card padding is already subtracted) scale with the viewport.
+  @include media-up('lg') {
+    --inset-outer: #{fluid($space-48 - $space-20, $space-64 - $space-20)};
+    --inset-inner: #{fluid($space-48, 138px)};
+
+    flex-direction: row;
+    gap: 0;
+    padding: $space-20;
+    border-radius: $radius-48;
+  }
+
+  &__media {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: $radius-16;
+
+    @include media-up('lg') {
+      flex: none;
+      align-self: flex-start;
+      order: var(--flip);
+      width: fluid(548px, 657px, 540px, 700px);
+      border-radius: $radius-32;
+    }
+  }
+
+  &__picture {
+    display: block;
+    height: 100%;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    padding-block: $space-16;
+
+    @include media-up('lg') {
+      flex: 1;
+      justify-content: space-between;
+      min-width: 0;
+      padding-block: $space-20 $space-24;
+      padding-inline-start: calc(var(--inset-inner) * var(--flop) + var(--inset-outer) * var(--flip));
+      padding-inline-end: calc(var(--inset-inner) * var(--flip) + var(--inset-outer) * var(--flop));
+    }
+  }
+
+  // Typography comes from the global .subheading
+  &__number {
+    margin: 0;
+    color: var(--text-primary);
+
+    @include media-between('md', 'lg') {
+      font-size: $number-size-mobile;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+
+    @include media-up('lg') {
+      gap: $space-24;
+    }
+  }
+
+  // Typography comes from the global .h4. The first-line indent is part of the design (scales with the font size)
+  &__title {
+    margin: 0;
+    text-indent: 2.75em;
+    color: var(--text-primary);
+
+    @include media-between('md', 'lg') {
+      font-size: $title-size-mobile;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  // Single card with the media at the end side (right on desktop)
+  &--media-end {
+    --media-card-flip: 1;
+  }
+}

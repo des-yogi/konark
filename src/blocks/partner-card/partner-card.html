@@ -1,0 +1,24 @@
+<!--DEV
+Logo card. With "href" it is a link, without it a plain card:
+@@include('blocks/partner-card/partner-card.html', {
+  "href": "https://example.com/",
+  "image": "partner-logo"
+})
+The image files (webp + png, 2:1) lie in the img folder of the block.
+-->
+
+@@if(href)
+<a class="partner-card  partner-card--link" href="@@href" target="_blank" rel="noopener noreferrer">
+  <picture>
+    <source srcset="img/@@image.webp" type="image/webp">
+    <img class="partner-card__img" src="img/@@image.png" width="400" height="200" alt="" loading="lazy" decoding="async">
+  </picture>
+</a>
+@@else
+<div class="partner-card">
+  <picture>
+    <source srcset="img/@@image.webp" type="image/webp">
+    <img class="partner-card__img" src="img/@@image.png" width="400" height="200" alt="" loading="lazy" decoding="async">
+  </picture>
+</div>
+@@endif

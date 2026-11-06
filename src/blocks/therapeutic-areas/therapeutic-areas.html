@@ -1,0 +1,71 @@
+<!--DEV
+@@include('blocks/therapeutic-areas/therapeutic-areas.html', {
+  "gradient": "light-dark-gr"
+})
+
+Therapeutic areas: a heading with a short text and a responsive grid of drug-type-card links (1 column on mobile, up to 4 on desktop).
+Background is transparent: add a gradient class on the section when needed.
+Icons are placeholders: img/<name>.svg in the drug-type-card block (antihistamine, antibio, mens-health, womens-health ...).
+-->
+
+<section class="container  therapeutic-areas  @@gradient">
+  <div class="therapeutic-areas__inner">
+    <div class="therapeutic-areas__head">
+      <h2 class="therapeutic-areas__title  h1">Терапевтичні <strong>напрямки</strong></h2>
+      <div class="therapeutic-areas__text">
+        <p>Ми пропонуємо широкий і сучасний асортимент лікарських препаратів і препаратів медичного призначення провідних виробників.</p>
+      </div>
+    </div>
+
+    <ul class="therapeutic-areas__list">
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Антигістамінні (протиалергенні) препарати",
+          "icon": "antihistamine"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Антибіотики",
+          "icon": "antibio"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Чоловіче здоровʼя",
+          "icon": "mens-health"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Жіноче здоровʼя",
+          "icon": "womens-health"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Антигістамінні (протиалергенні) препарати",
+          "icon": "antihistamine"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Антибіотики",
+          "icon": "antibio"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Чоловіче здоровʼя",
+          "icon": "mens-health"
+        })
+      </li>
+      <li class="therapeutic-areas__item">
+        @@include('../../blocks/drug-type-card/drug-type-card.html', {
+          "title": "Жіноче здоровʼя",
+          "icon": "womens-health"
+        })
+      </li>
+    </ul>
+  </div>
+</section>

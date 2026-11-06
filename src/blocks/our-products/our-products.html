@@ -1,0 +1,95 @@
+<!--DEV
+@@include('blocks/our-products/our-products.html', {
+  "gradient": "dark-light-gr"
+})
+
+Products section. Mobile: the list is a CSS scroll-snap carousel (swipe works without JS), the arrows are added by our-products.js
+(they are `hidden` until the script runs). From md: the list is a plain grid and the arrows are hidden.
+Background is transparent: add a gradient class on the section when needed.
+Product images are placeholders: img/product-N.webp|jpg, 480x480 (the card shows them at ~240-263px, so 2x).
+-->
+
+<section class="container  our-products  js-our-products  @@gradient">
+  <div class="our-products__inner">
+    <h2 class="display-1  our-products__title">Наші продукти</h2>
+
+    <div class="our-products__body">
+      <div class="our-products__about">
+        <p class="our-products__text">Каталог препаратів компанії надає широкий спектр засобів лікування для збереження і захисту здоров’я, підвищення якості життя.</p>
+        <a class="btn-secondary" href="/catalog/">
+          <span class="text-roll"><span class="text-roll__line">дивитись всі продукти</span><span class="text-roll__line" aria-hidden="true">дивитись всі продукти</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+          </span>
+        </a>
+      </div>
+
+      <ul class="our-products__list  js-our-products-list" id="our-products-list">
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Іоніка",
+            "image": "product-1",
+            "label": "Новинка",
+            "labelClass": "prod-card__label--blue"
+          })
+        </li>
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Поліфер",
+            "image": "product-2",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Єврофаст",
+            "image": "product-3",
+            "label": "",
+            "labelClass": ""
+          })
+        </li>
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Іоніка",
+            "image": "product-1",
+            "label": "Новинка",
+            "labelClass": "prod-card__label--blue"
+          })
+        </li>
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Поліфер",
+            "image": "product-2",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+
+        <li class="our-products__item">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Єврофаст",
+            "image": "product-3",
+            "label": "",
+            "labelClass": ""
+          })
+        </li>
+
+      </ul>
+
+      <div class="our-products__nav" hidden>
+        <button class="btn-icon-secondary  js-our-products-prev" type="button" aria-label="Попередні продукти" aria-controls="our-products-list">
+          <svg class="our-products__arrow  our-products__arrow--prev" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
+        </button>
+        <button class="btn-icon-secondary  js-our-products-next" type="button" aria-label="Наступні продукти" aria-controls="our-products-list">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

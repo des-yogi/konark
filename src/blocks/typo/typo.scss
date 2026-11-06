@@ -268,7 +268,16 @@ small {
 
 sub,
 sup {
-  font-size: 70%;
+}
+
+sup {
+  font-size: 90%;
+  vertical-align: 0.1em;
+}
+
+sub {
+  font-size: 60%;
+  vertical-align: 0;
 }
 
 b,

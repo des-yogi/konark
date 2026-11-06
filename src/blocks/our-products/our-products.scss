@@ -1,0 +1,174 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss: $space-16, $space-24, $space-32, $space-40, $space-48, $space-64
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// Products section. Transparent background: the gradient is added with a separate class.
+// Mobile: a CSS-only scroll-snap carousel that bleeds to the screen edges (the .container paddings are cancelled,
+// the inner block gets its own 16px). From md: a plain grid (2 columns, from lg 3 columns next to the text).
+.our-products {
+  $block-name: &; // #{$block-name}__element
+
+  $card-width: 280px; // mobile carousel card, fixed by the design
+
+  padding-block: $space-48;
+
+  @include media-down('md') {
+    &.container {
+      padding-inline: 0;
+    }
+  }
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    padding-inline: $space-16;
+
+    @include media-up('md') {
+      padding-inline: 0;
+    }
+
+    @include media-up('lg') {
+      gap: $space-40;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    // font-size: 66px;
+    // font-weight: 500;
+    // line-height: 1;
+    // letter-spacing: -0.04em;
+    color: var(--text-primary);
+
+    // @include media-up('md') {
+    //   font-size: 105px;
+    // }
+
+    // @include media-up('lg') {
+    //   font-size: 155px;
+    // }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      align-items: start;
+    }
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    align-items: flex-start;
+    max-width: 325px;
+
+    @include media-up('md') {
+      gap: $space-32;
+    }
+
+    @include media-up('lg') {
+      grid-column: 1 / span 3;
+      max-width: none;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  // Mobile: horizontal scroller. The paddings give room for the card shadows (overflow-x clips them),
+  // the negative margins keep the layout spacing and let the list bleed out of the inner paddings.
+  &__list {
+    display: flex;
+    gap: $space-16;
+    margin: (-$space-24) (-$space-16);
+    padding: $space-24 $space-16;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: $space-16;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // @include media-up('md') {
+    //   @include grid-12;
+
+    //   row-gap: 20px;
+    //   margin: 0;
+    //   padding: 0;
+    //   overflow: visible;
+    //   scroll-snap-type: none;
+    // }
+
+    @include media-up('md') {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(max(280px, calc((100% - 2 * #{$space-20}) / 3)), 1fr));
+      gap: $space-20;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    @include media-up('lg') {
+      grid-column: 4 / -1;
+      grid-template-columns: subgrid; // 9 tracks of the parent grid: 3 cards per row
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex: none;
+    width: $card-width;
+    margin: 0; // resets the global `li + li` offset
+    scroll-snap-align: start;
+
+    @include media-up('md') {
+      // grid-column: span 6;
+      width: auto;
+    }
+
+    @include media-up('lg') {
+      grid-column: span 3;
+    }
+  }
+
+  // Prev/next buttons (mobile only). Shown by the script, so they never appear dead without JS.
+  &__nav {
+    display: flex;
+    gap: $space-40;
+    justify-content: center;
+
+    &[hidden] {
+      display: none;
+    }
+
+    @include media-up('md') {
+      display: none;
+    }
+  }
+
+  // The sprite has only the "right" arrow
+  // &__arrow--prev {
+  //   rotate: 180deg;
+  // }
+}

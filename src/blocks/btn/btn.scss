@@ -10,6 +10,7 @@
   @include button-forced-colors;
   @include text-button;
 
+  justify-content: center;
   height: $button-height;
   padding: 0 $space-20;
   border-radius: $radius-16;

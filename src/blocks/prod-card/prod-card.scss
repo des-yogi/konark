@@ -1,0 +1,178 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-4, $space-8, $space-12, $space-16, $space-20, $space-32,
+// $radius-12, $radius-24, $radius-32, $shadow-s, $shadow-m, $shadow-m-hover, $img-zoom, $white
+
+// Product card: the whole card is one link (the title link is stretched over it with ::after).
+// Mobile: fixed-size carousel card (the width is set by the parent), from md: fluid, sized by the grid.
+.prod-card {
+  $block-name: &; // #{$block-name}__element
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-12;
+  width: 100%;
+  height: 100%;
+  padding: $space-20;
+  border-radius: $radius-32;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+
+  @include media-up('md') {
+    gap: $space-20;
+    padding: $space-20 $space-32;
+    border-radius: $radius-24;
+    box-shadow: $shadow-m;
+  }
+
+  @include button-hover {
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-m-hover;
+
+    #{$block-name}__img {
+      transform: scale(#{1 + $img-zoom});
+    }
+  }
+
+  @include button-active {
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: none;
+  }
+
+  // Focus is on the inner link, the ring is drawn around the whole card
+  &:has(#{$block-name}__link:focus-visible) {
+    outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+    outline-offset: $focus-ring-offset;
+  }
+
+  @include button-reduced-motion;
+
+  &__media {
+    display: block;
+    flex: none;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+  }
+
+  &__title {
+    margin: 0;
+    // font-size: 22px;
+    // font-weight: 600;
+    // line-height: 1.2;
+    // letter-spacing: -0.02em;
+    color: var(--text-primary);
+
+    // @include media-up('md') {
+    //   font-size: 24px;
+    // }
+  }
+
+  &__link {
+    color: var(--text-primary);
+    text-decoration: none;
+
+    &:visited {
+      color: var(--text-primary);
+    }
+
+    &:focus-visible {
+      outline: none; // the ring is on the card, see above
+    }
+
+    // Stretches the link over the whole card
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+  }
+
+  &__info {
+    margin: 0;
+  }
+
+  &__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: $space-12;
+    padding: $space-8 0 $space-4;
+    border-bottom: 1px solid var(--divider-subtle);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  &__term {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__value {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    text-align: end;
+    color: var(--text-primary);
+  }
+
+  // Optional tag at the top centre ("new", "sale"...). Empty label is hidden.
+  // The colours come from two custom properties, so a new colour modifier is just two lines.
+  &__label {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    z-index: 1;
+    padding: $space-8 $space-16;
+    border-end-start-radius: $radius-12;
+    border-end-end-radius: $radius-12;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--label-color, var(--text-primary));
+    background-color: var(--label-bg, var(--tag-bg-hover));
+    translate: -50% 0;
+    pointer-events: none;
+
+    &:empty {
+      display: none;
+    }
+
+    &--blue {
+      --label-color: #{$white};
+      --label-bg: var(--palette-main-blue-50);
+    }
+
+    &--grey {
+      --label-color: var(--text-primary);
+      --label-bg: var(--tag-bg-hover);
+    }
+  }
+}

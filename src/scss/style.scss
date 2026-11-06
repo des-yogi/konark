@@ -47,6 +47,17 @@
 @use '../blocks/hero/hero';
 @use '../blocks/partners-slider/partners-slider';
 @use '../blocks/achievements/achievements';
+@use '../blocks/our-products/our-products';
+@use '../blocks/prod-card/prod-card';
+@use '../blocks/therapeutic-areas/therapeutic-areas';
+@use '../blocks/drug-type-card/drug-type-card';
+@use '../blocks/info-media/info-media';
+@use '../blocks/media-card/media-card';
+@use '../blocks/partners/partners';
+@use '../blocks/partner-group/partner-group';
+@use '../blocks/partner-card/partner-card';
+@use '../blocks/become-partner/become-partner';
+@use '../blocks/force-theme/force-theme';
 
 // Подключения из addCssAfter:
 @use './print' as *;

@@ -1,0 +1,24 @@
+@use 'sass:list';
+@use '../../scss/variables.scss' as *;
+
+// Service classes: pin a subtree to one theme, whatever the page theme is (a dark promo card on a light page, etc.).
+// They redefine every semantic color token from the same $tokens map that builds the page themes (see variables.scss),
+// so buttons, text and other blocks inside take the pinned values. The palette variables do not depend on the theme.
+// The token names must match the ones generated in variables.scss (no prefix: --btn-primary-bg).
+$force-theme-prefix: '';
+
+.force-light {
+  @each $name, $pair in $tokens {
+    --#{$force-theme-prefix}#{$name}: var(--palette-#{list.nth($pair, 1)});
+  }
+
+  color-scheme: light;
+}
+
+.force-dark {
+  @each $name, $pair in $tokens {
+    --#{$force-theme-prefix}#{$name}: var(--palette-#{list.nth($pair, 2)});
+  }
+
+  color-scheme: dark;
+}

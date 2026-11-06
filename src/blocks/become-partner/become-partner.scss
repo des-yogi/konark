@@ -1,0 +1,146 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// Promo with a dark card. The outer div is transparent: the gradient is added with a separate class.
+// The card is the same in both themes (it is pinned with the force-dark class, see force-theme).
+// The emblem is a decor under the text: it is not scaled above $emblem-size, it is only moved.
+.become-partner {
+  $block-name: &; // #{$block-name}__element
+
+  $emblem-size: 460px;
+  $emblem-top: $space-24; // mobile: the offset from the top and from the sides
+  $emblem-gap: $space-40; // from md: the offset from the card edges
+  $emblem-overlap: 100px; // mobile: how far the title goes up over the emblem
+
+  padding-block: $space-40;
+
+  // The container query units below are measured by this element (its content box = the card width)
+  container-type: inline-size;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    // Mobile: the emblem fills the card up to $emblem-size minus its side offsets; from md it is fixed
+    --emblem-size: min(#{$emblem-size}, calc(100cqi - #{$emblem-top * 2}));
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+    padding: calc(#{$emblem-top} + var(--emblem-size) - #{$emblem-overlap}) $space-16 $space-24;
+    overflow: hidden;
+    border-radius: $radius-32;
+    background-image: linear-gradient(to bottom, var(--palette-main-blue-50) 36%, var(--palette-main-blue-85) 109%);
+    isolation: isolate; // keeps the emblem blend inside the card
+
+    @include media-up('md') {
+      --emblem-size: #{$emblem-size};
+
+      justify-content: space-between;
+      min-height: calc(var(--emblem-size) + #{$emblem-gap * 2}); // the emblem keeps $emblem-gap from the top and the bottom
+      padding: $space-40;
+      border-radius: $radius-40;
+    }
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      padding: $space-64;
+      border-radius: $radius-48;
+    }
+  }
+
+  // Mobile: top and sides. Tablet: right side, centered vertically. Desktop: centered in the card.
+  &__emblem {
+    position: absolute;
+    inset-block-start: $emblem-top;
+    inset-inline: $emblem-top;
+    z-index: -1;
+    width: var(--emblem-size);
+    height: var(--emblem-size);
+    margin-inline: auto;
+    opacity: 0.4; // fallback without the soft light blend
+    pointer-events: none;
+    user-select: none;
+
+    @supports (mix-blend-mode: soft-light) {
+      opacity: 1;
+      mix-blend-mode: soft-light;
+    }
+
+    @include media-up('md') {
+      inset-block: 0;
+      inset-inline: auto $emblem-gap;
+      margin: auto 0;
+    }
+
+    @include media-up('lg') {
+      inset-inline: 0;
+      margin: auto;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  // The size comes from the .h1 class; the accent part is <strong>
+  &__title {
+    margin: 0;
+    color: var(--text-static-white-soft);
+
+    strong {
+      color: var(--text-static-white);
+    }
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+      align-self: start;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      align-self: end;
+      justify-self: end;
+      width: 100%;
+      max-width: 492px;
+    }
+  }
+
+  // The size comes from the .lead class
+  &__text {
+    color: var(--text-static-white-soft);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+
+    @include media-up('md') {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  // Full-width button: the label stays at the start, the icon chip at the end
+  &__more {
+    justify-content: space-between;
+
+    @include media-up('md') {
+      justify-content: center;
+    }
+  }
+}

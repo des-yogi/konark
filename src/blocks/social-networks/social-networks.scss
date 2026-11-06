@@ -26,6 +26,7 @@
     @include button-forced-colors;
 
     flex: none;
+    justify-content: center;
     width: 44px;
     height: 44px;
     border-radius: $radius-14;

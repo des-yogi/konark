@@ -1,0 +1,37 @@
+<!--DEV
+@@include('blocks/become-partner/become-partner.html', {
+  "gradient": "dark-light-gr"
+})
+The outer div holds the vertical paddings and the gradient class; the card inside is pinned to the dark theme (force-dark).
+The emblem files (webp + png, 460x460) lie in the img folder of the block.
+-->
+
+<div class="container  become-partner  @@gradient">
+  <section class="become-partner__card  force-dark">
+    <picture class="become-partner__emblem">
+      <source srcset="img/emblem.webp" type="image/webp">
+      <img class="become-partner__img" src="img/emblem.png" width="460" height="460" alt="" loading="lazy" decoding="async">
+    </picture>
+
+    <h2 class="become-partner__title  h1">Стати нашим<br><strong>партнером</strong></h2>
+
+    <div class="become-partner__body">
+      <div class="become-partner__text  lead">
+        <p>Компанія «Конарк Інтелмед» вже багато років успішно працює в такій висококонкурентній сфері, як український ринок ліків, і здійснює прямі поставки препаратів вітчизняного та іноземного виробництва.</p>
+      </div>
+
+      <div class="become-partner__actions">
+        <a class="btn" href="#">
+          <span class="text-roll"><span class="text-roll__line">Стати партнером</span><span class="text-roll__line" aria-hidden="true">Стати партнером</span></span>
+        </a>
+
+        <a class="btn-secondary  become-partner__more" href="#">
+          <span class="text-roll"><span class="text-roll__line">Детальніше про співпрацю</span><span class="text-roll__line" aria-hidden="true">Детальніше про співпрацю</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

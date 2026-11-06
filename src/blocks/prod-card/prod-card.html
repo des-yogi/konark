@@ -1,0 +1,43 @@
+<!--DEV
+@@include('blocks/prod-card/prod-card.html', {
+  "title": "Іоніка",
+  "image": "product-1",
+  "label": "Новинка",
+  "labelClass": "prod-card__label--blue"
+})
+
+Product card. The whole card is clickable: the link sits on the title and is stretched over the card with ::after,
+so a screen reader gets one link named by the product title (the image is decorative, alt is empty).
+The card is not a list item itself: wrap it in <li> where a list is needed (see our-products).
+
+Label (optional): <span class="prod-card__label"></span> is hidden by :empty, so keep it EMPTY (no spaces/newlines inside)
+when there is nothing to show. The colour comes from a modifier class: prod-card__label--blue (see prod-card.scss to add more).
+
+-->
+
+<article class="prod-card">
+  <picture class="prod-card__media">
+    <source srcset="img/@@image.webp" type="image/webp">
+    <img class="prod-card__img" src="img/@@image.jpg" width="480" height="480" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="prod-card__body">
+    <h3 class="h6  prod-card__title">
+      <a class="prod-card__link" href="#">@@title<sup>®</sup></a>
+    </h3>
+    <dl class="prod-card__info">
+      <div class="prod-card__row">
+        <dt class="prod-card__term">Дозування</dt>
+        <dd class="prod-card__value">1,5 грам</dd>
+      </div>
+      <div class="prod-card__row">
+        <dt class="prod-card__term">Кількість</dt>
+        <dd class="prod-card__value">14 стіків</dd>
+      </div>
+      <div class="prod-card__row">
+        <dt class="prod-card__term">Група</dt>
+        <dd class="prod-card__value">Рецептурні</dd>
+      </div>
+    </dl>
+  </div>
+  <span class="prod-card__label  @@labelClass">@@label</span>
+</article>
