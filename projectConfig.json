@@ -54,7 +54,12 @@
     "partner-group": [],
     "partner-card": [],
     "become-partner": [],
-    "force-theme": []
+    "force-theme": [],
+    "latest-news": [],
+    "news-card": [],
+    "badge": [],
+    "faq": [],
+    "faq-section": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

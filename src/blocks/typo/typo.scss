@@ -145,6 +145,10 @@ h6 {
   @include heading-style('subheading');
 }
 
+.caption {
+  @include heading-style('caption');
+}
+
 
 /* stylelint-disable no-descending-specificity */
 .p,

@@ -1,0 +1,105 @@
+<!--DEV
+@@include('blocks/faq/faq.html', {
+  "modifier": ""
+})
+
+FAQ accordion on CoreUI Collapse (only one item is open at a time, data-coreui-parent="#faq"). Independent of the section around it.
+modifier: "" - numbered items (CSS counter), "faq--plain" - without numbers (the answer takes the full width).
+The markup of the items is hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop).
+The id "faq" and the ids of the items (faq-item-N) must be unique on the page. The texts are placeholders (lorem).
+The JS is the CoreUI collapse module from src/js/index.js, there is no own script.
+-->
+
+<div class="faq  @@modifier" id="faq">
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-1" aria-expanded="true" aria-controls="faq-item-1">
+        <span class="faq__title  subheading">Яку фармацевтичну продукцію ви постачаєте?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse  show" id="faq-item-1" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-2" aria-expanded="false" aria-controls="faq-item-2">
+        <span class="faq__title  subheading">З якими компаніями ви співпрацюєте?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-2" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-3" aria-expanded="false" aria-controls="faq-item-3">
+        <span class="faq__title  subheading">Як ви гарантуєте якість продукції?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-3" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-4" aria-expanded="false" aria-controls="faq-item-4">
+        <span class="faq__title  subheading">Чи надаєте ви документи на продукцію?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-4" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-5" aria-expanded="false" aria-controls="faq-item-5">
+        <span class="faq__title  subheading">Які умови та терміни постачання?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-5" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-6" aria-expanded="false" aria-controls="faq-item-6">
+        <span class="faq__title  subheading">Чи можливі індивідуальні умови співпраці?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-6" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq__item">
+    <h3 class="faq__header">
+      <button class="faq__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#faq-item-7" aria-expanded="false" aria-controls="faq-item-7">
+        <span class="faq__title  subheading">Як стати вашим партнером?</span>
+        <svg class="faq__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="faq__panel  collapse" id="faq-item-7" data-coreui-parent="#faq">
+      <div class="faq__content">
+        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Latest news: the section is the grid. Below lg: heading, list, button in one column.
+// From lg: the heading and the button share the first row, the list takes the second one.
+.latest-news {
+  display: grid;
+  gap: $space-20;
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    gap: $space-32;
+    padding-block: $space-64;
+  }
+
+  @include media-up('lg') {
+    grid-template-columns: 1fr auto;
+    gap: $space-40 $space-16;
+    align-items: end;
+  }
+
+  &__title {
+    margin: 0;
+    text-align: center;
+    color: var(--text-primary);
+
+    @include media-up('lg') {
+      grid-column: 1;
+      grid-row: 1;
+      text-align: start;
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-up('lg') {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+
+  &__item {
+    margin: 0;
+
+    // The first (featured) card takes the whole row
+    @include media-up('md') {
+      &:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  // Mobile: full width; from md: by content
+  &__more {
+    justify-content: space-between;
+
+    @include media-up('md') {
+      justify-self: center;
+    }
+
+    @include media-up('lg') {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+    }
+  }
+}

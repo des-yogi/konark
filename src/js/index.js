@@ -20,7 +20,7 @@ import * as Popper from '@popperjs/core';
 // import '@coreui/coreui/js/src/dropdown.js';
 import '@coreui/coreui/js/src/modal.js';
 import '@coreui/coreui/js/src/collapse.js';
-// import '@coreui/coreui/js/src/tab.js';
+import '@coreui/coreui/js/src/tab.js';
 // import '@coreui/coreui/js/src/navigation.js';
 import '@coreui/coreui/js/src/offcanvas.js';
 // import Popover from '@coreui/coreui/js/src/popover.js';

@@ -1,0 +1,38 @@
+<!--DEV
+@@include('blocks/news-card/news-card.html', {
+  "modifier": "news-card--featured",
+  "titleClass": "h4",
+  "image": "news-1",
+  "href": "#",
+  "badge": "Новини",
+  "datetime": "2026-02-04",
+  "date": "4 лютого 2026",
+  "title": "Благодійна акція: Бронхомед Максімун",
+  "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед»."
+})
+-->
+
+<article class="news-card  @@modifier">
+  <a class="news-card__media" href="@@href" tabindex="-1" aria-hidden="true">
+    <picture>
+      <source srcset="img/@@image.webp" type="image/webp">
+      <img class="news-card__img" src="img/@@image.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+    </picture>
+  </a>
+  <div class="news-card__body">
+    <div class="news-card__meta">
+      @@include('../../blocks/badge/badge.html', {
+        "text":
+        "@@badge",
+        "modifier": ""
+      })
+      <time class="news-card__date  caption" datetime="@@datetime">@@date</time>
+    </div>
+    <div class="news-card__content">
+      <h3 class="news-card__title  @@titleClass"><a class="news-card__link" href="@@href">@@title</a></h3>
+      <div class="news-card__text">
+        <p>@@text</p>
+      </div>
+    </div>
+  </div>
+</article>

@@ -332,8 +332,8 @@ $headings: (
   'h5': ('sizes': (24px, 28px, 32px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
   'h6': ('sizes': (22px, 24px, 24px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
   'subheading': ('sizes': (18px, 20px, 20px), 'line-height': 1.2, 'letter-spacing': -0.02em, 'font-weight': 600),
+  'caption': ('sizes': (13px, 13px, 13px), 'line-height': 1.2, 'letter-spacing': 0.02em, 'font-weight': 600, 'text-transform': uppercase),
 );
-
 
 // Ширины
 
@@ -408,3 +408,9 @@ $menu-wide-width: 1440px; // from this width the menu gap returns to the design 
 
 $toggler-part-height: 3px;
 $toggler-part-bg-color: #000;
+
+$enable-transitions: true !default;
+$enable-prefers-reduced-motion-media-query: true !default;
+$transition-base: all .25s ease-in-out !default;
+$transition-fade: opacity .25s linear !default;
+$transition-collapse: height .3s ease !default;

@@ -65,6 +65,7 @@
   font-weight: map.get($style, 'font-weight');
   line-height: map.get($style, 'line-height');
   letter-spacing: map.get($style, 'letter-spacing');
+  text-transform: map.get($style, 'text-transform');
 
   @include media-up('md') {
     font-size: list.nth($sizes, 2);

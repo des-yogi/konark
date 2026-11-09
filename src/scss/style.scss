@@ -58,6 +58,11 @@
 @use '../blocks/partner-card/partner-card';
 @use '../blocks/become-partner/become-partner';
 @use '../blocks/force-theme/force-theme';
+@use '../blocks/latest-news/latest-news';
+@use '../blocks/news-card/news-card';
+@use '../blocks/badge/badge';
+@use '../blocks/faq/faq';
+@use '../blocks/faq-section/faq-section';
 
 // Подключения из addCssAfter:
 @use './print' as *;
