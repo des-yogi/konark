@@ -1,0 +1,17 @@
+<!--DEV
+@@include('blocks/faq-section/faq-section.html', {
+  "gradient": "light-dark-gr"
+})
+
+FAQ section: the heading and the faq accordion (an independent block).
+The section itself is the grid and the page container; the background/gradient is a separate class (@@gradient).
+-->
+
+<section class="container  faq-section  @@gradient">
+  <h2 class="faq-section__title  h1">Відповідаємо на ваші <strong>запитання</strong></h2>
+  <div class="faq-section__body">
+    @@include('../../blocks/faq/faq.html', {
+      "modifier": ""
+    })
+  </div>
+</section>

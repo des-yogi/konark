@@ -1,0 +1,161 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+// News card. Below md every card is vertical (image on top).
+// md–lg: the featured card turns horizontal, the regular ones stay vertical.
+// From lg: all cards are horizontal. Horizontal cards are two equal columns (image | text),
+// so the featured image ends exactly at the right edge of the left regular card below it.
+.news-card {
+  $block-name: &; // #{$block-name}__element
+
+  display: grid;
+  align-content: start;
+  gap: $space-16;
+  height: 100%;
+  padding: $space-16 $space-16 $space-24;
+  border-radius: $radius-32;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+
+  @include media-up('md') {
+    padding-bottom: $space-32;
+    border-radius: $radius-40;
+  }
+
+  @include media-up('lg') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: $space-20;
+    padding: $space-16;
+    box-shadow: $shadow-m;
+  }
+
+  &__media {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: $radius-28;
+
+    @include button-hover {
+      #{$block-name}__img {
+        transform: scale(#{1 + $img-zoom});
+      }
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    padding-inline: $space-4;
+
+    @include media-up('md') {
+      gap: $space-16;
+    }
+
+    @include media-up('lg') {
+      // align-self: stretch;
+      // justify-content: space-between;
+      padding: $space-8 0 $space-24;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    gap: $space-16;
+    align-items: center;
+    min-height: 32px;
+  }
+
+  &__date {
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+
+    @include button-hover {
+      text-decoration: underline;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring));
+  }
+
+  // The first paragraph must not add the global top margin to the gap
+  &__text {
+    color: var(--text-secondary);
+
+    > :first-child {
+      margin-top: 0;
+    }
+  }
+
+  // The special card: the first one, enlarged (horizontal from md)
+  &--featured {
+    @include media-up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $space-24;
+      align-items: start;
+      padding: $space-16;
+
+      #{$block-name}__body {
+        align-self: stretch;
+        justify-content: space-between;
+        padding: 0;
+      }
+    }
+
+    @include media-up('lg') {
+      gap: $space-20;
+      padding: $space-20;
+      border-radius: $radius-48;
+
+      #{$block-name}__media {
+        border-radius: $radius-32;
+      }
+
+      #{$block-name}__body {
+        padding: $space-20 $space-20 $space-24 $space-16;
+      }
+
+      #{$block-name}__content {
+        gap: $space-24;
+      }
+    }
+
+    @include media-up('xxl') {
+
+      #{$block-name}__body {
+        padding: $space-20 $space-64 $space-24 $space-96;
+      }
+    }
+  }
+}

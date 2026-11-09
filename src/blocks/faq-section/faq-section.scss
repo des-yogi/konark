@@ -1,0 +1,45 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// FAQ section: the section is the grid. Below md: heading and list in one column.
+// md: the list takes 10 of 12 columns on the right (no right padding). lg: the heading takes 6 columns, the list the other 6.
+.faq-section {
+  display: grid;
+  gap: $space-12;
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    @include grid-12;
+
+    row-gap: $space-40;
+    padding-block: $space-64;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--text-primary);
+
+    @include media-up('md') {
+      grid-column: 1 / -1;
+    }
+
+    // 492px is the heading width in the mockup: it breaks the heading into three lines without <br>
+    @include media-up('lg') {
+      grid-column: 1 / 7;
+      max-inline-size: 492px;
+    }
+  }
+
+  &__body {
+    min-width: 0;
+
+    @include media-up('md') {
+      grid-column: 3 / -1;
+    }
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      grid-row: 1;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<!--DEV
+@@include('blocks/latest-news/latest-news.html', {
+  "gradient": "dark-light-gr"
+})
+-->
+
+<section class="container  latest-news  @@gradient">
+  <h2 class="latest-news__title  h1"><strong>Будьте в курсі</strong> останніх подій</h2>
+  <ul class="latest-news__list">
+    <li class="latest-news__item">
+      @@include('../../blocks/news-card/news-card.html', {
+        "modifier": "news-card--featured",
+        "titleClass": "h4",
+        "image": "news-1",
+        "href": "#",
+        "badge": "Новини",
+        "datetime": "2026-02-04",
+        "date": "4 лютого 2026",
+        "title": "Благодійна акція: Бронхомед Максімун",
+        "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед». З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для боротьби з COVID-19*."
+      })
+    </li>
+    <li class="latest-news__item">
+      @@include('../../blocks/news-card/news-card.html', {
+        "modifier": "",
+        "titleClass": "h6",
+        "image": "news-2",
+        "href": "#",
+        "badge": "Новини",
+        "datetime": "2026-02-04",
+        "date": "4 лютого 2026",
+        "title": "Благодійна акція: Бронхомед Максімун",
+        "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед». З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для боротьби з COVID-19*."
+      })
+    </li>
+    <li class="latest-news__item">
+      @@include('../../blocks/news-card/news-card.html', {
+        "modifier": "",
+        "titleClass": "h6",
+        "image": "news-3",
+        "href": "#",
+        "badge": "Новини",
+        "datetime": "2026-02-04",
+        "date": "4 лютого 2026",
+        "title": "Благодійна акція: Бронхомед Максімун",
+        "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед». З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для боротьби з COVID-19*."
+      })
+    </li>
+  </ul>
+  <a class="btn-secondary  latest-news__more" href="#">
+    <span class="text-roll"><span class="text-roll__line">Більше новин</span><span class="text-roll__line" aria-hidden="true">Більше новин</span></span>
+    <span class="btn-secondary__icon">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+    </span>
+  </a>
+</section>

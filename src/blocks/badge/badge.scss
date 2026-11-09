@@ -1,0 +1,45 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+.badge {
+  --badge-dot: var(--tag-red);
+
+  @include heading-style('caption');
+
+  display: inline-flex;
+  gap: $space-8;
+  align-items: center;
+  height: 32px;
+  padding-inline: $space-16 $space-12;
+  border-radius: $radius-16;
+  white-space: nowrap;
+  color: var(--tag-text);
+  background-color: var(--tag-bg);
+
+  // Status dot
+  &::after {
+    content: '';
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--badge-dot);
+  }
+
+  // No label, no badge
+  &:empty {
+    display: none;
+  }
+
+  &--green {
+    --badge-dot: var(--tag-green);
+  }
+
+  &--yellow {
+    --badge-dot: var(--tag-yellow);
+  }
+
+  &--blue {
+    --badge-dot: var(--tag-blue);
+  }
+}

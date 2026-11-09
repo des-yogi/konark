@@ -1,0 +1,137 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+// FAQ accordion (CoreUI Collapse). Each item is a header with a full-width trigger button and a collapsible panel.
+// The numbers come from a CSS counter; `faq--plain` removes them and the answer takes the full width.
+// The .collapse / .collapsing rules come from CoreUI, nothing is duplicated here.
+.faq {
+  $block-name: &; // #{$block-name}__element
+
+  --faq-number-width: 30px;
+  --faq-gap: 24px; // between the number, the title and the icon
+  --faq-padding-inline: 8px;
+  // Left and right edges of the answer: the title column (number + gap on the left, gap + icon on the right)
+  --faq-content-start: calc(var(--faq-padding-inline) + var(--faq-number-width) + var(--faq-gap));
+  --faq-content-end: calc(var(--faq-padding-inline) + 24px + var(--faq-gap));
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+  counter-reset: faq-item;
+
+  &__item {
+    border-bottom: 1px solid var(--divider-subtle);
+    counter-increment: faq-item;
+  }
+
+  &__header {
+    margin: 0;
+    font: inherit;
+  }
+
+  &__trigger {
+    display: flex;
+    gap: var(--faq-gap);
+    align-items: flex-start;
+    width: 100%;
+    padding: $space-16 var(--faq-padding-inline) $space-20;
+    border: 0;
+    border-radius: $radius-14;
+    font: inherit;
+    text-align: start;
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    // The arrow turns ↗ → → ↘ (hover, open); the rotation is one custom property so the states do not fight
+    --faq-icon-rotate: 0deg;
+
+    &::before {
+      content: counter(faq-item, decimal-leading-zero);
+      flex: none;
+      width: var(--faq-number-width);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+    }
+
+    &[aria-expanded='false'] {
+      @include button-hover {
+        --faq-icon-rotate: 45deg;
+      }
+    }
+
+    &[aria-expanded='true'] {
+      --faq-icon-rotate: 90deg;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), 2px);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+
+  &__icon {
+    flex: none;
+    align-self: flex-start;
+    rotate: var(--faq-icon-rotate);
+    transition: rotate $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  // The panel is only a collapsing box (no padding, otherwise the height animation jumps); the spacing is inside
+  &__content {
+    padding: 0 var(--faq-content-end) $space-20 var(--faq-content-start); // the row keeps its own 20px bottom padding, so the gap under the title is 20px
+    color: var(--text-secondary);
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    > * + * {
+      margin-top: $space-16;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: $space-24;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    li + li {
+      margin-top: $space-16;
+    }
+  }
+
+  // Without numbers: no number column, the answer is as wide as the row
+  &--plain {
+    --faq-content-start: var(--faq-padding-inline);
+    --faq-content-end: var(--faq-padding-inline);
+
+    #{$block-name}__trigger {
+      gap: 0;
+      justify-content: space-between;
+
+      &::before {
+        content: none;
+      }
+    }
+
+    #{$block-name}__title {
+      padding-inline-end: var(--faq-gap);
+    }
+  }
+}
