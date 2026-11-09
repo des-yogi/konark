@@ -1,30 +1,45 @@
 @use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
 
-// Skip link: visually hidden until it receives keyboard focus (first Tab on the page)
 .skip-link {
   $block-name: &; // #{$block-name}__element
 
+  @include button-reset;
+  @include text-button;
+
   position: fixed;
-  top: 8px;
-  left: 8px;
+  top: 0;
+  left: 0;
   z-index: 1000;
-  padding: 8px 16px;
-  font-weight: 700;
-  color: $white;
-  text-decoration: none;
-  background-color: $link-color-hover;
-  border-radius: $border-radius;
-  transform: translateY(calc(-100% - 16px)); // moved above the viewport (top offset + spare)
-  transition: transform $transition-time;
+  height: $button-height;
+  padding-inline: $space-24;
+  border-radius: 0 0 $radius-16 0;
+  color: var(--btn-primary-label);
+  background-color: var(--btn-primary-bg);
+  transform: translateY(-100%); // moved exactly above the viewport
+  transition: transform $transition-time ease, background-color $transition-time ease, opacity $transition-time ease;
+
+  &:visited {
+    color: var(--btn-primary-label);
+  }
 
   &:focus {
-    color: $white;
+    color: var(--btn-primary-label);
     transform: translateY(0);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+  @include button-hover {
+    background-color: var(--btn-primary-bg-hover);
   }
+
+  @include button-active {
+    background-color: var(--btn-primary-bg-hover);
+    opacity: $button-active-opacity;
+  }
+
+  @include button-focus(var(--btn-primary-focus-ring));
+  @include button-reduced-motion;
 }
 
 // Skip-link target: <main tabindex="-1"> is not interactive — no focus ring around the whole content area
