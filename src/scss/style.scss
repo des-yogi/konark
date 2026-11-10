@@ -63,6 +63,11 @@
 @use '../blocks/badge/badge';
 @use '../blocks/faq/faq';
 @use '../blocks/faq-section/faq-section';
+@use '../blocks/page-head/page-head';
+@use '../blocks/chip/chip';
+@use '../blocks/filters-form/filters-form';
+@use '../blocks/catalog/catalog';
+@use '../blocks/seo-text/seo-text';
 
 // Подключения из addCssAfter:
 @use './print' as *;

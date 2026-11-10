@@ -1,0 +1,48 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Active filter chip (Figma: Text / Default, Variant2). A button that removes the filter.
+.chip {
+  display: inline-flex;
+  flex: none;
+  gap: $space-8 - 2px;
+  align-items: center;
+  padding: $space-4 $space-4 $space-4 $space-16;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  background-color: var(--tag-bg);
+  border: 0;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition: background-color $transition-time;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--tag-bg-hover);
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+    outline-offset: $focus-ring-offset;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__icon {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    fill: currentcolor;
+  }
+}

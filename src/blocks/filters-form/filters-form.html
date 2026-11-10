@@ -1,0 +1,131 @@
+<!--DEV
+Product filters (CoreUI Offcanvas below lg, a static sidebar from lg - ONE DOM, see filters-form.scss).
+Include it ONCE per page, inside <aside class="catalog__filters">, outside of the HTMX results target:
+
+@@include('blocks/filters-form/filters-form.html')
+
+- Opened by the "Фільтри (N)" button of the catalog toolbar: data-coreui-toggle="offcanvas" data-coreui-target="#filter-form".
+- The groups are an independent accordion (CoreUI Collapse, no data-coreui-parent). A closed group's toggle has the class "collapsed".
+- Group ids ("filters-group-N") must be unique on the page.
+- The search input of the catalog is bound to this form with form="filter-form".
+- STUBS: action, the counters "(2)" and "10", the groups and the options are placeholders (in MODX the groups become a loop).
+  Options are the field-checkbox block with the field-checkbox--option modifier; "checked" is a flag ("1" = checked).
+-->
+<form class="filters-form  offcanvas" id="filter-form" tabindex="-1" aria-labelledby="filters-form-title" action="#" method="get">
+  <div class="filters-form__top">
+    <button class="filters-form__close  js-filters-close" type="button" aria-label="Закрити фільтри" data-coreui-dismiss="offcanvas">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#close"></use></svg>
+    </button>
+  </div>
+
+  <div class="filters-form__scroll  js-filters-scroll">
+    <div class="filters-form__content">
+      <div class="filters-form__head">
+        <h2 class="filters-form__title" id="filters-form-title">Фільтри (2)</h2>
+        <a class="filters-form__clear" href="#">очистити всі</a>
+      </div>
+
+      <div class="filters-form__group">
+        <h3 class="filters-form__group-title">
+          <button class="filters-form__toggle" type="button" data-coreui-toggle="collapse" data-coreui-target="#filters-group-1" aria-expanded="true" aria-controls="filters-group-1">
+            <span class="filters-form__toggle-text">Група</span>
+            <span class="filters-form__toggle-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="filters-form__panel  collapse  show" id="filters-group-1">
+          <fieldset class="filters-form__fieldset">
+            <legend class="visually-hidden">Група</legend>
+            <div class="filters-form__options  js-filters-options">
+              <div class="filters-form__list">
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 1", "count": "10", "checked": "1", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 2", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 3", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 4", "count": "10", "checked": "1", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 5", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 6", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 7", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 8", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 9", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="filters-form__group">
+        <h3 class="filters-form__group-title">
+          <button class="filters-form__toggle  collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#filters-group-2" aria-expanded="false" aria-controls="filters-group-2">
+            <span class="filters-form__toggle-text">Терапевтичний напрямок</span>
+            <span class="filters-form__toggle-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="filters-form__panel  collapse" id="filters-group-2">
+          <fieldset class="filters-form__fieldset">
+            <legend class="visually-hidden">Терапевтичний напрямок</legend>
+            <div class="filters-form__options  js-filters-options">
+              <div class="filters-form__list">
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 1", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 2", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 3", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 4", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="filters-form__group">
+        <h3 class="filters-form__group-title">
+          <button class="filters-form__toggle  collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#filters-group-3" aria-expanded="false" aria-controls="filters-group-3">
+            <span class="filters-form__toggle-text">АТС Класифікація</span>
+            <span class="filters-form__toggle-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="filters-form__panel  collapse" id="filters-group-3">
+          <fieldset class="filters-form__fieldset">
+            <legend class="visually-hidden">АТС Класифікація</legend>
+            <div class="filters-form__options  js-filters-options">
+              <div class="filters-form__list">
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 1", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 2", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 3", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 4", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="filters-form__group">
+        <h3 class="filters-form__group-title">
+          <button class="filters-form__toggle  collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#filters-group-4" aria-expanded="false" aria-controls="filters-group-4">
+            <span class="filters-form__toggle-text">Діюча речовина</span>
+            <span class="filters-form__toggle-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="filters-form__panel  collapse" id="filters-group-4">
+          <fieldset class="filters-form__fieldset">
+            <legend class="visually-hidden">Діюча речовина</legend>
+            <div class="filters-form__options  js-filters-options">
+              <div class="filters-form__list">
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 1", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 2", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 3", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+                @@include('../../blocks/field-checkbox/field-checkbox.html', {"text": "Option 4", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters-form__footer">
+    <button class="filters-form__submit  btn" type="submit">
+      <span class="text-roll">
+        <span class="text-roll__line">Застосувати</span>
+        <span class="text-roll__line" aria-hidden="true">Застосувати</span>
+      </span>
+    </button>
+  </div>
+</form>

@@ -1,40 +1,39 @@
 <!--DEV
 @@include('blocks/pagination/pagination.html')
+
+Page navigation. In MODX it is built by pdoPage chunks: the item, the current page, the disabled arrow, the ellipsis.
+- A page link: a.pagination__link[href][aria-label="Сторінка N"].
+- The current page is not a link: span.pagination__link[aria-current="page"].
+- A disabled arrow (first / last page) is not a link either: span.pagination__link[aria-disabled="true"].
+- The ellipsis is its own item: li.pagination__item > span.pagination__dots.
+- STUBS: hrefs, the page numbers and the current page are placeholders.
 -->
-
-<div class="pagination" aria-label="Постраничная навигация" role="navigation">
-  <ol class="pagination__list" >
-
+<nav class="pagination" aria-label="Сторінки">
+  <ul class="pagination__list">
     <li class="pagination__item  pagination__item--prev">
-<!-- aria-label="Предыдущая страница" можно применять только на ссылках с атриб. href="" -->
-      <a class="pagination__link  pagination__link--disabled">
+      <a class="pagination__link" href="#" aria-label="Попередня сторінка">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
       </a>
     </li>
-
-    <li class="pagination__item  active">
-      <a class="pagination__link">1</a>
-    </li>
-
     <li class="pagination__item">
-      <a href="#" class="pagination__link">2</a>
+      <a class="pagination__link" href="#" aria-label="Сторінка 1">1</a>
     </li>
-
     <li class="pagination__item">
-      <a href="#" class="pagination__link">3</a>
+      <span class="pagination__link" aria-current="page">2</span>
     </li>
-
     <li class="pagination__item">
-      <a href="#" class="pagination__link">4</a>
+      <a class="pagination__link" href="#" aria-label="Сторінка 3">3</a>
     </li>
-
     <li class="pagination__item">
-      <a href="#" class="pagination__link">5</a>
+      <span class="pagination__dots">…</span>
     </li>
-
+    <li class="pagination__item">
+      <a class="pagination__link" href="#" aria-label="Сторінка 6">6</a>
+    </li>
     <li class="pagination__item  pagination__item--next">
-      <a href="#" class="pagination__link" aria-label="Следующая страница">
+      <a class="pagination__link" href="#" aria-label="Наступна сторінка">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
       </a>
     </li>
-
-  </ol>
-</div>
+  </ul>
+</nav>

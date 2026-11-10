@@ -1,0 +1,51 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// SEO text: a glass card (Always light 2) with a heading and the text.
+// The title is the global .h4 (28 / 36 / 40), the first paragraph is the global .lead.
+.seo-text {
+  $block-name: &; // #{$block-name}__element
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    padding: $space-40 $space-16;
+    border-radius: $radius-32;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      padding: $space-64;
+      border-radius: $radius-40;
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-48;
+    }
+  }
+
+  // The margins of .h4 are enough: 0 on top (first child) and 20px under it = the gap to the text
+  &__body {
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    color: var(--text-secondary);
+
+    & > *:first-child {
+
+      @include lead;
+    }
+
+    // & > * {
+    //   margin: 0;
+    // }
+
+    // & > * + * {
+    //   margin-top: $space-16;
+    // }
+  }
+}

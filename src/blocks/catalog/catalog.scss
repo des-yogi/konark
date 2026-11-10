@@ -1,0 +1,226 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Product catalog page: sidebar filters (from lg) + search + chips + product grid.
+// The filters-form block turns into the sidebar by itself from lg, here we only give it a column.
+.catalog {
+  $block-name: &; // #{$block-name}__element
+
+  // Minimal card width: the grid keeps 3 columns at wide screens and drops to fewer on narrow ones
+  --card-min: 280px;
+
+  padding-block-end: $space-20;
+
+  @include media-up('lg') {
+    padding-block-end: $space-48;
+  }
+
+  &__body {
+    padding-top: 16px;
+
+    @include media-up('lg') {
+      padding-top: 40px;
+
+      @include grid-12;
+
+      align-items: stretch;
+    }
+  }
+
+  &__filters {
+    @include media-up('lg') {
+      grid-column: 1 / span 3;
+    }
+
+    .filters-form__head {
+      @include media-up('lg') {
+        @include visually-hidden;
+      }
+    }
+  }
+
+  // Flex column: the empty state stretches down to the bottom of the sidebar
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16 0;
+    min-width: 0;
+
+    @include media-up('lg') {
+      grid-column: 4 / -1;
+      gap: $space-32 0;
+    }
+  }
+
+  &__toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+  }
+
+  &__label {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--input-label);
+
+    @include media-up('lg') {
+
+      @include visually-hidden;
+    }
+  }
+
+  // The filter button opens the drawer, so it is not needed when the filters are a sidebar
+  &__filter-btn {
+    display: flex;
+
+    @include media-up('lg') {
+      display: none;
+    }
+  }
+
+  &__filter-toggle {
+    flex: 1;
+  }
+
+  // HTMX target: everything inside is replaced as a whole
+  &__results {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $space-20;
+    // margin-block-start: $space-20;
+
+    @include media-up('lg') {
+      gap: $space-32;
+      // margin-block-start: $space-32;
+    }
+  }
+
+  // Mobile: chips on the top, the count and "clear all" under them.
+  // From lg: one row, the chips on the left, "clear all" and the count at the right.
+  &__controls {
+    display: grid;
+    grid-template-areas:
+      'chips chips'
+      'count clear';
+    grid-template-columns: 1fr auto;
+    gap: $space-12;
+    align-items: baseline;
+
+    @include media-up('lg') {
+      grid-template-areas: 'chips clear count';
+      grid-template-columns: 1fr auto auto;
+      column-gap: $space-24;
+      //align-items: start;
+    }
+  }
+
+  &__chips {
+    display: flex;
+    grid-area: chips;
+    flex-wrap: wrap;
+    gap: $space-8;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & > li {
+      margin: 0;
+    }
+
+    // No chips: the row collapses, the count and the link keep their place
+    &:empty {
+      display: none;
+    }
+  }
+
+  // The same look as filters-form__clear, but it is visible at all widths
+  &__clear {
+    display: flex;
+    grid-area: clear;
+    align-items: center;
+    min-height: 44px;
+    border-radius: $radius-8;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    cursor: pointer;
+
+    @include media-up('lg') {
+      min-height: 32px;
+    }
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__count {
+    display: flex;
+    grid-area: count;
+    align-items: center;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: nowrap;
+    color: var(--text-secondary);
+
+    @include media-up('lg') {
+      min-height: 32px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--card-min), calc((100% - 2 * 20px) / 3)), 1fr));
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__empty {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    padding: $space-32 $space-20;
+    border-radius: $radius-24;
+    text-align: center;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('lg') {
+      padding-inline: $space-48;
+    }
+  }
+
+  &__empty-text {
+    max-width: 640px;
+    margin: 0;
+  }
+}

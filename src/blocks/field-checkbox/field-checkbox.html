@@ -1,35 +1,37 @@
 <!--DEV
-@@include('blocks/field-checkbox/field-checkbox.html')
+@@include('blocks/field-checkbox/field-checkbox.html', {"text": "Видужання без наслідків", "checked": "", "disabled": "", "count": "", "mod": ""})
+
+Flags: "checked": "1" / "disabled": "1"; empty string = off.
+
+Filter option (taller row, hover background, counter) - add the modifier and the counter:
+@@include('blocks/field-checkbox/field-checkbox.html', {"text": "Назва препарату", "count": "10", "checked": "", "disabled": "", "mod": "field-checkbox--option"})
 
 <div class="field-checkbox">
   <label class="field-checkbox__name">
-    <input class="field-checkbox__input" type="checkbox" name="" value="" checked>
-    <span class="field-checkbox__name-text">Текст у флажка</span>
+    <input class="field-checkbox__input" type="checkbox" name="" value="">
+    <span class="field-checkbox__name-text">Видужання без наслідків</span>
   </label>
 </div>
 
-<div class="field-checkbox">
-  <div class="field-checkbox__title">Необязательный общий заголовок</div>
-  <div class="field-checkbox__input-wrap">
-    <label class="field-checkbox__name">
-      <input class="field-checkbox__input" type="checkbox" checked>
-      <span class="field-checkbox__name-text">Текст у флажка</span>
-    </label>
-    <div class="field-checkbox__help-text-wrap">
-      <div class="field-checkbox__help-text">Пояснение</div>
-    </div>
-  </div>
-  <div class="field-checkbox__input-wrap">
-    <label class="field-checkbox__name">
-      <input class="field-checkbox__input" type="checkbox">
-      <span class="field-checkbox__name-text">Текст у флажка</span>
-    </label>
-  </div>
-  <div class="field-checkbox__input-wrap">
-    <label class="field-checkbox__name">
-      <input class="field-checkbox__input" type="checkbox">
-      <span class="field-checkbox__name-text">Текст у флажка</span>
-    </label>
-  </div>
+<div class="field-checkbox field-checkbox--option">
+  <label class="field-checkbox__name">
+    <input class="field-checkbox__input" type="checkbox" name="" value="">
+    <span class="field-checkbox__name-text">Назва препарату</span>
+    <span class="field-checkbox__count">10</span>
+  </label>
 </div>
 -->
+<div class="field-checkbox  @@mod">
+  <label class="field-checkbox__name">
+    <input class="field-checkbox__input"
+           type="checkbox"
+           name=""
+           value=""
+           @@if(checked) checked @@endif @@if(disabled) disabled @@endif
+    >
+    <span class="field-checkbox__name-text">@@text</span>
+    @@if(count)
+    <span class="field-checkbox__count">@@count</span>
+    @@endif
+  </label>
+</div>

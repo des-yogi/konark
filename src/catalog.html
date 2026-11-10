@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konark Каталог</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "Наша <strong>продукція</strong>",
+          "text": "<p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників.</p>"
+        })
+
+        @@include('blocks/catalog/catalog.html', {
+          "empty": ""
+        })
+
+        @@include('blocks/seo-text/seo-text.html', {
+          "title": "Про компанію",
+          "text": "<p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в Компанія «Конарк Інтелмед» створена в 1997 році</p><p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в</p>"
+        })
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

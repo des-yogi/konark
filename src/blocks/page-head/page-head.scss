@@ -1,0 +1,53 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Page head: h1 + short intro text. Transparent background (the gradient is a separate class if needed).
+// The layout is taken 1:1 from the heading of therapeutic-areas.
+// Vertical paddings: the top one is the gap to the breadcrumbs above (they have their own bottom padding).
+.page-head {
+  padding-block: $space-12 $space-20;
+
+  @include media-up('lg') {
+    padding-block-start: $space-64;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      align-items: start;
+    }
+  }
+
+  &__title {
+    margin: 0;
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      padding-top: 1.2em;
+    }
+
+    & > * {
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    & > * + * {
+      margin-top: 1em;
+    }
+  }
+}

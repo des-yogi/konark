@@ -1,121 +1,95 @@
 @use '../../scss/variables.scss' as *;
-@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins' as *;
 
-$line-height: 1.375em !default;
-$text-color: hsl(0deg 0% 10%) !default;
-$border-color: hsl(0deg 0% 60%) !default;
-
+// Page navigation (Figma: pagination). Cells are 48x48; below md the arrows sit at the edges and the pages in the middle.
 .pagination {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 18px;
-
-  // margin-bottom: 60px;
-
-  @include media-up('md') {
-    // justify-content: flex-start;
-    margin-top: 20px;
-  }
-
   $block-name: &; // #{$block-name}__element
+
+  $cell: 48px;
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    list-style: none;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     margin: 0;
-    padding-left: 0;
+    padding: 0;
+    list-style: none;
   }
 
+  // The cells may shrink a bit on very narrow screens
   &__item {
-    margin-right: 0.5em;
+    flex: 0 1 $cell;
+    min-width: 0;
+    margin: 0;
 
-    &:last-child {
-      margin-right: 0;
-    }
+    // &--prev {
+    //   margin-inline-end: auto;
 
-    &.active {
-      a {
-        color: $main-color;
-        pointer-events: none;
-      }
-    }
+    //   @include media-up('md') {
+    //     margin-inline: 0;
+    //   }
+    // }
 
-    &--prev,
-    &--next {
+    // &--next {
+    //   margin-inline-start: auto;
 
-      #{$block-name}__link {
-        background-size: 8px 14px;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-    }
+    //   @include media-up('md') {
+    //     margin-inline: 0;
+    //   }
+    // }
+  }
 
-    &--prev {
-      // margin-right: 20px;
-
-      #{$block-name}__link {
-        transform: scale(-1, 1);
-        background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$text-color);
-
-        &:hover,
-        &:focus {
-          background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$white);
-        }
-
-        &--disabled {
-          background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$text-muted);
-        }
-      }
-    }
-
-    &--next {
-      // margin-left: 20px;
-
-      #{$block-name}__link {
-        background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$text-color);
-
-        &:hover,
-        &:focus {
-          background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$white);
-        }
-
-        &--disabled {
-          background-image: svg-load('../blocks/pagination/bg-img/right-arrow-icon.svg', fill=$text-muted);
-        }
-      }
-    }
+  // A page, an arrow, the current page and a disabled arrow share one look
+  &__link,
+  &__dots {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: $cell;
+    border-radius: $radius-14;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    color: var(--nav-text);
   }
 
   &__link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    color: $text-muted;
-    background-color: $white;
-    border-radius: 0;
-    transition: all 0.2s ease-out;
+    transition: color $transition-time, background-color $transition-time;
 
-    &:hover,
-    &:focus {
-      text-decoration: none;
-      color: $white;
-      background-color: $main-color;
+    &:visited {
+      color: var(--nav-text);
     }
 
-    &--disabled,
-    &:disabled {
-      // background-color: $light-bg;
-      pointer-events: none;
+    @media (hover: hover) {
+      &[href]:hover {
+        color: var(--btn-primary-bg-hover);
+        background-color: var(--tag-bg);
+      }
     }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+
+    &[aria-current='page'] {
+      color: var(--btn-primary-bg);
+      background-color: var(--tag-bg);
+    }
+
+    &[aria-disabled='true'] {
+      color: var(--nav-text-disabled);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__dots {
+    cursor: default;
   }
 }

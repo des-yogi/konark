@@ -174,5 +174,16 @@
       --label-color: var(--text-primary);
       --label-bg: var(--tag-bg-hover);
     }
+
+    &--red {
+      --label-color: #{$white};
+      --label-bg: var(--tag-red);
+    }
+
+    // Dark text on purpose: white is unreadable on yellow in both themes
+    &--yellow {
+      --label-color: rgb(0 0 0 / 87%);
+      --label-bg: var(--tag-yellow);
+    }
   }
 }
