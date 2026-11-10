@@ -4,12 +4,29 @@ The form is a plain GET form: it is going to be split into chunks for SimpleSear
 
 @@include('blocks/search-form/search-form.html')
 
-The modal version (modifier search-form--modal) lives in blocks/search-modal/search-modal.html.
+Variant bound to ANOTHER form (the catalog: the search lives outside of the filters form, but is sent together with it).
+The root is a div[role=search] (a form cannot be nested in a form), the field and the button point to the form by id.
+"id" is the id of the input: put a visible <label for="..."> before the block, it names the field.
 
+@@include('blocks/search-form/search-form.html', {
+  "form": "filter-form",
+  "id": "catalog-search"
+})
+
+The modal version (modifier search-form--modal) lives in blocks/search-modal/search-modal.html.
+-->
+@@if(form)
+<div class="search-form" role="search">
+  <input class="search-form__input" type="search" name="q" id="@@id" form="@@form" placeholder="Пошук" autocomplete="off" enterkeyhint="search">
+  <button class="search-form__submit  btn-icon-primary" type="submit" form="@@form" aria-label="Знайти">
+    <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+  </button>
+</div>
+@@else
 <form class="search-form" role="search" action="/search/" method="get">
   <input class="search-form__input" type="search" name="q" placeholder="Search" aria-label="Пошук" autocomplete="off" enterkeyhint="search">
   <button class="search-form__submit  btn-icon-primary" type="submit" aria-label="Знайти">
     <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
   </button>
 </form>
--->
+@@endif

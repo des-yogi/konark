@@ -99,6 +99,11 @@ body {
   margin: 0;
 }
 
+// Только для внутренних страниц
+.main {
+  padding-top: $header-height;
+}
+
 // Programmatic focus (tabindex="-1", e.g. after a skip link) shows no ring for mouse users
 [tabindex='-1']:focus:not(:focus-visible) {
   outline: none !important; // stylelint-disable-line  declaration-no-important

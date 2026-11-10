@@ -1,0 +1,147 @@
+<!--DEV
+@@include('blocks/catalog/catalog.html', {
+  "empty": ""
+})
+
+Product catalog: filters (sidebar from lg / drawer below) + search + chips of the chosen filters + product grid + pagination.
+Put it in <main class="main" id="main"> after the page-head; the seo-text block follows.
+
+- "empty": "1" shows the empty state ("0 продуктів", no pagination), "" shows the product list with the pagination.
+- #catalog-results is the HTMX target: it is the only part that is replaced on filtering. The sidebar form (#filter-form)
+  and the search live outside of it and are bound by form="filter-form".
+- "очистити всі" is ONE link (catalog__clear) at all widths. If the client wants it next to the filter button on mobile,
+  duplicate it in the toolbar and hide one copy per breakpoint.
+- STUBS: the counts, chips, cards and the label text are placeholders (in MODX: loops and snippets).
+-->
+<div class="container  catalog">
+  <div class="catalog__body">
+
+    <aside class="catalog__filters">
+      @@include('../../blocks/filters-form/filters-form.html')
+    </aside>
+
+    <div class="catalog__main">
+
+      <div class="catalog__toolbar">
+        <div class="catalog__search">
+          <label class="catalog__label" for="catalog-search">Пошук продуктів</label>
+          @@include('../../blocks/search-form/search-form.html', {
+            "form": "filter-form",
+            "id": "catalog-search"
+          })
+        </div>
+        <div class="catalog__filter-btn">
+          <button class="btn-secondary  catalog__filter-toggle" type="button" data-coreui-toggle="offcanvas" data-coreui-target="#filter-form" aria-controls="filter-form">
+            <span class="text-roll"><span class="text-roll__line">Фільтри (2)</span><span class="text-roll__line" aria-hidden="true">Фільтри (2)</span></span>
+            <span class="btn-secondary__icon">
+              <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#filter"></use></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="catalog__results" id="catalog-results">
+
+        <section class="catalog__controls">
+          <h2 class="visually-hidden">Результати</h2>
+          <ul class="catalog__chips">
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+            <li>
+              @@include('../../blocks/chip/chip.html', {
+              "text": "Filter"
+              })
+            </li>
+          </ul>
+          <a class="catalog__clear" href="#">Очистити всі</a>
+          <p class="catalog__count" aria-live="polite">
+            @@if(empty) 0 продуктів @@else 22 продукти @@endif
+          </p>
+        </section>
+
+        @@if(empty)
+          <div class="catalog__empty">
+            <p class="catalog__empty-text  subheading">За вашим запитом нічого не знайдено. Спробуйте змінити або прибрати фільтри.</p>
+          </div>
+        @@else
+
+          <ul class="catalog__list">
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-1",
+                "label": "Новинка",
+                "labelClass": "prod-card__label--red"
+              })
+            </li>
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-2",
+                "label": "Новинка",
+                "labelClass": "prod-card__label--yellow"
+              })
+            </li>
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-3",
+                "label": "",
+                "labelClass": ""
+              })
+            </li>
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-1",
+                "label": "",
+                "labelClass": ""
+              })
+            </li>
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-2",
+                "label": "",
+                "labelClass": ""
+              })
+            </li>
+            <li class="catalog__item">
+              @@include('../../blocks/prod-card/prod-card.html', {
+                "title": "Іоніка",
+                "image": "product-3",
+                "label": "",
+                "labelClass": ""
+              })
+            </li>
+          </ul>
+
+          @@include('../../blocks/pagination/pagination.html')
+        @@endif
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,65 +1,70 @@
 @use '../../scss/variables.scss' as *;
-@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins' as *;
 
-$line-height: 1.375em !default;
-$text-color: hsl(0deg 0% 10%) !default;
-
+// Breadcrumbs: a single line. When the path is too long the list scrolls horizontally
+// (the scrollbar is hidden by .invisible-scrollbar) and breadcrumbs.js shows its end.
+// Transparent background. It is the first block of an inner page, so the top padding also clears the fixed header.
+// Text style: the .caption class on the list (Figma: Genery/Caption).
 .breadcrumbs {
-  margin-top: 25px;
-  margin-bottom: 25px;
-
   $block-name: &; // #{$block-name}__element
+  $ring-room: $space-4; // the list clips its content: this room keeps the focus ring (2px + 2px offset) visible
 
-  &__list {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
+  // The paddings are reduced by $ring-room: the list adds it back, so the text stays where the design has it
+  padding-block: ($space-32 - $ring-room) ($space-20 - $ring-room);
+
+  @include media-up('lg') {
+    padding-block-start: $space-48 - $ring-room;
   }
 
+  // Vertical margins stay 0 on purpose: the global `ol:last-child` rule would override a negative bottom margin
+  &__list {
+    display: flex;
+    gap: $space-8;
+    align-items: center;
+    margin: 0 (-$ring-room);
+    padding: $ring-room;
+    overflow-x: auto;
+    list-style: none;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
 
   &__item {
-    display: inline-block;
-    vertical-align: baseline;
-    max-width: 100%;
-    margin-right: 0.6em;
-    margin-bottom: 0.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    flex: none;
+    gap: $space-8;
+    align-items: center;
+    margin: 0; // resets the global `li + li` offset
 
-    @include media-up('md') {
-      margin-bottom: 0;
-    }
-
+    // The separator is decoration: the empty alternative text hides it from screen readers
     &:not(:last-child)::after {
-      content: '|'; // U+276F, HTML-код &#10095; CSS-код  \276F - Прававя угловая скобка
-      display: inline-block;
-      margin-left: 0.8em;
-      font-weight: 600;
-      color: $text-muted;
-    }
-
-    &:last-child {
-
-      #{$block-name}__link {
-        text-decoration: none;
-        color: $main-color;
-      }
+      content: '›';
+      content: '›' / '';
     }
   }
 
   &__link {
-    max-width: 100%;
-    font-size: 14px;
-    font-weight: 500;
-    color: $text-muted;
+    border-radius: $radius-8;
     text-decoration: none;
-    white-space: nowrap;
+    color: var(--text-secondary);
 
-    &:hover,
-    &:focus {
-      color: $main-color;
+    &:visited {
+      color: var(--text-secondary);
+    }
 
-      // text-decoration: none;
+    @media (hover: hover) {
+      &[href]:hover {
+        color: var(--text-accent);
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+
+    &[aria-current='page'] {
+      color: var(--text-primary);
     }
   }
 }

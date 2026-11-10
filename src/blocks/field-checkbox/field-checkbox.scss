@@ -1,112 +1,148 @@
 @use '../../scss/variables.scss' as *;
 @use '../../scss/mixins' as *;
-@use "sass:math";
 
 .field-checkbox {
-  $block-name: &; // #{$block-name}__element
+  $block-name: &;
+  $box-area: 32px;
+  $box-size: 20px;
+  $box-border: 2px;
+
+  --checked-hover: color-mix(in oklch, var(--btn-primary-bg-hover), var(--bg-primary) 12%);
 
   display: block;
-  margin-bottom: 32px;
-
-  &__title {
-    display: block;
-    margin-bottom: 16px;
-    line-height: $line-height;
-    font-weight: 500;
-    color: $title-color;
-  }
-
-  &__input-wrap {
-    margin-right: 24px;
-    margin-bottom: 16px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
 
   &__name {
     position: relative;
-    display: inline-block;
-    padding-left: 32px;
-
-    // margin-right: 0.6em;
-    font-weight: 400;
-    line-height: $line-height;
+    display: flex;
+    gap: $space-8;
+    align-items: center;
+    min-height: $box-area;
+    padding-inline-end: $space-8;
+    border-radius: $radius-8;
     cursor: pointer;
+    transition: background-color $transition-time;
 
-    &:hover {
-
-      #{$block-name}__name-text {
-        color: $link-color-hover;
+    @media (hover: hover) {
+      &:hover #{$block-name}__name-text::before {
+        border-color: var(--btn-primary-bg-hover);
+        background-color: var(--tag-bg-hover);
       }
+
+      // Checked + hover: nudge the fill towards the page background (lighter on light theme, softer white on dark)
+      &:hover #{$block-name}__input:checked:not(:disabled) ~ #{$block-name}__name-text::before {
+        border-color: var(--checked-hover);
+        background-color: var(--checked-hover);
+      }
+    }
+
+    &:has(:disabled) {
+      cursor: default;
+    }
+
+    &:has(:focus-visible) {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
     }
   }
 
   &__name-text {
-    color: $title-color;
+    position: relative;
+    padding-inline-start: $box-area + 10px; // box area + 10px gap (design)
+    color: var(--input-text);
 
+    @at-root #{$block-name}__input:disabled ~ & {
+      color: var(--btn-secondary-label-disabled);
+    }
+
+    // Box
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 22px;
-      height: 22px;
-      border: 1px solid $border-color;
-      border-radius: math.div($border-radius, 2);
+      inset-block-start: 50%;
+      inset-inline-start: ($box-area - $box-size) * 0.5;
+      box-sizing: border-box;
+      width: $box-size;
+      height: $box-size;
+      border: $box-border solid var(--btn-primary-bg-disabled);
+      border-radius: 6px;
+      transform: translateY(-50%);
+      transition:
+        border-color $transition-time,
+        background-color $transition-time;
 
-      @at-root input:checked ~ & {
-        background-color: $border-color;
+      @at-root #{$block-name}__input:checked ~ & {
+        border-color: var(--btn-primary-bg-hover);
+        background-color: var(--btn-primary-bg-hover);
+      }
+
+      @at-root #{$block-name}__input:disabled ~ & {
+        border-color: var(--divider);
+        background-color: transparent;
       }
     }
 
-    @at-root input:focus ~ &::before {
-      @include field-focus;
-    }
-
+    // Tick
     &::after {
       content: '';
       position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 12px;
-      height: 8px;
+      inset-block-start: 50%;
+      inset-inline-start: 11px;
+      width: 10px;
+      height: 5px;
+      border-block-end: 2px solid var(--btn-primary-label);
+      border-inline-start: 2px solid var(--btn-primary-label);
       opacity: 0;
-      border-left: 2px solid $white;
-      border-bottom: 2px solid $white;
-      transform: rotate(-45deg);
+      transform: translateY(-70%) rotate(-45deg);
       transition: opacity $transition-time;
 
-      @at-root input:checked ~ & {
+      @at-root #{$block-name}__input:checked ~ & {
         opacity: 1;
-        border-color: $white;
       }
     }
   }
 
+  &__count {
+    flex: none;
+    margin-inline-start: auto;
+    color: var(--text-secondary);
+  }
+
+  // Visually hidden, stays focusable
   &__input {
     position: absolute;
-    top: 0.7em;
-    left: 0;
-    padding: 0;
+    width: 1px;
+    height: 1px;
     margin: 0;
-    transform: translateY(-50%);
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
 
-    &:focus,
-    &:active {
-      @include field-focus;
+  // Filter option: taller row, hover background, counter on the right
+  &--option {
+    #{$block-name}__name {
+      gap: $space-12;
+      min-height: 44px;
+      padding-inline: $space-4 $space-8;
+
+      @media (hover: hover) {
+        &:hover:not(:has(:disabled)) {
+          background-color: var(--tag-bg);
+        }
+      }
     }
 
-    // сокрытие инпута в случае использования своего чекбокса
-    opacity: 0;
+    #{$block-name}__name-text {
+      padding-inline-start: $box-area + $space-4;
+      color: var(--text-primary); // filter options use Text/Black, the counter stays --text-secondary
+    }
   }
 
-  &__help-text-wrap {
-    padding-left: 1.5em;
-  }
-
-  &__help-text {
-    @include field-help-text;
+  @media (prefers-reduced-motion: reduce) {
+    &__name,
+    &__name-text::before,
+    &__name-text::after {
+      transition: none;
+    }
   }
 }

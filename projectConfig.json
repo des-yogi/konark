@@ -59,7 +59,12 @@
     "news-card": [],
     "badge": [],
     "faq": [],
-    "faq-section": []
+    "faq-section": [],
+    "page-head": [],
+    "chip": [],
+    "filters-form": [],
+    "catalog": [],
+    "seo-text": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

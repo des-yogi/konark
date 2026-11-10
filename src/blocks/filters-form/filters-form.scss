@@ -1,0 +1,327 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Product filters. ONE DOM, two layouts:
+// - below lg: a CoreUI Offcanvas drawer built the same way as mob-nav (the project-wide modal rules);
+// - from lg: a static sidebar (the offcanvas styles are reset).
+// CoreUI's own .offcanvas-lg switches at 992px, so the breakpoint is handled here instead.
+// The scrollbar theme "os-theme-mob-nav" is defined in mob-nav.scss (global) and reused here.
+.filters-form {
+  $block-name: &; // #{$block-name}__element
+
+  $inset: $space-16;
+  $inset-wide: $space-40;
+  $ring-room: $space-4; // the focus ring (2px + 2px offset) must not be clipped by the scroll container
+  $row: 44px;
+  $row-gap: $space-4;
+  $rows-visible: 7;
+
+  --cui-offcanvas-width: 100%;
+  --cui-offcanvas-bg: var(--bg-secondary);
+  --cui-offcanvas-color: var(--text-primary);
+  --cui-offcanvas-border-width: 0;
+
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: var(--cui-offcanvas-width);
+  transform: translateX(-100%);
+
+  @include media-up('md') {
+    --cui-offcanvas-width: 492px;
+
+    overflow: hidden;
+    border-start-end-radius: $radius-40;
+    border-end-end-radius: $radius-40;
+    box-shadow: $shadow-m; // CoreUI emits no shadow while $enable-shadows is off
+  }
+
+  // Low screens: the whole panel scrolls instead of only the groups
+  @media (height < 700px) {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    #{$block-name}__scroll {
+      flex: none;
+    }
+
+    #{$block-name}__footer {
+      position: sticky;
+      inset-block-end: 0;
+    }
+  }
+
+  // Static sidebar
+  @include media-up('lg') {
+    position: static;
+    z-index: auto;
+    display: block;
+    width: auto;
+    max-width: none;
+    overflow: visible;
+    border-radius: 0;
+    color: inherit;
+    visibility: visible;
+    background: none;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+  }
+
+  &__top {
+    display: flex;
+    flex: none;
+    justify-content: flex-end;
+    padding: $space-24 $space-12 $space-8;
+
+    @include media-up('md') {
+      padding: $space-16 22px $space-16 $inset-wide;
+    }
+
+    @include media-up('lg') {
+      display: none;
+    }
+  }
+
+  &__close {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-16;
+    color: var(--nav-text);
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-s;
+    transition: background-color $transition-time ease, box-shadow $transition-time ease;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--nav-bg-hover);
+        box-shadow: $shadow-s-hover;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // The scroll host (OverlayScrollbars). The scrollbar sits at its right edge, the content leaves room for it.
+  &__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: $space-24 $inset $space-16 ($inset - $ring-room);
+
+    @include media-up('md') {
+      margin: (56px - $ring-room) $inset-wide $space-16 ($inset-wide - $ring-room);
+    }
+
+    @include media-up('lg') {
+      margin: (-$ring-room);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    padding: $ring-room ($space-12 + $space-4 + $ring-room) $ring-room $ring-room; // 12px gap + 4px scrollbar
+
+    @include media-up('lg') {
+      padding-inline-end: $ring-room;
+    }
+  }
+
+  &__head {
+    display: flex;
+    gap: $space-16;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: $space-4;
+    min-height: $row;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--text-primary);
+
+    // The sidebar has no visible heading, but the form keeps one for assistive technologies
+    @include media-up('lg') {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  // Duplicated in catalog (catalog__clear) on purpose: the same look, a different block context
+  &__clear {
+    display: flex;
+    align-items: center;
+    min-height: $row;
+    border-radius: $radius-8;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    cursor: pointer;
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+
+    // In the sidebar "clear all" lives in the results controls
+    @include media-up('lg') {
+      display: none;
+    }
+  }
+
+  &__group-title {
+    margin: 0;
+  }
+
+  &__toggle {
+    display: flex;
+    gap: $space-12;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 56px;
+    padding: $space-12 $space-16 $space-12 $space-12;
+    border: 0;
+    border-radius: $radius-16;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-align: start;
+    color: var(--text-primary);
+    background-color: transparent;
+    transition: background-color $transition-time;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--tag-bg);
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // Plus / minus: two bars, the vertical one collapses when the group is open
+  &__toggle-icon {
+    position: relative;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    color: var(--nav-text);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      width: 14px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: currentcolor;
+      transform: translate(-50%, -50%);
+      transition: transform $transition-time;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+
+      #{$block-name}__toggle[aria-expanded='true'] & {
+        transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
+      }
+    }
+  }
+
+  &__panel {
+    padding-block-end: $space-4;
+  }
+
+  &__fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  // The list of options. From lg it scrolls inside the group (about 7 rows), in the drawer the whole panel scrolls.
+  &__options {
+    padding: $ring-room;
+    margin: (-$ring-room);
+
+    @include media-up('lg') {
+      padding-inline-end: $space-12 + $space-4 + $ring-room; // 12px gap + 4px scrollbar
+      max-height: calc(#{$rows-visible} * #{$row} + #{$rows-visible - 1} * #{$row-gap} + #{2 * $ring-room});
+    }
+  }
+
+  // OverlayScrollbars wraps the host's children, so the rows get their own flex container
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $row-gap;
+  }
+
+  &__footer {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    padding: $space-16 $inset calc(30px + env(safe-area-inset-bottom));
+    background-color: var(--bg-secondary);
+    background-image: linear-gradient(var(--bg-overlay-subtle), var(--bg-overlay-subtle));
+
+    @include media-up('md') {
+      padding: 30px $inset-wide;
+    }
+
+    // In the sidebar the button follows the groups
+    @include media-up('lg') {
+      padding: $space-16 0 0;
+      background: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__close,
+    &__toggle,
+    &__toggle-icon::before,
+    &__toggle-icon::after {
+      transition: none;
+    }
+  }
+}
