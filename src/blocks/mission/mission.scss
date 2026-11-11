@@ -1,0 +1,131 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// The section is transparent, it has no gradient: the emblem blends with the page background.
+// Below lg: the emblem on top, the list under it. From lg: a 12-column grid, the emblem and the list side by side.
+.mission {
+  $block-name: &; // #{$block-name}__element
+
+  $emblem-size: 500px;
+  $list-max-width: 700px; // below lg
+  $padding-block-lg: 64px; // 87 from the mockup
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-20;
+  align-items: center;
+  padding-block: $space-40;
+
+  @include media-up('md') {
+    padding-block: $space-48;
+  }
+
+  @include media-up('lg') {
+    @include grid-12;
+
+    align-items: center;
+    padding-block: $padding-block-lg;
+  }
+
+  // Do not add z-index/opacity/transform to the section or to the parents of the emblem: it would isolate the blend
+  &__emblem {
+    display: block;
+    flex: none;
+    inline-size: min(#{$emblem-size}, 100%);
+    max-width: 500px;
+    aspect-ratio: 1;
+    opacity: 1;
+    mix-blend-mode: luminosity;
+    pointer-events: none;
+    user-select: none;
+
+    // The emblem file is white: in the dark theme it is dimmed to blue
+    [data-theme='dark'] & {
+      opacity: 1;
+      mix-blend-mode: color-burn;
+    }
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+      justify-self: center;
+    }
+
+    @include media-up('xl') {
+      grid-column: 1 / span 5;
+      margin-left: $space-40;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  // From xl the list skips one column before itself (the 6th) and one after (the 12th)
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+    inline-size: 100%;
+    max-inline-size: $list-max-width;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      max-inline-size: none;
+    }
+
+    @include media-up('xl') {
+      grid-column: 7 / span 5;
+    }
+  }
+
+  // Mobile: the icon above the text. From md: the icon at the start side.
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    margin-top: 0; // the global `li + li` rule must not shift the items
+    padding: $space-16 $space-24 $space-24 $space-16;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('md') {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: center;
+    padding: $space-12;
+    border-radius: $radius-16;
+    background-color: var(--bg-tertiary);
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $space-8;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__text {
+    color: var(--text-secondary);
+  }
+}

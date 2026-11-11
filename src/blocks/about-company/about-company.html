@@ -1,0 +1,57 @@
+<!--DEV
+@@include('blocks/about-company/about-company.html', {
+  "gradient": "dark-light-gr",
+  "image": "hero-img",
+  "href": "#"
+})
+-->
+
+<section class="container  about-company  @@gradient">
+  <div class="about-company__inner">
+    <div class="about-company__top">
+      <div class="about-company__content">
+        <h2 class="about-company__title">Про компанію</h2>
+        <div class="about-company__text">
+          <p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в розподілі і збуті фармацевтичної продукції на території України і стати надійним партнером з дистрибуції медичних препаратів. Компанія “Конарк Інтелмед” – це сукупність адміністративного, науково-технічного, комерційного та управлінського досвіду.</p>
+        </div>
+        <a class="btn-secondary  about-company__btn" href="@@href">
+          <span class="text-roll"><span class="text-roll__line">Презентація компанії</span><span class="text-roll__line" aria-hidden="true">Презентація компанії</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#download"></use></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="about-company__media">
+        <picture class="about-company__picture">
+          <source srcset="img/@@image.webp" type="image/webp">
+          <img class="about-company__img" src="img/@@image.jpg" width="657" height="492" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </div>
+
+    <ul class="about-company__list">
+      <li class="about-company__item">
+        <p class="about-company__value  display-2">100+</p>
+        <div class="about-company__info">
+          <p class="about-company__name">Продуктів</p>
+          <p class="about-company__caption">Виготовили і запустили на ринок більше 100 якісних продуктів для здоров’я та краси</p>
+        </div>
+      </li>
+      <li class="about-company__item">
+        <p class="about-company__value  display-2">5000</p>
+        <div class="about-company__info">
+          <p class="about-company__name">Партнерів</p>
+          <p class="about-company__caption">Партнерів. Аптечні пережі, лікарі, дистриб’ютори, заводи-виробники України і світу</p>
+        </div>
+      </li>
+      <li class="about-company__item">
+        <p class="about-company__value  display-2">30</p>
+        <div class="about-company__info">
+          <p class="about-company__name">Років успішної роботи</p>
+          <p class="about-company__caption">Виготовили і запустили на ринок більше 100 якісних продуктів для здоров’я та краси</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

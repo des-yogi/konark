@@ -1,0 +1,130 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in variables.scss: $header-height, $space-12/16/20/24/40/116, $radius-32
+// The stage (one screen high) sticks to the viewport; the list follows it in the normal flow and scrolls over it.
+// The list starts right below the stage, so the first card enters from the bottom edge of the screen;
+// the padding at the end of the list lets the last card leave at the top before the stage is released.
+// Sticky does not work if any ancestor has overflow hidden/auto/scroll (overflow: clip is fine).
+.history {
+  $block-name: &; // #{$block-name}__element
+
+  $stagger: 152px; // the right column is shifted down by this much (from md)
+  $list-max-width: 1026px;
+  $column-gap-lg: 136px;
+  $card-blur: 15px;
+  $card-height: 400px; // approximate height of a card: used only to release the stage in time
+
+  // The distance of the stuck title from the top of the viewport (below lg); can be overridden from outside
+  --history-offset: calc(#{$header-height} + #{$space-40});
+
+  position: relative;
+
+  &__stage {
+    position: sticky;
+    inset-block-start: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    block-size: 100svh;
+    padding-block-start: var(--history-offset);
+
+    // From lg the title stands in the middle of the visible area below the fixed header
+    @include media-up('lg') {
+      justify-content: center;
+      padding-block-start: $header-height;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    text-align: center;
+    color: var(--bg-shape);
+  }
+
+  &__list {
+    position: relative;
+    z-index: 1; // the cards pass over the stuck title
+    display: grid;
+    gap: $space-16;
+    margin: 0;
+
+    // The stage is released when the end of the list (with this padding) reaches the bottom of the screen,
+    // so the padding says where the last card is at that moment: its top edge is just below the fixed header
+    padding: 0 0 calc(100svh - #{$header-height} - #{$card-height});
+    list-style: none;
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $space-20;
+      padding-block-end: calc(100svh - #{$header-height} - #{$card-height} + #{$stagger});
+
+      // The last card is in the left (not shifted) column: no extra room for the shift
+      &:has(> :last-child:nth-child(odd)) {
+        padding-block-end: calc(100svh - #{$header-height} - #{$card-height});
+      }
+    }
+
+    @include media-up('lg') {
+      column-gap: $column-gap-lg;
+      row-gap: $space-116;
+      max-inline-size: $list-max-width;
+      margin-inline: auto;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    margin-top: 0; // the global `li + li` rule must not shift the cards
+    padding: $space-40 $space-24;
+    border-radius: $radius-32;
+    background-color: var(--bg-overlay-subtle);
+    backdrop-filter: blur($card-blur);
+
+    @include media-up('md') {
+      padding-inline: $space-20;
+
+      &:nth-child(even) {
+        translate: 0 $stagger;
+      }
+    }
+
+    @include media-up('lg') {
+      padding-inline: $space-40;
+    }
+  }
+
+  &__year {
+    margin: 0;
+    color: var(--text-accent);
+  }
+
+  &__text {
+    color: var(--text-secondary);
+  }
+
+  // The cards fade in while entering the viewport from the bottom; after that they stay fully opaque.
+  // Scroll-driven animation, no JS; where it is not supported the cards simply stay visible.
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      &__item {
+        animation: history-card-fade linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+    }
+  }
+}
+
+@keyframes history-card-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

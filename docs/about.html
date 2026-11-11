@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html class="no-js page" lang="uk" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Konark Про нас</title>
+    <!-- Theme + js class: must run before CSS to prevent flashes (FOUC). Keep the storage key in sync with index.js -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        let theme = null;
+        root.classList.replace("no-js", "js");
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {
+          // Storage is blocked (private mode, disabled cookies) — fall back to system theme
+        }
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <link
+      rel="preload"
+      href="fonts/manrope-v23-cyrillic_latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin>
+    <link
+      rel="preload"
+      href="fonts/manrope-v23-cyrillic_latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin>
+    <link
+      rel="preload"
+      href="fonts/manrope-v23-cyrillic_latin-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin>
+    <!-- Основной бандл стилей -->
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <!-- Подключить на наужных страницах, но если слайдер есть на первом экране, то добавить библиотеку в общий бандл (LCP prevent) -->
+    <!-- <link rel="preload" href="css/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="css/swiper-bundle.min.css" rel="stylesheet" media="screen"></noscript>
+<link rel="preload" href="css/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="css/fancybox.css" rel="stylesheet" media="screen"></noscript> -->
+
+    <!-- LCP-картинка (герой на первом экране) — по умолчанию Low/Medium,
+     браузер не знает, что это важный элемент страницы -->
+    <!-- <link rel="preload" href="hero.webp" as="image" fetchpriority="high"> -->
+
+    <!-- Favicons block -->
+    <!-- <link rel="icon" type="image/png" href="/assets/img/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="shortcut icon" href="/assets/img/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="КОНАРК">
+<link rel="manifest" href="/assets/img/site.webmanifest"> -->
+
+    <meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+
+    <!-- OpenGraph microdata
+<meta property="og:title"         content="Your Website Title">
+<meta property="og:description"   content="Your description">
+<meta property="og:site_name"     content="Website Name">
+<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg">
+<meta property="og:image:alt"    content="A picture of something.">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url"          content="https://www.your-domain.com/your-page.html">
+<meta property="og:type"         content="website">
+<meta property="og:locale"       content="uk_UA">
+-->
+
+    <!-- <link rel="canonical" href="https://www.your-domain.com/"> -->
+    <!-- <link rel="alternate" hreflang="uk" href="https://example.com/uk/page"> -->
+    <!-- <link rel="alternate" hreflang="en" href="https://example.com/en/page"> -->
+    <!-- <link rel="alternate" hreflang="x-default" href="https://example.com/en/page"> -->
+
+    <!-- <meta name="color-scheme" content="light"> одна тема -->
+    <!-- <meta name="color-scheme" content="dark"> одна тема -->
+    <!-- <meta name="color-scheme" content="light dark"> две темы -->
+    <!-- <meta name="theme-color" content="red" media="(prefers-color-scheme: light)"> -->
+    <!-- <meta name="theme-color" content="green" media="(prefers-color-scheme: dark)"> -->
+    <!-- <meta name="theme-color" content="#0b1020">
+  Изменяет цвет элементов интерфейса браузера и операционной системы в соответствии с фирменным стилем вашей компании. Используйте атрибут media, чтобы задать один цвет для светлого режима и другой — для темного.
+-->
+  </head>
+
+  <body>
+    <noscript
+      >У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим
+      сайтом.</noscript
+    >
+
+    <a class="skip-link" href="#main">Перейти до основного вмісту</a>
+
+    <div class="page__inner">
+      <div class="page__content">
+        <header class="page-header js-page-header is-fixed" data-scroll-offset="88">
+          <div class="container page-header__inner">
+            <a class="logo" href="index.html" aria-label="КОНАРК, на головну">
+              <svg
+                class="logo__img"
+                width="178"
+                height="36"
+                viewBox="0 0 178 36"
+                role="img"
+                focusable="false">
+                <title>Конарк Інтелмед</title>
+                <path
+                  d="M18.9 18.1c2.7-2.7 7.1-3.3 10.8-3.6.5 0 .4.1.5.5.6 2.8.9 5.7-.9 8.2-2.7 3.7-7.2 6.9-11.3 8.8 3.4-2.8 7-6.9 6.2-11.7-.4 0-.9-.1-1.4 0-2 .3-3.7 2.3-4.8 3.8.7-1.8.8-4 .9-6M15.2 3.4c.1 0 .1 0 .2.1 3.6.3 6.1 1.6 8.8 3.9l-12.5 24c6.6 4.7 16.7.2 19.4-3.2 4.7-6 5.7-12.8 1.4-19.7l.5-.3c4 6 3.8 14.4-.6 20.3-3.7 5-9.1 7.6-15.2 7.4-2.7-.1-5.2-.9-7.4-1.9.5-1 .9-1.9 1.3-2.9 2.7-6 5.5-12 8.1-18.1 2-4.3-.1-7.5-4-9.6m2 13.3-.1.1c-1.9 1.2-3.3 2.9-4.5 4.8.4-2.2.4-4.2-.4-6.2-.3-.7-.4-1.1-1.3-.7-4.5 2.3-4.1 8-5.1 12.2-.8-5.8-1.9-12 2.9-17.8.9-1.1 2.8-2.3 4-3.1 2.7 3.1 4.5 6.5 4.5 10.7m7.4-12.1L26 1.9C22.7.2 19.3-.4 14.6.3 7.6 1.5.8 7.8.1 16.6c-.4 4.3 1 9.1 4 12.8l.2-.3C-1.2 21.1-.3 11.4 6.8 5 12.1.1 19.1.5 24.6 4.6m22.6 13L58.1 6.8l1.7-1.6H53l-.3.3-9.3 9.6v-10h-5.2v1l-.1 24.8v1h5.3V20.6l9.7 11 .3.3h7l-1.5-1.6z" />
+                <path
+                  d="M78.1 6.3q-2.85-1.8-6.9-1.8c-3.7 0-6.5 1-8.4 2.9s-3 3.9-3.5 6c-.5 2-.7 3.7-.7 5.2 0 1.9.3 3.7.7 5.4.5 1.7 1.2 3.2 2.2 4.5s2.4 2.4 4 3.1 3.5 1.1 5.6 1.1c3.7 0 6.5-1 8.4-2.9 1.9-1.8 3-3.8 3.5-5.9.4-1.9.7-3.7.7-5.3 0-2.6-.5-5.1-1.4-7.2-.8-2.2-2.3-3.9-4.2-5.1M76 26.1q-2.55 1.8-4.8 1.8-2.4 0-4.8-1.8C64.8 25 64 22.5 64 18.5c0-2.6.4-4.7 1.3-6 .8-1.4 1.7-2.2 2.7-2.6 1.1-.4 2.2-.7 3.1-.7 1 0 2.1.2 3.1.7 1 .4 1.9 1.3 2.7 2.6.8 1.4 1.3 3.4 1.3 6.1.1 3.9-.7 6.4-2.2 7.5m26.8-21h-.9v10.4H91.6V5.1h-5.3v26.8h5.3V20.3h10.3v11.6h5.2V5.2h-1zm19.8.7-.2-.6h-4.9l-.2.6-9.3 24.8-.5 1.3h5.6l.2-.6 2.1-5.8h9l2.1 5.8.2.6h5.6l-.5-1.3zm-2.7 6.7 2.9 8.3H117zM150.3 7c-1.6-1.2-3.9-1.9-6.7-1.9h-10.9v26.8h5.3V22h5.4c3.5 0 6-.8 7.4-2.5 1.4-1.6 2.1-3.8 2.1-6.3 0-2.8-.9-4.9-2.6-6.2m-3.8 9.3c-.8.6-2 .9-3.5.9h-5V9.9h5c1.6 0 2.8.3 3.5.8s1 1.3 1 2.6c.1 1.5-.3 2.5-1 3m29.2 14L164 17.6l10.9-10.8 1.7-1.6h-2.4l-4-.1h-.4l-.3.3-9.3 9.6V5.1H155v26.8h5.2V20.6l9.7 11 .3.3h7z" />
+              </svg>
+            </a>
+
+            <div class="page-header__nav">
+              <nav class="main-nav" aria-label="Головне меню">
+                <ul class="main-nav__list">
+                  <li class="main-nav__item">
+                    <button
+                      class="main-nav__link"
+                      type="button"
+                      data-disclosure
+                      aria-expanded="false"
+                      aria-controls="main-nav-products"
+                      aria-current="true">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Продукція</span
+                        ><span class="text-roll__line" aria-hidden="true">Продукція</span></span
+                      >
+                      <svg class="main-nav__arrow" width="12" height="12" aria-hidden="true">
+                        <use
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+                      </svg>
+                    </button>
+                    <div class="main-nav__sublist-wrapper" id="main-nav-products">
+                      <ul class="main-nav__sublist">
+                        <li>
+                          <a class="main-nav__sublink" aria-current="page">Терапевтичні напрями</a>
+                        </li>
+                        <li class="active">
+                          <a class="main-nav__sublink" href="#">Безрецептурні лікарські засоби</a>
+                        </li>
+                        <li>
+                          <a class="main-nav__sublink" href="#">Рецептурні лікарські засоби</a>
+                        </li>
+                        <li><a class="main-nav__sublink" href="#">Медичні вироби</a></li>
+                        <li><a class="main-nav__sublink" href="#">Дієтичні добавки</a></li>
+                        <li><a class="main-nav__sublink" href="#">Косметичні засоби</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="main-nav__item">
+                    <button
+                      class="main-nav__link"
+                      type="button"
+                      data-disclosure
+                      aria-expanded="false"
+                      aria-controls="main-nav-about">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Про нас</span
+                        ><span class="text-roll__line" aria-hidden="true">Про нас</span></span
+                      >
+                      <svg class="main-nav__arrow" width="12" height="12" aria-hidden="true">
+                        <use
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+                      </svg>
+                    </button>
+                    <div class="main-nav__sublist-wrapper" id="main-nav-about">
+                      <ul class="main-nav__sublist">
+                        <li><a class="main-nav__sublink" href="#">Про компанію</a></li>
+                        <li><a class="main-nav__sublink" href="#">Кар’єра</a></li>
+                        <li><a class="main-nav__sublink" href="#">Фінансова звітність</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="main-nav__item">
+                    <a class="main-nav__link" href="#">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Новини</span
+                        ><span class="text-roll__line" aria-hidden="true">Новини</span></span
+                      >
+                    </a>
+                  </li>
+                  <li class="main-nav__item">
+                    <a class="main-nav__link" href="#">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Партнери</span
+                        ><span class="text-roll__line" aria-hidden="true">Партнери</span></span
+                      >
+                    </a>
+                  </li>
+                  <li class="main-nav__item">
+                    <a class="main-nav__link" href="#">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Співпраця</span
+                        ><span class="text-roll__line" aria-hidden="true">Співпраця</span></span
+                      >
+                    </a>
+                  </li>
+                  <li class="main-nav__item">
+                    <a class="main-nav__link" href="#">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Фармаконагляд</span
+                        ><span class="text-roll__line" aria-hidden="true">Фармаконагляд</span></span
+                      >
+                    </a>
+                  </li>
+                  <li class="main-nav__item">
+                    <a class="main-nav__link" href="#">
+                      <span class="text-roll"
+                        ><span class="text-roll__line">Контакти</span
+                        ><span class="text-roll__line" aria-hidden="true">Контакти</span></span
+                      >
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="page-header__controls">
+              <button
+                class="page-header__search"
+                type="button"
+                aria-label="Пошук"
+                data-coreui-toggle="modal"
+                data-coreui-target="#search-modal"
+                aria-controls="search-modal"
+                aria-haspopup="dialog">
+                <svg width="24" height="24" aria-hidden="true">
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="img/sprite-svg.svg#search"></use>
+                </svg>
+              </button>
+
+              <div class="page-header__theme">
+                <button
+                  class="theme-toggle js-theme-toggle"
+                  type="button"
+                  role="switch"
+                  aria-checked="false"
+                  aria-label="Темна тема">
+                  <span class="theme-toggle__thumb" aria-hidden="true"></span>
+                  <svg
+                    class="theme-toggle__icon theme-toggle__icon--light"
+                    width="24"
+                    height="24"
+                    aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#sun"></use>
+                  </svg>
+                  <svg
+                    class="theme-toggle__icon theme-toggle__icon--dark"
+                    width="24"
+                    height="24"
+                    aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#moon"></use>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="page-header__lang">
+                <div class="lang-switcher">
+                  <button
+                    class="lang-switcher__toggler"
+                    type="button"
+                    data-disclosure
+                    aria-expanded="false"
+                    aria-controls="lang-switcher-list">
+                    <span class="visually-hidden">Мова:</span>
+                    UA
+                    <svg class="lang-switcher__arrow" width="12" height="12" aria-hidden="true">
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+                    </svg>
+                  </button>
+                  <ul class="lang-switcher__list" id="lang-switcher-list">
+                    <li>
+                      <a
+                        class="lang-switcher__link"
+                        href="/"
+                        lang="uk"
+                        hreflang="uk"
+                        aria-label="Українська"
+                        aria-current="true"
+                        >UA</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="lang-switcher__link"
+                        href="/en/"
+                        lang="en"
+                        hreflang="en"
+                        aria-label="English"
+                        >EN</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="page-header__burger">
+                <button
+                  class="burger"
+                  type="button"
+                  aria-label="Меню"
+                  data-coreui-toggle="offcanvas"
+                  data-coreui-target="#mob-nav"
+                  aria-controls="mob-nav">
+                  <svg width="24" height="24" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#burger"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="main" tabindex="-1">
+          <nav class="container breadcrumbs" aria-label="Навігаційний ланцюжок">
+            <ol
+              class="breadcrumbs__list caption invisible-scrollbar js-breadcrumbs-list"
+              itemscope
+              itemtype="https://schema.org/BreadcrumbList">
+              <li
+                class="breadcrumbs__item"
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem">
+                <a class="breadcrumbs__link" href="#" itemprop="item"
+                  ><span itemprop="name">Головна</span></a
+                >
+                <meta itemprop="position" content="1">
+              </li>
+              <li
+                class="breadcrumbs__item"
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem">
+                <span class="breadcrumbs__link" aria-current="page"
+                  ><span itemprop="name">Продукція</span></span
+                >
+                <meta itemprop="position" content="2">
+              </li>
+            </ol>
+          </nav>
+
+          <div class="container page-head">
+            <div class="page-head__inner">
+              <h1 class="page-head__title">Про <strong>нас</strong></h1>
+              <div class="page-head__text">
+                <p>
+                  Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор
+                  фармацевтичної продукції відомих світових виробників.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <section class="container about-company">
+            <div class="about-company__inner">
+              <div class="about-company__top">
+                <div class="about-company__content">
+                  <h2 class="about-company__title">Про компанію</h2>
+                  <div class="about-company__text">
+                    <p>
+                      Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор
+                      фармацевтичної продукції відомих світових виробників. Успішний досвід роботи
+                      дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в
+                      розподілі і збуті фармацевтичної продукції на території України і стати
+                      надійним партнером з дистрибуції медичних препаратів. Компанія “Конарк
+                      Інтелмед” – це сукупність адміністративного, науково-технічного, комерційного
+                      та управлінського досвіду.
+                    </p>
+                  </div>
+                  <a class="btn-secondary about-company__btn" href="#">
+                    <span class="text-roll"
+                      ><span class="text-roll__line">Презентація компанії</span
+                      ><span class="text-roll__line" aria-hidden="true"
+                        >Презентація компанії</span
+                      ></span
+                    >
+                    <span class="btn-secondary__icon">
+                      <svg width="24" height="24" aria-hidden="true">
+                        <use
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          xlink:href="img/sprite-svg.svg#download"></use>
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+
+                <div class="about-company__media">
+                  <picture class="about-company__picture">
+                    <source srcset="img/hero-img.webp" type="image/webp">
+                    <img
+                      class="about-company__img"
+                      src="img/hero-img.jpg"
+                      width="657"
+                      height="492"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </picture>
+                </div>
+              </div>
+
+              <ul class="about-company__list">
+                <li class="about-company__item">
+                  <p class="about-company__value display-2">100+</p>
+                  <div class="about-company__info">
+                    <p class="about-company__name">Продуктів</p>
+                    <p class="about-company__caption">
+                      Виготовили і запустили на ринок більше 100 якісних продуктів для здоров’я та
+                      краси
+                    </p>
+                  </div>
+                </li>
+                <li class="about-company__item">
+                  <p class="about-company__value display-2">5000</p>
+                  <div class="about-company__info">
+                    <p class="about-company__name">Партнерів</p>
+                    <p class="about-company__caption">
+                      Партнерів. Аптечні пережі, лікарі, дистриб’ютори, заводи-виробники України і
+                      світу
+                    </p>
+                  </div>
+                </li>
+                <li class="about-company__item">
+                  <p class="about-company__value display-2">30</p>
+                  <div class="about-company__info">
+                    <p class="about-company__name">Років успішної роботи</p>
+                    <p class="about-company__caption">
+                      Виготовили і запустили на ринок більше 100 якісних продуктів для здоров’я та
+                      краси
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="container mission">
+            <h2 class="visually-hidden">Наша місія</h2>
+
+            <picture class="mission__emblem">
+              <source srcset="img/emblem-white.webp" type="image/webp">
+              <img
+                class="mission__img"
+                src="img/emblem-white.png"
+                width="500"
+                height="500"
+                alt=""
+                loading="lazy"
+                decoding="async">
+            </picture>
+
+            <ul class="mission__list">
+              <li class="mission__item">
+                <div class="mission__icon">
+                  <img
+                    src="img/antihistamine.svg"
+                    width="56"
+                    height="56"
+                    alt=""
+                    loading="lazy"
+                    decoding="async">
+                </div>
+                <div class="mission__body">
+                  <p class="mission__title h6">Місія</p>
+                  <div class="mission__text">
+                    <p>
+                      Забезпечення населення якісними медичними препаратами, що покращують якість
+                      життя на основі використання інноваційних розробок та ефективного менеджменту.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="mission__item">
+                <div class="mission__icon">
+                  <img
+                    src="img/antihistamine.svg"
+                    width="56"
+                    height="56"
+                    alt=""
+                    loading="lazy"
+                    decoding="async">
+                </div>
+                <div class="mission__body">
+                  <p class="mission__title h6">Візія</p>
+                  <div class="mission__text">
+                    <p>
+                      Продовження динамічного розвитку і прагнення стати партнером
+                      багатонаціональних фармацевтичних компаній.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="mission__item">
+                <div class="mission__icon">
+                  <img
+                    src="img/antihistamine.svg"
+                    width="56"
+                    height="56"
+                    alt=""
+                    loading="lazy"
+                    decoding="async">
+                </div>
+                <div class="mission__body">
+                  <p class="mission__title h6">Ми пропонуємо</p>
+                  <div class="mission__text">
+                    <p>
+                      Широкий і сучасний асортимент лікарських препаратів, препаратів медичного
+                      призначення, лікувальних добавок, косметичних засобів провідних виробників.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <div class="container map-values">
+            <section class="map-animated">
+              <h2 class="visually-hidden">Географія поставок</h2>
+
+              <div
+                class="map-animated__map js-map-animated"
+                data-draw="1600"
+                data-hold="300"
+                data-gap="500"
+                data-stagger="40"
+                data-pulse="3200"
+                data-margin="0.3">
+                <div class="map-animated__canvas js-map-animated-canvas" aria-hidden="true"></div>
+                <script type="application/json" class="js-map-animated-data">
+                  {
+                    "hub": { "title": "Київ", "country": "UA", "lon": 30.5234, "lat": 50.4501 },
+                    "routes": [
+                      {
+                        "title": "Рейк'явік",
+                        "country": "IS",
+                        "lon": -21.8952,
+                        "lat": 64.1353,
+                        "direction": "out"
+                      },
+                      {
+                        "title": "Лісабон",
+                        "country": "PT",
+                        "lon": -9.1355,
+                        "lat": 38.7072,
+                        "direction": "out"
+                      },
+                      {
+                        "title": "Мадрид",
+                        "country": "ES",
+                        "lon": -3.7033,
+                        "lat": 40.4167,
+                        "direction": "out"
+                      },
+                      {
+                        "title": "Стокгольм",
+                        "country": "SE",
+                        "lon": 18.0645,
+                        "lat": 59.3328,
+                        "direction": "out"
+                      },
+                      {
+                        "title": "Лондон",
+                        "country": "GB",
+                        "lon": -0.1262,
+                        "lat": 51.5002,
+                        "direction": "in"
+                      },
+                      {
+                        "title": "Берн",
+                        "country": "CH",
+                        "lon": 7.4481,
+                        "lat": 46.948,
+                        "direction": "in"
+                      },
+                      {
+                        "title": "Белград",
+                        "country": "RS",
+                        "lon": 20.4781,
+                        "lat": 44.8048,
+                        "direction": "in"
+                      },
+                      {
+                        "title": "Любляна",
+                        "country": "SI",
+                        "lon": 14.506,
+                        "lat": 46.0514,
+                        "direction": "in"
+                      },
+                      {
+                        "title": "Париж",
+                        "country": "FR",
+                        "lon": 2.351,
+                        "lat": 48.8567,
+                        "direction": "in"
+                      }
+                    ]
+                  }
+                </script>
+              </div>
+            </section>
+
+            <!-- DEV: no params. The section has no .container: horizontal paddings come from the parent block (map-values).
+     Vertical paddings are the default ones for a section; cancel them inside map-values. Icons: img/ (56x56). -->
+            <section class="values">
+              <h2 class="values__title h1">Наші <strong>цінності</strong></h2>
+
+              <ul class="values__list">
+                <li class="values__item">
+                  <div class="values__icon">
+                    <img
+                      src="img/antihistamine.svg"
+                      width="56"
+                      height="56"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </div>
+                  <div class="values__body">
+                    <p class="values__name subheading">Професіоналізм</p>
+                    <div class="values__text">
+                      <p>
+                        Цінність компанії полягає в висококваліфікованому колективі професіоналів,
+                        який є основою успіху і корпоративної гордості.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li class="values__item">
+                  <div class="values__icon">
+                    <img
+                      src="img/antihistamine.svg"
+                      width="56"
+                      height="56"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </div>
+                  <div class="values__body">
+                    <p class="values__name subheading">Якість</p>
+                    <div class="values__text">
+                      <p>
+                        Прагнення до вищих стандартів якості використовує кожну можливість для
+                        впровадження світових інновацій та технологій.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li class="values__item">
+                  <div class="values__icon">
+                    <img
+                      src="img/antihistamine.svg"
+                      width="56"
+                      height="56"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </div>
+                  <div class="values__body">
+                    <p class="values__name subheading">Репутація та довіра</p>
+                    <div class="values__text">
+                      <p>
+                        Багаторічна історія компанії та високі стандарти якості виробництва
+                        забезпечили непохитну довіру і репутацію серед споживачів та партнерів.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li class="values__item">
+                  <div class="values__icon">
+                    <img
+                      src="img/antihistamine.svg"
+                      width="56"
+                      height="56"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </div>
+                  <div class="values__body">
+                    <p class="values__name subheading">Відповідальність перед споживачами</p>
+                    <div class="values__text">
+                      <p>
+                        Ми на зв’язку з нашими споживачами і партнерами, адаптуючись до їх потреб
+                        через неперервні інновації, оновлення продуктів та розширення нашої
+                        діяльності.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <section class="functions-slider">
+            <h2 class="functions-slider__title h3">Наше <strong>життя</strong></h2>
+
+            <div class="functions-slider__slider">
+              <div class="functions-slider__swiper swiper js-functions-slider">
+                <ul class="functions-slider__list swiper-wrapper">
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-1.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-1.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-2.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-2.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-3.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-3.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-4.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-4.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-5.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-5.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                  <li class="functions-slider__item swiper-slide">
+                    <div class="functions-slider__card">
+                      <picture class="functions-slider__picture">
+                        <source srcset="img/functions-6.webp" type="image/webp">
+                        <img
+                          class="functions-slider__img"
+                          src="img/functions-6.jpg"
+                          width="600"
+                          height="450"
+                          alt=""
+                          loading="lazy"
+                          decoding="async">
+                      </picture>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="functions-slider__nav">
+                <button
+                  class="btn-icon-secondary functions-slider__btn js-functions-slider-prev"
+                  type="button"
+                  aria-label="Попереднє фото">
+                  <svg width="24" height="24" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#arrow-left"></use>
+                  </svg>
+                </button>
+                <button
+                  class="btn-icon-secondary functions-slider__btn js-functions-slider-next"
+                  type="button"
+                  aria-label="Наступне фото">
+                  <svg width="24" height="24" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#arrow-right"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="container history">
+            <div class="history__stage">
+              <h2 class="history__title display-1">Наша історія</h2>
+            </div>
+
+            <ul class="history__list">
+              <li class="history__item">
+                <p class="history__year display-2">1995</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2004</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2010</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2021</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+
+              <li class="history__item">
+                <p class="history__year display-2">1995</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2004</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2010</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+              <li class="history__item">
+                <p class="history__year display-2">2021</p>
+                <div class="history__text">
+                  <p>
+                    Забезпечення населення якісними медичними препаратами, що покращують якість
+                    життя на основі використання інноваційних розробок та ефективного менеджменту.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section class="container info-media">
+            <div class="section-head">
+              <h2 class="section-head__title h3">
+                Екологічність і <strong>соціальна відповідальність</strong>
+              </h2>
+              <div class="section-head__text">
+                <p>
+                  Ми пропонуємо широкий і сучасний асортимент лікарських препаратів і препаратів
+                  медичного призначення провідних виробників.
+                </p>
+              </div>
+            </div>
+
+            <div class="info-media__inner">
+              <article class="media-card info-media__item">
+                <div class="media-card__media">
+                  <picture class="media-card__picture">
+                    <source srcset="img/media-card-img-1.webp" type="image/webp">
+                    <img
+                      class="media-card__img"
+                      src="img/media-card-img-1.jpg"
+                      width="657"
+                      height="492"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </picture>
+                </div>
+                <div class="media-card__body">
+                  <p class="media-card__number subheading" aria-hidden="true">01</p>
+                  <div class="media-card__content">
+                    <h3 class="media-card__title h4">Відповідність процесів сучасним вимогам</h3>
+                    <div class="media-card__text">
+                      <p>
+                        Всі дистриб'юторські процеси в компанії відповідають сучасним вимогам
+                        фармацевтичного виробництва в Євросоюзі: GDP. Продукція відповідає «Належній
+                        виробничій практиці» (GMP). Компанія гарантує якість та підтверджує
+                        оригінальність інформації про продукцію та упаковку.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="media-card info-media__item">
+                <div class="media-card__media">
+                  <picture class="media-card__picture">
+                    <source srcset="img/media-card-img-2.webp" type="image/webp">
+                    <img
+                      class="media-card__img"
+                      src="img/media-card-img-2.jpg"
+                      width="657"
+                      height="492"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </picture>
+                </div>
+                <div class="media-card__body">
+                  <p class="media-card__number subheading" aria-hidden="true">02</p>
+                  <div class="media-card__content">
+                    <h3 class="media-card__title h4">
+                      Сучасна інфраструктура для зберігання та доставки продукції
+                    </h3>
+                    <div class="media-card__text">
+                      <p>
+                        Окрім величезного офісу, компанія має у своєму розпорядженні сучасний
+                        складський комплекс, загальна площа якого становить близько 2400 кв.м.,
+                        високий технологічний рівень комплексу дозволяє нам гарантувати умови
+                        зберігання та якості продукції. Розвинена транспортна служба гарантує чітку
+                        роботу і своєчасну доставку.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="media-card info-media__item">
+                <div class="media-card__media">
+                  <picture class="media-card__picture">
+                    <source srcset="img/media-card-img-1.webp" type="image/webp">
+                    <img
+                      class="media-card__img"
+                      src="img/media-card-img-1.jpg"
+                      width="657"
+                      height="492"
+                      alt=""
+                      loading="lazy"
+                      decoding="async">
+                  </picture>
+                </div>
+                <div class="media-card__body">
+                  <p class="media-card__number subheading" aria-hidden="true">03</p>
+                  <div class="media-card__content">
+                    <h3 class="media-card__title h4">Відповідність процесів сучасним вимогам</h3>
+                    <div class="media-card__text">
+                      <p>
+                        Всі дистриб'юторські процеси в компанії відповідають сучасним вимогам
+                        фармацевтичного виробництва в Євросоюзі: GDP. Продукція відповідає «Належній
+                        виробничій практиці» (GMP). Компанія гарантує якість та підтверджує
+                        оригінальність інформації про продукцію та упаковку.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="container social-initiatives">
+            <div class="section-head">
+              <h2 class="section-head__title h3"><strong>Соціальні</strong> ініціативи</h2>
+              <div class="section-head__text">
+                <p>
+                  Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор
+                  фармацевтичної продукції відомих світових виробників. Успішний досвід роботи
+                  дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в
+                  розподілі і збуті фармацевтичної продукції на території України і стати надійним
+                  партнером з дистрибуції медичних препаратів. Компанія “Конарк Інтелмед” – це
+                  сукупність адміністративного, науково-технічного, комерційного та управлінського
+                  досвіду.
+                </p>
+              </div>
+            </div>
+
+            <ul class="social-initiatives__list">
+              <li class="social-initiatives__item">
+                <article class="news-card">
+                  <a class="news-card__media" href="#" tabindex="-1" aria-hidden="true">
+                    <picture>
+                      <source srcset="img/news-2.webp" type="image/webp">
+                      <img
+                        class="news-card__img"
+                        src="img/news-2.jpg"
+                        width="800"
+                        height="600"
+                        alt=""
+                        loading="lazy"
+                        decoding="async">
+                    </picture>
+                  </a>
+                  <div class="news-card__body">
+                    <div class="news-card__meta">
+                      <span class="badge">Новини</span>
+
+                      <time class="news-card__date caption" datetime="2026-02-04"
+                        >4 лютого 2026</time
+                      >
+                    </div>
+                    <div class="news-card__content">
+                      <h3 class="news-card__title h6">
+                        <a class="news-card__link" href="#">Благодійна акція: Бронхомед Максімун</a>
+                      </h3>
+                      <div class="news-card__text">
+                        <p>
+                          Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви
+                          долучаєтесь до ініціативи ТОВ «Конарк Інтелмед».
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+
+              <li class="social-initiatives__item">
+                <article class="news-card">
+                  <a class="news-card__media" href="#" tabindex="-1" aria-hidden="true">
+                    <picture>
+                      <source srcset="img/news-3.webp" type="image/webp">
+                      <img
+                        class="news-card__img"
+                        src="img/news-3.jpg"
+                        width="800"
+                        height="600"
+                        alt=""
+                        loading="lazy"
+                        decoding="async">
+                    </picture>
+                  </a>
+                  <div class="news-card__body">
+                    <div class="news-card__meta">
+                      <span class="badge">Новини</span>
+
+                      <time class="news-card__date caption" datetime="2026-02-04"
+                        >4 лютого 2026</time
+                      >
+                    </div>
+                    <div class="news-card__content">
+                      <h3 class="news-card__title h6">
+                        <a class="news-card__link" href="#">Благодійна акція: Бронхомед Максімун</a>
+                      </h3>
+                      <div class="news-card__text">
+                        <p>
+                          З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для
+                          боротьби з COVID-19*.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+
+              <li class="social-initiatives__item">
+                <article class="news-card">
+                  <a class="news-card__media" href="#" tabindex="-1" aria-hidden="true">
+                    <picture>
+                      <source srcset="img/news-2.webp" type="image/webp">
+                      <img
+                        class="news-card__img"
+                        src="img/news-2.jpg"
+                        width="800"
+                        height="600"
+                        alt=""
+                        loading="lazy"
+                        decoding="async">
+                    </picture>
+                  </a>
+                  <div class="news-card__body">
+                    <div class="news-card__meta">
+                      <span class="badge">Новини</span>
+
+                      <time class="news-card__date caption" datetime="2026-02-04"
+                        >4 лютого 2026</time
+                      >
+                    </div>
+                    <div class="news-card__content">
+                      <h3 class="news-card__title h6">
+                        <a class="news-card__link" href="#">Благодійна акція: Бронхомед Максімун</a>
+                      </h3>
+                      <div class="news-card__text">
+                        <p>
+                          Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви
+                          долучаєтесь до ініціативи ТОВ «Конарк Інтелмед».
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+
+              <li class="social-initiatives__item">
+                <article class="news-card">
+                  <a class="news-card__media" href="#" tabindex="-1" aria-hidden="true">
+                    <picture>
+                      <source srcset="img/news-3.webp" type="image/webp">
+                      <img
+                        class="news-card__img"
+                        src="img/news-3.jpg"
+                        width="800"
+                        height="600"
+                        alt=""
+                        loading="lazy"
+                        decoding="async">
+                    </picture>
+                  </a>
+                  <div class="news-card__body">
+                    <div class="news-card__meta">
+                      <span class="badge">Новини</span>
+
+                      <time class="news-card__date caption" datetime="2026-02-04"
+                        >4 лютого 2026</time
+                      >
+                    </div>
+                    <div class="news-card__content">
+                      <h3 class="news-card__title h6">
+                        <a class="news-card__link" href="#">Благодійна акція: Бронхомед Максімун</a>
+                      </h3>
+                      <div class="news-card__text">
+                        <p>
+                          З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для
+                          боротьби з COVID-19*.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            </ul>
+          </section>
+        </main>
+      </div>
+
+      <div class="page__footer-wrapper">
+        <footer class="page-footer">
+          <div class="container">
+            <div class="page-footer__panel">
+              <div class="page-footer__content">
+                <div class="page-footer__about">
+                  <a class="logo logo--footer" href="index.html" aria-label="КОНАРК, на головну">
+                    <svg
+                      class="logo__img"
+                      width="178"
+                      height="36"
+                      viewBox="0 0 178 36"
+                      role="img"
+                      focusable="false">
+                      <title>Конарк Інтелмед</title>
+                      <path
+                        d="M18.9 18.1c2.7-2.7 7.1-3.3 10.8-3.6.5 0 .4.1.5.5.6 2.8.9 5.7-.9 8.2-2.7 3.7-7.2 6.9-11.3 8.8 3.4-2.8 7-6.9 6.2-11.7-.4 0-.9-.1-1.4 0-2 .3-3.7 2.3-4.8 3.8.7-1.8.8-4 .9-6M15.2 3.4c.1 0 .1 0 .2.1 3.6.3 6.1 1.6 8.8 3.9l-12.5 24c6.6 4.7 16.7.2 19.4-3.2 4.7-6 5.7-12.8 1.4-19.7l.5-.3c4 6 3.8 14.4-.6 20.3-3.7 5-9.1 7.6-15.2 7.4-2.7-.1-5.2-.9-7.4-1.9.5-1 .9-1.9 1.3-2.9 2.7-6 5.5-12 8.1-18.1 2-4.3-.1-7.5-4-9.6m2 13.3-.1.1c-1.9 1.2-3.3 2.9-4.5 4.8.4-2.2.4-4.2-.4-6.2-.3-.7-.4-1.1-1.3-.7-4.5 2.3-4.1 8-5.1 12.2-.8-5.8-1.9-12 2.9-17.8.9-1.1 2.8-2.3 4-3.1 2.7 3.1 4.5 6.5 4.5 10.7m7.4-12.1L26 1.9C22.7.2 19.3-.4 14.6.3 7.6 1.5.8 7.8.1 16.6c-.4 4.3 1 9.1 4 12.8l.2-.3C-1.2 21.1-.3 11.4 6.8 5 12.1.1 19.1.5 24.6 4.6m22.6 13L58.1 6.8l1.7-1.6H53l-.3.3-9.3 9.6v-10h-5.2v1l-.1 24.8v1h5.3V20.6l9.7 11 .3.3h7l-1.5-1.6z" />
+                      <path
+                        d="M78.1 6.3q-2.85-1.8-6.9-1.8c-3.7 0-6.5 1-8.4 2.9s-3 3.9-3.5 6c-.5 2-.7 3.7-.7 5.2 0 1.9.3 3.7.7 5.4.5 1.7 1.2 3.2 2.2 4.5s2.4 2.4 4 3.1 3.5 1.1 5.6 1.1c3.7 0 6.5-1 8.4-2.9 1.9-1.8 3-3.8 3.5-5.9.4-1.9.7-3.7.7-5.3 0-2.6-.5-5.1-1.4-7.2-.8-2.2-2.3-3.9-4.2-5.1M76 26.1q-2.55 1.8-4.8 1.8-2.4 0-4.8-1.8C64.8 25 64 22.5 64 18.5c0-2.6.4-4.7 1.3-6 .8-1.4 1.7-2.2 2.7-2.6 1.1-.4 2.2-.7 3.1-.7 1 0 2.1.2 3.1.7 1 .4 1.9 1.3 2.7 2.6.8 1.4 1.3 3.4 1.3 6.1.1 3.9-.7 6.4-2.2 7.5m26.8-21h-.9v10.4H91.6V5.1h-5.3v26.8h5.3V20.3h10.3v11.6h5.2V5.2h-1zm19.8.7-.2-.6h-4.9l-.2.6-9.3 24.8-.5 1.3h5.6l.2-.6 2.1-5.8h9l2.1 5.8.2.6h5.6l-.5-1.3zm-2.7 6.7 2.9 8.3H117zM150.3 7c-1.6-1.2-3.9-1.9-6.7-1.9h-10.9v26.8h5.3V22h5.4c3.5 0 6-.8 7.4-2.5 1.4-1.6 2.1-3.8 2.1-6.3 0-2.8-.9-4.9-2.6-6.2m-3.8 9.3c-.8.6-2 .9-3.5.9h-5V9.9h5c1.6 0 2.8.3 3.5.8s1 1.3 1 2.6c.1 1.5-.3 2.5-1 3m29.2 14L164 17.6l10.9-10.8 1.7-1.6h-2.4l-4-.1h-.4l-.3.3-9.3 9.6V5.1H155v26.8h5.2V20.6l9.7 11 .3.3h7z" />
+                    </svg>
+                  </a>
+
+                  <div class="page-footer__intro">
+                    <p class="page-footer__note">
+                      «На веб-сайті розміщено загальну інформацію про продукцію, яка жодним чином не
+                      замінює консультацію лікаря та зміст інструкції для медичного застосування
+                      лікарського засобу»
+                    </p>
+
+                    <div class="social-networks">
+                      <ul class="social-networks__list">
+                        <li>
+                          <a
+                            class="social-networks__link"
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube">
+                            <svg width="24" height="24" aria-hidden="true">
+                              <use
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                xlink:href="img/sprite-svg.svg#youtube"></use>
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            class="social-networks__link"
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook">
+                            <svg width="24" height="24" aria-hidden="true">
+                              <use
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                xlink:href="img/sprite-svg.svg#facebook"></use>
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            class="social-networks__link"
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram">
+                            <svg width="24" height="24" aria-hidden="true">
+                              <use
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                xlink:href="img/sprite-svg.svg#instagram"></use>
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="page-footer__links">
+                  <nav class="page-footer__nav" aria-label="Меню в підвалі">
+                    <ul class="page-footer__menu">
+                      <li>
+                        <a class="page-footer__link" aria-current="page"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Продукція</span
+                            ><span class="text-roll__line" aria-hidden="true">Продукція</span></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Партнери</span
+                            ><span class="text-roll__line" aria-hidden="true">Партнери</span></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Фармаконагляд</span
+                            ><span class="text-roll__line" aria-hidden="true"
+                              >Фармаконагляд</span
+                            ></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Співпраця</span
+                            ><span class="text-roll__line" aria-hidden="true">Співпраця</span></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Про нас</span
+                            ><span class="text-roll__line" aria-hidden="true">Про нас</span></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Новини</span
+                            ><span class="text-roll__line" aria-hidden="true">Новини</span></span
+                          ></a
+                        >
+                      </li>
+                      <li>
+                        <a class="page-footer__link" href="#"
+                          ><span class="text-roll"
+                            ><span class="text-roll__line">Контакти</span
+                            ><span class="text-roll__line" aria-hidden="true">Контакти</span></span
+                          ></a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+
+                  <nav class="page-footer__legal" aria-label="Правові документи">
+                    <ul class="page-footer__legal-list">
+                      <!-- для активной ссылки aria-current="page" без href="#" -->
+                      <li><a class="page-footer__legal-link" href="#">Правила використання</a></li>
+                      <li>
+                        <a class="page-footer__legal-link" href="#">Політика конфіденційності</a>
+                      </li>
+                      <li><a class="page-footer__legal-link" href="#">Cookies</a></li>
+                      <li><a class="page-footer__legal-link" href="#">АТС Класифікація</a></li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+
+              <p class="page-footer__copyright">© Copyright 1997-2026. Конарк Інтелмед</p>
+
+              <p class="page-footer__warning">
+                «На веб-сайті розміщено загальну інформацію про продукцію, яка жодним чином не
+                замінює консультацію лікаря та зміст інструкції для медичного застосування
+                лікарського засобу»; «Інформація про продукцію (лікарські засоби) розміщена на цьому
+                сайті у порядку ст. 15 Закону України «Про захист прав споживачів». Інформація про
+                продукцію, розміщена на цьому сайті, не є рекламою»
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="mob-nav offcanvas offcanvas-start" id="mob-nav" tabindex="-1" aria-label="Меню">
+      <div class="mob-nav__top">
+        <a class="logo" href="index.html" aria-label="КОНАРК, на головну">
+          <svg
+            class="logo__img"
+            width="178"
+            height="36"
+            viewBox="0 0 178 36"
+            role="img"
+            focusable="false">
+            <title>Конарк Інтелмед</title>
+            <path
+              d="M18.9 18.1c2.7-2.7 7.1-3.3 10.8-3.6.5 0 .4.1.5.5.6 2.8.9 5.7-.9 8.2-2.7 3.7-7.2 6.9-11.3 8.8 3.4-2.8 7-6.9 6.2-11.7-.4 0-.9-.1-1.4 0-2 .3-3.7 2.3-4.8 3.8.7-1.8.8-4 .9-6M15.2 3.4c.1 0 .1 0 .2.1 3.6.3 6.1 1.6 8.8 3.9l-12.5 24c6.6 4.7 16.7.2 19.4-3.2 4.7-6 5.7-12.8 1.4-19.7l.5-.3c4 6 3.8 14.4-.6 20.3-3.7 5-9.1 7.6-15.2 7.4-2.7-.1-5.2-.9-7.4-1.9.5-1 .9-1.9 1.3-2.9 2.7-6 5.5-12 8.1-18.1 2-4.3-.1-7.5-4-9.6m2 13.3-.1.1c-1.9 1.2-3.3 2.9-4.5 4.8.4-2.2.4-4.2-.4-6.2-.3-.7-.4-1.1-1.3-.7-4.5 2.3-4.1 8-5.1 12.2-.8-5.8-1.9-12 2.9-17.8.9-1.1 2.8-2.3 4-3.1 2.7 3.1 4.5 6.5 4.5 10.7m7.4-12.1L26 1.9C22.7.2 19.3-.4 14.6.3 7.6 1.5.8 7.8.1 16.6c-.4 4.3 1 9.1 4 12.8l.2-.3C-1.2 21.1-.3 11.4 6.8 5 12.1.1 19.1.5 24.6 4.6m22.6 13L58.1 6.8l1.7-1.6H53l-.3.3-9.3 9.6v-10h-5.2v1l-.1 24.8v1h5.3V20.6l9.7 11 .3.3h7l-1.5-1.6z" />
+            <path
+              d="M78.1 6.3q-2.85-1.8-6.9-1.8c-3.7 0-6.5 1-8.4 2.9s-3 3.9-3.5 6c-.5 2-.7 3.7-.7 5.2 0 1.9.3 3.7.7 5.4.5 1.7 1.2 3.2 2.2 4.5s2.4 2.4 4 3.1 3.5 1.1 5.6 1.1c3.7 0 6.5-1 8.4-2.9 1.9-1.8 3-3.8 3.5-5.9.4-1.9.7-3.7.7-5.3 0-2.6-.5-5.1-1.4-7.2-.8-2.2-2.3-3.9-4.2-5.1M76 26.1q-2.55 1.8-4.8 1.8-2.4 0-4.8-1.8C64.8 25 64 22.5 64 18.5c0-2.6.4-4.7 1.3-6 .8-1.4 1.7-2.2 2.7-2.6 1.1-.4 2.2-.7 3.1-.7 1 0 2.1.2 3.1.7 1 .4 1.9 1.3 2.7 2.6.8 1.4 1.3 3.4 1.3 6.1.1 3.9-.7 6.4-2.2 7.5m26.8-21h-.9v10.4H91.6V5.1h-5.3v26.8h5.3V20.3h10.3v11.6h5.2V5.2h-1zm19.8.7-.2-.6h-4.9l-.2.6-9.3 24.8-.5 1.3h5.6l.2-.6 2.1-5.8h9l2.1 5.8.2.6h5.6l-.5-1.3zm-2.7 6.7 2.9 8.3H117zM150.3 7c-1.6-1.2-3.9-1.9-6.7-1.9h-10.9v26.8h5.3V22h5.4c3.5 0 6-.8 7.4-2.5 1.4-1.6 2.1-3.8 2.1-6.3 0-2.8-.9-4.9-2.6-6.2m-3.8 9.3c-.8.6-2 .9-3.5.9h-5V9.9h5c1.6 0 2.8.3 3.5.8s1 1.3 1 2.6c.1 1.5-.3 2.5-1 3m29.2 14L164 17.6l10.9-10.8 1.7-1.6h-2.4l-4-.1h-.4l-.3.3-9.3 9.6V5.1H155v26.8h5.2V20.6l9.7 11 .3.3h7z" />
+          </svg>
+        </a>
+
+        <button
+          class="mob-nav__close"
+          type="button"
+          aria-label="Закрити меню"
+          data-coreui-dismiss="offcanvas">
+          <svg width="24" height="24" aria-hidden="true">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="img/sprite-svg.svg#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <form
+        class="mob-nav__search search-form search-form--nav"
+        role="search"
+        action="/search/"
+        method="get">
+        <input
+          class="search-form__input"
+          type="search"
+          name="q"
+          placeholder="Пошук"
+          aria-label="Пошук"
+          autocomplete="off"
+          enterkeyhint="search">
+        <button class="search-form__submit" type="submit" aria-label="Знайти">
+          <svg width="24" height="24" aria-hidden="true">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="img/sprite-svg.svg#search"></use>
+          </svg>
+        </button>
+      </form>
+
+      <div class="mob-nav__tools">
+        <button
+          class="theme-toggle js-theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Темна тема">
+          <span class="theme-toggle__thumb" aria-hidden="true"></span>
+          <svg
+            class="theme-toggle__icon theme-toggle__icon--light"
+            width="24"
+            height="24"
+            aria-hidden="true">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="img/sprite-svg.svg#sun"></use>
+          </svg>
+          <svg
+            class="theme-toggle__icon theme-toggle__icon--dark"
+            width="24"
+            height="24"
+            aria-hidden="true">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="img/sprite-svg.svg#moon"></use>
+          </svg>
+        </button>
+
+        <div class="lang-switcher">
+          <button
+            class="lang-switcher__toggler"
+            type="button"
+            data-disclosure
+            aria-expanded="false"
+            aria-controls="mob-nav-lang-list">
+            <span class="visually-hidden">Мова:</span>
+            UA
+            <svg class="lang-switcher__arrow" width="12" height="12" aria-hidden="true">
+              <use
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+            </svg>
+          </button>
+          <ul class="lang-switcher__list" id="mob-nav-lang-list">
+            <li>
+              <a
+                class="lang-switcher__link"
+                href="/"
+                lang="uk"
+                hreflang="uk"
+                aria-label="Українська"
+                aria-current="true"
+                >UA</a
+              >
+            </li>
+            <li>
+              <a
+                class="lang-switcher__link"
+                href="/en/"
+                lang="en"
+                hreflang="en"
+                aria-label="English"
+                >EN</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mob-nav__scroll" data-overlayscrollbars-initialize>
+        <nav class="mob-nav__nav" aria-label="Головне меню">
+          <ul class="mob-nav__list" id="mob-nav-list">
+            <li class="mob-nav__item">
+              <button
+                class="mob-nav__toggle"
+                type="button"
+                data-coreui-toggle="collapse"
+                data-coreui-target="#mob-nav-sub-products"
+                aria-expanded="false"
+                aria-controls="mob-nav-sub-products"
+                aria-current="true">
+                <span class="mob-nav__label">Продукція</span>
+                <svg class="mob-nav__arrow" width="12" height="12" aria-hidden="true">
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+                </svg>
+              </button>
+              <div class="collapse" id="mob-nav-sub-products" data-coreui-parent="#mob-nav-list">
+                <ul class="mob-nav__sublist">
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" aria-current="page">Вся продукція</a>
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/products/therapeutic/"
+                      >Терапевтичні напрямки</a
+                    >
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/products/otc/"
+                      >Безрецептурні лікарські засоби</a
+                    >
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/products/rx/">Рецептурні лікарські засоби</a>
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/products/devices/">Медичні вироби</a>
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/products/supplements/">Дієтичні добавки</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mob-nav__item">
+              <button
+                class="mob-nav__toggle"
+                type="button"
+                data-coreui-toggle="collapse"
+                data-coreui-target="#mob-nav-sub-about"
+                aria-expanded="false"
+                aria-controls="mob-nav-sub-about">
+                <span class="mob-nav__label">Про нас</span>
+                <svg class="mob-nav__arrow" width="12" height="12" aria-hidden="true">
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="img/sprite-svg.svg#chevron-down-sm"></use>
+                </svg>
+              </button>
+              <div class="collapse" id="mob-nav-sub-about" data-coreui-parent="#mob-nav-list">
+                <ul class="mob-nav__sublist">
+                  <!-- STUB: the real items are not in the design -->
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/about/">Про компанію</a>
+                  </li>
+                  <li class="mob-nav__item">
+                    <a class="mob-nav__sublink" href="/about/history/">Історія</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mob-nav__item"><a class="mob-nav__link" href="/news/">Новини</a></li>
+            <li class="mob-nav__item"><a class="mob-nav__link" href="/partners/">Партнери</a></li>
+            <li class="mob-nav__item">
+              <a class="mob-nav__link" href="/cooperation/">Співпраця</a>
+            </li>
+            <li class="mob-nav__item">
+              <a class="mob-nav__link" href="/pharmacovigilance/">Фармаконагляд</a>
+            </li>
+            <li class="mob-nav__item"><a class="mob-nav__link" href="/contacts/">Контакти</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div
+      class="search-modal modal fade js-search-modal"
+      id="search-modal"
+      tabindex="-1"
+      aria-label="Пошук"
+      aria-hidden="true">
+      <div class="search-modal__dialog modal-dialog container">
+        <div class="search-modal__content modal-content">
+          <form class="search-form search-form--modal" role="search" action="/search/" method="get">
+            <input
+              class="search-form__input js-search-modal-input"
+              type="search"
+              name="q"
+              placeholder="Пошуковий запит"
+              aria-label="Пошук"
+              autocomplete="off"
+              enterkeyhint="search">
+            <button class="search-form__submit btn-icon-primary" type="submit" aria-label="Знайти">
+              <svg width="24" height="24" aria-hidden="true">
+                <use
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xlink:href="img/sprite-svg.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script> -->
+    <script src="js/script.min.js"></script>
+  </body>
+</html>

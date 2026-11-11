@@ -188,6 +188,16 @@ $tokens: (
   'input-text': ('grey-90', 'white-a-90'), // Input/Text Default
   'input-text-active': ('grey-100', 'white-a-100'), // Input/Text Active
 
+  // Map (map-animated, the partner countries map)
+  'map-land': ('blue-a-20', 'white-a-15'), // Map/Land (Figma: Background/Shape)
+  'map-country': ('blue-a-30', 'white-a-25'), // Map/Highlighted country
+  'map-country-stroke': ('white-a-60', 'white-a-30'), // Map/Highlighted country outline
+  'map-line': ('blue-a-50', 'white-a-60'), // Map/Route line (Figma: Input/Stroke Hover)
+  'map-point': ('blue-a-70', 'main-blue-20'), // Map/City (Figma: Tag/Dark blue 2)
+  'map-hub': ('main-blue-60', 'white-a-100'), // Map/Hub city (Figma: Main Button/Default BG)
+  'map-tooltip-bg': ('white-a-100', 'white-a-100'), // Map/Tooltip background
+  'map-tooltip-text': ('grey-95', 'main-blue-70'), // Map/Tooltip text
+
   // Effects (shadow colors, Figma collection "Effects")
   'shadow-color-s': ('blue-a-5', 'black-a-15'), // Shadow S
   'shadow-color-m': ('blue-a-20', 'black-a-30'), // Shadow M

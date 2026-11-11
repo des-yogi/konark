@@ -1,0 +1,182 @@
+@use 'sass:math';
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-16/32/40/48/64, $radius-24/40, $shadow-s, $shadow-s-hover, $shadow-m, $shadow-m-hover, $white, $screen-xxl
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-slide classes below beat its rules regardless of the load order.
+
+// The slide box keeps one size, only the card inside it changes (real width, not transform scale:
+// the radius, the border and the shadow must not be scaled). Swiper therefore never has to re-measure the slides.
+// The card size follows the position of the slide: functions-slider.js writes the distance from the active slide
+// (in slides, 0 / 1 / 2 ...) into --distance on every frame of a drag or a transition, the size is calculated here.
+// Below lg the not active cards are smaller (the boxes overlap so the visible gap stays 20px: keep in sync with MD_GAP in the js),
+// from lg the cards form a fan: the neighbours and the outer cards are smaller and overlap
+// (the step between the centres is 200px: keep it in sync with spaceBetween in the js).
+.functions-slider {
+  $block-name: &; // #{$block-name}__element
+
+  $slide-width: 318px;
+  $slide-width-md: 686px;
+  $slide-width-lg: 600px;
+  $scale-md: math.div(600, 686); // the not active cards below lg
+  $scale-lg-near: math.div(512, 600); // 1 slide away from the active one
+  $scale-lg-far: math.div(420, 600); // 2 and more slides away
+  $shadow-room: 64px; // the card shadows must fit in the Swiper box: it clips everything outside
+  $fan-max-width: 1220px; // the edges of the outer cards (2 * (400 + 210)): exactly 5 cards are visible
+  $inset: $space-16; // the first slide stands this far from the screen edge, the next one peeks out on the right
+  // From xxl .container (page.scss) stops growing: its side padding is calc(50% - this), the arrows follow it
+  $container-half-xxl: math.div($screen-xxl, 2) - $space-48;
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-40;
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    --inset: #{$space-40};
+
+    padding-block: $space-64;
+  }
+
+  &__title {
+    margin: 0;
+    text-align: center;
+  }
+
+  &__slider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-40;
+  }
+
+  &__swiper.swiper {
+    // The card sizes follow the wrapper frame by frame, so this curve drives them too
+    --swiper-wrapper-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+    box-sizing: border-box;
+    inline-size: 100%; // Swiper's own auto side margins would shrink it to the width of the slides in a flex column
+
+    // The padding gives the shadows room, the negative margin keeps the layout gaps of the mockup
+    margin-block: -$shadow-room;
+    padding: $shadow-room var(--inset, #{$inset});
+
+    // The side paddings keep the shadows of the outer cards inside the clipped box;
+    // Swiper subtracts them from its size, so the fan itself stays 1220px wide and centred
+    @include media-up('lg') {
+      max-inline-size: $fan-max-width + 2 * $shadow-room;
+      margin-inline: auto;
+      padding-inline: $shadow-room;
+    }
+  }
+
+  &__list.swiper-wrapper {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item.swiper-slide {
+    --distance: 0;
+    --scale-near: 1;
+    --scale-far: 1;
+    --scale: calc(
+      1 - (1 - var(--scale-near)) * min(var(--distance), 1) - (var(--scale-near) - var(--scale-far)) * clamp(0, var(--distance) - 1, 1)
+    );
+    --card-shadow: #{$shadow-s};
+    --card-shadow-hover: #{$shadow-s-hover};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: $slide-width;
+    block-size: auto;
+    aspect-ratio: 4 / 3;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+
+    @include media-up('md') {
+      --scale-near: #{$scale-md};
+      --scale-far: #{$scale-md};
+
+      inline-size: $slide-width-md;
+    }
+
+    // The cards farther than 2 slides have the outer size too and would peek out from under the outer cards,
+    // so they fade out quickly after the 2nd position (gone at 2.5, before they reach the clipped edge)
+    @include media-up('lg') {
+      --scale-near: #{$scale-lg-near};
+      --scale-far: #{$scale-lg-far};
+
+      inline-size: $slide-width-lg;
+      opacity: clamp(0, (2.5 - var(--distance)) * 2, 1);
+    }
+
+    &.swiper-slide-active {
+      --card-shadow: #{$shadow-m};
+      --card-shadow-hover: #{$shadow-m-hover};
+    }
+  }
+
+  &__card {
+    box-sizing: border-box;
+    inline-size: calc(100% * var(--scale));
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 2px solid $white;
+    border-radius: $radius-24;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow $transition-time ease;
+
+    @include media-up('md') {
+      border-radius: $radius-40;
+    }
+
+    @include button-hover {
+      box-shadow: var(--card-shadow-hover);
+    }
+  }
+
+  &__picture {
+    display: block;
+    block-size: 100%;
+  }
+
+  &__img {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  // Below lg the arrows are in a row under the slider, from lg they sit on the sides over the cards:
+  // 48px from the screen edges, from xxl at the edges of the centred .container content.
+  // The row stays above the Swiper box (z-index: 1 in Swiper's CSS): its shadow padding reaches into the row
+  &__nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: calc(var(--inset, #{$inset}) + #{$space-16});
+    pointer-events: none; // the empty middle of the row must not block dragging the slider
+
+    @include media-up('lg') {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline: max(#{$space-48}, 50% - #{$container-half-xxl});
+      z-index: 4;
+      padding-inline: 0;
+      translate: 0 -50%;
+    }
+  }
+
+  &__btn {
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__card {
+      transition: none;
+    }
+  }
+}

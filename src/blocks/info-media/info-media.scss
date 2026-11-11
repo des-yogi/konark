@@ -29,4 +29,9 @@
   &__item:nth-child(odd) {
     --media-card-flip: 1;
   }
+
+  &__title {
+    margin-bottom: 40px;
+    max-width: 680px;
+  }
 }

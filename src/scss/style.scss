@@ -68,6 +68,15 @@
 @use '../blocks/filters-form/filters-form';
 @use '../blocks/catalog/catalog';
 @use '../blocks/seo-text/seo-text';
+@use '../blocks/about-company/about-company';
+@use '../blocks/mission/mission';
+@use '../blocks/map-values/map-values';
+@use '../blocks/map-animated/map-animated';
+@use '../blocks/values/values';
+@use '../blocks/functions-slider/functions-slider';
+@use '../blocks/history/history';
+@use '../blocks/section-head/section-head';
+@use '../blocks/social-initiatives/social-initiatives';
 
 // Подключения из addCssAfter:
 @use './print' as *;

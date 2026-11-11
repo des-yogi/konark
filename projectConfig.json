@@ -64,7 +64,16 @@
     "chip": [],
     "filters-form": [],
     "catalog": [],
-    "seo-text": []
+    "seo-text": [],
+    "about-company": [],
+    "mission": [],
+    "map-values": [],
+    "map-animated": [],
+    "values": [],
+    "functions-slider": [],
+    "history": [],
+    "section-head": [],
+    "social-initiatives": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",
