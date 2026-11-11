@@ -1,0 +1,28 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Map with animated routes into and out of the hub (amCharts 5, loaded lazily by map-animated.js).
+// The map takes the full width of the page: no horizontal paddings. Transparent background.
+.map-animated {
+  $block-name: &; // #{$block-name}__element
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  // The size is reserved before the library loads, so the page does not jump.
+  // From md the edges of the map fade out (elliptical mask, as in the mockup), so the page background shows through.
+  // --map-fade-start: where the fading starts, a share of the ellipse radius.
+  &__canvas {
+    --map-fade-start: 53.5%;
+
+    width: 100%;
+    aspect-ratio: 1374 / 737;
+
+    @include media-up('md') {
+      mask-image: radial-gradient(closest-side, #000 var(--map-fade-start), transparent);
+    }
+  }
+}

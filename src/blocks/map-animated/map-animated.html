@@ -1,0 +1,36 @@
+<!--DEV
+@@include('blocks/map-animated/map-animated.html', {
+  "gradient": "dark-light-gr"
+})
+
+Animation settings (all optional, ms): data-draw, data-hold, data-gap, data-stagger, data-pulse.
+data-margin: the view shows the cities plus this share of their spread on every side (0.3 = 30%).
+data-animate="false" shows the routes without motion.
+The JSON below is placeholder data: in MODX it comes from the MIGX table.
+"direction": "out" — from the hub to the city, "in" — from the city to the hub.
+"country" — ISO 3166-1 alpha-2 code, the country gets highlighted.
+-->
+
+<section class="map-animated  @@gradient">
+  <h2 class="visually-hidden">Географія поставок</h2>
+
+  <div class="map-animated__map  js-map-animated" data-draw="1600" data-hold="300" data-gap="500" data-stagger="40" data-pulse="3200" data-margin="0.3">
+    <div class="map-animated__canvas  js-map-animated-canvas" aria-hidden="true"></div>
+    <script type="application/json" class="js-map-animated-data">
+      {
+        "hub": { "title": "Київ", "country": "UA", "lon": 30.5234, "lat": 50.4501 },
+        "routes": [
+          { "title": "Рейк'явік", "country": "IS", "lon": -21.8952, "lat": 64.1353, "direction": "out" },
+          { "title": "Лісабон", "country": "PT", "lon": -9.1355, "lat": 38.7072, "direction": "out" },
+          { "title": "Мадрид", "country": "ES", "lon": -3.7033, "lat": 40.4167, "direction": "out" },
+          { "title": "Стокгольм", "country": "SE", "lon": 18.0645, "lat": 59.3328, "direction": "out" },
+          { "title": "Лондон", "country": "GB", "lon": -0.1262, "lat": 51.5002, "direction": "in" },
+          { "title": "Берн", "country": "CH", "lon": 7.4481, "lat": 46.948, "direction": "in" },
+          { "title": "Белград", "country": "RS", "lon": 20.4781, "lat": 44.8048, "direction": "in" },
+          { "title": "Любляна", "country": "SI", "lon": 14.506, "lat": 46.0514, "direction": "in" },
+          { "title": "Париж", "country": "FR", "lon": 2.351, "lat": 48.8567, "direction": "in" }
+        ]
+      }
+    </script>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// No .container here: the section sits inside map-values, which provides the horizontal paddings.
+// Default vertical paddings of a section are cancelled by the parent block.
+.values {
+  $icon-box-size: 80px;
+  $icon-box-size-md: 116px;
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-32;
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__list {
+    display: grid;
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    margin-top: 0;
+    padding: $space-16;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('md') {
+      gap: $space-32;
+      padding: $space-16 $space-32 $space-16 $space-16;
+    }
+
+    @include media-up('lg') {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: center;
+    inline-size: $icon-box-size;
+    block-size: $icon-box-size;
+    border-radius: $radius-16;
+    background-color: var(--bg-tertiary);
+
+    @include media-up('md') {
+      inline-size: $icon-box-size-md;
+      block-size: $icon-box-size-md;
+    }
+
+    @include media-up('lg') {
+      align-self: auto;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    min-width: 0;
+
+    @include media-up('lg') {
+      flex: 1;
+    }
+  }
+
+  &__name {
+    margin: 0;
+  }
+
+  &__text {
+    color: var(--text-secondary);
+  }
+}
