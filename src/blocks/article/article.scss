@@ -43,13 +43,13 @@ $photo-ring-space: $space-8; // room for the focus ring inside the scroll row (r
   &__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: $space-12 $space-16;
+    gap: $space-12 $space-20;
     align-items: center;
     padding-top: $space-8;
 
-    @include media-up('md') {
-      column-gap: $space-20;
-    }
+    // @include media-up('md') {
+    //   column-gap: $space-20;
+    // }
 
     @include media-up('lg') {
       grid-column: 8 / -1;
@@ -62,13 +62,13 @@ $photo-ring-space: $space-8; // room for the focus ring inside the scroll row (r
     display: flex;
     flex-direction: column;
     gap: $space-4;
-    text-align: right;
     white-space: nowrap;
   }
 
   &__date-label,
   &__date-value {
     margin: 0;
+    text-align: initial;
   }
 
   &__date-label {
@@ -120,6 +120,7 @@ $photo-ring-space: $space-8; // room for the focus ring inside the scroll row (r
 
   &__cover-caption {
     margin: 0;
+    font-size: $font-size-sm;
     color: var(--text-secondary);
 
     &:empty {
