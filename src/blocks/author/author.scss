@@ -1,0 +1,51 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Article author: round photo + label + name
+.author {
+  display: flex;
+  gap: $space-12;
+  align-items: center;
+
+  &__photo {
+    display: block;
+    flex: none;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: $radius-full;
+
+    @include media-up('lg') {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // safety net: CMS photos are not guaranteed to be square
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-width: 0;
+  }
+
+  &__label,
+  &__name {
+    margin: 0;
+  }
+
+  &__label {
+    color: var(--text-secondary);
+  }
+
+  &__name {
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+  }
+}

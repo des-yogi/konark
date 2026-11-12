@@ -1,0 +1,74 @@
+<!--DEV
+@@include('blocks/gallery/gallery.html', {
+  "title": "Галерея"
+})
+
+The gallery is optional: include it on the page after the article only if there are photos.
+The list below is a static sample (MIGX in MODX): one li per photo, the same file is used for the thumbnail and the popup.
+- the thumbnail: picture with webp + jpg, the ratio is 4:3 (the photo is cropped in MODX, object-fit: cover is a safety net)
+- href of the link: the big file for the Fancybox popup
+- alt: a description of the photo (the link has no other accessible name)
+The wrapper of every gallery has the .js-gallery class: each one is its own Fancybox gallery (see index.js).
+-->
+
+<section class="container  gallery">
+  <h2 class="gallery__title  h3">@@title</h2>
+  <ul class="gallery__list  js-gallery">
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 1" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 2" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 3" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 4" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 5" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 6" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="gallery__item">
+      <a class="gallery__link" href="img/cover.jpg" data-fancybox>
+        <picture class="gallery__picture">
+          <source srcset="img/cover.webp" type="image/webp">
+          <img class="gallery__img" src="img/cover.jpg" width="1920" height="1080" alt="Фото галереї 7" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+  </ul>
+</section>

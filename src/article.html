@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Конарк | Інновації у фармацевтиці</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/article/article.html', {
+          "title": "<strong>Інновації у фармацевтиці:</strong> створюємо якість, якій довіряють",
+          "author": "1",
+          "authorImage": "ava",
+          "authorName": "Тарас Шевченко",
+          "datetime": "2026-04-06",
+          "date": "6 квітня 2026",
+          "cover": "cover",
+          "caption": "Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції"
+        })
+
+        @@include('blocks/gallery/gallery.html', {
+          "title": "Галерея"
+        })
+
+        <section class="container  social-initiatives">
+          <h2 class="h3  social-initiatives__title  social-initiatives__title--centered">Вас також може <strong>зацікавити:</strong></h2>
+
+          <ul class="social-initiatives__list">
+            <li class="social-initiatives__item">
+              @@include('blocks/news-card/news-card.html', {
+                "modifier": "",
+                "titleClass": "h6",
+                "image": "news-2",
+                "href": "#",
+                "badge": "Новини",
+                "datetime": "2026-02-04",
+                "date": "4 лютого 2026",
+                "title": "Благодійна акція: Бронхомед Максімун",
+                "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед»."
+              })
+            </li>
+
+            <li class="social-initiatives__item">
+              @@include('blocks/news-card/news-card.html', {
+                "modifier": "",
+                "titleClass": "h6",
+                "image": "news-3",
+                "href": "#",
+                "badge": "Новини",
+                "datetime": "2026-02-04",
+                "date": "4 лютого 2026",
+                "title": "Благодійна акція: Бронхомед Максімун",
+                "text": "З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для боротьби з COVID-19*."
+              })
+            </li>
+
+            <li class="social-initiatives__item">
+              @@include('blocks/news-card/news-card.html', {
+                "modifier": "",
+                "titleClass": "h6",
+                "image": "news-2",
+                "href": "#",
+                "badge": "Новини",
+                "datetime": "2026-02-04",
+                "date": "4 лютого 2026",
+                "title": "Благодійна акція: Бронхомед Максімун",
+                "text": "Купуючи Бронхомед Максімун з написом «Подолаємо COVID-19 разом!», Ви долучаєтесь до ініціативи ТОВ «Конарк Інтелмед»."
+              })
+            </li>
+
+            <li class="social-initiatives__item">
+              @@include('blocks/news-card/news-card.html', {
+                "modifier": "",
+                "titleClass": "h6",
+                "image": "news-3",
+                "href": "#",
+                "badge": "Новини",
+                "datetime": "2026-02-04",
+                "date": "4 лютого 2026",
+                "title": "Благодійна акція: Бронхомед Максімун",
+                "text": "З кожної такої проданої упаковки до благодійного фонду надійде 1 грн для боротьби з COVID-19*."
+              })
+            </li>
+          </ul>
+
+        </section>
+
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

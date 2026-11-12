@@ -44,4 +44,16 @@
   &__item {
     margin: 0;
   }
+
+  &__title {
+    margin-bottom: $space-24;
+
+    @include media-up('md') {
+      margin-bottom: $space-40;
+    }
+
+    &--centered {
+      text-align: center;
+    }
+  }
 }

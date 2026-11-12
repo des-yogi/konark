@@ -1,0 +1,70 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/photo-mixins' as *;
+
+// Gallery: the title + a grid of photos that open in Fancybox (the init is global: the .js-gallery wrapper, see index.js).
+// The columns come from the available width, no breakpoints: 280px is the minimum width of a photo.
+.gallery {
+  $block-name: &; // #{$block-name}__element
+
+  $list-gap: $space-20;
+  $max-columns: 4;
+
+  display: grid;
+  gap: $space-40;
+  padding-block: $space-40;
+
+  @include media-up('md') {
+    padding-block: $space-48;
+  }
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  &__title {
+    margin: 0;
+    text-align: center;
+  }
+
+    &__list {
+    display: grid;
+    grid-template-columns:
+      repeat(auto-fill,
+      minmax(min(100%, max(280px, calc((100% - #{($max-columns - 1) * $list-gap}) / #{$max-columns}))), 1fr));
+    gap: $list-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    margin: 0; // the global `li + li` rule must not push the photos apart
+  }
+
+  &__link {
+    border-radius: $radius-16;
+
+    @include fancybox-photo(#{$block-name}__img);
+
+    @include media-up('md') {
+      border-radius: $radius-24;
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-32;
+    }
+  }
+
+  &__picture {
+    display: block;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto; // the height attribute must not break the aspect ratio
+    aspect-ratio: 4 / 3;
+    object-fit: cover; // safety net: CMS photos are not guaranteed to be 4:3
+  }
+}
