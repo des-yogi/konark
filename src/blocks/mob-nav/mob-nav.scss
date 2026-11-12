@@ -285,6 +285,16 @@
   &__toggle[aria-current='true'] #{$block-name}__label {
     text-decoration: underline;
     text-underline-offset: 4px;
+    color: var(--text-accent);
+  }
+
+  &__link[aria-current='page'],
+  &__sublink[aria-current='page'],
+  &__toggle[aria-current='true'] {
+
+    #{$block-name}__arrow {
+      fill: var(--text-accent);
+    }
   }
 
   &__arrow {
