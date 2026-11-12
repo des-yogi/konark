@@ -60,8 +60,11 @@
       }
     }
 
-    &[aria-expanded='true'] #{$block-name}__arrow {
-      color: var(--text-accent);
+    &[aria-expanded='true'] {
+
+      #{$block-name}__arrow {
+        color: var(--text-accent);
+      }
     }
 
     // Colour change belongs to the menu, not to the text-roll effect: the rolling-in line is accent blue
@@ -79,9 +82,15 @@
       border-top: 1px solid currentcolor; // a border survives forced-colors mode, a background does not
     }
 
+    &:is([aria-current='page']),
+    &:is([aria-current='true']) {
+      color: var(--text-accent);
+    }
+
     // With an arrow the line stops before it: arrow 12px + gap 8px + padding 8px
     &:has(#{$block-name}__arrow):is([aria-current='page'], [aria-current='true'])::after {
       right: calc(#{$space-8} + #{$space-8} + 12px);
+      fill: currentColor;
     }
 
     &:focus-visible {
@@ -166,6 +175,7 @@
     &[aria-current='page'] {
       text-decoration: underline;
       text-underline-offset: 2px;
+      color: var(--text-accent);
     }
 
     &:focus-visible {

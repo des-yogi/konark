@@ -181,13 +181,17 @@
     }
 
     // The current page: a static underline under the label (it does not roll with the text)
-    &[aria-current='page']::after {
-      content: '';
-      position: absolute;
-      top: calc(50% + 0.5lh + #{$space-1});
-      right: 0;
-      left: 0;
-      border-top: 1px solid currentcolor;
+    &[aria-current='page'] {
+      color: var(--text-accent);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: calc(50% + 0.5lh + #{$space-1});
+        right: 0;
+        left: 0;
+        border-top: 1px solid currentColor;
+      }
     }
 
     // Colour change on roll belongs to the menus, not to the text-roll effect
@@ -237,6 +241,7 @@
     &[aria-current='page'] {
       text-decoration: underline;
       text-underline-offset: 4px;
+      color: var(--text-accent);
     }
 
     @media (hover: hover) {

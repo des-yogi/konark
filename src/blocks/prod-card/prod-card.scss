@@ -16,7 +16,7 @@
   gap: $space-12;
   width: 100%;
   height: 100%;
-  padding: $space-20;
+  padding: $space-24 $space-20 $space-20;
   border-radius: $radius-32;
   background-color: var(--bg-overlay-subtle);
   box-shadow: $shadow-s;
@@ -24,7 +24,7 @@
 
   @include media-up('md') {
     gap: $space-20;
-    padding: $space-20 $space-32;
+    padding: $space-24 $space-32 $space-20;
     border-radius: $radius-24;
     box-shadow: $shadow-m;
   }

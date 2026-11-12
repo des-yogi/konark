@@ -115,8 +115,9 @@ $number-size-mobile: list.nth(map.get(map.get($headings, 'subheading'), 'sizes')
   // Typography comes from the global .h4. The first-line indent is part of the design (scales with the font size)
   &__title {
     margin: 0;
-    text-indent: 2.75em;
     color: var(--text-primary);
+
+    // text-indent: 2.75em;
 
     @include media-between('md', 'lg') {
       font-size: $title-size-mobile;
