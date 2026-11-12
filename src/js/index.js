@@ -257,10 +257,12 @@ initGlobal();
 // =============================================================================
 //  Fancybox UI
 // =============================================================================
-//import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
-//Fancybox.bind("[data-fancybox]", {
-  // Your custom options
-//});
+import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+// Each .js-gallery wrapper is its own gallery scope:
+// groupAll groups items only inside the wrapper matched by the first selector
+Fancybox.bind('.js-gallery', '[data-fancybox]', {
+  groupAll: true,
+});
 
 // =============================================================================
 //  Swiper.js

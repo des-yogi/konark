@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "@coreui/coreui": "^5.9.1",
+    "@fancyapps/ui": "^6.1.15",
     "autosize": "^6.0.1",
     "overlayscrollbars": "^2.17.0",
     "swiper": "^14.4.0"

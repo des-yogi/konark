@@ -73,10 +73,15 @@
     "functions-slider": [],
     "history": [],
     "section-head": [],
-    "social-initiatives": []
+    "social-initiatives": [],
+    "article": [],
+    "gallery": [],
+    "share": [],
+    "author": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",
+    "../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css",
     "src/scss/_coreui-custom.scss",
     "src/scss/variables.scss",
     "src/scss/mixins.scss"

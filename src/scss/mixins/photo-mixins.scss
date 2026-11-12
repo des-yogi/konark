@@ -1,0 +1,48 @@
+@use '../variables.scss' as *;
+@use 'button-mixins' as *;
+
+// Photos that open in Fancybox. The rule for all galleries: hover = zoom 7% + light 10% darkening.
+$photo-zoom: 0.07;
+$photo-shade: rgb(15 16 19 / 10%);
+
+// The link around a photo. It clips the photo, so the border-radius of the link is set by the block.
+// $img: selector of the photo inside the link.
+// Usage: .block__link { border-radius: ...; @include fancybox-photo(#{$block-name}__img); }
+// Include it after the plain declarations of the link: the mixin ends with nested rules.
+// Usage: @use '../../scss/mixins/photo-mixins' as *;
+@mixin fancybox-photo($img) {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  cursor: zoom-in;
+
+  #{$img} {
+    transition: transform $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: $photo-shade;
+    opacity: 0;
+    transition: opacity $transition-time ease;
+    pointer-events: none;
+
+    @include button-reduced-motion;
+  }
+
+  @include button-hover {
+    #{$img} {
+      transform: scale(#{1 + $photo-zoom});
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  @include button-focus(var(--btn-secondary-focus-ring));
+}

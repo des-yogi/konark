@@ -1,0 +1,17 @@
+<!--DEV
+@@include('blocks/author/author.html', {
+  "image": "ava",
+  "name": "Тарас Шевченко"
+})
+-->
+
+<div class="author">
+  <picture class="author__photo">
+    <source srcset="img/@@image.webp" type="image/webp">
+    <img class="author__img" src="img/@@image.jpg" width="144" height="144" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="author__info">
+    <p class="author__label">Автор статті</p>
+    <p class="author__name">@@name</p>
+  </div>
+</div>

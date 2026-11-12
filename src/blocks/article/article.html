@@ -1,0 +1,154 @@
+<!--DEV
+@@include('blocks/article/article.html', {
+  "title": "<strong>Інновації у фармацевтиці:</strong> створюємо якість, якій довіряють",
+  "author": "1",
+  "authorImage": "ava",
+  "authorName": "Тарас Шевченко",
+  "datetime": "2026-04-06",
+  "date": "6 квітня 2026",
+  "cover": "cover",
+  "caption": "Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції"
+})
+
+author: "1" shows the author block, "" hides it (the date stays)
+cover: image file name without extension (img/cover.jpg + img/cover.webp), "" = article without the main photo
+caption: caption under the photo, "" = no caption (keep it on one line without extra spaces: the empty figcaption is hidden by :empty)
+
+The sections below are a static sample (MIGX in MODX). Every part of a section is optional:
+- heading: h2.article__heading.h3, always this markup
+- text: plain editor tags without classes and without wrapper divs
+- photos: div.article__photos.js-gallery (+ article__photos--portrait for 2–3 portrait photos 3:4 and the invisible-scrollbar class; without the modifier = one landscape photo 16:9)
+- caption of a photo: keep figcaption on one line without extra spaces (empty one is hidden by :empty); data-caption of the link is the caption in the Fancybox popup
+-->
+
+<article class="container  article">
+
+  <header class="article__head">
+    <h1 class="article__title  h3">@@title</h1>
+    <div class="article__meta">
+      @@if(author)
+      @@include('../../blocks/author/author.html', {
+        "image": "@@authorImage",
+        "name": "@@authorName"
+      })
+      @@endif
+      <div class="article__date">
+        <p class="article__date-label">Дата</p>
+        <p class="article__date-value"><time datetime="@@datetime">@@date</time></p>
+      </div>
+    </div>
+  </header>
+  @@if(cover)
+  <figure class="article__cover">
+    <picture class="article__cover-picture">
+      <source srcset="img/@@cover.webp" type="image/webp">
+      <img class="article__cover-img" src="img/@@cover.jpg" width="1920" height="1080" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <figcaption class="article__cover-caption">@@caption</figcaption>
+  </figure>
+  @@endif
+
+  <div class="article__body">
+    <div class="article__section">
+      <p class="lead">Фармацевтика — це галузь, де якість не може бути компромісом. Ми щодня працюємо над тим, щоб лікарські засоби були доступними, безпечними та ефективними.</p>
+      <p>Компанія «Конарк Інтелмед» поєднує багаторічний досвід дистрибуції з сучасними підходами до контролю якості та логістики.</p>
+      <p>Кожна партія препаратів проходить багатоступеневу перевірку, а наші партнери — міжнародні виробники з підтвердженою репутацією.</p>
+    </div>
+
+    <div class="article__section">
+      <h2 class="article__heading  h3">Якість, яку підтверджує досвід</h2>
+      <p>Система якості охоплює всі етапи: від закупівлі та зберігання до доставки в аптеки й лікувальні заклади.</p>
+      <p>Ми регулярно проходимо аудити та впроваджуємо найкращі практики, щоб кожен пацієнт отримував надійний препарат.</p>
+      <div class="article__photos  js-gallery">
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/cover.jpg" data-fancybox data-caption="Склад із контрольованим температурним режимом">
+            <picture class="article__photo-picture">
+              <source srcset="img/cover.webp" type="image/webp">
+              <img class="article__photo-img" src="img/cover.jpg" width="1920" height="1080" alt="Склад із контрольованим температурним режимом" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption">Склад із контрольованим температурним режимом</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="article__section">
+      <h2 class="article__heading  h3">Технології, що формують майбутнє</h2>
+      <p>Розвиток фармацевтичної галузі нерозривно пов’язаний із впровадженням сучасного обладнання, автоматизацією процесів і постійним удосконаленням виробничих рішень.</p>
+      <p>Інвестиції в технології дозволяють підвищувати ефективність виробництва, оптимізувати використання ресурсів і створювати основу для подальшого розвитку асортименту. Водночас ключовими пріоритетами залишаються науковий підхід, кваліфікація фахівців і відповідальне ставлення до кожного продукту.</p>
+      <h4>Що це дає партнерам</h4>
+      <ul>
+        <li>Відстеження партій на кожному етапі</li>
+        <li>Стабільні умови зберігання</li>
+        <li>Швидку обробку замовлень</li>
+      </ul>
+      <div class="article__photos  article__photos--portrait  invisible-scrollbar  js-gallery">
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/photo-2.jpg" data-fancybox data-caption="Лабораторний контроль">
+            <picture class="article__photo-picture">
+              <source srcset="img/photo-2.webp" type="image/webp">
+              <img class="article__photo-img" src="img/photo-2.jpg" width="900" height="1200" alt="Лабораторний контроль" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption">Лабораторний контроль</figcaption>
+        </figure>
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/photo-3.jpg" data-fancybox>
+            <picture class="article__photo-picture">
+              <source srcset="img/photo-3.webp" type="image/webp">
+              <img class="article__photo-img" src="img/photo-3.jpg" width="900" height="1200" alt="Пакування продукції" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption"></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="article__section">
+      <h2 class="article__heading  h3">Відповідальність перед пацієнтами</h2>
+      <p>Розвиток фармацевтичної галузі нерозривно пов’язаний із впровадженням сучасного обладнання, автоматизацією процесів і постійним удосконаленням виробничих рішень.</p>
+      <p>Ми переконані, що довіра формується завдяки прозорим процесам, послідовному дотриманню вимог і прагненню до постійного вдосконалення.</p>
+      <div class="article__photos  article__photos--portrait  invisible-scrollbar  js-gallery">
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/photo-4.jpg" data-fancybox data-caption="Команда логістики">
+            <picture class="article__photo-picture">
+              <source srcset="img/photo-4.webp" type="image/webp">
+              <img class="article__photo-img" src="img/photo-4.jpg" width="900" height="1200" alt="Команда логістики" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption">Команда логістики</figcaption>
+        </figure>
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/photo-5.jpg" data-fancybox>
+            <picture class="article__photo-picture">
+              <source srcset="img/photo-5.webp" type="image/webp">
+              <img class="article__photo-img" src="img/photo-5.jpg" width="900" height="1200" alt="Фармацевт за роботою" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption"></figcaption>
+        </figure>
+        <figure class="article__photo">
+          <a class="article__photo-link" href="img/photo-6.jpg" data-fancybox>
+            <picture class="article__photo-picture">
+              <source srcset="img/photo-6.webp" type="image/webp">
+              <img class="article__photo-img" src="img/photo-6.jpg" width="900" height="1200" alt="Доставка в аптеки" loading="lazy" decoding="async">
+            </picture>
+          </a>
+          <figcaption class="article__photo-caption">Компанія «Конарк Інтелмед» створена в 1997 році</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="article__section">
+      <h2 class="article__heading  h3">Рух до нових можливостей</h2>
+      <p>Фармацевтична галузь продовжує розвиватися, відкриваючи нові перспективи для науки, виробництва та охорони здоров’я. Поєднання досвіду, інновацій і відповідального підходу створює основу для сталого розвитку та впевненого руху вперед.</p>
+      <p class="lead">Наша філософія — якість у кожному процесі, відповідальність у кожному рішенні та прагнення до кращого майбутнього.</p>
+    </div>
+
+    @@include('../../blocks/share/share.html', {
+      "mix": "article__share",
+      "url": "https%3A%2F%2Fexample.com%2Fnews%2Farticle%2F"
+    })
+
+  </div>
+</article>

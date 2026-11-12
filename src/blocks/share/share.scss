@@ -1,0 +1,66 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+.share {
+  $block-name: &; // #{$block-name}__element
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-12 $space-20;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-12 $space-16;
+  border-radius: $radius-14;
+  background-color: var(--tag-bg);
+
+  @include media-up('md') {
+    padding: 10px 10px 10px 36px;
+  }
+
+  &__title {
+    margin: 0;
+    font: inherit;
+    font-weight: $font-weight-semibold;
+    letter-spacing: normal;
+    color: var(--text-primary);
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-8;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+  }
+
+  &__link {
+    @include button-reset;
+    @include button-forced-colors;
+
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-14;
+    color: var(--btn-primary-bg); // same colour as in social-networks: blue in the light theme, white in the dark one
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-s;
+    transition: $button-transition;
+
+    &:visited {
+      color: var(--btn-primary-bg);
+    }
+
+    @include button-hover {
+      box-shadow: $shadow-s-hover;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring));
+    @include button-reduced-motion;
+  }
+}

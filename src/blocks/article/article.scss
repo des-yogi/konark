@@ -1,0 +1,262 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/photo-mixins.scss' as *;
+
+$article-body-width: 910px; // text column of the mockup (desktop)
+$article-body-fit: $article-body-width + 2 * $space-40; // viewport where the text column reaches its max width (container paddings: 40)
+$photo-ring-space: $space-8; // room for the focus ring inside the scroll row (ring width + offset)
+
+// Article. Vertical paddings of the whole article are set here (same values as page-head).
+// Stages done: head (title + meta), main photo, text sections with photos. The share block comes later.
+.article {
+  $block-name: &; // #{$block-name}__element
+
+  // The scroll row of photos breaks out of the container with vw units: this prevents a page scrollbar
+  overflow-x: clip;
+  padding-block: $space-12 $space-20;
+
+  @include media-up('lg') {
+    padding-block-start: $space-64;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      align-items: end;
+    }
+  }
+
+  &__title {
+    margin: 0;
+
+    @include media-up('lg') {
+      grid-column: 1 / span 7;
+    }
+  }
+
+  // Below lg the meta is pressed to the left, from lg to the right (with or without the author)
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-12 $space-16;
+    align-items: center;
+    padding-top: $space-8;
+
+    @include media-up('md') {
+      column-gap: $space-20;
+    }
+
+    @include media-up('lg') {
+      grid-column: 8 / -1;
+      justify-content: flex-end;
+      column-gap: $space-40;
+    }
+  }
+
+  &__date {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  &__date-label,
+  &__date-value {
+    margin: 0;
+  }
+
+  &__date-label {
+    color: var(--text-secondary);
+  }
+
+  &__date-value {
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+  }
+
+  // Optional main photo (16:9) + caption. Its vertical paddings are the gaps
+  // to the head above and to the text below.
+  &__cover {
+    display: grid;
+    gap: $space-12;
+    margin: 0;
+    padding-block: $space-20;
+
+    @include media-up('md') {
+      gap: $space-16;
+      padding-block-start: $space-32;
+    }
+
+    @include media-up('lg') {
+      padding-block: $space-40;
+    }
+  }
+
+  &__cover-picture {
+    display: block;
+  }
+
+  &__cover-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover; // safety net: CMS photos are not guaranteed to be 16:9
+    border-radius: $radius-24;
+
+    @include media-up('md') {
+      border-radius: $radius-32;
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-48;
+    }
+  }
+
+  &__cover-caption {
+    margin: 0;
+    color: var(--text-secondary);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // Text column: centered, never wider than the mockup. Text colors are set here once and inherited.
+  // Sections stay in the normal block flow (no flex/grid): the margins of the headings must collapse.
+  &__body {
+    max-width: $article-body-width;
+    margin-inline: auto;
+    color: var(--text-secondary);
+  }
+
+  // Without the main photo the text follows the head directly (same gaps as around the photo)
+  &__head + &__body {
+    margin-top: $space-20;
+
+    @include media-up('md') {
+      margin-top: $space-32;
+    }
+
+    @include media-up('lg') {
+      margin-top: $space-40;
+    }
+  }
+
+  &__section + &__section {
+    margin-top: $space-48;
+  }
+
+  // Photos right under the main heading: the margin of the heading is the gap
+  &__heading + &__photos {
+    margin-top: 0;
+  }
+
+  // One landscape photo (16:9). With --portrait: a row of 2–3 portrait photos (3:4)
+  &__photos {
+    margin-top: $space-48;
+
+    // The photos share the width of the text column and never get narrower than their flex-basis:
+    // if they do not fit, the row scrolls (no JS)
+    &--portrait {
+      display: flex;
+      gap: $space-16;
+      align-items: flex-start; // photos keep their own height, the caption must not stretch the neighbours
+
+      // Below lg the scroll row breaks out of the container to the screen edges
+      // (the inline padding keeps the first photo on the text edge).
+      // The block padding is the room for the focus ring (a scroll container clips it),
+      // the negative margins keep the visible gaps unchanged.
+      @include media-down('lg') {
+        margin-block: ($space-48 - $photo-ring-space) (-$photo-ring-space);
+        margin-inline: calc(50% - 50vw);
+        padding-block: $photo-ring-space;
+        padding-inline: calc(50vw - 50%);
+        overflow-x: auto;
+
+        // Right under the main heading: its margin is the gap
+        #{$block-name}__heading + & {
+          margin-top: -$photo-ring-space;
+        }
+      }
+
+      @include media-up('lg') {
+        gap: $space-20;
+      }
+
+      #{$block-name}__photo {
+        flex: 1 0 200px;
+        min-width: 0;
+
+        // Tablet (mockup): two photos per column width, the third one scrolls
+        @include media-up('md') {
+          flex-basis: calc(50% - #{$space-8});
+        }
+
+        // The column has its max width: 3 photos fit (3 * 280 + 2 * 20 = 880 <= 910)
+        @include media-up($article-body-fit) {
+          flex-basis: 280px;
+        }
+      }
+
+      #{$block-name}__photo-img {
+        aspect-ratio: 3 / 4;
+      }
+    }
+  }
+
+  &__photo {
+    display: grid;
+    gap: $space-12;
+    margin: 0;
+  }
+
+  // Fancybox link: zoom of the photo + light darkening on hover (the mixin is shared with the gallery)
+  &__photo-link {
+    border-radius: $radius-16;
+
+    @include fancybox-photo(#{$block-name}__photo-img);
+
+    @include media-up('md') {
+      border-radius: $radius-24;
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-32;
+    }
+  }
+
+  &__photo-picture {
+    display: block;
+  }
+
+  &__photo-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover; // safety net: CMS photos are cropped there, but the ratio is guaranteed here
+    object-position: center;
+  }
+
+  &__photo-caption {
+    margin: 0;
+    font-size: $font-size-sm;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__share {
+    margin-top: $space-32;
+
+    @include media-up('lg') {
+      margin-top: $space-48;
+    }
+  }
+}
