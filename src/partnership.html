@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konark | Співпраця</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "<strong>Співпраця</strong> з Конарк",
+          "text": "<p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників.</p>"
+        })
+
+        <div class="container  info-media">
+          <article class="media-card  media-card--media-end">
+            <div class="media-card__media">
+              <picture class="media-card__picture">
+                <source srcset="img/media-card-img-1.webp" type="image/webp">
+                <img class="media-card__img" src="img/media-card-img-1.jpg" width="657" height="492" alt="" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="media-card__body">
+              <p class="media-card__number  subheading" aria-hidden="true"></p>
+              <div class="media-card__content">
+                <h3 class="media-card__title  h4">Відповідальність за якість та безпеку продукції</h3>
+                <div class="media-card__text">
+                  <p>ТОВ «Конарк Інтелмед» висловлює свою повагу потенційним партнерам та повідомляє наступне. Компанія послідовно дотримується високих стандартів якості, безпеки та відповідального ведення бізнесу. Ми усвідомлюємо важливість своєчасного забезпечення пацієнтів ефективними лікарськими засобами та прагнемо співпрацювати виключно з надійними і професійними контрагентами.</p>
+                </div>
+                <!-- <a href="#" class="btn-secondary  media-card__btn-link">
+                  <span class="text-roll"><span class="text-roll__line">перейти</span><span class="text-roll__line" aria-hidden="true">перейти</span></span>
+                  <span class="btn-secondary__icon">
+                    <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+                  </span>
+                </a> -->
+              </div>
+            </div>
+          </article>
+
+          @@include('blocks/benefits/benefits.html')
+        </div>
+
+        @@include('blocks/relationships/relationships.html')
+
+        @@include('blocks/documents/documents.html')
+
+        @@include('blocks/contact-us/contact-us.html')
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

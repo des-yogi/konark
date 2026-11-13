@@ -1,0 +1,54 @@
+<!--DEV
+@@include('blocks/documents/documents.html')
+
+Documents section: a centered title and a grid of download panels.
+Panels are hardcoded (no loops). One section holds one kind of panel: standard or `download-panel--sm`.
+-->
+
+<section class="container documents">
+  <h2 class="documents__title h3">Документація</h2>
+
+  <ul class="documents__list">
+    <li class="documents__item">
+      @@include('../../blocks/download-panel/download-panel.html', {
+        "small": "download-panel--sm",
+        "accent": "download-panel__cover--accent",
+        "title": "Пропозиція укласти договір",
+        "text": "Перший звіт про діяльність лабораторії",
+        "meta": "<span class='download-panel__meta-item'>100 стор</span><span class='download-panel__meta-item'>300 Мб</span>",
+        "year": ""
+      })
+    </li>
+    <li class="documents__item">
+      @@include('../../blocks/download-panel/download-panel.html', {
+        "small": "download-panel--sm",
+        "accent": "",
+        "title": "Лист Повідомлення про співпарцю",
+        "text": "",
+        "meta": "<span class='download-panel__meta-item'>100 стор</span><span class='download-panel__meta-item'>300 Мб</span>",
+        "year": ""
+      })
+    </li>
+    <li class="documents__item">
+      @@include('../../blocks/download-panel/download-panel.html', {
+        "small": "download-panel--sm",
+        "accent": "",
+        "title": "Положення про кваліфікацію",
+        "text": "Перший звіт про діяльність лабораторії",
+        "meta": "<span class='download-panel__meta-item'>100 стор</span><span class='download-panel__meta-item'>300 Мб</span>",
+        "year": ""
+      })
+    </li>
+    <li class="documents__item">
+      @@include('../../blocks/download-panel/download-panel.html', {
+        "small": "download-panel--sm",
+        "accent": "",
+        "title": "Угода про конфіденційність",
+        "text": "",
+        "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+        "year": ""
+      })
+    </li>
+  </ul>
+</section>
+

@@ -1,0 +1,21 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// World map with highlighted countries and their cities (amCharts 5, loaded lazily by map-region.js).
+// The map takes the full width of the page: no horizontal paddings. Transparent background.
+.map-region {
+  $block-name: &; // #{$block-name}__element
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  // The size is reserved before the library loads, so the page does not jump.
+  // 2.29 : 1 is the world in the Equal Earth projection without Antarctica (no empty bands above and below).
+  &__canvas {
+    width: 100%;
+    aspect-ratio: 2.29;
+  }
+}

@@ -1,0 +1,45 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Documents section: a centered title and a grid of download panels.
+// The grid has no breakpoints: columns are at least 580px wide, so a horizontal panel always fits, a lone panel keeps its column width.
+.documents {
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__title {
+    margin-block-end: $space-24;
+    text-align: center;
+
+    @include media-up('md') {
+      margin-block-end: $space-40;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 580px), 1fr));
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The panel fills the whole grid cell
+  &__item {
+    display: flex;
+    margin: 0; // resets the global `li + li` margin
+
+    // Resets the global bullet of `ul li:before`
+    &::before {
+      content: none;
+    }
+  }
+
+  &__item > .download-panel {
+    flex: 1;
+  }
+}

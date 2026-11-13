@@ -9,8 +9,6 @@ node_modules/
 .DS_Store
 *.log
 *.txt
-*.jpg
-*.png
 *.bak
 *.sublime-*
 *.rar

@@ -82,6 +82,12 @@
 @use '../blocks/gallery/gallery';
 @use '../blocks/share/share';
 @use '../blocks/author/author';
+@use '../blocks/map-region/map-region';
+@use '../blocks/benefits/benefits';
+@use '../blocks/relationships/relationships';
+@use '../blocks/contact-us/contact-us';
+@use '../blocks/documents/documents';
+@use '../blocks/download-panel/download-panel';
 
 // Подключения из addCssAfter:
 @use './print' as *;
