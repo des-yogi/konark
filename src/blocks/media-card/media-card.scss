@@ -107,6 +107,10 @@ $number-size-mobile: list.nth(map.get(map.get($headings, 'subheading'), 'sizes')
     flex-direction: column;
     gap: $space-12;
 
+    @include media-up('md') {
+      gap: $space-20;
+    }
+
     @include media-up('lg') {
       gap: $space-24;
     }
@@ -127,6 +131,11 @@ $number-size-mobile: list.nth(map.get(map.get($headings, 'subheading'), 'sizes')
   &__text {
     margin: 0;
     color: var(--text-secondary);
+  }
+
+  &__btn-link {
+    align-self: flex-start;
+    min-width: 160px;
   }
 
   // Single card with the media at the end side (right on desktop)

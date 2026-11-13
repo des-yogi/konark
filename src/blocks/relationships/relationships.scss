@@ -1,0 +1,136 @@
+@use 'sass:math';
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// Steps of establishing partnership: a card with the head (title + description) and a numbered list.
+// The outer div is transparent (no gradient: the page has its own) and holds the vertical paddings.
+// Numbers are a CSS counter, so they follow the markup order (01, 02, ...).
+.relationships {
+  $number-width: 24px; // from md: 30px
+  $list-shift-from: 96px; // the tablet design: the list is moved to the right by 96px
+  $list-shift-width: 624px; // the card content width at 768px: 768 - 2 * 40 (.container) - 2 * 32 (card padding)
+
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    padding: $space-40 $space-16;
+    border-radius: $radius-32;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      gap: $space-40;
+      padding: $space-48 $space-32;
+      border-radius: $radius-40;
+    }
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      align-items: start;
+      padding: $space-64;
+      border-radius: $radius-48;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+
+    @include media-up('lg') {
+      grid-column: 1 / span 5;
+    }
+  }
+
+  // The size comes from the .h3 class; the accent part is <strong>
+  &__title {
+    margin: 0;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: relationships;
+
+    // From md to lg the shift is in percent of the card width (96px at 768px), so the lines stay short
+    @include media-up('md') {
+      margin-inline-start: math.percentage(math.div($list-shift-from, $list-shift-width));
+    }
+
+    @include media-up('lg') {
+      grid-column: 6 / -1;
+      margin-inline-start: 0;
+      padding-left: $space-40;
+    }
+
+    @include media-up('xl') {
+      grid-column: 7 / -1;
+      padding-left: 0;
+    }
+  }
+
+  &__item {
+    display: flex;
+    gap: $space-8;
+    align-items: baseline; // the number sits on the baseline of the first line of the step title
+    margin: 0;
+    padding-block: $space-20;
+    border-block-end: 1px solid var(--divider-subtle);
+    counter-increment: relationships;
+
+    @include media-up('md') {
+      gap: $space-24;
+    }
+
+    &::before {
+      content: counter(relationships, decimal-leading-zero);
+      flex: none;
+      inline-size: $number-width;
+      font-weight: $font-weight-semibold;
+      color: var(--text-primary);
+
+      @include media-up('md') {
+        inline-size: 30px;
+      }
+    }
+
+    &:last-child {
+      border-block-end: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $space-8;
+    min-inline-size: 0;
+  }
+
+  // The size comes from the .h6 class
+  &__step {
+    margin: 0;
+  }
+
+  &__text {
+    color: var(--text-secondary);
+  }
+}

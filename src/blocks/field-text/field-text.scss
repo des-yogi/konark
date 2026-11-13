@@ -107,7 +107,7 @@
     // In the mockup the error message is aligned to the right
     #{$block-name}__help-text {
       color: var(--input-border-error);
-      text-align: right;
+      // text-align: right;
     }
   }
 }

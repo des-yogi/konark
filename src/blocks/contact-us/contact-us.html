@@ -1,0 +1,81 @@
+<!--DEV
+@@include('blocks/contact-us/contact-us.html')
+
+The outer div holds the vertical paddings; the card inside is pinned to the dark theme (force-dark).
+The emblem files (webp + png, 460x460) lie in the img folder of the block (the same ones as in become-partner).
+The messages of the phone field (data-msg-invalid) are the texts for the translation: one value per language.
+The captcha is a stub: the empty div is hidden by CSS until the widget is put inside.
+-->
+
+<div class="container  contact-us">
+  <section class="contact-us__card  force-dark">
+    <picture class="contact-us__emblem">
+      <source srcset="img/emblem.webp" type="image/webp">
+      <img class="contact-us__img" src="img/emblem.png" width="460" height="460" alt="" loading="lazy" decoding="async">
+    </picture>
+
+    <div class="contact-us__head">
+      <h2 class="contact-us__title  h1"><strong>Напишіть</strong> нам</h2>
+
+      <div class="contact-us__texts">
+        <div class="contact-us__note  small">
+          <p>Інформація, яка буде надіслана Вами, є конфіденційною та не підлягає розголошенню, крім випадків, встановлених законодавством.</p>
+        </div>
+
+        <div class="contact-us__agreement  lead">
+          <p>Натискаючи кнопку «Надіслати», Ви підтверджуєте згоду на обробку Ваших персональних даних.</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-us__form  js-contact-us" method="post" action="">
+      <div class="contact-us__fields">
+        <label class="field-text  contact-us__field">
+          <span class="field-text__name">Імʼя</span>
+          <span class="field-text__input-wrap">
+            <input class="field-text__input" type="text" name="name" autocomplete="name" required>
+          </span>
+        </label>
+
+        <div class="contact-us__row">
+          <label class="field-text  contact-us__field">
+            <span class="field-text__name">Телефон</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input  js-contact-us-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+380" aria-describedby="contact-us-phone-error" data-msg-invalid="Введіть номер повністю: +380 XX XXX XX XX" required>
+              <span class="field-text__help-text" id="contact-us-phone-error"></span>
+            </span>
+          </label>
+
+          <label class="field-text  contact-us__field">
+            <span class="field-text__name">E-mail</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="email" name="email" autocomplete="email">
+            </span>
+          </label>
+        </div>
+
+        <label class="field-text  contact-us__field">
+          <span class="field-text__name">Повідомлення</span>
+          <span class="field-text__input-wrap">
+            <textarea class="field-text__input" name="message" rows="3" placeholder="Ваше повідомлення"></textarea>
+          </span>
+        </label>
+
+        <div class="field-checkbox">
+          <label class="field-checkbox__name">
+            <input class="field-checkbox__input  js-contact-us-consent" type="checkbox" name="consent" value="1" required checked>
+            <span class="field-checkbox__name-text">Згода на обробку персональних даних</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="contact-us__actions">
+        <div class="contact-us__captcha">Captcha</div>
+
+        <button class="btn  contact-us__submit  js-contact-us-submit" type="submit">
+          <span class="text-roll"><span class="text-roll__line">Надіслати</span><span class="text-roll__line" aria-hidden="true">Надіслати</span></span>
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

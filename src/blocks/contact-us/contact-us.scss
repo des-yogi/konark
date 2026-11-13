@@ -1,0 +1,215 @@
+@use '../../scss/variables' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// Contact form on a dark card. It is built on become-partner: the same card, gradient, emblem and force-dark.
+// The outer div is transparent (the page has its own gradient). The emblem is a decor under the content:
+// it is not scaled above $emblem-size, it is only moved.
+.contact-us {
+  $block-name: &; // #{$block-name}__element
+
+  $emblem-size: 460px;
+  $emblem-top: $space-24; // mobile: the offset from the top and from the sides
+  $emblem-gap: $space-40; // from md: the offset from the card edges
+  $emblem-overlap: 100px; // mobile: how far the title goes up over the emblem
+
+  padding-block: $space-40;
+
+  // The container query units below are measured by this element (its content box = the card width)
+  container-type: inline-size;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    // Mobile: the emblem fills the card up to $emblem-size minus its side offsets; from md it is fixed
+    --emblem-size: min(#{$emblem-size}, calc(100cqi - #{$emblem-top * 2}));
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+    // padding: calc(#{$emblem-top} + var(--emblem-size) - #{$emblem-overlap}) $space-16 $space-24;
+    padding: 220px $space-16 $space-24;
+    overflow: hidden;
+    border-radius: $radius-32;
+    background-image: linear-gradient(to bottom, var(--palette-main-blue-50) 36%, var(--palette-main-blue-85) 109%);
+    isolation: isolate; // keeps the emblem blend inside the card
+
+    @include media-up('md') {
+      --emblem-size: #{$emblem-size};
+
+      gap: $space-96;
+      padding: $space-48;
+      border-radius: $radius-40;
+    }
+
+    @include media-up('lg') {
+      @include grid-12;
+
+      padding: $space-64;
+      border-radius: $radius-48;
+    }
+  }
+
+  // Mobile: top and sides. Tablet: right side, centered vertically. Desktop: centered in the card.
+  &__emblem {
+    position: absolute;
+    inset-block-start: $emblem-top;
+    inset-inline: $emblem-top;
+    z-index: -1;
+    width: var(--emblem-size);
+    height: var(--emblem-size);
+    margin-inline: auto;
+    opacity: 0.4; // fallback without the soft light blend
+    pointer-events: none;
+    user-select: none;
+
+    @supports (mix-blend-mode: soft-light) {
+      opacity: 1;
+      mix-blend-mode: soft-light;
+    }
+
+    @include media-up('md') {
+      top: $space-48;
+      inset-inline: auto $emblem-gap;
+      margin: auto 0;
+    }
+
+    @include media-up('lg') {
+      inset-inline: 0;
+      margin: auto;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Desktop: the title stays at the top, the texts at the bottom, the height is the height of the form
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+
+    @include media-up('md') {
+      gap: $space-32;
+    }
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+      justify-content: space-between;
+    }
+
+    @include media-up('xl') {
+      grid-column: 1 / span 5;
+      // justify-content: space-between;
+    }
+  }
+
+  // The size comes from the .h1 class; the accent part is <strong>
+  &__title {
+    margin: 0;
+    color: var(--text-static-white-soft);
+
+    strong {
+      color: var(--text-static-white);
+    }
+  }
+
+  &__texts {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+  }
+
+  // The size comes from the .small class
+  &__note {
+    color: var(--text-static-white-soft);
+  }
+
+  // The size comes from the .lead class
+  &__agreement {
+    color: var(--text-static-white);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('lg') {
+      grid-column: 8 / -1;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+  }
+
+  // Cancels the default bottom margin of .field-text: the gaps come from the parent
+  &__field.field-text {
+    margin-bottom: 0;
+  }
+
+  // Phone and e-mail: one column, from lg two columns
+  &__row {
+    display: grid;
+    gap: $space-16;
+
+    @include media-up('lg') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('lg') {
+      flex-direction: row;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('md') {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  // Stub for the captcha widget: while it is empty it takes no place
+  &__captcha {
+    @include media-up('md') {
+      flex: none;
+      inline-size: 300px;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__submit {
+    @include media-between('md', 'lg') {
+      flex: 0;
+      min-width: 200px;
+    }
+  }
+
+  &__captcha,
+  .field-text__help-text {
+    color: var(--input-text);
+  }
+}

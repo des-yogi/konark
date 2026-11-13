@@ -1,0 +1,35 @@
+<!--DEV
+@@include('blocks/map-region/map-region.html', {
+  "gradient": "dark-light-gr"
+})
+-->
+
+<!--
+  The JSON below is placeholder data: in MODX it comes from the MIGX table.
+  One item = a highlighted country + its city: "country" is the ISO 3166-1 alpha-2 code,
+  "title" is the city name in the tooltip, "hub": true makes the dot twice as big (Kyiv).
+-->
+<section class="container  map-region  @@gradient" style="padding-bottom: 0;">
+  <h2 class="visually-hidden">Країни-партнери</h2>
+
+  <div class="map-region__map  js-map-region" data-cities="true">
+    <div class="map-region__canvas  js-map-region-canvas" aria-hidden="true"></div>
+    <script type="application/json" class="js-map-region-data">
+      [
+        { "country": "UA", "title": "Київ", "lon": 30.5234, "lat": 50.4501, "hub": true },
+        { "country": "IN", "title": "Нью-Делі", "lon": 77.209, "lat": 28.6139 },
+        { "country": "KZ", "title": "Астана", "lon": 71.4704, "lat": 51.1605 },
+        { "country": "UZ", "title": "Ташкент", "lon": 69.2401, "lat": 41.2995 },
+        { "country": "MD", "title": "Кишинів", "lon": 28.8638, "lat": 47.0105 },
+        { "country": "AE", "title": "Абу-Дабі", "lon": 54.3773, "lat": 24.4539 },
+        { "country": "PL", "title": "Варшава", "lon": 21.0122, "lat": 52.2297 },
+        { "country": "GB", "title": "Лондон", "lon": -0.1276, "lat": 51.5072 },
+        { "country": "CH", "title": "Берн", "lon": 7.4474, "lat": 46.948 },
+        { "country": "NL", "title": "Амстердам", "lon": 4.9041, "lat": 52.3676 },
+        { "country": "GR", "title": "Афіни", "lon": 23.7275, "lat": 37.9838 },
+        { "country": "IT", "title": "Рим", "lon": 12.4964, "lat": 41.9028 },
+        { "country": "LV", "title": "Рига", "lon": 24.1052, "lat": 56.9496 }
+      ]
+    </script>
+  </div>
+</section>

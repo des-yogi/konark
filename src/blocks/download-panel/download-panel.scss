@@ -1,0 +1,207 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// File download panel: a cover (file type + optional year) and a body with text, meta and a button.
+// Vertical up to md, horizontal from md. The whole panel is clickable:
+// the link inside the button is stretched over it with ::after.
+.download-panel {
+  $block-name: &; // #{$block-name}__element
+
+  --cover-padding: #{$space-20};
+  --card-width: 120px;
+  --card-height: 161px;
+  --card-icon-top: 48px; // standard card from md: the icon keeps its place with or without a year
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-24;
+  min-inline-size: 0;
+  padding: $space-16 $space-16 $space-24;
+  border-radius: $radius-32;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-m;
+  transition: $button-transition;
+
+  @include button-reduced-motion;
+
+  @include media-up('md') {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: $space-16 $space-20 $space-20 $space-16;
+  }
+
+  // Whole-panel states
+  @include button-hover {
+    background-color: var(--bg-overlay-medium);
+  }
+
+  &:has(#{$block-name}__button:focus-visible) {
+    box-shadow:
+      $shadow-m,
+      inset 0 0 0 1px var(--btn-secondary-focus-ring);
+  }
+
+  &--sm {
+    --cover-padding: #{$space-12};
+    --card-width: 96px;
+    --card-height: 127px;
+  }
+
+  &__cover {
+    display: flex;
+    flex: none;
+    align-self: center;
+    padding: var(--cover-padding);
+    border-radius: $radius-28;
+    background-color: var(--bg-secondary);
+
+    @include media-up('md') {
+      align-self: flex-start;
+    }
+
+    // The card stays white and dark-on-white in both themes
+    &--accent {
+      background-color: var(--tag-blue-light);
+
+      #{$block-name}__card {
+        color: var(--text-static-black);
+        background-color: var(--bg-static-white);
+      }
+
+      #{$block-name}__icon {
+        color: var(--palette-main-blue-60);
+      }
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-4;
+    inline-size: var(--card-width);
+    block-size: var(--card-height);
+    border-radius: $radius-16;
+    color: var(--text-primary);
+    background-color: var(--bg-cover-inner);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      gap: $space-12;
+      justify-content: flex-start;
+      padding-block-start: var(--card-icon-top);
+    }
+  }
+
+  // The small card has no year: the icon is centered on both axes
+  &--sm &__card {
+    @include media-up('md') {
+      justify-content: center;
+      padding-block-start: 0;
+    }
+  }
+
+  &__icon {
+    flex: none;
+    inline-size: 42px;
+    block-size: 42px;
+    color: var(--btn-secondary-icon-bg); // blue #0C419D on light, white on dark
+    fill: currentcolor;
+  }
+
+  &__year {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: 1.5;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-self: stretch;
+    gap: $space-20;
+    min-inline-size: 0;
+
+    @include media-up('md') {
+      gap: $space-12;
+      padding-block-start: $space-12;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  &__title,
+  &__text {
+    margin: 0;
+  }
+
+  &__title {
+    color: var(--text-primary);
+  }
+
+  &__text {
+    color: var(--text-secondary);
+  }
+
+  // Pressed to the bottom; the button stays on the right even without meta
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    margin-block-start: auto;
+
+    @include media-up('md') {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex: none;
+    gap: $space-8;
+    margin: 0;
+    color: var(--text-secondary);
+    white-space: nowrap;
+
+    @include media-up('md') {
+      margin-inline-end: auto;
+    }
+  }
+
+  &__meta-item + &__meta-item::before {
+    content: '|';
+    margin-inline-end: $space-8;
+  }
+
+  &__button.btn-secondary {
+    position: static; // the stretched ::after is positioned against the panel
+    justify-content: space-between;
+    inline-size: 100%;
+
+    @include media-up('md') {
+      justify-content: center;
+      inline-size: auto;
+    }
+
+    &:focus-visible {
+      outline: 0; // the ring is drawn around the whole panel
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: $radius-32;
+    }
+  }
+}

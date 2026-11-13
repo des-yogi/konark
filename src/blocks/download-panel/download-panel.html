@@ -1,0 +1,44 @@
+<!--DEV
+@@include('blocks/download-panel/download-panel.html', {
+  "small": "download-panel--sm",
+  "accent": "download-panel__cover--accent",
+  "title": "З положенням про комерційну (збутову) політику ТОВ «конарк інтелмед»",
+  "text": "Перший звіт про діяльність лабораторії від дня заснування: дослідницька програма, публікації, заходи, фінанси та стратегічні партнерства.",
+  "meta": "<span class='download-panel__meta-item'>100 стор</span><span class='download-panel__meta-item'>300 Мб</span>",
+  "year": "2025"
+})
+
+Download panel (standard). The whole panel is clickable: the link inside the button is stretched over it.
+Variants (classes only, markup stays the same):
+- small:  add `download-panel--sm` to the root; the year is usually omitted there
+- accent: add `download-panel__cover--accent` to the cover (blue cover for the latest/most important file)
+Optional: `download-panel__year`, `download-panel__meta`.
+-->
+
+<article class="download-panel @@small">
+  <!-- <div class="download-panel__inner"> -->
+    <div class="download-panel__cover @@accent">
+      <div class="download-panel__card">
+        <svg class="download-panel__icon" width="42" height="42" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#file-pdf"></use></svg>
+        <span class="download-panel__year">@@year</span>
+      </div>
+    </div>
+    <div class="download-panel__body">
+      <div class="download-panel__content">
+        <h3 class="download-panel__title subheading">@@title</h3>
+        <p class="download-panel__text">@@text</p>
+      </div>
+      <div class="download-panel__footer">
+        <p class="download-panel__meta small">
+          @@meta
+        </p>
+        <a class="btn-secondary download-panel__button" href="#" download>
+          <span class="text-roll"><span class="text-roll__line">Завантажити файл</span><span class="text-roll__line" aria-hidden="true">Завантажити файл</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#download"></use></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  <!-- </div> -->
+</article>
