@@ -37,10 +37,14 @@
     background-color: var(--bg-overlay-medium);
   }
 
+  // &:has(#{$block-name}__button:focus-visible) {
+  //   box-shadow:
+  //     $shadow-m,
+  //     inset 0 0 0 1px var(--btn-secondary-focus-ring);
+  // }
   &:has(#{$block-name}__button:focus-visible) {
-    box-shadow:
-      $shadow-m,
-      inset 0 0 0 1px var(--btn-secondary-focus-ring);
+    outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+    outline-offset: $focus-ring-offset;
   }
 
   &--sm {
