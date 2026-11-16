@@ -1,0 +1,103 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// CoreUI Tooltip: the trigger (any element with data-coreui-toggle="tooltip") and the bubble that CoreUI builds itself.
+// The bubble markup is fixed by the library: .tooltip > .tooltip-arrow + .tooltip-inner; the side is in data-popper-placement,
+// .fade/.show come from page.scss. The bubble is appended to <body>, so it takes the page theme tokens.
+// The distance arrow → trigger is the Popper default offset (6px), nothing is added here.
+
+$tooltip-max-width: 263px;
+$tooltip-arrow-width: 16px;
+$tooltip-arrow-height: 12px;
+
+// Trigger: accent text with a dashed underline, the line turns solid on hover
+[data-coreui-toggle='tooltip'] {
+  border-radius: $radius-8;
+  color: var(--text-accent);
+  text-decoration: underline dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+
+  &:visited {
+    color: var(--text-accent);
+  }
+
+  @include button-hover {
+    text-decoration-style: solid;
+  }
+
+  @include button-focus(var(--btn-secondary-focus-ring), 2px);
+}
+
+// Bubble. The wrapper keeps free space for the arrow on the trigger side: Popper measures it.
+.tooltip {
+  --cui-tooltip-opacity: 1;
+  position: absolute;
+  z-index: 1080; // above the header and the offcanvas panels
+
+  & .tooltip-arrow {
+    position: absolute;
+    background-color: var(--btn-primary-bg);
+
+    &::before {
+      display: none;
+    }
+  }
+
+  // Popper placements are physical, so left/right are not logical properties
+  &[data-popper-placement^='top'] {
+    padding-block-end: $tooltip-arrow-height;
+
+    & .tooltip-arrow {
+      bottom: 0;
+      width: $tooltip-arrow-width;
+      height: $tooltip-arrow-height;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+  }
+
+  &[data-popper-placement^='bottom'] {
+    padding-block-start: $tooltip-arrow-height;
+
+    & .tooltip-arrow {
+      top: 0;
+      width: $tooltip-arrow-width;
+      height: $tooltip-arrow-height;
+      clip-path: polygon(50% 0, 0 100%, 100% 100%);
+    }
+  }
+
+  &[data-popper-placement^='left'] {
+    padding-right: $tooltip-arrow-height;
+
+    & .tooltip-arrow {
+      right: 0;
+      width: $tooltip-arrow-height;
+      height: $tooltip-arrow-width;
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+    }
+  }
+
+  &[data-popper-placement^='right'] {
+    padding-left: $tooltip-arrow-height;
+
+    & .tooltip-arrow {
+      left: 0;
+      width: $tooltip-arrow-height;
+      height: $tooltip-arrow-width;
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    }
+  }
+}
+
+.tooltip-inner {
+  max-width: min(#{$tooltip-max-width}, calc(100vw - #{$space-24}));
+  padding: $space-8 $space-12;
+  border-radius: $radius-12;
+  font-family: $font-family;
+  line-height: 1.35;
+  text-align: inherit;
+  text-wrap: pretty;
+  color: var(--text-inverse);
+  background-color: var(--btn-primary-bg);
+}

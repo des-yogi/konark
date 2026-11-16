@@ -1,0 +1,49 @@
+<!--DEV
+@@include('blocks/report-problem/report-problem.html', {
+  "gradient": "dark-light-gr"
+})
+
+Report-problem section: a glass card with the intro (heading + text) and the list of report-card blocks.
+The section is the page container; the background/gradient is a separate class (@@gradient).
+-->
+
+<section class="container  report-problem  @@gradient">
+  <div class="report-problem__card">
+    <div class="report-problem__head">
+      <h2 class="report-problem__title  h4">Як передати інформацію щодо небажаних реакцій</h2>
+      <p class="report-problem__text">Якщо у Вас є інформація щодо небажаних реакцій, відсутності ефективності або будь-яких інших проблем з безпеки, зумовлених застосуванням лікарських засобів, за якими проводить фармаконагляд компанія «КОНАРК ІНТЕЛМЕД», Ви можете повідомити нам про це будь-яким зручним для Вас способом з перелічених</p>
+    </div>
+    <div class="report-problem__list">
+      @@include('../../blocks/report-card/report-card.html', {
+        "mod": "",
+        "title": "Заповнити форму повідомлення",
+        "text": "Швидкий і зручний спосіб відправлення інформації",
+        "formUrl1": "/pharmacovigilance/form-patients/",
+        "formUrl2": "/pharmacovigilance/form-specialists/",
+        "email": "",
+        "phone1": "",
+        "phone2": ""
+      })
+      @@include('../../blocks/report-card/report-card.html', {
+        "mod": "",
+        "title": "Надіслати повідомлення на e-mail:",
+        "text": "Відповідаємо оперативно",
+        "formUrl1": "",
+        "formUrl2": "",
+        "email": "pharmacovigilance@konark.com.ua",
+        "phone1": "",
+        "phone2": ""
+      })
+      @@include('../../blocks/report-card/report-card.html', {
+        "mod": "report-card--pair",
+        "title": "Зателефонувати:",
+        "text": "Завжди на зв’язку по будь-яким питанням",
+        "formUrl1": "",
+        "formUrl2": "",
+        "email": "",
+        "phone1": "+38 044 502 63 91",
+        "phone2": "+38 050 327 39 25"
+      })
+    </div>
+  </div>
+</section>

@@ -88,6 +88,18 @@
 @use '../blocks/contact-us/contact-us';
 @use '../blocks/documents/documents';
 @use '../blocks/download-panel/download-panel';
+@use '../blocks/report-problem/report-problem';
+@use '../blocks/report-card/report-card';
+@use '../blocks/applicants/applicants';
+@use '../blocks/applicant-card/applicant-card';
+@use '../blocks/adverse-reactions/adverse-reactions';
+@use '../blocks/tooltip/tooltip';
+@use '../blocks/info-accordion/info-accordion';
+@use '../blocks/applicant-modal/applicant-modal';
+@use '../blocks/patient-form/patient-form';
+@use '../blocks/field-phone/field-phone';
+@use '../blocks/field-select/field-select';
+@use '../blocks/doctor-form/doctor-form';
 
 // Подключения из addCssAfter:
 @use './print' as *;

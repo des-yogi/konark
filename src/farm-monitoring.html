@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ФармаконаглядКонарк</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "Фармаконагляд <strong>Конарк</strong>",
+          "text": "<p class='lead'>Наша основна мета – забезпечення якісними ефективними лікарськими засобами та турбота про безпеку пацієнтів!</p><p>Застосування лікарських засобів передбачає терапевтичну дію відповідно до відомих фармакологічних властивостей компонентів, що входять до їх складу. Але при цьому можуть виникати <span tabindex='0' data-coreui-toggle='tooltip' title='Уточнюючий текст Tooltip - підказка'>небажані реакції</span>, зумовлені особливостями відповіді організму людини або властивостями компонентів.</p><p><strong>Постійний нагляд протягом усього життєвого циклу лікарського засобу і своєчасне виявлення небажаних реакцій</strong> має ключове значення для проведення оцінки співвідношення користь/ризик та підтримки балансу, при якому користь від застосування лікарського засобу перевищує можливі ризики.</p>"
+        })
+
+        @@include('blocks/report-problem/report-problem.html', {
+          "gradient": ""
+        })
+
+        @@include('blocks/applicants/applicants.html', {
+          "gradient": ""
+        })
+
+        @@include('blocks/adverse-reactions/adverse-reactions.html', {
+          "gradient": ""
+        })
+
+        <div class="container  info-media">
+          <article class="media-card  media-card--media-end">
+            <div class="media-card__media">
+              <picture class="media-card__picture">
+                <source srcset="img/media-card-img-1.webp" type="image/webp">
+                <img class="media-card__img" src="img/media-card-img-1.jpg" width="657" height="492" alt="" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="media-card__body">
+              <p class="media-card__number  subheading" aria-hidden="true"></p>
+              <div class="media-card__content">
+                <h3 class="media-card__title  h4">Інформація з безпеки застосування лікарських засобів</h3>
+                <div class="media-card__text">
+                  <p>ТОВ «Конарк Інтелмед» висловлює свою повагу потенційним партнерам та повідомляє наступне. Компанія послідовно дотримується високих стандартів якості, безпеки та відповідального ведення бізнесу. </p>
+                </div>
+                <a href="#" class="btn-secondary  media-card__btn-link">
+                  <span class="text-roll"><span class="text-roll__line">Переглянути</span><span class="text-roll__line" aria-hidden="true">Переглянути</span></span>
+                  <span class="btn-secondary__icon">
+                    <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

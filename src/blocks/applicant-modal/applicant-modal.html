@@ -1,0 +1,73 @@
+<!--DEV
+@@include('../../blocks/applicant-modal/applicant-modal.html', {
+  "modalId": "applicant-modal-1",
+  "title": "ТОВ «Конарк Інтелмед»"
+})
+
+Applicant modal (CoreUI Modal) with the table of the applicant's products. One modal per applicant card:
+the card button points to it (data-coreui-toggle="modal" data-coreui-target="#modalId").
+Put the modals AFTER the list of cards (see applicants), not inside <li>.
+modalId: unique id of the modal on the page (also builds the id of the title).
+title: the applicant name (the title of the window).
+
+Below lg the table turns into a stack of records (the labels come from data-label, the header row is visually hidden),
+from lg it is a real table. Only the content under the title scrolls (OverlayScrollbars, js/applicant-modal.js).
+The rows are hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop).
+The texts are placeholders from the design.
+-->
+
+<div class="applicant-modal  modal  fade  js-applicant-modal" id="@@modalId" tabindex="-1" aria-labelledby="@@modalId-title" aria-hidden="true">
+  <div class="applicant-modal__dialog  modal-dialog">
+    <div class="applicant-modal__content  modal-content">
+      <button class="applicant-modal__close" type="button" aria-label="Закрити" data-coreui-dismiss="modal">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#close"></use></svg>
+      </button>
+      <h2 class="applicant-modal__title  h4" id="@@modalId-title">@@title</h2>
+      <div class="applicant-modal__scroll  js-applicant-modal-scroll" data-overlayscrollbars-initialize>
+        <div class="applicant-modal__card">
+          <table class="applicant-modal__table">
+            <thead class="applicant-modal__head">
+              <tr>
+                <th scope="col">Торгова назва ЛЗ / Trade name</th>
+                <th scope="col">МНН / INN</th>
+                <th scope="col">Форма випуску / Pharmaceutical form</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ВЕЛПАНАТ/VELPANAT</th>
+                <td data-label="МНН / INN">sofosbuvir / velpatasvir</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки, вкриті плівковою оболонкою, по 400 мг/100 мг, по 28 таблеток, вкритих плівковою оболонкою, у флаконі з поліетилену високої щільності (HDPE) із кришкою, оснащеною захистом від дітей; по 1 флакону в картонній коробці</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ГЕПЦИНАТ</th>
+                <td data-label="МНН / INN">sofosbuvir / velpatasvir</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки, вкриті плівковою оболонкою по 400 мг/100 мг; по 28 таблеток, вкритих плівковою оболонкою, у флаконі; по 1 флакону в картонній коробці</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ЕВЕРОНАТ</th>
+                <td data-label="МНН / INN">sofosbuvir</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки, вкриті плівковою оболонкою, по 400 мг по 28 таблеток у флаконі, по 1 флакону в картонній коробці</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ЕКСПРЕЗА®</th>
+                <td data-label="МНН / INN">everolimus</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки по 5 мг; по 7 таблеток у блістері; по 4 блістери в картонній коробці</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ВЕЛПАНАТ/VELPANAT</th>
+                <td data-label="МНН / INN">sofosbuvir / velpatasvir</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки, вкриті плівковою оболонкою, по 400 мг/100 мг, по 28 таблеток, вкритих плівковою оболонкою, у флаконі з поліетилену високої щільності (HDPE) із кришкою, оснащеною захистом від дітей; по 1 флакону в картонній коробці</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Торгова назва ЛЗ / Trade name">ГЕПЦИНАТ</th>
+                <td data-label="МНН / INN">sofosbuvir / velpatasvir</td>
+                <td data-label="Форма випуску / Pharmaceutical form">таблетки, вкриті плівковою оболонкою по 400 мг/100 мг; по 28 таблеток, вкритих плівковою оболонкою, у флаконі; по 1 флакону в картонній коробці</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<!--DEV
+@@include('blocks/report-card/report-card.html', {
+  "mod": "",
+  "title": "Надіслати повідомлення на e-mail:",
+  "text": "Відповідаємо оперативно",
+  "formUrl1": "",
+  "formUrl2": "",
+  "email": "pharmacovigilance@konark.com.ua",
+  "phone1": "",
+  "phone2": ""
+})
+
+Report card: icon + title + text + actions. The actions depend on the filled params (empty ones are skipped):
+  formUrl1 / formUrl2 — two links to the report forms (patients / medical specialists);
+  email               — a button that copies the e-mail;
+  phone1, phone2      — two buttons that copy the phone numbers (add "report-card--pair" to "mod").
+The icon: img/antihistamine.svg (the same for all cards).
+-->
+
+<div class="report-card  @@mod">
+  <img class="report-card__icon" src="img/antihistamine.svg" width="56" height="56" alt="" loading="lazy" decoding="async">
+  <div class="report-card__body">
+    <div class="report-card__info">
+      <h3 class="report-card__title  subheading">@@title</h3>
+      <p class="report-card__text">@@text</p>
+    </div>
+    <div class="report-card__actions">
+      @@if(formUrl1)
+      <div class="report-card__action">
+        <p class="report-card__caption  caption">для паціентів</p>
+        <a class="btn-secondary  report-card__btn" href="@@formUrl1">
+          <span class="text-roll  report-card__roll  report-card__roll--short"><span class="text-roll__line">Заповнити</span><span class="text-roll__line" aria-hidden="true">Заповнити</span></span>
+          <span class="text-roll  report-card__roll  report-card__roll--full"><span class="text-roll__line">Форма для паціентів</span><span class="text-roll__line" aria-hidden="true">Форма для паціентів</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+          </span>
+        </a>
+      </div>
+      <div class="report-card__action">
+        <p class="report-card__caption  caption">для спеціалістів медичної сфери</p>
+        <a class="btn-secondary  report-card__btn" href="@@formUrl2">
+          <span class="text-roll  report-card__roll  report-card__roll--short"><span class="text-roll__line">Заповнити</span><span class="text-roll__line" aria-hidden="true">Заповнити</span></span>
+          <span class="text-roll  report-card__roll  report-card__roll--full"><span class="text-roll__line">Форма для спеціалістів медичної сфери</span><span class="text-roll__line" aria-hidden="true">Форма для спеціалістів медичної сфери</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+          </span>
+        </a>
+      </div>
+      @@endif
+      @@if(email)
+      <div class="report-card__action">
+        <button class="btn-secondary  report-card__btn  report-card__btn--copy  js-copy" type="button" data-copy="@@email" data-copied="Скопійовано" aria-label="Скопіювати: @@email">
+          <span class="text-roll  report-card__roll"><span class="text-roll__line">@@email</span><span class="text-roll__line" aria-hidden="true">@@email</span></span>
+          <span class="btn-secondary__icon  report-card__chip">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#copy"></use></svg>
+          </span>
+        </button>
+        <span class="report-card__status" role="status"></span>
+      </div>
+      @@endif
+      @@if(phone1)
+      <div class="report-card__action">
+        <button class="btn-secondary  report-card__btn  report-card__btn--copy  js-copy" type="button" data-copy="@@phone1" data-copied="Скопійовано" aria-label="Скопіювати: @@phone1">
+          <span class="text-roll  report-card__roll"><span class="text-roll__line">@@phone1</span><span class="text-roll__line" aria-hidden="true">@@phone1</span></span>
+          <span class="btn-secondary__icon  report-card__chip">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#copy"></use></svg>
+          </span>
+        </button>
+        <span class="report-card__status" role="status"></span>
+      </div>
+      <div class="report-card__action">
+        <button class="btn-secondary  report-card__btn  report-card__btn--copy  js-copy" type="button" data-copy="@@phone2" data-copied="Скопійовано" aria-label="Скопіювати: @@phone2">
+          <span class="text-roll  report-card__roll"><span class="text-roll__line">@@phone2</span><span class="text-roll__line" aria-hidden="true">@@phone2</span></span>
+          <span class="btn-secondary__icon  report-card__chip">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#copy"></use></svg>
+          </span>
+        </button>
+        <span class="report-card__status" role="status"></span>
+      </div>
+      @@endif
+    </div>
+  </div>
+</div>

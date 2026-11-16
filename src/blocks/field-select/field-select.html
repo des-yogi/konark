@@ -1,15 +1,23 @@
 <!--DEV
+Select: a mix with field-text, so the name, the box, the states (hover / focus / error / disabled) and the help text
+come from field-text; field-select adds the arrow (CSS, no markup) and the dropdown list.
+Where the browser supports appearance: base-select (Chrome / Edge 135+), the list is styled as in the design;
+elsewhere the closed field looks the same and the list is the system one.
+
 @@include('blocks/field-select/field-select.html')
+
+The empty option is the placeholder: value="" + selected disabled hidden (it is not shown in the list,
+the field shows it in the placeholder color). With the required attribute an empty choice does not pass the validation.
+Error: the same as in field-text (field-text--error on the label, aria-invalid on the select, the message in __help-text).
 -->
 
-<div class="field-select">
-  <span class="field-select__select-wrap">
-    <select class="field-select__select" name="select-name">
-      <option value="value1">Значение 1</option>
-      <option value="value2">Значение 2</option>
-      <option value="value3">Значение 3</option>
-      <option value="value4">Значение 4</option>
+<label class="field-text  field-select">
+  <span class="field-text__name">Стать</span>
+  <span class="field-text__input-wrap  field-select__wrap">
+    <select class="field-text__input  field-select__select" name="">
+      <option value="" selected disabled hidden>Оберіть стать</option>
+      <option value="male">Чоловіча</option>
+      <option value="female">Жіноча</option>
     </select>
-    <!-- <small class="field-select__help-text error"></small> -->
   </span>
-</div>
+</label>

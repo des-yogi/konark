@@ -1,0 +1,106 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+// Info accordion (CoreUI Collapse): the items open and close independently, no numbers, the title is .h5.
+// The mechanics repeat the faq block (the block is standalone on purpose, it does not depend on faq).
+// The .collapse / .collapsing rules come from CoreUI, nothing is duplicated here.
+.info-accordion {
+  $block-name: &; // #{$block-name}__element
+
+  --info-accordion-gap: 24px; // between the title and the icon
+  --info-accordion-padding-inline: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+
+  &__item {
+    border-bottom: 1px solid var(--divider-subtle);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__header {
+    margin: 0;
+    font: inherit;
+  }
+
+  &__trigger {
+    display: flex;
+    gap: var(--info-accordion-gap);
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: $space-16 var(--info-accordion-padding-inline) $space-20;
+    border: 0;
+    border-radius: $radius-14;
+    font: inherit;
+    text-align: start;
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    // The arrow turns ↗ → → ↘ (hover, open); the rotation is one custom property so the states do not fight
+    --info-accordion-icon-rotate: 0deg;
+
+    &[aria-expanded='false'] {
+      @include button-hover {
+        --info-accordion-icon-rotate: 45deg;
+      }
+    }
+
+    &[aria-expanded='true'] {
+      --info-accordion-icon-rotate: 90deg;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), 2px);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+
+  &__icon {
+    flex: none;
+    rotate: var(--info-accordion-icon-rotate);
+    transition: rotate $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  // The panel is only a collapsing box (no padding, otherwise the height animation jumps); the spacing is inside
+  &__content {
+    padding: 0 var(--info-accordion-padding-inline) $space-20;
+    color: var(--text-secondary);
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    > * + * {
+      margin-top: $space-16;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: $space-24;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    li + li {
+      margin-top: $space-16;
+    }
+  }
+}

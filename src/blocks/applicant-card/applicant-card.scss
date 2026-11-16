@@ -1,0 +1,80 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Applicant card: title, a divider and a footer with the counter and the eye button.
+// The whole card is clickable: the ::after of the button covers the card (the button itself stays position: static).
+// The states are the same as in drug-type-card.
+.applicant-card {
+  $block-name: &; // #{$block-name}__element
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+  padding: $space-24;
+  border-radius: $radius-24;
+  color: var(--text-primary);
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+  transition: background-color $transition-time ease, box-shadow $transition-time ease;
+
+  @include media-up('md') {
+    box-shadow: $shadow-m;
+  }
+
+  @include button-hover {
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-m-hover;
+  }
+
+  @include button-active {
+    background-color: var(--bg-overlay-medium);
+    box-shadow: none;
+  }
+
+  // The focus ring is drawn around the card, not around the small button
+  &:has(#{$block-name}__button:focus-visible) {
+    outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+    outline-offset: $focus-ring-offset-lg;
+    background-color: var(--bg-overlay-medium);
+  }
+
+  @include button-reduced-motion;
+
+  // Typography comes from the global .subheading. Grows, so the footer stays at the bottom of a stretched card
+  &__title {
+    flex: 1 1 auto;
+    margin: 0;
+    padding-bottom: $space-12;
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $space-12;
+    border-top: 1px solid var(--divider-subtle);
+  }
+
+  &__count {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__button.btn-icon-tertiary {
+    color: var(--text-accent);
+
+    &:focus-visible {
+      outline: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: $radius-24;
+    }
+  }
+}

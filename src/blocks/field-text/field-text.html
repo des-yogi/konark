@@ -24,6 +24,12 @@ put the message into field-text__help-text (an empty help text is hidden):
 </label>
 
 Textarea: the same markup, <textarea class="field-text__input" rows="4"></textarea>
+
+Date: the same markup, <input class="field-text__input" type="date" name="">
+(the empty value shows the browser mask in the language of the page, e.g. дд.мм.рррр).
+
+Required field: add the required attribute to the input and the asterisk after the name:
+<span class="field-text__name">Текст<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
 -->
 
 <label class="field-text">

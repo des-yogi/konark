@@ -1,0 +1,274 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Applicant modal (CoreUI Modal): the title and the close button are fixed, only the table area under the title scrolls
+// (OverlayScrollbars, theme os-theme-mob-nav from mob-nav.scss).
+// Below md the window is the full viewport; from md it is centered with gaps and capped by the content width at xxl.
+// Below lg the table is a stack of records (labels from data-label), from lg a real table.
+// The backdrop is the global .modal-backdrop (see search-modal.scss).
+.applicant-modal {
+  $block-name: &; // #{$block-name}__element
+
+  $max-width: calc(#{$container-xxl} - 2 * #{$space-48}); // the content width at xxl (the container minus its 48px paddings)
+  $head-line: #e9ecef; // the line under the table header: taken from the design pixels (no token), the same in both themes
+  $row-padding: $space-16;
+  $cell-padding: 24px;
+  $bar: 4px; // the scrollbar thickness (os-theme-mob-nav)
+
+  // --gap: the distance from the viewport to the window; --start / --end: the scroll area insets (--end is where the scrollbar sits)
+  // --card-gap: the space between the card and the scrollbar
+  --gap: 0px;
+  --start: #{$space-16};
+  --end: 6px;
+  --card-gap: #{$space-4};
+  --head-top: 80px; // the title top inside the window
+  --title-end: #{$space-16}; // keeps a long name away from the close button (on mobile the title is under the button)
+  --head-gap: #{$space-24}; // the title - the card
+  --bottom: #{$space-16};
+
+  @include media-up('md') {
+    --gap: #{$space-40};
+    --start: #{$space-40};
+    --end: #{$space-20};
+    --card-gap: #{$space-12};
+    --head-top: 72px;
+    --title-end: 80px;
+    --bottom: #{$space-40};
+  }
+
+  @include media-up('lg') {
+    --gap: #{$space-48};
+    --start: 60px;
+    --end: 35px;
+    --card-gap: 21px;
+    --head-top: 68px;
+    --head-gap: #{$space-32};
+  }
+
+  // The doubled class (.modal-dialog / .modal-content) beats the CoreUI rules regardless of the order of the stylesheets:
+  // CoreUI sets max-width: 500px on .modal-dialog from 576px and its own radius / background on .modal-content
+  &__dialog.modal-dialog {
+    display: flex;
+    align-items: center;
+    max-width: calc(#{$max-width} + 2 * var(--gap));
+    min-height: 100%;
+    margin: 0 auto;
+    padding: var(--gap);
+  }
+
+  &__content.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100dvh; // below md: the full viewport
+    padding-block-start: var(--head-top);
+    border: 0;
+    border-radius: 0;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+
+    @include media-up('md') {
+      height: auto;
+      max-height: calc(100dvh - 2 * var(--gap));
+      border-radius: $radius-40;
+      box-shadow: $shadow-m; // CoreUI emits no shadow while $enable-shadows is off
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-48;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    inset-block-start: $space-16;
+    inset-inline-end: $space-16;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-16;
+    color: var(--nav-text);
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-s;
+    transition: background-color $transition-time ease, box-shadow $transition-time ease;
+    cursor: pointer;
+
+    @include media-up('md') {
+      inset-block-start: $space-24;
+      inset-inline-end: $space-24;
+    }
+
+    @include media-up('lg') {
+      inset-block-start: $space-32;
+      inset-inline-end: $space-32;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--nav-bg-hover);
+        box-shadow: $shadow-s-hover;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__title {
+    flex: none;
+    margin: 0;
+    padding-inline: var(--start) var(--title-end);
+  }
+
+  // The scroll host (OverlayScrollbars): the scrollbar sits at its right edge, the card leaves room for it
+  &__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: var(--head-gap) var(--end) var(--bottom) var(--start);
+  }
+
+  &__card {
+    margin-inline-end: calc(#{$bar} + var(--card-gap));
+    overflow: hidden;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-subtle);
+  }
+
+  // The global table styles (table.scss: outer border, margin, cell borders, slashed zero) are reset here.
+  // The :first-child / :last-child / :not() variants are listed on purpose: they raise the specificity over the global rules.
+  &__table {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-variant-numeric: normal;
+    color: var(--text-secondary);
+
+    th,
+    td,
+    th:first-child,
+    td:first-child,
+    th:last-child,
+    td:last-child,
+    th:not(:first-child),
+    td:not(:first-child) {
+      border: 0;
+      text-align: start;
+    }
+
+    th,
+    td {
+      padding: $row-padding $space-8;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    th:first-child,
+    td:first-child {
+      padding-inline-start: $cell-padding;
+    }
+
+    th:last-child,
+    td:last-child {
+      padding-inline-end: $cell-padding;
+    }
+
+    // The column widths follow the design (320 / 320 / the rest, 16px between the texts); only the table layout needs them
+    @include media-up('lg') {
+      th:nth-child(1) {
+        width: 28%;
+      }
+
+      th:nth-child(2) {
+        width: 26.8%;
+      }
+    }
+
+    tbody tr + tr {
+      border-block-start: 1px solid var(--divider-subtle);
+    }
+
+    tbody th {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  &__head {
+    background-color: var(--bg-overlay-medium);
+
+    tr {
+      border-block-end: 1px solid $head-line;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  // Below lg: a stack of records. The header row is only for assistive technologies, every cell shows its own label.
+  @include media-down('lg') {
+    &__head {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    &__table {
+      &,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      tbody tr {
+        display: flex;
+        flex-direction: column;
+        gap: $space-16;
+        padding: $space-32 $cell-padding;
+      }
+
+      th,
+      td,
+      th:first-child,
+      td:first-child,
+      th:last-child,
+      td:last-child {
+        padding: 0;
+      }
+
+      th::before,
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      // In the stack the name is a plain value like the others (the label is the semibold line)
+      tbody th {
+        font-weight: 400;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}

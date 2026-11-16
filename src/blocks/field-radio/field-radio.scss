@@ -1,114 +1,166 @@
 @use '../../scss/variables.scss' as *;
 @use '../../scss/mixins' as *;
 
+// Radio button (Figma: Radio button). The states follow field-checkbox: the same 32px area, 20px circle,
+// hover, checked, disabled and focus; the checked circle is filled and has a white dot.
+// The structure of the block is the old one: __title, __group, __input-wrap, __name, __help-text.
 .field-radio {
   $block-name: &; // #{$block-name}__element
+  $box-area: 32px;
+  $box-size: 20px;
+  $box-border: 2px;
+  $dot-size: 8px;
+
+  --checked-hover: color-mix(in oklch, var(--btn-primary-bg-hover), var(--bg-primary) 12%);
 
   display: block;
-  margin-bottom: 16px;
 
+  // Optional common title of the group
   &__title {
     display: block;
-    margin-bottom: 16px;
-    line-height: $line-height;
-    font-weight: 500;
-    color: $title-color;
+    margin-block-end: $space-16;
+    font-size: 18px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  // The options one under another; inside __group they go in a row
+  &__input-wrap + &__input-wrap {
+    margin-block-start: $space-12;
   }
 
   &__group {
     display: flex;
     flex-wrap: wrap;
+    gap: $space-12 $space-24;
 
     #{$block-name}__input-wrap {
-      flex: 0 0 auto;
+      margin: 0;
     }
   }
 
-  &__input-wrap {
-    margin-right: 24px;
-    margin-bottom: 16px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
+  // The clickable area is the circle and the text, not the whole row
   &__name {
     position: relative;
-    display: inline-block;
-    padding-left: 32px;
-
-    // margin-right: 0.6em;
-    font-weight: 400;
-    line-height: $line-height;
+    display: inline-flex;
+    vertical-align: top;
+    max-inline-size: 100%;
+    gap: $space-8;
+    align-items: center;
+    min-height: $box-area;
+    padding-inline-end: $space-8;
+    border-radius: $radius-8;
     cursor: pointer;
 
-    &:hover {
-
-      #{$block-name}__name-text {
-        color: $link-color-hover;
+    @media (hover: hover) {
+      &:hover #{$block-name}__name-text::before {
+        border-color: var(--btn-primary-bg-hover);
+        background-color: var(--tag-bg-hover);
       }
+
+      &:hover #{$block-name}__input:checked:not(:disabled) ~ #{$block-name}__name-text::before {
+        border-color: var(--checked-hover);
+        background-color: var(--checked-hover);
+      }
+    }
+
+    &:has(:disabled) {
+      cursor: default;
+    }
+
+    &:has(:focus-visible) {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
     }
   }
 
   &__name-text {
-    color: $title-color;
+    position: relative;
+    padding-inline-start: $box-area + 10px; // box area + 10px gap (as in field-checkbox)
+    color: var(--input-text);
 
+    @at-root #{$block-name}__input:disabled ~ & {
+      color: var(--btn-secondary-label-disabled);
+    }
+
+    // Circle
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 22px;
-      height: 22px;
-      border: 1px solid $border-color;
+      inset-block-start: 50%;
+      inset-inline-start: ($box-area - $box-size) * 0.5;
+      box-sizing: border-box;
+      width: $box-size;
+      height: $box-size;
+      border: $box-border solid var(--btn-primary-bg-disabled);
       border-radius: 50%;
+      transform: translateY(-50%);
+      transition:
+        border-color $transition-time,
+        background-color $transition-time;
+
+      @at-root #{$block-name}__input:checked ~ & {
+        border-color: var(--btn-primary-bg-hover);
+        background-color: var(--btn-primary-bg-hover);
+      }
+
+      @at-root #{$block-name}__input:disabled ~ & {
+        border-color: var(--divider);
+        background-color: transparent;
+      }
     }
 
-    @at-root input:focus ~ &::before {
-      @include field-focus;
-    }
-
+    // Dot
     &::after {
       content: '';
       position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 12px;
-      height: 12px;
-      opacity: 0;
+      inset-block-start: 50%;
+      inset-inline-start: ($box-area - $dot-size) * 0.5;
+      width: $dot-size;
+      height: $dot-size;
       border-radius: 50%;
-      background-color: $border-color;
+      background-color: var(--btn-primary-label);
+      opacity: 0;
+      transform: translateY(-50%);
       transition: opacity $transition-time;
 
-      @at-root input:checked ~ & {
+      @at-root #{$block-name}__input:checked ~ & {
         opacity: 1;
+      }
+
+      @at-root #{$block-name}__input:disabled:checked ~ & {
+        background-color: var(--divider);
       }
     }
   }
 
+  // Visually hidden, stays focusable (the arrow keys move the choice inside the group)
   &__input {
     position: absolute;
-    top: 0.8em;
-    left: 0;
-    padding: 0;
+    width: 1px;
+    height: 1px;
     margin: 0;
-    transform: translateY(-50%);
-
-    &:focus,
-    &:active {
-      @include field-focus;
-    }
-
-    // сокрытие инпута в случае использования своей радиокнопки
+    padding: 0;
     opacity: 0;
+    pointer-events: none;
   }
 
+  // The help text is aligned with the option text
   &__help-text-wrap {
-    padding-left: 1.5em;
+    padding-inline-start: $box-area + 10px;
   }
 
   &__help-text {
-    @include field-help-text;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__name-text::before,
+    &__name-text::after {
+      transition: none;
+    }
   }
 }

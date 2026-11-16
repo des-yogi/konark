@@ -1,0 +1,276 @@
+<!--DEV
+@@include('blocks/patient-form/patient-form.html')
+
+The report form for a patient (the page /farm-monitoring/patient-form, file src/patient-form.html).
+The head (h1 + intro) and the form are in the middle 8 columns from lg; the fields go in 2 columns from md.
+The sections are <fieldset> with <legend> (the .subheading style); "Форма випуску" and "ПЛЗ був призначений лікарем"
+are nested fieldsets. The field markup is written by hand (field-text, field-select, field-checkbox, field-radio).
+
+JS (no own script): field-text.js (autosize of the textarea and the phone mask, class js-phone-mask),
+field-actions.js (the submit button is disabled until the checkbox name="agreement" is checked).
+STUBS: action, the link to the privacy policy. The names of the fields are for the CMS handler (FormIt).
+-->
+
+<div class="container  patient-form">
+  <div class="patient-form__head">
+    <h1 class="patient-form__title  h5">Повідомлення про побічну реакцію на лікарський засіб</h1>
+    <p class="patient-form__intro">Карта-повідомлення для надання пацієнтом та/або його представником, організаціями, які представляють інтереси пацієнтів, інформації про побічну реакцію та/або відсутність ефективності лікарського засобу при його медичному застосуванні</p>
+  </div>
+
+  <form class="patient-form__form" action="" method="post">
+    <fieldset class="patient-form__section">
+      <legend class="patient-form__legend  subheading">1. Інформація про пацієнта</legend>
+      <div class="patient-form__body">
+        <div class="patient-form__fields">
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Ініціали пацієнта<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="patient_initials" required>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Вік пацієнта<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="patient_age" inputmode="numeric" required>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Дата народження</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="date" name="patient_birthdate">
+            </span>
+          </label>
+          <label class="field-text  field-select  patient-form__field">
+            <span class="field-text__name">Стать</span>
+            <span class="field-text__input-wrap  field-select__wrap">
+              <select class="field-text__input  field-select__select" name="patient_gender">
+                <option value="" selected disabled hidden>Оберіть стать</option>
+                <option value="male">Чоловіча</option>
+                <option value="female">Жіноча</option>
+              </select>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Телефон</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input  js-phone-mask" type="tel" name="patient_phone" inputmode="tel" placeholder="+380 xx xxx xx xx" aria-describedby="patient-phone-error" data-msg-invalid="Введіть номер повністю: +380 XX XXX XX XX">
+              <span class="field-text__help-text" id="patient-phone-error"></span>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Адреса</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="patient_address" placeholder="Місто, адреса">
+            </span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="patient-form__section">
+      <legend class="patient-form__legend  subheading">2. Інформація про підозрюваний лікарський засіб (ПЛЗ)</legend>
+      <div class="patient-form__body">
+        <div class="patient-form__fields">
+          <label class="field-text  patient-form__field  patient-form__field--wide">
+            <span class="field-text__name">Торгова назва та дозування ПЛЗ<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="drug_name" required>
+            </span>
+          </label>
+        </div>
+
+        <fieldset class="patient-form__group">
+          <legend class="patient-form__group-legend">Форма випуску</legend>
+          <div class="patient-form__checks">
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="tablets">
+                <span class="field-checkbox__name-text">Таблетки</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="capsules">
+                <span class="field-checkbox__name-text">Капсули</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="oral_solution">
+                <span class="field-checkbox__name-text">Розчин для орального застосування</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="injection_solution">
+                <span class="field-checkbox__name-text">Розчин для ін’єкцій</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="infusion_solution">
+                <span class="field-checkbox__name-text">Розчин для інфузій</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="syrup">
+                <span class="field-checkbox__name-text">Сироп</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="ointment">
+                <span class="field-checkbox__name-text">Мазь</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="drops">
+                <span class="field-checkbox__name-text">Краплі</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="injection_powder">
+                <span class="field-checkbox__name-text">Порошок для ін’єкцій</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="oral_powder">
+                <span class="field-checkbox__name-text">Порошок для орального розчину</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="suppositories">
+                <span class="field-checkbox__name-text">Супозиторії</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="gel">
+                <span class="field-checkbox__name-text">Гель</span>
+              </label>
+            </div>
+            <div class="field-checkbox">
+              <label class="field-checkbox__name">
+                <input class="field-checkbox__input" type="checkbox" name="drug_forms[]" value="other">
+                <span class="field-checkbox__name-text">Інше</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="patient-form__fields">
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Номер серії</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="drug_batch">
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Виробник</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="drug_manufacturer">
+            </span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="patient-form__section">
+      <legend class="patient-form__legend  subheading">3. Інформація про призначення ПЛЗ</legend>
+      <div class="patient-form__body">
+        <fieldset class="patient-form__group  field-radio">
+          <legend class="patient-form__group-legend">ПЛЗ був призначений лікарем</legend>
+            <div class="field-radio__input-wrap">
+              <label class="field-radio__name">
+                <input class="field-radio__input" type="radio" name="drug_prescribed" value="yes">
+                <span class="field-radio__name-text">Так</span>
+              </label>
+            </div>
+            <div class="field-radio__input-wrap">
+              <label class="field-radio__name">
+                <input class="field-radio__input" type="radio" name="drug_prescribed" value="no">
+                <span class="field-radio__name-text">Ні</span>
+              </label>
+            </div>
+        </fieldset>
+      </div>
+    </fieldset>
+
+    <fieldset class="patient-form__section">
+      <legend class="patient-form__legend  subheading">4. Опис проявів небажаної реакції та/або зазначення відсутності ефективності лікарського засобу</legend>
+      <div class="patient-form__body">
+        <div class="patient-form__fields">
+          <label class="field-text  patient-form__field  patient-form__field--wide">
+            <span class="field-text__name">Опис<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <textarea class="field-text__input" name="reaction_description" rows="5" placeholder="Ваше повідомлення" required></textarea>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Дата початку небажаної реакції<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="date" name="reaction_start" required>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Дата закінчення небажаної реакції<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="date" name="reaction_end" required>
+            </span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="patient-form__section">
+      <legend class="patient-form__legend  subheading">5. Інформація про повідомника (особа, яка надсилає повідомлення)</legend>
+      <div class="patient-form__body">
+        <div class="patient-form__fields">
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">ПІБ повідомника<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="reporter_name" placeholder="Введіть ваше ПІБ" autocomplete="name" required>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Повідомлення надає<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="reporter_role" placeholder="Пацієнт, родич, представник тощо" required>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Тел<svg class="field-text__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input  js-phone-mask" type="tel" name="reporter_phone" inputmode="tel" placeholder="+380 xx xxx xx xx" aria-describedby="reporter-phone-error" data-msg-invalid="Введіть номер повністю: +380 XX XXX XX XX" autocomplete="tel" required>
+              <span class="field-text__help-text" id="reporter-phone-error"></span>
+            </span>
+          </label>
+          <label class="field-text  patient-form__field">
+            <span class="field-text__name">Адреса</span>
+            <span class="field-text__input-wrap">
+              <input class="field-text__input" type="text" name="reporter_address" placeholder="Місто, адреса" autocomplete="street-address">
+            </span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="patient-form__actions">
+      <div class="field-checkbox  patient-form__consent">
+        <label class="field-checkbox__name">
+          <input class="field-checkbox__input" type="checkbox" name="agreement" value="1" required checked>
+          <span class="field-checkbox__name-text">Я надаю згоду на обробку персональних даних та/або передачу їх третім особам для цілей, пов’язаних з її заповненням і погоджуюсь з <a class="patient-form__link" href="/privacy-policy/">Політикою конфіденційності</a></span>
+        </label>
+      </div>
+
+      <button class="btn  patient-form__submit" type="submit">
+        <span class="text-roll"><span class="text-roll__line">Відправити</span><span class="text-roll__line" aria-hidden="true">Відправити</span></span>
+      </button>
+    </div>
+  </form>
+</div>

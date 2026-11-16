@@ -43,8 +43,8 @@ import Tooltip from '@coreui/coreui/js/src/tooltip.js';
 // =============================================================================
 //  Enable Bootstrap tooltips
 // =============================================================================
-// const tooltipTriggerList = document.querySelectorAll('[data-coreui-toggle="tooltip"]')
-// const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = document.querySelectorAll('[data-coreui-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
 
 // =============================================================================
 //  Toasts are opt-in for performance reasons, so you must initialize them yourself.

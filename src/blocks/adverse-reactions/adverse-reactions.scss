@@ -1,0 +1,154 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+// Adverse reactions: the section is the grid (the capsules picture + the accordion). Transparent background (the gradient is a separate class).
+// Below lg: one column, the picture on top. From lg: the picture takes 6 columns (its width is capped at $media-max), the accordion the other 6.
+// The capsules are placed by their CENTERS in % of the picture area, so the composition scales with the area.
+// The parallax: JS only writes --x / --y (-1..1, the pointer position in the area) on .adverse-reactions__media,
+// every capsule moves and turns by its own --shift-x / --shift-y / --turn. The area itself stays still.
+.adverse-reactions {
+  $block-name: &; // #{$block-name}__element
+  $media-max: 555px; // the capsules area is a bit larger than the main picture (482px)
+  $body-offset: 180px; // the accordion starts lower than the top edge of the picture (desktop)
+
+  display: grid;
+  gap: $space-20;
+  padding-block: $space-48;
+  overflow-x: clip; // the capsules shift on pointer move and must not make a horizontal scroll on narrow screens
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  @include media-up('lg') {
+    @include grid-12;
+
+    align-items: start;
+  }
+
+  &__media {
+    position: relative;
+    justify-self: center;
+    inline-size: min(100%, 480px);
+    aspect-ratio: 1;
+
+    @include media-up('lg') {
+      grid-column: 1 / span 6;
+      justify-self: start;
+      inline-size: min(100%, #{$media-max});
+    }
+  }
+
+  &__capsule {
+    // Center of the capsule (% of the area), width (% of the area) and the parallax amplitude (px / deg)
+    --left: 50%;
+    --top: 50%;
+    --width: 20%;
+    --shift-x: 0px;
+    --shift-y: 0px;
+    --turn: 0deg;
+    --blur: 0px;
+    --opacity: 1;
+
+    position: absolute;
+    inset-block-start: var(--top);
+    inset-inline-start: var(--left);
+    inline-size: var(--width);
+    translate: calc(-50% + var(--x, 0) * var(--shift-x)) calc(-50% + var(--y, 0) * var(--shift-y));
+    rotate: calc(var(--x, 0) * var(--turn));
+    mix-blend-mode: luminosity;
+    transition:
+      translate 0.35s ease-out,
+      rotate 0.35s ease-out;
+
+    @include button-reduced-motion;
+
+    // Depth of field: the main capsule is sharp and opaque; the farther a small capsule is, the blurrier and more translucent it gets
+    &:not(#{$block-name}__capsule--main) {
+      opacity: var(--opacity);
+      filter: blur(var(--blur));
+    }
+
+    &--main {
+      --left: 49.1%;
+      --top: 52.9%;
+      --width: 61%;
+      --shift-x: 10px;
+      --shift-y: 8px;
+      --turn: 2deg;
+
+      @include media-up('lg') {
+        --left: 50%;
+        --top: 50%;
+        --width: 86.8%;
+      }
+    }
+
+    &--left {
+      --blur: 0.6px; // tune the depth here
+      --opacity: 0.8;
+      --left: 3.1%;
+      --top: 35.6%;
+      --width: 10.6%;
+      --shift-x: -24px;
+      --shift-y: 16px;
+      --turn: -18deg; // 8
+
+      @include media-up('lg') {
+        --left: 14.6%;
+        --top: 38.5%;
+        --width: 17.8%;
+      }
+    }
+
+    &--bottom {
+      --blur: 1.6px; // tune the depth here
+      --opacity: 0.75;
+      --left: 96.3%;
+      --top: 75.9%;
+      --width: 7.6%;
+      --shift-x: -18px;
+      --shift-y: -24px;
+      --turn: 16deg; // 6
+
+      @include media-up('lg') {
+        --left: 82.7%;
+        --top: 75.3%;
+        --width: 12.8%;
+      }
+    }
+
+    &--top {
+      --blur: 1.8px; // tune the depth here
+      --opacity: 0.63;
+      --left: 53.1%;
+      --top: 11.6%;
+      --width: 10.7%;
+      --shift-x: 20px;
+      --shift-y: -18px;
+      --turn: 8deg;
+
+      @include media-up('lg') {
+        --left: 39%;
+        --top: 14.2%;
+        --width: 18%;
+      }
+    }
+  }
+
+  &__img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  &__body {
+    min-width: 0;
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      padding-block-start: $body-offset;
+    }
+  }
+}

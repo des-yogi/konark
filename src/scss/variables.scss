@@ -221,12 +221,16 @@ $tokens: (
   @each $name, $pair in $tokens {
     --#{$name}: var(--palette-#{list.nth($pair, 1)});
   }
+
+  color-scheme: light;
 }
 
 [data-theme='dark'] {
   @each $name, $pair in $tokens {
     --#{$name}: var(--palette-#{list.nth($pair, 2)});
   }
+
+  color-scheme: dark;
 }
 
 // Sizing tokens (Figma collection "Sizing Tokens", values from "Number Primitives")

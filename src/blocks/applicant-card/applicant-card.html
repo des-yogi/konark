@@ -1,0 +1,22 @@
+<!--DEV
+@@include('blocks/applicant-card/applicant-card.html', {
+  "title": "ТОВ «Конарк Інтелмед»",
+  "count": "16 позицій",
+  "modalId": "applicant-modal-1"
+})
+
+Applicant card: the applicant name and the number of its products. The whole card is clickable through the stretched
+button (btn-icon-tertiary with the "eye" icon): it opens the CoreUI modal with the list of products (the applicant-modal block with the same id, see applicants).
+modalId: the id of that modal (unique on the page).
+Wrap it in <li> where a list is needed (see applicants). The title uses the global .subheading style.
+-->
+
+<div class="applicant-card">
+  <h3 class="applicant-card__title  subheading">@@title</h3>
+  <div class="applicant-card__foot">
+    <p class="applicant-card__count">@@count</p>
+    <button class="btn-icon-tertiary  applicant-card__button" type="button" data-coreui-toggle="modal" data-coreui-target="#@@modalId" aria-label="Переглянути перелік препаратів: @@title">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#eye"></use></svg>
+    </button>
+  </div>
+</div>

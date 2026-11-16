@@ -1,0 +1,87 @@
+<!--DEV
+@@include('blocks/applicants/applicants.html', {
+  "gradient": "dark-light-gr"
+})
+
+Applicants: the section head (section-head) and a responsive grid of applicant-card blocks (1 column on mobile, 2 on tablet, up to 3 on desktop).
+Background is transparent: the gradient is a separate class on the section (@@gradient).
+The names and counters are placeholders.
+Every card opens its own modal (applicant-modal): the card and the modal are linked by modalId, the modals go after the list.
+-->
+
+<section class="container  applicants  @@gradient">
+  @@include('../../blocks/section-head/section-head.html', {
+    "tag": "h2",
+    "tagClass": "h3",
+    "title": "Заявники",
+    "text": "<p>Перелік лікарських засобів, що входять до даної системи фармаконагляду</p>"
+  })
+  <ul class="applicants__list">
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "ТОВ «Конарк Інтелмед»",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-1"
+      })
+    </li>
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "Євро Лайфкер Прайвіт Лімітед",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-2"
+      })
+    </li>
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "Євро Лайфкер Лтд",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-3"
+      })
+    </li>
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "Натко Фарма Лімітед",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-4"
+      })
+    </li>
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "Юнік Фармасьютикал Лабораторіз",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-5"
+      })
+    </li>
+    <li class="applicants__item">
+      @@include('../../blocks/applicant-card/applicant-card.html', {
+        "title": "МСН Лабораторіс Прайвіт Лімітед",
+        "count": "16 позицій",
+        "modalId": "applicant-modal-6"
+      })
+    </li>
+  </ul>
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-1",
+    "title": "ТОВ «Конарк Інтелмед»"
+  })
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-2",
+    "title": "Євро Лайфкер Прайвіт Лімітед"
+  })
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-3",
+    "title": "Євро Лайфкер Лтд"
+  })
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-4",
+    "title": "Натко Фарма Лімітед"
+  })
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-5",
+    "title": "Юнік Фармасьютикал Лабораторіз"
+  })
+  @@include('../../blocks/applicant-modal/applicant-modal.html', {
+    "modalId": "applicant-modal-6",
+    "title": "МСН Лабораторіс Прайвіт Лімітед"
+  })
+</section>

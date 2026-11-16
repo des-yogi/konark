@@ -20,6 +20,13 @@
     color: var(--input-label);
   }
 
+  // The red asterisk after the name of a required field (sprite icon "asterisk"); the input itself has the required attribute
+  &__required {
+    display: inline-block;
+    vertical-align: top;
+    margin-inline-start: 2px;
+  }
+
   &__input-wrap {
     display: block;
   }
@@ -63,6 +70,21 @@
     &::placeholder {
       color: var(--input-text);
       opacity: 1;
+    }
+
+    // Date: the native picker stays; the inner parts are aligned like the text of the other fields
+    &[type='date'] {
+      &::-webkit-datetime-edit {
+        padding: 0;
+      }
+
+      &::-webkit-date-and-time-value {
+        text-align: start; // iOS Safari centers the value
+      }
+
+      &::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+      }
     }
 
     &[type='search']::-webkit-search-cancel-button,
