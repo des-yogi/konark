@@ -1,0 +1,171 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Report card: icon + title + text + actions (btn-secondary buttons).
+// Below md: vertical card, the form buttons get a short label with a caption above, the copy buttons lose the icon chip.
+// From md: horizontal card, full labels, icon chips everywhere.
+.report-card {
+  $block-name: &; // #{$block-name}__element
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+  padding: $space-16;
+  border-radius: $radius-24;
+  background-color: var(--tag-bg);
+
+  @include media-up('md') {
+    flex-direction: row;
+    padding: $space-24 $space-24 $space-24 $space-20;
+  }
+
+  &__icon {
+    flex: none;
+    width: 56px;
+    height: 56px;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $space-16;
+    min-width: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+  }
+
+  // Typography comes from the global .subheading
+  &__title {
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+
+    @include media-up('md') {
+      gap: $space-8;
+    }
+  }
+
+  // position: the status bubble is placed relative to its button
+  &__action {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    min-width: 0;
+  }
+
+  // Typography comes from the global .caption; the caption replaces the long button label below md
+  &__caption {
+    margin: 0;
+    color: var(--text-secondary);
+
+    @include media-up('md') {
+      display: none;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    min-width: 0;
+
+    // Copy buttons: no icon chip below md, the long text is cut with an ellipsis instead of leaving the button
+    &--copy {
+      @include media-down('md') {
+        justify-content: center;
+        padding-inline: $space-12;
+        font-size: 12px;
+      }
+    }
+  }
+
+  // The label is a text-roll: it must be able to shrink inside the flex button and cut the text of both lines
+  &__roll {
+    min-width: 0;
+
+    & .text-roll__line {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    // Form buttons: the short label below md, the full one from md
+    &--short {
+      @include media-up('md') {
+        display: none;
+      }
+    }
+
+    &--full {
+      @include media-down('md') {
+        display: none;
+      }
+    }
+  }
+
+  &__chip {
+    @include media-down('md') {
+      display: none;
+    }
+  }
+
+  // "Copied" bubble above the button
+  &__status {
+    position: absolute;
+    inset-block-end: calc(100% + #{$space-8});
+    inset-inline-start: 50%;
+    z-index: 1;
+    translate: -50% $space-4;
+    padding: $space-8 $space-12;
+    border-radius: $radius-12;
+    font-size: 14px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--text-inverse);
+    background-color: var(--btn-primary-bg);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition-time ease, translate $transition-time ease, visibility $transition-time;
+    pointer-events: none;
+
+    @include button-reduced-motion;
+
+    &--visible {
+      translate: -50% 0;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  // Two phone buttons: one under another below sm, side by side from sm
+  &--pair {
+    #{$block-name}__actions {
+      gap: $space-8;
+
+      @include media-up('sm') {
+        flex-direction: row;
+      }
+    }
+
+    #{$block-name}__action {
+      @include media-up('sm') {
+        flex: 1;
+      }
+    }
+  }
+}

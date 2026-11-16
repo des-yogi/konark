@@ -1,0 +1,56 @@
+<!--DEV
+@@include('../../blocks/info-accordion/info-accordion.html')
+
+Info accordion on CoreUI Collapse: two independent items (no data-coreui-parent, each one opens and closes on its own).
+The first item is open by default, the second one is closed. No numbers, the title is .h5.
+The panel content comes from the text editor, so it has no classes (p, ul > li).
+The markup of the items is hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop).
+The ids of the items (info-accordion-item-N) must be unique on the page. The texts are placeholders.
+The JS is the CoreUI collapse module from src/js/index.js, there is no own script.
+-->
+
+<div class="info-accordion">
+  <div class="info-accordion__item">
+    <h3 class="info-accordion__header">
+      <button class="info-accordion__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#info-accordion-item-1" aria-expanded="true" aria-controls="info-accordion-item-1">
+        <span class="info-accordion__title  h5">Про небажані реакції</span>
+        <svg class="info-accordion__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="info-accordion__panel  collapse  show" id="info-accordion-item-1">
+      <div class="info-accordion__content">
+        <p>З метою безперервного моніторингу за безпекою лікарських засобів, в компанії «КОНАРК ІНТЕЛМЕД» функціонує система фармаконагляду, створена у відповідності до міжнародних стандартів та вимог законодавства України.</p>
+        <p>Повідомляючи про небажані реакції лікарських засобів, за якими проводить фармаконагляд компанія «КОНАРК ІНТЕЛМЕД», Ви допомагаєте нам відстежувати профіль безпеки наших продуктів та запроваджувати необхідні заходи для попередження виникнення небажаних реакцій в подальшому.</p>
+      </div>
+    </div>
+  </div>
+  <div class="info-accordion__item">
+    <h3 class="info-accordion__header">
+      <button class="info-accordion__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#info-accordion-item-2" aria-expanded="false" aria-controls="info-accordion-item-2">
+        <span class="info-accordion__title  h5">Про надання інформації</span>
+        <svg class="info-accordion__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+      </button>
+    </h3>
+    <div class="info-accordion__panel  collapse" id="info-accordion-item-2">
+      <div class="info-accordion__content">
+        <p>Будемо вдячні Вам за надання інформації про виникнення небажаної реакції, відсутності ефективності, або будь-якої інформації, що стосується безпеки та ефективності застосування лікарських засобів, пов’язану або не пов’язану з небажаною реакцією, а саме про:</p>
+        <ul>
+          <li>небажані реакції, які виникли при застосуванні лікарських засобів компанії;</li>
+          <li>відсутність ефективності лікарського засобу;</li>
+          <li>застосування лікарського засобу не у відповідності до затвердженої інструкції;</li>
+          <li>передозування або зловживання лікарським засобом, лікарську залежність;</li>
+          <li>взаємодію з іншими лікарськими засобами;</li>
+          <li>помилки при призначенні та/або застосуванні лікарського засобу;</li>
+          <li>нецільове застосування лікарського засобу;</li>
+          <li>застосування лікарського засобу під час вагітності або годування груддю;</li>
+          <li>вплив лікарського засобу на репродуктивну функцію;</li>
+          <li>застосування лікарського засобу у особливих групах пацієнтів (діти, пацієнти похилого віку тощо);</li>
+          <li>несподіваний терапевтичний ефект;</li>
+          <li>небажаний вплив лікарського засобу під час професійної діяльності;</li>
+          <li>ризики, пов’язані з утилізацією лікарського засобу;</li>
+          <li>скарги на якість лікарських засобів, що стали причиною небажаної реакції.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Report form for a health care specialist. It is mixed with patient-form (class="patient-form  doctor-form"):
+// the page grid, the sections, the fields and the actions come from patient-form; here only the extra elements.
+.doctor-form {
+  // Two groups side by side from lg (Наслідок / Категорія), one under another below lg
+  &__groups {
+    display: grid;
+    gap: $space-40;
+
+    @include media-up('lg') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: $space-20;
+      align-items: start;
+    }
+  }
+
+  // A one-column list of checkboxes (the labels are as wide as their text)
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    align-items: flex-start;
+  }
+
+  // The name of the field looks like a group title (Body L Bold) instead of the small uppercase label
+  &__field--titled .field-text__name {
+    margin-block-end: $space-16;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-primary);
+  }
+}

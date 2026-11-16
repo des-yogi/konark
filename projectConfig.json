@@ -83,7 +83,19 @@
     "relationships": [],
     "contact-us": [],
     "documents": [],
-    "download-panel": []
+    "download-panel": [],
+    "report-problem": [],
+    "report-card": [],
+    "applicants": [],
+    "applicant-card": [],
+    "adverse-reactions": [],
+    "tooltip": [],
+    "info-accordion": [],
+    "applicant-modal": [],
+    "patient-form": [],
+    "field-phone": [],
+    "field-select": [],
+    "doctor-form": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

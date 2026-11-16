@@ -11,9 +11,12 @@
 
   display: block;
 
+  // The clickable area is the box and the text, not the whole row
   &__name {
     position: relative;
-    display: flex;
+    display: inline-flex;
+    vertical-align: top;
+    max-inline-size: 100%;
     gap: $space-8;
     align-items: center;
     min-height: $box-area;
@@ -121,6 +124,7 @@
   // Filter option: taller row, hover background, counter on the right
   &--option {
     #{$block-name}__name {
+      display: flex; // the filter option is a full-width row with a hover background
       gap: $space-12;
       min-height: 44px;
       padding-inline: $space-4 $space-8;

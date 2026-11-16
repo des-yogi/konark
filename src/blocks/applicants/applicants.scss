@@ -1,0 +1,48 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Applicants: the section is the grid (head + list). Transparent background (the gradient is a separate class).
+// The list is adaptive without breakpoints: 1 column on mobile, then 2 / 3 columns (capped at 3) while a card stays >= $card-min.
+.applicants {
+  $card-min: 300px; // tune here: the smallest card width before the grid drops a column
+  $gap: $space-20;
+
+  display: grid;
+  gap: $space-40;
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  .section-head {
+    margin-bottom: 0;
+  }
+
+  &__list {
+    display: grid;
+    gap: $space-12;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('md') {
+      grid-template-columns: repeat(auto-fill, minmax(max(#{$card-min}, calc((100% - 2 * #{$gap}) / 3)), 1fr));
+      gap: $gap;
+    }
+  }
+
+  &__item {
+    display: flex; // lets the card stretch to the row height
+    margin: 0; // resets the global `li + li` offset
+
+    // resets the global list marker
+    &::before {
+      content: none;
+    }
+
+    > .applicant-card {
+      flex: 1;
+    }
+  }
+}

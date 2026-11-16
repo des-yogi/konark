@@ -1,0 +1,184 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Report form for a patient. The block is the page grid: from lg the head and the form take the middle 8 columns.
+// The fields come from field-text / field-select / field-checkbox / field-radio; here only the layout.
+// Vertical rhythm from the design: 40 between the head and the sections, 24 inside a section, 20 between the fields.
+.patient-form {
+  $block-name: &; // #{$block-name}__element
+
+  display: grid;
+  gap: $space-40;
+  padding-block: $space-24 $space-48;
+
+  @include media-up('md') {
+    padding-block-end: $space-64;
+  }
+
+  @include media-up('lg') {
+    @include grid-12;
+
+    row-gap: $space-40;
+    padding-block-start: $space-64;
+  }
+
+  &__head,
+  &__form {
+    min-width: 0;
+
+    @include media-up('lg') {
+      grid-column: 3 / span 8;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+  }
+
+  // The size comes from the .h5 class
+  &__title {
+    margin: 0;
+  }
+
+  &__intro {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-40;
+  }
+
+  &__section,
+  &__group {
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  // The size comes from the .subheading class
+  &__legend {
+    margin: 0 0 $space-24;
+    padding: 0;
+    color: var(--text-primary);
+  }
+
+  // Body L Bold (no global class)
+  &__group-legend {
+    margin: 0 0 $space-16;
+    padding: 0;
+    font-size: 18px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+  }
+
+  &__fields {
+    display: grid;
+    gap: $space-20;
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  // Cancels the default bottom margin of .field-text: the gaps come from the grid
+  &__field.field-text {
+    margin-bottom: 0;
+  }
+
+  &__field--wide {
+    grid-column: 1 / -1;
+  }
+
+  // The release forms: one column, from md two columns (filled top to bottom, like in the design)
+  // The gap is the bottom margin of every option (a top margin would shift the second column down);
+  // the negative margin of the list takes back the gap after the last row
+  &__checks {
+    margin-block-end: -$space-12;
+
+    @include media-up('md') {
+      columns: 2;
+      column-gap: $space-20;
+    }
+
+    // Inline blocks are not split between the columns: the absolutely positioned box of the checkbox
+    // (it overhangs its row before the transform) would otherwise be cut by the column break
+    > * {
+      display: inline-block;
+      vertical-align: top;
+      inline-size: 100%;
+      margin-block-end: $space-12;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('md') {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  // A long consent text: the box stays at the first line
+  &__consent {
+    @include media-up('md') {
+      max-inline-size: 445px;
+    }
+
+    .field-checkbox__name {
+      align-items: flex-start;
+    }
+
+    .field-checkbox__name-text::before,
+    .field-checkbox__name-text::after {
+      inset-block-start: 12px; // the middle of the first line (24px)
+    }
+  }
+
+  &__link {
+    border-radius: $radius-button-3;
+    color: var(--text-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__submit {
+    flex: none;
+
+    @include media-down('md') {
+      width: 100%;
+    }
+  }
+}

@@ -7,3 +7,8 @@
 * https://des-yogi.github.io/konark/article
 * https://des-yogi.github.io/konark/partners
 * https://des-yogi.github.io/konark/partnership
+* https://des-yogi.github.io/konark/farm-monitoring
+* https://des-yogi.github.io/konark/patient-form
+* https://des-yogi.github.io/konark/doctor-form
+
+
