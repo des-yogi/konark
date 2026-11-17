@@ -1,0 +1,65 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Tab pills (CoreUI Tab). The root is also the .container and the horizontal scroller:
+// its side paddings are the page margins, and the pills run out to the screen edge when they do not fit.
+.tab-pills {
+  $ring-space: $focus-ring-width + $focus-ring-offset; // the focus ring must not be cut by the scroller
+
+  margin-block: -$ring-space;
+  padding-block: $ring-space;
+  overflow-x: auto;
+
+  &__list {
+    display: flex;
+    gap: $space-8;
+    inline-size: max-content;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // Resets the global `li + li` margin and the bullet of `ul li:before`
+  &__item {
+    margin: 0;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  // Colors of the default and hover states are the same as in btn-icon-tertiary
+  &__tab {
+    @include button-reset;
+    @include text-button;
+
+    flex: none;
+    block-size: 46px;
+    padding: $space-4 $space-20;
+    border: 1px solid transparent;
+    border-radius: $radius-full;
+    color: var(--nav-text);
+    background-color: var(--tag-bg);
+    scroll-margin-inline: $space-16; // scrollIntoView keeps a gap to the edge
+    transition: $button-transition;
+
+    &[aria-selected='false'] {
+      @include button-hover {
+        background-color: var(--tag-bg-hover);
+      }
+    }
+
+    // The active pill is the "Active" state of the mockup: main button color, 90% opacity, thin border
+    &[aria-selected='true'] {
+      border-color: var(--divider-subtle);
+      color: var(--btn-secondary-icon);
+      background-color: var(--btn-primary-bg);
+      opacity: $button-active-opacity;
+    }
+
+    @include button-forced-colors;
+    @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+    @include button-reduced-motion;
+  }
+}

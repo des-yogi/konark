@@ -1,0 +1,26 @@
+<!--DEV
+@@include('blocks/anchor-nav/anchor-nav.html')
+
+Anchor navigation of a text page. Is placed inside the text-page block, which also holds the sections.
+The links must point to the ids of the sections (#privacy-N); the titles are the same as the section titles.
+The first link is `active` in the markup (the JS keeps the `active` class on the link of the section that is being read).
+The items are hardcoded on purpose (the templater has no loops; in MODX it becomes a loop over the headings).
+Below lg it is a plain list in the flow, from lg it is sticky under the fixed header.
+The JS is own (anchor-nav.js), it does not need CoreUI. The offset under the fixed header comes from CSS: scroll-padding-top of the page + scroll-margin-top of the sections.
+-->
+
+<nav class="anchor-nav  js-anchor-nav" aria-label="Зміст сторінки">
+  <ul class="anchor-nav__list">
+    <li class="anchor-nav__item"><a class="anchor-nav__link  active" href="#privacy-1">1. Загальні положення</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-2">2. Які дані ми збираємо</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-3">3. Мета обробки персональних даних</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-4">4. Правові підстави обробки даних</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-5">5. Передача персональних даних третім особам</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-6">6. Файли cookie та аналітичні технології</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-7">7. Захист персональних даних</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-8">8. Строки зберігання даних</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-9">9. Права користувачів</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-10">10. Зміни до Політики конфіденційності</a></li>
+    <li class="anchor-nav__item"><a class="anchor-nav__link" href="#privacy-11">11. Контактна інформація</a></li>
+  </ul>
+</nav>

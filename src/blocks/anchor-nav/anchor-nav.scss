@@ -1,0 +1,102 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+$anchor-nav-top: $header-height + $space-24; // under the fixed header + the gap
+$anchor-line-length: 24px;
+
+// Anchor nav of a text page. Below lg: a plain list. From lg: it is sticky under the fixed header.
+// The `active` class is set by anchor-nav.js.
+// The line before the text is a dot by default (1px) and grows to 24px on hover and in the active state.
+.anchor-nav {
+  $block-name: &; // #{$block-name}__element
+
+  @include media-up('lg') {
+    position: sticky;
+    inset-block-start: $anchor-nav-top;
+
+    // If the viewport is lower than the list, the list scrolls inside itself
+    max-block-size: calc(100dvh - #{$anchor-nav-top} - #{$space-24});
+    overflow-y: auto;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('lg') {
+      gap: $space-4;
+    }
+  }
+
+  &__item {
+    margin: 0;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  &__link {
+    display: flex;
+    gap: $space-12;
+    align-items: center;
+    padding-block: $space-8;
+    border-radius: $radius-12;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color $transition-time ease;
+
+    &::before {
+      content: '';
+      flex: none;
+      inline-size: 1px;
+      block-size: 0;
+      border-block-start: 1px solid var(--divider-strong);
+      transition: inline-size $transition-time ease;
+
+      @include button-reduced-motion;
+    }
+
+    // The color is set for every state: a visited link must not change it
+    &:visited {
+      color: var(--text-secondary);
+    }
+
+    &:not(.active) {
+
+      @include button-hover {
+        color: var(--text-primary);
+
+        &::before {
+          inline-size: $anchor-line-length;
+        }
+      }
+    }
+
+    // The frame is an inner outline, so the layout does not move: the text stays where the line + gap put it (13px)
+    &:focus-visible {
+      padding-inline-start: $space-12 + 1px;
+      outline: 2px solid var(--btn-primary-focus-ring);
+      outline-offset: -2px;
+      color: var(--text-primary);
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &.active {
+      color: var(--text-accent);
+
+      &::before {
+        inline-size: $anchor-line-length;
+      }
+    }
+
+    @include button-reduced-motion;
+  }
+}

@@ -100,6 +100,12 @@
 @use '../blocks/field-phone/field-phone';
 @use '../blocks/field-select/field-select';
 @use '../blocks/doctor-form/doctor-form';
+@use '../blocks/tab-pills/tab-pills';
+@use '../blocks/address-card/address-card';
+@use '../blocks/contacts-tabs/contacts-tabs';
+@use '../blocks/anchor-nav/anchor-nav';
+@use '../blocks/text-page/text-page';
+@use '../blocks/page-404/page-404';
 
 // Подключения из addCssAfter:
 @use './print' as *;

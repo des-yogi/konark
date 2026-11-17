@@ -29,6 +29,10 @@
     @include media-up('lg') {
       grid-column: 1 / span 6;
     }
+
+    @include media-up('xxl') {
+      grid-column: 1 / span 7;
+    }
   }
 
   &__text {
@@ -39,6 +43,11 @@
     @include media-up('lg') {
       grid-column: 7 / -1;
       padding-top: 1.2em;
+      padding-left: 40px;
+    }
+
+    @include media-up('xxl') {
+      grid-column: 8 / -1;
     }
 
     & > * {

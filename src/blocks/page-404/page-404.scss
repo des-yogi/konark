@@ -1,0 +1,67 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// 404 page. Vertical paddings of the block: 40 (mobile) / 64 (from md).
+// The illustration is an inline svg that scales as a whole (see page-404.html):
+// mobile - the width of the container, tablet - 600px, desktop - the size of the raster (1016px).
+.page-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: $space-40;
+  text-align: center;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__picture {
+    display: block;
+    inline-size: 100%;
+    max-inline-size: 600px;
+    block-size: auto;
+
+    @include media-up('lg') {
+      max-inline-size: 1016px;
+    }
+  }
+
+  // The digits and the piece of the zero over the capsule follow the theme
+  &__digits {
+    fill: var(--text-accent);
+  }
+
+  &__shadow {
+    fill: rgb(0 33 90 / 50%);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block-start: $space-48;
+
+    @include media-up('md') {
+      margin-block-start: $space-40;
+    }
+
+    @include media-up('lg') {
+      margin-block-start: $space-16;
+    }
+  }
+
+  // Typography comes from the global .h3 (Light). The width makes two balanced lines as in the mockup
+  &__title {
+    max-inline-size: 11.5em;
+    margin: 0;
+  }
+
+  &__text {
+    margin: $space-12 0 0;
+    color: var(--text-secondary);
+  }
+
+  &__btn {
+    margin-block-start: $space-24;
+  }
+}

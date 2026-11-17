@@ -1,0 +1,100 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Text page (privacy policy and other legal texts): the anchor nav (aside) + the text sections.
+// Below lg: the nav and the text are one column. From lg: the nav takes 4 columns, the text 8 (as in the mockup).
+// The vertical paddings of the whole text page are set here: 24 / 32 / 64.
+// The content is a free-form text from the CMS: its elements are styled by tags inside the section.
+.text-page {
+  --text-page-gap: #{$space-12}; // the gap between the heading and the blocks of a section
+
+  padding-block: $space-24;
+
+  @include media-up('md') {
+    --text-page-gap: #{$space-16};
+
+    padding-block: $space-32;
+  }
+
+  @include media-up('lg') {
+    --text-page-gap: #{$space-20};
+
+    padding-block: $space-64;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+
+    @include media-up('lg') {
+      @include grid-12;
+    }
+  }
+
+  // The aside is as high as the text: this is what lets the nav inside stay sticky
+  &__aside {
+
+    @include media-up('lg') {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  &__body {
+    min-width: 0;
+    color: var(--text-secondary);
+
+    @include media-up('lg') {
+      grid-column: 5 / -1;
+    }
+  }
+
+  // The margin of a heading that follows an anchor click: the gap under the fixed header
+  // (the header itself is the scroll-padding-top of the page)
+  &__section {
+    scroll-margin-block-start: $space-24;
+
+    & + & {
+      margin-top: $space-32;
+
+      @include media-up('lg') {
+        margin-top: $space-48;
+      }
+    }
+
+    & > * {
+      margin: 0;
+    }
+
+    & > * + * {
+      margin-top: var(--text-page-gap);
+    }
+
+    // Paragraphs of one text are closer to each other than the blocks
+    & > p + p {
+      margin-top: $space-12;
+    }
+
+    ul {
+      padding-left: $space-24;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    li + li {
+      margin-top: $space-16;
+    }
+
+    strong {
+      font-weight: $font-weight-semibold;
+      color: var(--text-primary);
+    }
+  }
+
+  // Typography comes from the global .h5
+  &__title {
+    color: var(--text-primary);
+  }
+}

@@ -25,7 +25,7 @@ import '@coreui/coreui/js/src/tab.js';
 import '@coreui/coreui/js/src/offcanvas.js';
 // import Popover from '@coreui/coreui/js/src/popover.js';
 import Tooltip from '@coreui/coreui/js/src/tooltip.js';
-// import '@coreui/coreui/js/src/scrollspy.js';
+import '@coreui/coreui/js/src/scrollspy.js';
 // import '@coreui/coreui/js/src/alert.js';
 // import '@coreui/coreui/js/src/button.js';
 // import '@coreui/coreui/js/src/carousel.js';
