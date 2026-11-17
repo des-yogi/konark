@@ -1,0 +1,141 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// ATC classification page: title, intro text with the summary card, the coding example and the tree.
+// Mobile and tablet: the full container width; lg: 10 columns centred; xl: 8 columns centred.
+.atc-page {
+  $block-name: &; // #{$block-name}__element
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); // deep tree levels must not widen the column on narrow screens
+  row-gap: $space-24;
+  padding-block: $space-24;
+
+  @include media-up('md') {
+    row-gap: $space-32;
+    padding-block: $space-64;
+  }
+
+  @include media-up('lg') {
+    @include grid-12;
+  }
+
+  &__title,
+  &__body,
+  &__tree {
+    @include media-up('lg') {
+      grid-column: 2 / span 10;
+    }
+
+    @include media-up('xl') {
+      grid-column: 3 / span 8;
+    }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  // Editor content (plain tags) and the summary card: one gap for everything
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+
+    > * {
+      margin: 0;
+    }
+
+    > ul {
+      display: flex;
+      flex-direction: column;
+      gap: $space-16;
+
+      > li {
+        margin: 0;
+      }
+    }
+  }
+
+  // Collapsible card: A-C are always visible, the rest opens below them
+  &__summary {
+    padding: $space-24 $space-16;
+    border-radius: $radius-32;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('md') {
+      padding: $space-24;
+    }
+  }
+
+  &__summary-title {
+    margin: 0;
+  }
+
+  &__summary-toggle {
+    display: flex;
+    gap: $space-16;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: $space-8 0;
+    border: 0;
+    border-radius: $radius-8;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: start;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover #{$block-name}__summary-icon {
+        rotate: 45deg;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+
+    &[aria-expanded='true'] #{$block-name}__summary-icon {
+      rotate: 90deg;
+    }
+  }
+
+  // arrow-up: 0° closed, 45° on hover, 90° open
+  &__summary-icon {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    margin-block: calc((1lh - 24px) / 2); // centred on the first line of the title
+    color: var(--nav-text);
+    transition: rotate $transition-time ease;
+  }
+
+  &__summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    margin: $space-20 0 0;
+  }
+
+  &__summary-item {
+    margin: 0;
+  }
+
+  &__summary-more {
+    display: flow-root; // keeps the list margin inside while CoreUI animates the height
+
+    #{$block-name}__summary-list {
+      margin-block-start: $space-16;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__summary-icon {
+      transition: none;
+    }
+  }
+}
