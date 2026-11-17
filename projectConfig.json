@@ -103,7 +103,8 @@
     "text-page": [],
     "page-404": [],
     "atc-tree": [],
-    "atc-page": []
+    "atc-page": [],
+    "reporting": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

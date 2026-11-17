@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Терапевтичні напрямки</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "Терапевтичні <strong>напрямки</strong>",
+          "text": "<p>Ми пропонуємо широкий і сучасний асортимент лікарських препаратів і препаратів медичного призначення провідних виробників.</p>"
+        })
+
+        <section class="container  therapeutic-areas">
+          <div class="therapeutic-areas__inner">
+
+            <ul class="therapeutic-areas__list">
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Антигістамінні (протиалергенні) препарати",
+                  "icon": "antihistamine"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Антибіотики",
+                  "icon": "antibio"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Чоловіче здоровʼя",
+                  "icon": "mens-health"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Жіноче здоровʼя",
+                  "icon": "womens-health"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Антигістамінні (протиалергенні) препарати",
+                  "icon": "antihistamine"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Антибіотики",
+                  "icon": "antibio"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Чоловіче здоровʼя",
+                  "icon": "mens-health"
+                })
+              </li>
+              <li class="therapeutic-areas__item">
+                @@include('blocks/drug-type-card/drug-type-card.html', {
+                  "title": "Жіноче здоровʼя",
+                  "icon": "womens-health"
+                })
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

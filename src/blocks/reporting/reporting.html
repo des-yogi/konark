@@ -1,0 +1,105 @@
+<!--DEV
+@@include('blocks/reporting/reporting.html')
+
+Reporting page: a wrapper (vertical paddings) with two glass sections built from ready blocks:
+1. Activity reports: section-head + standard download-panels (the latest one with download-panel__cover--accent) + a note.
+2. Governance and integrity documents: section-head + download-panel--sm.
+- STUBS: titles, texts, years, meta and the note are placeholders (in MODX the panels become a loop).
+-->
+<div class="container  reporting">
+  <section class="reporting__section">
+    @@include('../../blocks/section-head/section-head.html', {
+      "tag": "h2",
+      "tagClass": "h4",
+      "title": "Звіти про діяльність",
+      "text": "<p>Щорічні звіти «Конарк Інтелмед» містять повну інформацію про реалізовані дослідження, публікації, заходи, фінансові потоки та стратегічні плани</p>"
+    })
+
+    <ul class="reporting__list">
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "",
+          "accent": "download-panel__cover--accent",
+          "title": "Звіт про діяльність Конарк 2025",
+          "text": "Перший звіт про діяльність лабораторії від дня заснування: дослідницька програма, публікації, заходи, фінанси та стратегічні партнерства.",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": "2025"
+        })
+      </li>
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "",
+          "accent": "",
+          "title": "Звіт про діяльність Конарк 2024",
+          "text": "Перший звіт про діяльність лабораторії від дня заснування: дослідницька програма, публікації, заходи, фінанси та стратегічні партнерства.",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": "2024"
+        })
+      </li>
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "",
+          "accent": "",
+          "title": "Звіт про діяльність Конарк 2023",
+          "text": "Перший звіт про діяльність лабораторії від дня заснування: дослідницька програма, публікації, заходи, фінанси та стратегічні партнерства.",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": "2023"
+        })
+      </li>
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "",
+          "accent": "",
+          "title": "Звіт про діяльність Конарк 2022",
+          "text": "Перший звіт про діяльність лабораторії від дня заснування: дослідницька програма, публікації, заходи, фінанси та стратегічні партнерства.",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": "2022"
+        })
+      </li>
+    </ul>
+
+    <p class="reporting__note">Звіт за 2026 рік — буде опубліковано у першому кварталі 2027</p>
+  </section>
+
+  <section class="reporting__section">
+    @@include('../../blocks/section-head/section-head.html', {
+      "tag": "h2",
+      "tagClass": "h4",
+      "title": "Документи управління та доброчесності",
+      "text": "<p>Щорічні звіти «Конарк Інтелмед» містять повну інформацію про реалізовані дослідження, публікації, заходи, фінансові потоки та стратегічні плани</p>"
+    })
+
+    <ul class="reporting__list">
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "download-panel--sm",
+          "accent": "",
+          "title": "Статут ТОВ «Конарк Інтелмед»",
+          "text": "",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": ""
+        })
+      </li>
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "download-panel--sm",
+          "accent": "",
+          "title": "Положення про доброчесність",
+          "text": "",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": ""
+        })
+      </li>
+      <li class="reporting__item">
+        @@include('../../blocks/download-panel/download-panel.html', {
+          "small": "download-panel--sm",
+          "accent": "",
+          "title": "Незалежний зовнішній аудит",
+          "text": "Фінансова звітність «Конарк Інтелмед» щорічно перевіряється незалежним аудитором. Результати аудиту публікуються у відкритому доступі разом із щорічним звітом",
+          "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>3,2 Мб</span>",
+          "year": ""
+        })
+      </li>
+    </ul>
+  </section>
+</div>
