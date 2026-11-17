@@ -1,0 +1,28 @@
+<!--DEV
+@@include('blocks/tab-pills/tab-pills.html')
+
+Tab pills: the tab list of a CoreUI Tab. The root is also the .container: it is the horizontal scroller,
+so on narrow screens the pills run to the screen edge and are cut by it (no extra wrapper, no hardcoded page paddings).
+The first pill is active. The ids of the panes (data-coreui-target) are hardcoded for the contacts page;
+in MODX the list becomes a loop. Inactive pills get tabindex="-1" (CoreUI moves it with the arrow keys).
+-->
+
+<div class="container  tab-pills  invisible-scrollbar  js-tab-pills">
+  <ul class="tab-pills__list" role="tablist">
+    <li class="tab-pills__item" role="presentation">
+      <button class="tab-pills__tab  active" id="contacts-tab-1" type="button" role="tab" data-coreui-toggle="tab" data-coreui-target="#contacts-pane-1" aria-controls="contacts-pane-1" aria-selected="true">Офіс (Юридична адреса)</button>
+    </li>
+    <li class="tab-pills__item" role="presentation">
+      <button class="tab-pills__tab" id="contacts-tab-2" type="button" role="tab" tabindex="-1" data-coreui-toggle="tab" data-coreui-target="#contacts-pane-2" aria-controls="contacts-pane-2" aria-selected="false">Офіс (Київ)</button>
+    </li>
+    <li class="tab-pills__item" role="presentation">
+      <button class="tab-pills__tab" id="contacts-tab-3" type="button" role="tab" tabindex="-1" data-coreui-toggle="tab" data-coreui-target="#contacts-pane-3" aria-controls="contacts-pane-3" aria-selected="false">Офіс (Тернопіль)</button>
+    </li>
+    <li class="tab-pills__item" role="presentation">
+      <button class="tab-pills__tab" id="contacts-tab-4" type="button" role="tab" tabindex="-1" data-coreui-toggle="tab" data-coreui-target="#contacts-pane-4" aria-controls="contacts-pane-4" aria-selected="false">Склад Харків</button>
+    </li>
+    <li class="tab-pills__item" role="presentation">
+      <button class="tab-pills__tab" id="contacts-tab-5" type="button" role="tab" tabindex="-1" data-coreui-toggle="tab" data-coreui-target="#contacts-pane-5" aria-controls="contacts-pane-5" aria-selected="false">Склад Тернопіль</button>
+    </li>
+  </ul>
+</div>

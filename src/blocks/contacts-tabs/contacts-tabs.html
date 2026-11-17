@@ -1,0 +1,140 @@
+<!--DEV
+@@include('blocks/contacts-tabs/contacts-tabs.html')
+
+Contacts tabs: the tab list (tab-pills) and the panes with contact cards (address-card), a CoreUI Tab.
+The panes are hardcoded and identical (no loops); in MODX they become a loop. The first pane is active.
+The ids of the panes (contacts-pane-N) must match data-coreui-target of tab-pills.
+The section has no gradient: it lies on the page gradient.
+-->
+
+<section class="contacts-tabs">
+  @@include('../../blocks/tab-pills/tab-pills.html')
+
+  <div class="container  contacts-tabs__body">
+    <div class="contacts-tabs__pane  fade  show  active" id="contacts-pane-1" role="tabpanel" aria-labelledby="contacts-tab-1">
+      <ul class="contacts-tabs__list">
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "phone",
+          "title": "Телефон:",
+          "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "mail",
+          "title": "Електронна адреса:",
+          "content": "<a class='address-card__link' href='mailto:info@konark.com.ua'>info@konark.com.ua</a><p class='address-card__text'>Відповідаємо оперативно. У будь-який день з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "location",
+          "title": "Юридична та фактична адреса:",
+          "content": "<p class='address-card__text'>61033, Харківська обл., місто Харків, вулиця Шевченка, будинок 315</p>"
+          })
+        </li>
+      </ul>
+    </div>
+    <div class="contacts-tabs__pane  fade" id="contacts-pane-2" role="tabpanel" aria-labelledby="contacts-tab-2">
+      <ul class="contacts-tabs__list">
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "phone",
+          "title": "Телефон:",
+          "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "mail",
+          "title": "Електронна адреса:",
+          "content": "<a class='address-card__link' href='mailto:info@konark.com.ua'>info@konark.com.ua</a><p class='address-card__text'>Відповідаємо оперативно. У будь-який день з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "location",
+          "title": "Юридична та фактична адреса:",
+          "content": "<p class='address-card__text'>61033, Харківська обл., місто Харків, вулиця Шевченка, будинок 315</p>"
+          })
+        </li>
+      </ul>
+    </div>
+    <div class="contacts-tabs__pane  fade" id="contacts-pane-3" role="tabpanel" aria-labelledby="contacts-tab-3">
+      <ul class="contacts-tabs__list">
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "phone",
+          "title": "Телефон:",
+          "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "mail",
+          "title": "Електронна адреса:",
+          "content": "<a class='address-card__link' href='mailto:info@konark.com.ua'>info@konark.com.ua</a><p class='address-card__text'>Відповідаємо оперативно. У будь-який день з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "location",
+          "title": "Юридична та фактична адреса:",
+          "content": "<p class='address-card__text'>61033, Харківська обл., місто Харків, вулиця Шевченка, будинок 315</p>"
+          })
+        </li>
+      </ul>
+    </div>
+    <div class="contacts-tabs__pane  fade" id="contacts-pane-4" role="tabpanel" aria-labelledby="contacts-tab-4">
+      <ul class="contacts-tabs__list">
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "phone",
+          "title": "Телефон:",
+          "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "mail",
+          "title": "Електронна адреса:",
+          "content": "<a class='address-card__link' href='mailto:info@konark.com.ua'>info@konark.com.ua</a><p class='address-card__text'>Відповідаємо оперативно. У будь-який день з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "location",
+          "title": "Юридична та фактична адреса:",
+          "content": "<p class='address-card__text'>61033, Харківська обл., місто Харків, вулиця Шевченка, будинок 315</p>"
+          })
+        </li>
+      </ul>
+    </div>
+    <div class="contacts-tabs__pane  fade" id="contacts-pane-5" role="tabpanel" aria-labelledby="contacts-tab-5">
+      <ul class="contacts-tabs__list">
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "phone",
+          "title": "Телефон:",
+          "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "mail",
+          "title": "Електронна адреса:",
+          "content": "<a class='address-card__link' href='mailto:info@konark.com.ua'>info@konark.com.ua</a><p class='address-card__text'>Відповідаємо оперативно. У будь-який день з 9:00-21:00</p>"
+          })
+        </li>
+        <li class="contacts-tabs__item">
+          @@include('../../blocks/address-card/address-card.html', {
+          "icon": "location",
+          "title": "Юридична та фактична адреса:",
+          "content": "<p class='address-card__text'>61033, Харківська обл., місто Харків, вулиця Шевченка, будинок 315</p>"
+          })
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

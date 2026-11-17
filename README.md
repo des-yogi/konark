@@ -10,5 +10,10 @@
 * https://des-yogi.github.io/konark/farm-monitoring
 * https://des-yogi.github.io/konark/patient-form
 * https://des-yogi.github.io/konark/doctor-form
+* https://des-yogi.github.io/konark/contacts
+* https://des-yogi.github.io/konark/privacy-policy
+* https://des-yogi.github.io/konark/text
+* https://des-yogi.github.io/konark/page-404
+
 
 

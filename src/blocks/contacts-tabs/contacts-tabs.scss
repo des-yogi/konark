@@ -1,0 +1,50 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Contacts tabs: the tab pills and the panes with address cards (CoreUI Tab).
+// The page-head above has its own bottom padding of 20, so the section starts with 20 (64 on desktop).
+// The grid has no breakpoints: columns are at least 280px wide and at most three, so a long e-mail always fits.
+.contacts-tabs {
+  padding-block: $space-20;
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  &__body {
+    margin-block-start: $space-32;
+
+    @include media-up('md') {
+      margin-block-start: $space-40;
+    }
+  }
+
+  // An inactive pane is hidden; the global .fade fades the active one in
+  &__pane:not(.active) {
+    display: none;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(280px, calc((100% - #{$space-40}) / 3)), 1fr));
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The card fills the whole grid cell: the cards of a row have the same height
+  &__item {
+    display: flex;
+    margin: 0; // resets the global `li + li` margin
+
+    // Resets the global bullet of `ul li:before`
+    &::before {
+      content: none;
+    }
+  }
+
+  &__item > .address-card {
+    flex: 1;
+  }
+}

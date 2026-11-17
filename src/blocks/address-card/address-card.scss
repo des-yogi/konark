@@ -1,0 +1,80 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Contact card: an icon chip with a title, and a body under them (a link and/or a text).
+// The card is the same on all screens; the grid around it decides how many cards are in a row.
+.address-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+  min-inline-size: 0;
+  padding: $space-24;
+  border-radius: $radius-24;
+  background-color: var(--bg-overlay-subtle);
+
+  @include media-up('md') {
+    gap: $space-40;
+  }
+
+  &__head {
+    display: flex;
+    gap: $space-16;
+    align-items: center;
+  }
+
+  &__icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: 40px;
+    block-size: 40px;
+    border-radius: $radius-8;
+    color: var(--btn-primary-bg);
+    background-color: var(--tag-bg-hover);
+  }
+
+  // The size comes from the .subheading class
+  &__title {
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+  }
+
+  // Body L Bold: 18 / 600 / 1.5
+  &__link {
+    align-self: flex-start;
+    max-inline-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: inherit;
+    text-decoration: none;
+    color: var(--text-primary);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: var(--text-primary);
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+}

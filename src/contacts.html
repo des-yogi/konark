@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контактна інформація</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "<strong>Контактна</strong> інформація",
+          "text": "<p>Якщо у Вас виникли запитання або пропозиції зв’яжіться з нами будь яким зручним способом</p>"
+        })
+
+        @@include('blocks/contacts-tabs/contacts-tabs.html')
+
+        @@include('blocks/contact-us/contact-us.html')
+
+        <section class="container documents">
+          <h2 class="documents__title h3">Завантаження</h2>
+
+          <ul class="documents__list">
+            <li class="documents__item">
+              @@include('blocks/download-panel/download-panel.html', {
+                "small": "download-panel--sm",
+                "accent": "",
+                "title": "Прес-кіт",
+                "text": "",
+                "meta": "<span class='download-panel__meta-item'>48 стор</span><span class='download-panel__meta-item'>30 Мб</span>",
+                "year": ""
+              })
+            </li>
+            <li class="documents__item">
+              @@include('blocks/download-panel/download-panel.html', {
+                "small": "download-panel--sm",
+                "accent": "",
+                "title": "Презентація компанії",
+                "text": "",
+                "meta": "<span class='download-panel__meta-item'>100 стор</span><span class='download-panel__meta-item'>300 Мб</span>",
+                "year": ""
+              })
+            </li>
+          </ul>
+        </section>
+
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

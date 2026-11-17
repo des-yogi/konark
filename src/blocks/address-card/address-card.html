@@ -1,0 +1,23 @@
+<!--DEV
+@@include('blocks/address-card/address-card.html', {
+  "icon": "phone",
+  "title": "Телефон:",
+  "content": "<a class='address-card__link' href='tel:+380445026391'>+38 (044) 502-63-91</a><p class='address-card__text'>Приймаємо дзвінки з понеділка по суботу, з 9:00-21:00</p>"
+})
+
+Contact card: an icon chip + title and a body. `icon` is the id of the sprite icon (phone, mail, location).
+`content` is the body: an optional link (`address-card__link`, tel: / mailto:) and a text (`address-card__text`).
+The address card has the text only.
+-->
+
+<article class="address-card">
+  <div class="address-card__head">
+    <span class="address-card__icon">
+      <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#@@icon"></use></svg>
+    </span>
+    <h3 class="address-card__title  subheading">@@title</h3>
+  </div>
+  <div class="address-card__body">
+    @@content
+  </div>
+</article>

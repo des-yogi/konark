@@ -95,7 +95,13 @@
     "patient-form": [],
     "field-phone": [],
     "field-select": [],
-    "doctor-form": []
+    "doctor-form": [],
+    "tab-pills": [],
+    "address-card": [],
+    "contacts-tabs": [],
+    "anchor-nav": [],
+    "text-page": [],
+    "page-404": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

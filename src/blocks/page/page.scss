@@ -326,6 +326,23 @@ img {
     var(--bg-gradient-2-end) 100%);
 }
 
+.text-plain {
+  @include col(xs, 12);
+  @include col-offset(lg, 1);
+  @include col(lg, 10);
+  @include col-offset(xl, 2);
+  @include col(xl, 8);
+  padding-block: 32px;
+
+  @include media-up('md') {
+    padding-block: 48px;
+  }
+
+  @include media-up('xl') {
+    padding-block: 64px;
+  }
+}
+
 // Swiper
 // .swiper-wrapper,
 // .swiper-slide {
