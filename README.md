@@ -11,6 +11,8 @@
 * https://des-yogi.github.io/konark/patient-form
 * https://des-yogi.github.io/konark/doctor-form
 * https://des-yogi.github.io/konark/classification
+* https://des-yogi.github.io/konark/reporting
+* https://des-yogi.github.io/konark/therapeutic-areas
 * https://des-yogi.github.io/konark/contacts
 * https://des-yogi.github.io/konark/privacy-policy
 * https://des-yogi.github.io/konark/text

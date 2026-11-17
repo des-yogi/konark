@@ -1,0 +1,72 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Reporting page: a wrapper with two glass sections (activity reports, governance documents).
+// Both sections look the same, so they are elements of one block instead of two copies of the same styles.
+.reporting {
+  $block-name: &; // #{$block-name}__element
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-40;
+  padding-block: $space-24;
+
+  @include media-up('md') {
+    padding-block: $space-48;
+  }
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    padding: $space-40 $space-16;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      padding: $space-64 $space-32;
+      border-radius: $radius-48;
+    }
+
+    // 24px to the panels instead of the default 40px (set by the section gap)
+    .section-head {
+      margin-bottom: 0;
+    }
+  }
+
+  // The grid has no breakpoints (as in `documents`): columns are at least ~560px wide,
+  // so a horizontal panel always fits, a lone panel keeps its column width.
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 557px), 1fr));
+    gap: $space-20;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The panel fills the whole grid cell
+  &__item {
+    display: flex;
+    margin: 0; // resets the global `li + li` margin
+
+    // Resets the global bullet of `ul li:before`
+    &::before {
+      content: none;
+    }
+  }
+
+  &__item > .download-panel {
+    flex: 1;
+  }
+
+  &__note {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+}

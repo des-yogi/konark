@@ -108,6 +108,7 @@
 @use '../blocks/page-404/page-404';
 @use '../blocks/atc-tree/atc-tree';
 @use '../blocks/atc-page/atc-page';
+@use '../blocks/reporting/reporting';
 
 // Подключения из addCssAfter:
 @use './print' as *;
