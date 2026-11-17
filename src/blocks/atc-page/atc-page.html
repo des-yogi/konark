@@ -1,0 +1,57 @@
+<!--DEV
+@@include('blocks/atc-page/atc-page.html')
+
+ATC classification page content: title, intro text, the summary card, the coding example and the tree.
+- __body is editor content: plain tags without classes (p, h2.h6, ul > li, strong); the summary card sits between
+  the intro and the example (in MODX: two text fields around it, or the card as a chunk).
+- The summary card is a CoreUI Collapse: A-C are always visible, D-V are in the collapsible part (#atc-summary-more).
+- The tree is the atc-tree block, mixed with atc-page__tree.
+-->
+<div class="container  atc-page">
+  <h1 class="atc-page__title  h3">АТХ (ATC) класифікація</h1>
+
+  <div class="atc-page__body">
+    <p>Анатомо-терапевтично-хімічна (АТХ) класифікація ВООЗ (Anatomical Therapeutic Chemical Classification System, ATC) — міжнародна система класифікації лікарських засобів.</p>
+    <p>АТС підрозділяє лікарські засоби на групи, що мають 5 різних рівнів. Кожен рівень класифікації має буквений або цифровий код.</p>
+
+    <div class="atc-page__summary">
+      <h2 class="atc-page__summary-title  h6">
+        <button class="atc-page__summary-toggle  collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#atc-summary-more" aria-expanded="false" aria-controls="atc-summary-more">
+          АТС класифікація лікарських засобів (АТС):
+          <svg class="atc-page__summary-icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h2>
+      <ul class="atc-page__summary-list">
+        <li class="atc-page__summary-item"><strong>A</strong> Травна система та обмін речовин</li>
+        <li class="atc-page__summary-item"><strong>B</strong> Кров і кровотворні органи</li>
+        <li class="atc-page__summary-item"><strong>C</strong> Серцево-судинна система</li>
+      </ul>
+      <div class="atc-page__summary-more  collapse" id="atc-summary-more">
+        <ul class="atc-page__summary-list">
+          <li class="atc-page__summary-item"><strong>D</strong> Дерматологічні засоби</li>
+          <li class="atc-page__summary-item"><strong>G</strong> Сечостатева система та статеві гормони</li>
+          <li class="atc-page__summary-item"><strong>H</strong> Препарати гормонів для системного застосування, крім статевих гормонів та інсулінів</li>
+          <li class="atc-page__summary-item"><strong>J</strong> Протимікробні засоби для системного застосування</li>
+          <li class="atc-page__summary-item"><strong>L</strong> Антинеопластичні та імуномодулюючі засоби</li>
+          <li class="atc-page__summary-item"><strong>M</strong> Опорно-руховий апарат</li>
+          <li class="atc-page__summary-item"><strong>N</strong> Нервова система</li>
+          <li class="atc-page__summary-item"><strong>P</strong> Протипаразитарні засоби, інсектициди та репеленти</li>
+          <li class="atc-page__summary-item"><strong>R</strong> Респіраторна система</li>
+          <li class="atc-page__summary-item"><strong>S</strong> Органи чуття</li>
+          <li class="atc-page__summary-item"><strong>V</strong> Різні засоби</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="h6">Приклад структури кодування лікарських засобів за АТС-класифікацією:</h2>
+    <ul>
+      <li><strong>A</strong> Препарати, що впливають на травний тракт і обмін речовин (рівень 1 визначається за назвою анатомічного органу чи системи, що є мішенню дії препарату)</li>
+      <li><strong>A03</strong> Препарати, що застосовуються у разі функціональних шлунково-кишкових розладів (рівень 2 визначається за основними терапевтичними та/чи фармакологічними властивостями лікарського засобу)</li>
+      <li><strong>A03A</strong> Препарати, що застосовуються у разі функціональних розладів з боку кишківника (рівень 3 визначається за конкретними індивідуальними терапевтичними та/чи фармакологічними властивостями лікарського засобу)</li>
+      <li><strong>A03AD</strong> Папаверин та його похідні (рівень 4 визначається за основними структурними та хімічними властивостями)</li>
+      <li><strong>A03AD02</strong> Дротаверин (Drotaverine) (рівень 5 визначається за індивідуальними особливостями хімічної структури)</li>
+    </ul>
+  </div>
+
+  @@include('../../blocks/atc-tree/atc-tree.html', {"mix": "atc-page__tree"})
+</div>

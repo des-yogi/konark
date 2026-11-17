@@ -1,0 +1,230 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// ATC classification tree. Level 1 is a card, levels 2-5 are nested lists with a guide line.
+// Levels 1-4 open with CoreUI Collapse (independent items), level 5 is a leaf.
+// The toggle holds only the +/- icon and is stretched over the row, so a name can be a link on top of it.
+.atc-tree {
+  $block-name: &; // #{$block-name}__element
+
+  $indent-sm: $space-12; // below md: more room for the text
+  $indent: 20px;
+  $row-gap: $space-8;
+  $icon-size: 24px;
+
+  color: var(--text-primary);
+
+  &__groups,
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    list-style: none;
+  }
+
+  &__groups {
+    gap: 10px;
+  }
+
+  // A nested level: indent + guide line
+  &__list {
+    gap: $row-gap;
+    margin-block-start: $row-gap;
+    margin-inline-start: $indent-sm;
+    padding-inline-start: $indent-sm;
+    border-inline-start: 1px solid var(--divider-subtle);
+
+    @include media-up('md') {
+      margin-inline-start: $indent;
+      padding-inline-start: $indent;
+    }
+  }
+
+  &__group,
+  &__item {
+    margin: 0;
+  }
+
+  // Level 1 (Figma "Body L Bold")
+  &__group {
+    padding: $space-16 $space-12;
+    border-radius: $radius-16;
+    font-size: $font-size;
+    font-weight: $font-weight-semibold;
+    line-height: 1.5;
+    background-color: var(--bg-overlay-subtle);
+
+    @include media-up('md') {
+      padding: $space-16;
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__panel {
+    display: flow-root; // keeps the list margin inside while CoreUI animates the height
+    font-size: $font-size-sm;
+    font-weight: 400;
+
+    @include media-up('md') {
+      font-size: $font-size;
+    }
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    gap: $space-4;
+    align-items: flex-start;
+    padding: $space-8 0;
+    border-radius: $radius-12;
+    transition: background-color $transition-time;
+
+    @include media-up('md') {
+      gap: $space-8;
+      padding-inline-start: $space-8;
+    }
+
+    @media (hover: hover) {
+      &:has(> #{$block-name}__toggle:hover) {
+        background-color: var(--tag-bg);
+      }
+    }
+
+    // The ring of the stretched toggle is drawn on the row
+    &:has(> #{$block-name}__toggle:focus-visible) {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+
+    // Level 5: a substance, no toggle; below md it is indented from the parent's name
+    &--leaf {
+      padding-block: $space-4;
+      padding-inline-start: $space-12;
+
+      @include media-up('md') {
+        padding-inline-start: $space-8;
+      }
+
+      #{$block-name}__text {
+        hyphens: auto;
+        hyphenate-limit-chars: 6 3 3;
+        hyphenate-limit-lines: 2;
+        hyphenate-limit-last: always;
+        hyphenate-limit-zone: 8%;
+      }
+    }
+
+    // An item without children among toggles: the name lines up with the names of its neighbours
+    &--empty {
+      padding-inline-start: $icon-size + $space-8;
+
+      @include media-up('md') {
+        padding-inline-start: $space-8 + $icon-size + $space-8;
+      }
+    }
+  }
+
+  &__toggle {
+    display: block;
+    flex: none;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    color: var(--nav-text);
+    background: none;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    // Stretched over the row: the whole row toggles
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: $radius-12;
+    }
+  }
+
+  // Plus / minus: two bars on top of each other, the vertical one is turned back when the item is open
+  &__icon {
+    position: relative;
+    display: block;
+    width: $icon-size;
+    height: 1lh; // centred on the first line of the name
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      width: 14px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: currentcolor;
+      translate: -50% -50%;
+      transition: rotate $transition-time;
+    }
+
+    &::after {
+      rotate: -90deg;
+
+      #{$block-name}__toggle[aria-expanded='true'] & {
+        rotate: 0deg;
+      }
+    }
+  }
+
+  &__text {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    // &:not(* > strong) {
+    //   hyphens: auto;
+    //   hyphenate-limit-chars: 6 3 3;
+    //   hyphenate-limit-lines: 2;
+    //   hyphenate-limit-last: always;
+    //   hyphenate-limit-zone: 8%;
+    // }
+    strong {
+      display: inline-flex;
+      align-items: baseline;
+      padding-right: 0.3em;
+    }
+  }
+
+  // Wraps only the name, the code stays plain. Lies above the stretched toggle.
+  &__link {
+    position: relative;
+    z-index: 1;
+    border-radius: $radius-8;
+    color: var(--text-accent);
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__row,
+    &__icon::before,
+    &__icon::after {
+      transition: none;
+    }
+  }
+}

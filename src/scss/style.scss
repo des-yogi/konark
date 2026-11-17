@@ -106,6 +106,8 @@
 @use '../blocks/anchor-nav/anchor-nav';
 @use '../blocks/text-page/text-page';
 @use '../blocks/page-404/page-404';
+@use '../blocks/atc-tree/atc-tree';
+@use '../blocks/atc-page/atc-page';
 
 // Подключения из addCssAfter:
 @use './print' as *;

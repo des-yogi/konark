@@ -101,7 +101,9 @@
     "contacts-tabs": [],
     "anchor-nav": [],
     "text-page": [],
-    "page-404": []
+    "page-404": [],
+    "atc-tree": [],
+    "atc-page": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",
