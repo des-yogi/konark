@@ -1,0 +1,100 @@
+<!--DEV
+@@include('blocks/product-video/product-video.html')
+
+Product videos (a block of the details column on the product page, after product-awards): a Swiper slider of YouTube videos.
+Every slide is a facade: a poster and a play button. The iframe is created on click and removed when the slide is left (see product-video.js).
+From md the row of thumbnails under the slider is the navigation (Swiper "Thumbs gallery"); below md there are no thumbnails,
+the next slide peeks out and the arrows are used.
+
+data-video: the YouTube link (watch / youtu.be / embed) or the bare video id. data-title: the title of the video (used for the iframe title).
+The poster is optional: put <picture>/<img class="product-video__img"> into the button (and into the thumbnail) to use your own one;
+without it the js takes the YouTube poster (maxresdefault, then hqdefault). The slides and the thumbnails are hardcoded on purpose
+(a placeholder, the templater has no loops; in MODX they become loops).
+-->
+
+<section class="product-video">
+  <h2 class="visually-hidden">Відео про препарат</h2>
+
+  <div class="product-video__player  swiper  js-product-video">
+    <ul class="product-video__list  swiper-wrapper">
+      <li class="product-video__item  swiper-slide">
+        <button class="product-video__media  js-product-video-play" type="button" data-video="https://www.youtube.com/watch?v=G6ARIEmeiqw" data-title="Цетрилев Нео: відео 1" aria-label="Відтворити відео: Цетрилев Нео: відео 1">
+          <span class="product-video__play" aria-hidden="true">
+            <svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__item  swiper-slide">
+        <button class="product-video__media  js-product-video-play" type="button" data-video="https://www.youtube.com/watch?v=xZLp5HylQBA" data-title="Цетрилев Нео: відео 2" aria-label="Відтворити відео: Цетрилев Нео: відео 2">
+          <span class="product-video__play" aria-hidden="true">
+            <svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__item  swiper-slide">
+        <button class="product-video__media  js-product-video-play" type="button" data-video="https://www.youtube.com/watch?v=HOIiBSEWIwI" data-title="Цетрилев Нео: відео 3" aria-label="Відтворити відео: Цетрилев Нео: відео 3">
+          <span class="product-video__play" aria-hidden="true">
+            <svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__item  swiper-slide">
+        <button class="product-video__media  js-product-video-play" type="button" data-video="https://www.youtube.com/watch?v=8lqdkGAufEA" data-title="Цетрилев Нео: відео 4" aria-label="Відтворити відео: Цетрилев Нео: відео 4">
+          <span class="product-video__play" aria-hidden="true">
+            <svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="product-video__thumbs  swiper  js-product-video-thumbs">
+    <ul class="product-video__thumbs-list  swiper-wrapper">
+      <li class="product-video__thumb  swiper-slide">
+        <button class="product-video__thumb-btn" type="button" aria-label="Перейти до відео 1">
+          <span class="product-video__thumb-media">
+            <span class="product-video__play  product-video__play--sm" aria-hidden="true">
+              <svg width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+            </span>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__thumb  swiper-slide">
+        <button class="product-video__thumb-btn" type="button" aria-label="Перейти до відео 2">
+          <span class="product-video__thumb-media">
+            <span class="product-video__play  product-video__play--sm" aria-hidden="true">
+              <svg width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+            </span>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__thumb  swiper-slide">
+        <button class="product-video__thumb-btn" type="button" aria-label="Перейти до відео 3">
+          <span class="product-video__thumb-media">
+            <span class="product-video__play  product-video__play--sm" aria-hidden="true">
+              <svg width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+            </span>
+          </span>
+        </button>
+      </li>
+      <li class="product-video__thumb  swiper-slide">
+        <button class="product-video__thumb-btn" type="button" aria-label="Перейти до відео 4">
+          <span class="product-video__thumb-media">
+            <span class="product-video__play  product-video__play--sm" aria-hidden="true">
+              <svg width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#play"></use></svg>
+            </span>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="product-video__nav">
+    <button class="btn-icon-secondary  js-product-video-prev" type="button" aria-label="Попереднє відео">
+      <svg width="18" height="18" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
+    </button>
+    <button class="btn-icon-secondary  js-product-video-next" type="button" aria-label="Наступне відео">
+      <svg width="18" height="18" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
+    </button>
+  </div>
+</section>

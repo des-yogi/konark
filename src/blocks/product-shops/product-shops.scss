@@ -1,0 +1,65 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-8/16/20/24/32, $radius-24/full, $shadow-s-hover, $transition-time, $focus-ring-offset
+// Product shops: a light card with a heading and a wrapping row of logo pills.
+// The logo files are 155x64 and already have the color of the shop, so they are shown in their own size, never scaled or cropped:
+// the pills wrap by themselves, the number in a row depends on the width of the card. Only the gap follows the screen: 8 / 20 (md to lg) / 16 (lg and up).
+.product-shops {
+  display: flex;
+  flex-direction: column;
+  gap: $space-24;
+  padding: $space-32 $space-16;
+  border-radius: $radius-24;
+  background-color: var(--bg-overlay-subtle);
+
+  @include media-up('md') {
+    padding: $space-32;
+  }
+
+  // .subheading gives a bottom margin and a smaller size on a phone (18px), the mockup has 20px; it is kept as the text style says
+  &__title {
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-8;
+    margin: 0; // the global ul has a bottom margin
+    padding: 0;
+    list-style: none;
+
+    @include media-between('md', 'lg') {
+      gap: $space-20;
+    }
+
+    @include media-up('lg') {
+      gap: $space-16;
+    }
+  }
+
+  &__item {
+    flex: none;
+    margin: 0; // the global `li + li` rule must not shift the pills
+  }
+
+  &__link {
+    display: block; // the size comes from the logo (width / height attributes 155x64)
+    border-radius: $radius-full;
+    overflow: hidden; // clips the logo to the pill
+    transition: box-shadow $transition-time ease;
+
+    @include button-hover {
+      box-shadow: $shadow-s-hover;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+    @include button-reduced-motion;
+  }
+
+  &__logo {
+    display: block;
+  }
+}

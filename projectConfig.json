@@ -113,7 +113,15 @@
     "field-file": [],
     "vacancy": [],
     "search-results": [],
-    "search-card": []
+    "search-card": [],
+    "product": [],
+    "product-gallery": [],
+    "product-info": [],
+    "product-awards": [],
+    "product-video": [],
+    "product-price": [],
+    "product-shops": [],
+    "product-notice": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

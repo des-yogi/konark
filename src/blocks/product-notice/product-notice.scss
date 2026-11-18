@@ -1,0 +1,119 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss: $space-8/16/20/24/32, $radius-12/24 (box-sizing: border-box is set here on the figure)
+// Product notice: a light card with a heading, a text and two square figures.
+// The columns have no breakpoints: a cell is at least $figure-min-size, so the row has 1 column on phones and 2 when they fit
+// (302 / 240px cells in the 624 / 497px of the tablet / desktop mockups). A figure is at most $figure-max-size (the tablet cell),
+// so a single column does not grow on wide phones, and the list is at most two such cells wide, so on a wide card
+// the two columns stay together at the left edge. Only the gap follows the screen: 8 / 20 (md to lg) / 16 (lg and up).
+// The photo fills the cell inside its paddings and keeps its ratio (contain), the caption hangs on the top edge.
+// The paddings: 32px on top (room for the caption), 16 to 24px on the other sides, growing with the cell from 240 to 302px
+// (the item is a size container for that).
+.product-notice {
+  $figure-min-size: 240px; // the desktop mockup cell: 2 x 240 + 16 fits the 497px of the desktop card
+  $figure-max-size: 302px;
+  $figure-padding: clamp(
+    $space-16,
+    #{$space-16} + (100cqi - #{$figure-min-size}) * 8 / 62,
+    $space-24
+  ); // 16 at 240, 24 at 302: (24 - 16) / (302 - 240)
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-24;
+  padding: $space-32 $space-16;
+  border-radius: $radius-24;
+  background-color: var(--bg-overlay-subtle);
+
+  @include media-up('md') {
+    padding: $space-32;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+  }
+
+  // .subheading gives a bottom margin and a smaller size on a phone (18px), the mockup has 20px; it is kept as the text style says
+  &__title {
+    margin: 0;
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min($figure-min-size, 100%), 1fr));
+    gap: $space-8;
+    max-inline-size: 2 * $figure-max-size + $space-20; // the widest gap; with a narrower one the figures leave a few px at the end
+    margin: 0; // the global ul has a bottom margin
+    padding: 0;
+    list-style: none;
+
+    @include media-between('md', 'lg') {
+      gap: $space-20;
+    }
+
+    @include media-up('lg') {
+      gap: $space-16;
+    }
+  }
+
+  &__item {
+    container-type: inline-size;
+    margin: 0; // the global `li + li` rule must not shift the figures
+  }
+
+  &__figure {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-inline-size: $figure-max-size;
+    aspect-ratio: 1;
+    margin: 0; // the global figure margin
+    padding: $space-32 $figure-padding $figure-padding;
+    border-radius: $radius-24;
+    overflow: hidden;
+    background-color: var(--bg-overlay-medium);
+  }
+
+  // The picture fills the space inside the paddings, the image keeps its ratio inside it
+  &__picture {
+    display: block;
+    flex: 1;
+    align-self: stretch;
+    min-inline-size: 0;
+  }
+
+  &__img {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+  }
+
+  &__label {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    padding: $space-8 $space-16;
+    border-end-start-radius: $radius-12;
+    border-end-end-radius: $radius-12;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--text-primary);
+    background-color: var(--tag-bg-hover);
+    translate: -50% 0;
+  }
+}

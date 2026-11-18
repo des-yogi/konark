@@ -1,0 +1,293 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+@use '../../scss/mixins/photo-mixins.scss' as *;
+
+// Needs in variables.scss: $space-2/4/8/16/24/40, $radius-12/14/16/24/28/full, $shadow-s, $header-height, $white
+// Product gallery: the main photo in a square frame (+ an optional label), thumbnails, zoom of the main photo.
+// Thumbnails: a row under the photo (a scrolling row below md), a column on the left from md to lg, a row of 4 from lg.
+// Zoom (product-gallery.js): where the device really hovers, the photo grows and follows the pointer;
+// elsewhere a tap grows the photo and it is scrolled with the finger. The ratio is --zoom-scale (data-scale on the root overrides it).
+.product-gallery {
+  $block-name: &; // #{$block-name}__element
+
+  // Keep in sync with hoverZoom in product-gallery.js
+  $zoom-hover: '(hover: hover) and (pointer: fine)';
+  $thumb-size: 127px;
+  $thumb-size-sm: 88px;
+  $zoom-duration: 0.6s;
+  $gallery-max-sm: 450px;
+  $gallery-max-md: 688px;
+  $gallery-max-lg: 580px;
+  $thumb-room: $space-24; // the shadow and the focus ring of the thumbnails must fit in the scrolling row
+
+  --zoom-scale: 2.5;
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+  max-inline-size: $gallery-max-sm;
+
+  // Up to lg the gallery does not grow with the screen, the rest of the column is taken by the details
+  @include media-between('md', 'lg') {
+    flex-direction: row;
+    align-items: flex-start;
+    max-inline-size: $gallery-max-md;
+  }
+
+  // From lg the gallery is a column
+  @include media-up('lg') {
+    max-inline-size: $gallery-max-lg;
+  }
+
+  // The column of the details is much longer than the gallery, so the gallery stays in view (if the window is high enough)
+  @include media-up('lg', '(height >= 840px)') {
+    position: sticky;
+    inset-block-start: calc(#{$header-height} + #{$space-24});
+  }
+
+  &__stage {
+    position: relative;
+    inline-size: 100%;
+    aspect-ratio: 1;
+    border-radius: $radius-28;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-s;
+
+    @include media-between('md', 'lg') {
+      flex: 1;
+      inline-size: auto;
+      min-inline-size: 0;
+    }
+  }
+
+  // Optional tag at the top centre ("new", "sale"...), the same as prod-card__label but bigger from md. Empty label is hidden.
+  &__label {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    z-index: 1;
+    padding: $space-8 $space-16;
+    border-end-start-radius: $radius-12;
+    border-end-end-radius: $radius-12;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--label-color, var(--text-primary));
+    background-color: var(--label-bg, var(--tag-bg-hover));
+    translate: -50% 0;
+    pointer-events: none;
+
+    @include media-up('md') {
+      padding: $space-12 $space-24;
+      font-size: 14px;
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    &--blue {
+      --label-color: #{$white};
+      --label-bg: var(--palette-main-blue-50);
+    }
+
+    &--grey {
+      --label-color: var(--text-primary);
+      --label-bg: var(--tag-bg-hover);
+    }
+
+    &--red {
+      --label-color: #{$white};
+      --label-bg: var(--tag-red);
+    }
+
+    // Dark text on purpose: white is unreadable on yellow in both themes
+    &--yellow {
+      --label-color: rgb(0 0 0 / 87%);
+      --label-bg: var(--tag-yellow);
+    }
+  }
+
+  // The frame of the photo (a button for the zoom): it clips the zoomed photo, the label and the hint stay outside of it
+  &__viewport {
+    position: absolute;
+    inset: 0;
+    padding: $space-16;
+    border-radius: inherit;
+    overflow: hidden;
+
+    @include media-up('md') {
+      padding: $space-40;
+    }
+
+    // No zoom source: no zoom
+    &[data-zoom] {
+      cursor: zoom-in;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring));
+  }
+
+  &__picture {
+    display: block;
+  }
+
+  &__img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  &__hint {
+    position: absolute;
+    inset-block-end: $space-16;
+    inset-inline-end: $space-16;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: $space-40;
+    block-size: $space-40;
+    border-radius: $radius-14;
+    color: var(--btn-secondary-icon);
+    background-color: var(--btn-secondary-icon-bg);
+    box-shadow: $shadow-s;
+    transition: opacity $transition-time ease;
+    pointer-events: none;
+
+    @include button-reduced-motion;
+  }
+
+  // Zoom by hover: the photo is scaled around the pointer (--zoom-x / --zoom-y are written by the script)
+  @media #{$zoom-hover} {
+    &__img {
+      transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
+      transition: scale $zoom-duration cubic-bezier(0.22, 0.61, 0.36, 1);
+
+      @include button-reduced-motion;
+    }
+
+    &__viewport--zoomed #{$block-name}__img {
+      scale: var(--zoom-scale);
+    }
+  }
+
+  // Zoom by tap: the zoomed photo is wider than the frame and is scrolled with the finger (arrow keys work too)
+  @media not all and #{$zoom-hover} {
+    &__viewport--zoomed {
+      overflow: auto;
+      overscroll-behavior: contain;
+
+      #{$block-name}__img {
+        inline-size: calc(var(--zoom-scale) * 100%);
+        max-inline-size: none;
+      }
+    }
+
+    // The hint: nothing else shows a touch user that the photo can be enlarged
+    &__hint {
+      display: flex;
+    }
+
+    &__viewport:not([data-zoom]) ~ #{$block-name}__hint,
+    &__viewport--zoomed ~ #{$block-name}__hint {
+      opacity: 0;
+    }
+  }
+
+  // Below md a row that scrolls without the script; the negative margin and the padding keep the shadows and the focus ring
+  &__thumbs {
+    display: flex;
+    gap: $space-8;
+    margin: (-$thumb-room) (-$space-8);
+    padding: $thumb-room $space-8;
+    list-style: none;
+    overflow-x: auto;
+
+    @include media-up('md') {
+      flex: none;
+      flex-direction: column;
+      gap: $space-16;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    // 4 thumbnails in a row, they shrink a little where the gallery is narrow (xl)
+    @include media-up('lg') {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, $thumb-size));
+    }
+  }
+
+  &__item {
+    flex: none;
+    inline-size: $thumb-size-sm;
+    margin: 0; // the global `li + li` rule must not shift the thumbnails
+
+    @include media-up('md') {
+      inline-size: $thumb-size;
+    }
+
+    @include media-up('lg') {
+      inline-size: auto;
+    }
+
+    &::before {
+      content: none;
+    }
+  }
+
+  // Hover and focus are the same as on the product card (photo-mixins): zoom of the photo, light darkening, focus ring
+  &__thumb {
+    inline-size: 100%;
+    margin: 0;
+    padding: $space-2;
+    border: 0;
+    border-radius: $radius-16;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-s;
+
+    @include fancybox-photo(#{$block-name}__thumb-img);
+
+    @include media-up('md') {
+      padding: $space-4;
+      border-radius: $radius-24;
+    }
+
+    // The mixin sets zoom-in, but a thumbnail switches the photo
+    &:enabled {
+      cursor: pointer;
+    }
+
+    // Keyboard focus gets the same zoom and darkening as hover (the mixin gives only the ring)
+    &:focus-visible {
+      #{$block-name}__thumb-img {
+        transform: scale(#{1 + $photo-zoom});
+      }
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // The active thumbnail has the same ring as the focus (button-focus), so the focus on it does not make a second ring
+    &[aria-pressed='true'] {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset-lg;
+    }
+  }
+
+  &__thumb-picture {
+    display: block;
+  }
+
+  &__thumb-img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+}

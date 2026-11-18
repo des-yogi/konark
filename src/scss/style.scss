@@ -118,6 +118,14 @@
 @use '../blocks/vacancy/vacancy';
 @use '../blocks/search-results/search-results';
 @use '../blocks/search-card/search-card';
+@use '../blocks/product/product';
+@use '../blocks/product-gallery/product-gallery';
+@use '../blocks/product-info/product-info';
+@use '../blocks/product-awards/product-awards';
+@use '../blocks/product-video/product-video';
+@use '../blocks/product-price/product-price';
+@use '../blocks/product-shops/product-shops';
+@use '../blocks/product-notice/product-notice';
 
 // Подключения из addCssAfter:
 @use './print' as *;

@@ -1,0 +1,38 @@
+<!--DEV
+@@include('blocks/product-notice/product-notice.html')
+
+Product notice (a block of the details column on the product page, after product-shops): a warning for the buyer
+that the package may look different from the photo, with two photos of the package (old and new design) as proof.
+A section with its own visible heading (h2 in the style of .subheading), a text and a list of two figures.
+Every figure has a caption on the top edge (figcaption), which is also the name of the photo for assistive technologies.
+The photos lie in img/ (here placeholders: package-old.*, package-new.*), the size of the source is 480x480,
+the size on the page is set in the styles. In MODX the text and the two photos are fields of the product.
+-->
+
+<section class="product-notice">
+  <div class="product-notice__head">
+    <h2 class="product-notice__title  subheading">До уваги споживача</h2>
+    <p class="product-notice__text">Зовнішній вигляд товару може відрізнятися від фотографії</p>
+  </div>
+
+  <ul class="product-notice__list">
+    <li class="product-notice__item">
+      <figure class="product-notice__figure">
+        <picture class="product-notice__picture">
+          <source srcset="img/package-old.webp" type="image/webp">
+          <img class="product-notice__img" src="img/package-old.png" width="480" height="480" alt="Цетрилев Нео: упаковка у старому дизайні" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="product-notice__label">Старий дизайн</figcaption>
+      </figure>
+    </li>
+    <li class="product-notice__item">
+      <figure class="product-notice__figure">
+        <picture class="product-notice__picture">
+          <source srcset="img/package-new.webp" type="image/webp">
+          <img class="product-notice__img" src="img/package-new.png" width="480" height="480" alt="Цетрилев Нео: упаковка у новому дизайні" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="product-notice__label">Новий дизайн</figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>

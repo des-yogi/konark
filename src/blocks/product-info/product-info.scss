@@ -1,0 +1,173 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-4/8/20/24/32/48/64, $radius-8, $focus-ring-offset, $font-weight-semibold
+// Product info: the main parameters, the table of the properties, the long notes and the instruction buttons.
+// The groups are spaced by --product-gap (set by .product, 32 / 40 / 32).
+// Params: up to md three rows (name left, value right), from md one row of three cells with dividers.
+// The distance between a cell and a divider is the same on both sides and grows with the width of the row (container query units).
+// The names of the specs and the notes and the values of the params are semibold
+@mixin product-info-strong {
+  margin: 0;
+  font-weight: $font-weight-semibold;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.product-info {
+  $block-name: &; // #{$block-name}__element
+  $divider: 1px solid var(--divider-subtle);
+  $params-gap: clamp(#{$space-24}, 8cqi, #{$space-64});
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--product-gap, #{$space-32});
+  line-height: 1.5;
+
+  &__params {
+    margin: 0;
+
+    @include media-up('md') {
+      display: flex;
+      padding-block: $space-8;
+      container-type: inline-size;
+    }
+  }
+
+  &__param {
+    display: flex;
+    gap: $space-8;
+    padding: $space-8 0 $space-4;
+    border-bottom: $divider;
+
+    @include media-up('md') {
+      flex-direction: column;
+      gap: $space-4;
+      min-inline-size: 0;
+      padding: 0;
+      border-bottom: 0;
+
+      & + & {
+        margin-inline-start: $params-gap;
+        padding-inline-start: $params-gap;
+        border-inline-start: $divider;
+      }
+    }
+  }
+
+  // dt is bold by default (typo.scss), in the mockup the name is regular
+  &__param-name {
+    flex: none;
+    margin: 0;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  &__param-value {
+    @include product-info-strong;
+
+    flex: 1;
+    min-inline-size: 0;
+    text-align: end;
+
+    @include media-up('md') {
+      flex: none;
+      text-align: start;
+    }
+  }
+
+  &__specs {
+    margin: 0;
+  }
+
+  // The value goes under the name (and stays whole) if it does not fit into the row
+  &__spec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: $space-8;
+    padding-block: $space-8;
+    border-bottom: $divider;
+  }
+
+  &__spec-name {
+    @include product-info-strong;
+  }
+
+  &__spec-value {
+    margin: 0;
+    margin-inline-start: auto;
+    text-align: end;
+    color: var(--text-secondary);
+  }
+
+  // No hover in the mockup: the underline goes away; the focus is the standard ring
+  &__link {
+    border-radius: $radius-8;
+    color: var(--text-accent);
+    text-decoration: underline;
+    text-underline-position: from-font;
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @include button-hover {
+      text-decoration: none;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+  }
+
+  &__notes {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin: 0;
+  }
+
+  &__note {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-block-size: $space-48;
+    padding-block: $space-8;
+    border-bottom: $divider;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  &__note-name {
+    @include product-info-strong;
+  }
+
+  &__note-text {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  // Up to md the buttons are one under another, stretched, with the icon at the right edge
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-20;
+
+    @include media-up('md') {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__pdf.btn-secondary,
+  &__full.btn-link {
+    justify-content: space-between;
+
+    @include media-up('md') {
+      justify-content: center;
+    }
+  }
+}

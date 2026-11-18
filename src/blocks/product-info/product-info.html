@@ -1,0 +1,84 @@
+<!--DEV
+@@include('blocks/product-info/product-info.html')
+
+Product info (the first blocks of the details column on the product page): the main parameters, the table of the properties,
+the long notes and the instruction buttons. It is included into .product__details. The groups are spaced by --product-gap (set by .product).
+The rows are hardcoded on purpose (a placeholder, the templater has no loops; in MODX each group becomes a loop and an empty field removes its row).
+
+Params (product-info__params): up to md three rows (name left, value right), from md one row with dividers.
+Specs (product-info__specs): the value can be a link (product-info__link), e.g. a filter of the catalog.
+Notes (product-info__notes): a name and a paragraph.
+Actions: the PDF is a download (btn-secondary), the full instruction is on another site (btn-link, new tab).
+-->
+
+<div class="product-info">
+  <dl class="product-info__params">
+    <div class="product-info__param">
+      <dt class="product-info__param-name">Кількість</dt>
+      <dd class="product-info__param-value">6 таблеток</dd>
+    </div>
+    <div class="product-info__param">
+      <dt class="product-info__param-name">Форма випуску</dt>
+      <dd class="product-info__param-value">Таблетки, вкриті оболонкою</dd>
+    </div>
+    <div class="product-info__param">
+      <dt class="product-info__param-name">Дозування</dt>
+      <dd class="product-info__param-value">5 мг</dd>
+    </div>
+  </dl>
+
+  <dl class="product-info__specs">
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">АТС клас</dt>
+      <dd class="product-info__spec-value">R06AE09 Левоцетиризин</dd>
+    </div>
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">Група</dt>
+      <dd class="product-info__spec-value"><a class="product-info__link" href="#">Безрецептурні лікарські засоби</a></dd>
+    </div>
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">Категорія</dt>
+      <dd class="product-info__spec-value"><a class="product-info__link" href="#">Проти алергії</a></dd>
+    </div>
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">Діюча речовина</dt>
+      <dd class="product-info__spec-value">Левоцетиризин</dd>
+    </div>
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">Умови випуску</dt>
+      <dd class="product-info__spec-value">Без рецепта</dd>
+    </div>
+    <div class="product-info__spec">
+      <dt class="product-info__spec-name">Реєстраційне посвідчення</dt>
+      <dd class="product-info__spec-value">UA/15063/01/01</dd>
+    </div>
+  </dl>
+
+  <dl class="product-info__notes">
+    <div class="product-info__note">
+      <dt class="product-info__note-name">Фармакотерапевтична група</dt>
+      <dd class="product-info__note-text">Антигістамінні засоби для системного застосування. Похідні піперазину.</dd>
+    </div>
+    <div class="product-info__note">
+      <dt class="product-info__note-name">Виробник</dt>
+      <dd class="product-info__note-text">Гетеро Лабз Лімітед, Індія/Hetero Labs Limited, India.</dd>
+    </div>
+    <div class="product-info__note">
+      <dt class="product-info__note-name">Показання для застосування</dt>
+      <dd class="product-info__note-text">Симптоматичне лікування алергічного риніту (у тому числі цілорічного алергічного риніту) та кропив’янки.</dd>
+    </div>
+  </dl>
+
+  <div class="product-info__actions">
+    <a class="btn-secondary  product-info__pdf" href="#" download>
+      <span class="text-roll"><span class="text-roll__line">Інструкція (PDF)</span><span class="text-roll__line" aria-hidden="true">Інструкція (PDF)</span></span>
+      <span class="btn-secondary__icon">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#download"></use></svg>
+      </span>
+    </a>
+    <a class="btn-link  product-info__full" href="#" target="_blank" rel="nofollow noopener">
+      <span class="text-roll"><span class="text-roll__line">Повна інструкція</span><span class="text-roll__line" aria-hidden="true">Повна інструкція</span></span>
+      <svg class="btn-link__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+    </a>
+  </div>
+</div>
