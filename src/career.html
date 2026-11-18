@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js  page" lang="uk" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карʼєра</title>
+  @@include('_include/page_head.html')
+</head>
+
+<body>
+  <noscript>У вас вимкнено JavaScript. Приносимо свої вибачення, але це ускладнює користування цим сайтом.</noscript>
+  @@include('blocks/skip-link/skip-link.html')
+
+  <div class="page__inner">
+
+    <div class="page__content">
+
+      @@include('blocks/page-header/page-header.html')
+
+      <main id="main" class="main" tabindex="-1">
+
+        @@include('blocks/breadcrumbs/breadcrumbs.html')
+
+        @@include('blocks/page-head/page-head.html', {
+          "title": "<strong>Карʼєра</strong> в Конарк",
+          "text": "<p>Ми високо цінуємо професіоналізм і відповідальність наших співробітників і докладаємо всіх зусиль для забезпечення комфортних та конкурентоспроможних умов роботи та намагаємося надати можливості для зростання і розвитку кожного фахівця нашої команди.</p>"
+        })
+
+        @@include('blocks/vacancies/vacancies.html')
+
+        @@include('blocks/our-team/our-team.html')
+
+        @@include('blocks/functions-slider/functions-slider.html')
+
+        @@include('blocks/seo-text/seo-text.html', {
+          "title": "CEO Секція",
+          "text": "<p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в Компанія «Конарк Інтелмед» створена в 1997 році</p><p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників. Успішний досвід роботи дозволив нам розвинути прогресивну фармацевтичну компанію, що бере участь в</p>"
+        })
+
+        <div class="container  become-partner  @@gradient">
+          <section class="become-partner__card  force-dark">
+            <picture class="become-partner__emblem">
+              <source srcset="img/emblem.webp" type="image/webp">
+              <img class="become-partner__img" src="img/emblem.png" width="460" height="460" alt="" loading="lazy" decoding="async">
+            </picture>
+
+            <h2 class="become-partner__title  h1">Не знайшли<br><strong>вакансію</strong> для себе?</h2>
+
+            <div class="become-partner__body">
+              <div class="become-partner__text  lead">
+                <p>Якщо жодна із запропонованих вакансій не зацікавила вас, просимо, будь ласка, заповнити анкету</p>
+              </div>
+
+              <div class="become-partner__actions">
+                <!-- <a class="btn" href="#">
+                  <span class="text-roll"><span class="text-roll__line">Стати партнером</span><span class="text-roll__line" aria-hidden="true">Стати партнером</span></span>
+                </a> -->
+
+                <button class="btn-secondary  become-partner__more"
+                        type="button"
+                        data-coreui-toggle="modal"
+                        data-coreui-target="#resume-modal"
+                >
+                  <span class="text-roll"><span class="text-roll__line">відправити резюме</span><span class="text-roll__line" aria-hidden="true">відправити резюме</span></span>
+                  <span class="btn-secondary__icon">
+                    <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+
+      </main>
+
+    </div>
+
+    <div class="page__footer-wrapper">
+      @@include('blocks/page-footer/page-footer.html')
+    </div>
+
+  </div>
+
+  @@include('_include/page_bottom.html')
+
+</body>
+</html>

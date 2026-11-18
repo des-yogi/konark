@@ -1,0 +1,42 @@
+<!--DEV
+@@include('blocks/our-team/our-team.html')
+
+"Our team" section: a glass panel with the title and the text on the left and the list of advantages on the right.
+Below lg the two parts stack (100% each), from lg they are two equal columns.
+- The text is a div with plain <p> (no classes): the spacing comes from the global p rule.
+- Advantages: img/<icon>.svg (colors are inlined in the svg, alt is empty), 56x56.
+- STUBS: texts and the icon (the same antihistamine.svg as in drug-type-card) are placeholders from the design.
+-->
+<section class="container  our-team">
+  <div class="our-team__panel">
+    <div class="our-team__about">
+      <h2 class="our-team__title  h2">Наша команда&nbsp;— <strong>це наша гордість</strong></h2>
+      <div class="our-team__text">
+        <p>Ми поважаємо особисту позицію кожного співробітника і будуємо спільну діяльність відкрито, заохочуючи до максимальної реалізації свого потенціалу всіх, хто цього бажає.</p>
+        <p>Такий підхід дозволяє нам будувати дружню згуртовану спільноту, де кожен розділяє її цінності. Ми пропонуємо вам будувати кар’єру в активній та цікавій атмосфері, де у вас є можливість розвиватися.</p>
+      </div>
+    </div>
+
+    <div class="our-team__advantages">
+      <h3 class="our-team__subtitle  h6">Наші переваги</h3>
+      <ul class="our-team__list">
+        <li class="our-team__item">
+          <img class="our-team__icon" src="img/antihistamine.svg" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <p class="our-team__item-text  subheading">Робота в комфортних умовах</p>
+        </li>
+        <li class="our-team__item">
+          <img class="our-team__icon" src="img/antihistamine.svg" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <p class="our-team__item-text  subheading">Свобода думок і вплив на результат роботи</p>
+        </li>
+        <li class="our-team__item">
+          <img class="our-team__icon" src="img/antihistamine.svg" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <p class="our-team__item-text  subheading">Навчання і розвиток</p>
+        </li>
+        <li class="our-team__item">
+          <img class="our-team__icon" src="img/antihistamine.svg" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <p class="our-team__item-text  subheading">Реалізація власних ініціатив за підтримки колег</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,72 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Vacancy card: the title on the top, the meta pressed to the bottom.
+// The whole card is one link (the title link is stretched over it with ::after).
+.vacancy-card {
+  $block-name: &; // #{$block-name}__element
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $space-24;
+  min-height: 200px;
+  height: 100%;
+  padding: $space-24;
+  border-radius: $radius-24;
+  background-color: var(--bg-overlay-subtle);
+  box-shadow: $shadow-s;
+  transition: $button-transition;
+
+  @include button-reduced-motion;
+
+  // Whole-card states (as download-panel)
+  @include button-hover {
+    background-color: var(--bg-overlay-medium);
+  }
+
+  &:has(#{$block-name}__link:focus-visible) {
+    outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+    outline-offset: $focus-ring-offset;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:focus-visible {
+      outline: 0; // the ring is drawn around the whole card
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: $radius-24;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4 $space-12;
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  &__meta-item + &__meta-item::before {
+    content: '|';
+    margin-inline-end: $space-12;
+  }
+}

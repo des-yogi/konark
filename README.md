@@ -14,6 +14,10 @@
 * https://des-yogi.github.io/konark/reporting
 * https://des-yogi.github.io/konark/therapeutic-areas
 * https://des-yogi.github.io/konark/contacts
+* https://des-yogi.github.io/konark/safety-use
+* https://des-yogi.github.io/konark/career
+* https://des-yogi.github.io/konark/vacancy
+* https://des-yogi.github.io/konark/search-results
 * https://des-yogi.github.io/konark/privacy-policy
 * https://des-yogi.github.io/konark/text
 * https://des-yogi.github.io/konark/page-404

@@ -109,6 +109,15 @@
 @use '../blocks/atc-tree/atc-tree';
 @use '../blocks/atc-page/atc-page';
 @use '../blocks/reporting/reporting';
+@use '../blocks/safety-table/safety-table';
+@use '../blocks/vacancies/vacancies';
+@use '../blocks/vacancy-card/vacancy-card';
+@use '../blocks/our-team/our-team';
+@use '../blocks/resume-modal/resume-modal';
+@use '../blocks/field-file/field-file';
+@use '../blocks/vacancy/vacancy';
+@use '../blocks/search-results/search-results';
+@use '../blocks/search-card/search-card';
 
 // Подключения из addCssAfter:
 @use './print' as *;

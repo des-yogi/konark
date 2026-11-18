@@ -1,0 +1,34 @@
+<!--DEV
+@@include('blocks/search-card/search-card--product.html', {
+  "title": "Ципрофлоксацин ЄВРО таблетки, 500 мг",
+  "href": "#",
+  "text": "Антибактеріальні засоби для системного застосування",
+  "image": "product-1"
+})
+
+Search result card, product version: the search-card block with the modifier search-card--product and the image
+(mobile: on the top, from md: on the left, 213x213). See search-card.html for the rest of the notes.
+
+- The image is decorative (alt is empty): the title already names the product.
+- The packshots are PNG with transparency, so the image is contained, not cropped.
+- STUB: "product-1" is the prod-card image (it is already in img/ of the build).
+-->
+
+<article class="search-card  search-card--product">
+  <picture class="search-card__media">
+    <source srcset="img/@@image.webp" type="image/webp">
+    <img class="search-card__img" src="img/@@image.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="search-card__body">
+    <div class="search-card__content">
+      <h2 class="search-card__title  h6">
+        <a class="search-card__link" href="@@href">@@title</a>
+      </h2>
+      <p class="search-card__text">@@text</p>
+    </div>
+    <span class="search-card__more  btn-link" aria-hidden="true">
+      <span class="text-roll"><span class="text-roll__line">Читати далі</span><span class="text-roll__line">Читати далі</span></span>
+      <svg class="btn-link__icon" width="24" height="24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+    </span>
+  </div>
+</article>

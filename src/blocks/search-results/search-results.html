@@ -1,0 +1,86 @@
+<!--DEV
+@@include('blocks/search-results/search-results.html')
+
+Search results page content. Put it in <main> after the page-head (the h1 "Результати пошуку" is there).
+
+- __head: the summary (the count + the query) and the refine search form (the search-form block, a mix).
+  1 column on mobile, 2 columns from md.
+- #search-results is the HTMX target: the list (or the empty state) and the pagination.
+  #search-summary has its own id, so it can be refreshed together with the list (hx-swap-oob) later.
+- The input name "q" is the same as in the header search form: in SimpleSearch use &searchIndex=`q`
+  (its default is "search").
+- The cards: search-card--product.html for products, search-card.html for everything else (two chunks in MODX).
+- Empty query / nothing found: instead of the list (and without the pagination):
+  <p class="search-results__empty  h6">За вашим запитом нічого не знайдено</p>
+- STUBS: the count, the query, the cards and the pagination are placeholders (in MODX: SimpleSearch).
+-->
+
+<div class="container  search-results">
+  <div class="search-results__head">
+    <div class="search-results__summary" id="search-summary">
+      <p class="lead">15 результатів пошуку</p>
+      <p>Ви шукали: «євро»</p>
+    </div>
+
+    <form class="search-form  search-results__form" role="search" action="/search/" method="get">
+      <input class="search-form__input" type="search" name="q" value="євро" placeholder="Search" aria-label="Пошук" autocomplete="off" enterkeyhint="search">
+      <button class="search-form__submit  btn-icon-primary" type="submit" aria-label="Знайти">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+      </button>
+    </form>
+  </div>
+
+  <div class="search-results__results" id="search-results">
+    <h2 class="visually-hidden">Знайдені сторінки</h2>
+
+    <ol class="search-results__list">
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card--product.html', {
+          "title": "Ципрофлоксацин ЄВРО таблетки, 500 мг",
+          "href": "#",
+          "text": "Антибактеріальні засоби для системного застосування",
+          "image": "product-1"
+        })
+      </li>
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card--product.html', {
+          "title": "Ципрофлоксацин ЄВРО таблетки, 500 мг",
+          "href": "#",
+          "text": "Антибактеріальні засоби для системного застосування",
+          "image": "product-1"
+        })
+      </li>
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card--product.html', {
+          "title": "Ципрофлоксацин ЄВРО таблетки, 500 мг",
+          "href": "#",
+          "text": "Антибактеріальні засоби для системного застосування",
+          "image": "product-1"
+        })
+      </li>
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card.html', {
+          "title": "Безпеки застосування лікарських засобів",
+          "href": "#",
+          "text": "Дата Лікарський засіб, якого стосується, Власник реєстраційного посвідчення, Короткий опис інформації з безпеки Документ Квітень 2026 ЄВРОФЛОКС, розчин для інфузій, 500 мг/100 мл ТОВ «Конарк Інтелмед» Інформаційний лист-звернення…"
+        })
+      </li>
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card.html', {
+          "title": "Безпеки застосування лікарських засобів",
+          "href": "#",
+          "text": "Дата Лікарський засіб, якого стосується, Власник реєстраційного посвідчення, Короткий опис інформації з безпеки Документ Квітень 2026 ЄВРОФЛОКС, розчин для інфузій, 500 мг/100 мл ТОВ «Конарк Інтелмед» Інформаційний лист-звернення…"
+        })
+      </li>
+      <li class="search-results__item">
+        @@include('../../blocks/search-card/search-card.html', {
+          "title": "Безпеки застосування лікарських засобів",
+          "href": "#",
+          "text": "Дата Лікарський засіб, якого стосується, Власник реєстраційного посвідчення, Короткий опис інформації з безпеки Документ Квітень 2026 ЄВРОФЛОКС, розчин для інфузій, 500 мг/100 мл ТОВ «Конарк Інтелмед» Інформаційний лист-звернення…"
+        })
+      </li>
+    </ol>
+
+    @@include('../../blocks/pagination/pagination.html')
+  </div>
+</div>

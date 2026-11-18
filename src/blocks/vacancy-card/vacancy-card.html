@@ -1,0 +1,23 @@
+<!--DEV
+@@include('blocks/vacancy-card/vacancy-card.html', {
+  "title": "Інженер департаменту розробки (R&D)",
+  "href": "#",
+  "direction": "Фахівці",
+  "employment": "Повний робочий день"
+})
+
+Vacancy card. The whole card is clickable: the link sits on the title and is stretched over the card with ::after,
+so a screen reader gets one link named by the vacancy title.
+The card is not a list item itself: wrap it in <li> (see vacancies).
+Meta: the direction and the employment type, separated by "|" in CSS.
+-->
+
+<article class="vacancy-card">
+  <h3 class="vacancy-card__title  subheading">
+    <a class="vacancy-card__link" href="@@href">@@title</a>
+  </h3>
+  <p class="vacancy-card__meta  caption">
+    <span class="vacancy-card__meta-item">@@direction</span>
+    <span class="vacancy-card__meta-item">@@employment</span>
+  </p>
+</article>

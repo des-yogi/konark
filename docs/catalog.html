@@ -1592,6 +1592,174 @@
       </div>
     </div>
 
+    <div
+      class="resume-modal modal fade"
+      id="resume-modal"
+      tabindex="-1"
+      aria-labelledby="resume-modal-title"
+      aria-hidden="true">
+      <div class="resume-modal__dialog modal-dialog">
+        <div class="resume-modal__content modal-content">
+          <button
+            class="resume-modal__close"
+            type="button"
+            aria-label="Закрити"
+            data-coreui-dismiss="modal">
+            <svg width="24" height="24" aria-hidden="true">
+              <use
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="img/sprite-svg.svg#close"></use>
+            </svg>
+          </button>
+
+          <h2 class="resume-modal__title h5" id="resume-modal-title">Відправити резюме</h2>
+
+          <form class="resume-modal__form" action="" method="post" enctype="multipart/form-data">
+            <div class="resume-modal__fields">
+              <div class="resume-modal__row">
+                <label class="field-text resume-modal__field">
+                  <span class="field-text__name"
+                    >Ім’я<svg class="field-text__required" width="8" height="8" aria-hidden="true">
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                  ></span>
+                  <span class="field-text__input-wrap">
+                    <input
+                      class="field-text__input"
+                      type="text"
+                      name="first_name"
+                      placeholder="Введіть ваше ім’я"
+                      autocomplete="given-name"
+                      required>
+                  </span>
+                </label>
+
+                <label class="field-text resume-modal__field">
+                  <span class="field-text__name"
+                    >Прізвище<svg
+                      class="field-text__required"
+                      width="8"
+                      height="8"
+                      aria-hidden="true">
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                  ></span>
+                  <span class="field-text__input-wrap">
+                    <input
+                      class="field-text__input"
+                      type="text"
+                      name="last_name"
+                      placeholder="Введіть ваше прізвище"
+                      autocomplete="family-name"
+                      required>
+                  </span>
+                </label>
+              </div>
+
+              <label class="field-text resume-modal__field">
+                <span class="field-text__name"
+                  >E-mail<svg class="field-text__required" width="8" height="8" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <input
+                    class="field-text__input"
+                    type="email"
+                    name="email"
+                    placeholder="Введіть ваш e-mail"
+                    autocomplete="email"
+                    required>
+                </span>
+              </label>
+
+              <label class="field-text resume-modal__field">
+                <span class="field-text__name"
+                  >Телефон<svg class="field-text__required" width="8" height="8" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <input
+                    class="field-text__input js-phone-mask"
+                    type="tel"
+                    name="phone"
+                    inputmode="tel"
+                    placeholder="+380 xx xxx xx xx"
+                    aria-describedby="resume-phone-error"
+                    data-msg-invalid="Введіть номер повністю: +380 XX XXX XX XX"
+                    autocomplete="tel"
+                    required>
+                  <span class="field-text__help-text" id="resume-phone-error"></span>
+                </span>
+              </label>
+
+              <label class="field-file">
+                <span class="field-file__name"
+                  >Файл резюме<svg
+                    class="field-file__required"
+                    width="8"
+                    height="8"
+                    aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-file__input-wrap">
+                  <input
+                    class="field-file__input"
+                    type="file"
+                    name="resume"
+                    accept=".pdf,.docx"
+                    data-max-size="10485760"
+                    data-msg-type="Лише файли PDF або DOCX"
+                    data-msg-size="Файл більший за 10 МБ"
+                    aria-describedby="resume-file-help"
+                    required>
+                  <span class="field-file__box">
+                    <span class="field-file__value">Завантажити резюме</span>
+                    <span class="field-file__check" aria-hidden="true"></span>
+                  </span>
+                  <span class="field-file__help-text" id="resume-file-help"
+                    >PDF, DOCX (max 10MB)</span
+                  >
+                </span>
+              </label>
+
+              <div class="field-checkbox">
+                <label class="field-checkbox__name">
+                  <input
+                    class="field-checkbox__input"
+                    type="checkbox"
+                    name="agreement"
+                    value="1"
+                    required
+                    checked>
+                  <span class="field-checkbox__name-text"
+                    >Я надаю згоду на обробку персональних даних згідно з
+                    <a class="resume-modal__link" href="/privacy-policy/"
+                      >Політикою конфіденційності</a
+                    ></span
+                  >
+                </label>
+              </div>
+            </div>
+
+            <button class="btn resume-modal__submit" type="submit">
+              <span class="text-roll"
+                ><span class="text-roll__line">Відправити</span
+                ><span class="text-roll__line" aria-hidden="true">Відправити</span></span
+              >
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script> -->
     <script src="js/script.min.js"></script>
   </body>

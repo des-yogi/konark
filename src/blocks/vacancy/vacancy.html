@@ -1,0 +1,76 @@
+<!--DEV
+@@include('blocks/vacancy/vacancy.html')
+
+Vacancy page content: meta, title, intro, the goal card, the editor text, the closing text and two buttons.
+The column is max 910px wide and centered (as the article text).
+
+- __intro and __body are editor content: plain tags without classes (p, h2, ul > li). An h2 in __body looks like .h5.
+- __goal "Ціль посади" is a separate field (optional: remove the whole div when it is empty).
+- __outro and __actions are the same for all vacancies (template).
+- "Відправити резюме" opens the resume modal: include resume-modal ONCE on the page
+  (@@include('blocks/resume-modal/resume-modal.html')).
+STUBS: the texts from the design, href of "Дивитись всі вакансії" (the page with all vacancies).
+-->
+
+<article class="container  vacancy">
+  <div class="vacancy__inner">
+    <p class="vacancy__meta">
+      <span class="vacancy__meta-item">Фахівці</span>
+      <span class="vacancy__meta-item">Повний робочий день</span>
+    </p>
+
+    <h1 class="vacancy__title  h3">Інженер департаменту розробки (R&amp;D)</h1>
+
+    <div class="vacancy__intro">
+      <p>Konark впродовж сторіччя створює сучасні лікарські засоби. З 2010 року є лідером України за обсягами продажу лікарських засобів у грошовому вираженні і постійно рухається вперед, розвиваючи фармацевтичну галузь України і світу. Реінвестуємо в розвиток компанії до 90% прибутку. Ми активно допомагаємо ЗСУ з 2014 року та підтримуємо економіку країни.</p>
+      <p>У Konark люди завжди на першому місці. Нас регулярно відзначають як кращого роботодавця галузі незалежні рейтингові видання України. Понад 2800 найкращих фахівців обрали нас як роботодавця.<br>Ми в пошуках Інженера в департамент розробки.</p>
+    </div>
+
+    <div class="vacancy__goal">
+      <p class="vacancy__goal-title  subheading">Ціль посади:</p>
+      <p class="vacancy__goal-text">Проведення фармацевтичної розробки (аналітична частина) нових рідких лікарських засобів у проектах високої складності</p>
+    </div>
+
+    <div class="vacancy__body">
+      <h2>Основні задачі:</h2>
+      <ul>
+        <li>Проводить апробацію та розробку аналітичних методик з контролю якості та досліджень субстанцій, допоміжних речовин, напівпродуктів і готових лікарських засобів в рамках фармацевтичної розробки у проектах високої складності або спеціальних досліджень.</li>
+        <li>Виконує аналізи за наявними методиками або затвердженим дизайном експерименту, валідації, трансферу, стабільності, альтернативних виробників АФІ тощо.</li>
+        <li>Оформлює OOS, бере участь у розслідуванні причин виникнення відхилень.</li>
+        <li>Проводить нестандартні аналітичні роботи (розслідування специфічних ситуацій) та оформляє звіти з проведених робіт.</li>
+        <li>Оформлює презентації по проєктах.</li>
+        <li>Надає експертну оцінку складності об’єктів та можливість розробки (аналітична частина) при формуванні пайплайну, бере участь у перемовинах щодо розробки препаратів сторонніми організаціями, розробляє або узгоджує технічне завдання та календарний план.</li>
+        <li>Готує презентації щодо статусу проєктів.</li>
+      </ul>
+
+      <h2>Вимоги:</h2>
+      <ul>
+        <li>Закінчена вища освіта — ОКР «магістр», «спеціаліст» (аналітична хімія, фармація, хімічна технологія, біотехнологія).</li>
+        <li>Досвід роботи у фармацевтичній розробці від 2-х років або у відділі контролю якості.</li>
+        <li>Володіння ВЕРХ та ГХ.</li>
+        <li>Знання англійської мови на рівні не нижче Intermediate.</li>
+      </ul>
+
+      <h2>Графік роботи</h2>
+      <p>пн – чт з 8:00 до 17:00, пт – до 16:00 (в літню пору року до 15:00).</p>
+    </div>
+
+    <div class="vacancy__outro">
+      <h2 class="vacancy__outro-title  h5">Долучайся до команди професіоналів вже сьогодні — надсилай своє резюме.</h2>
+      <p>Якщо твій досвід відповідає вимогам посади, то ми обов’язково зателефонуємо для обговорення деталей. В іншому випадку ми залишимо твоє резюме в резерві до появи відповідної вакансії.</p>
+      <p class="lead">До зустрічі у Konark!</p>
+    </div>
+
+    <div class="vacancy__actions">
+      <button class="btn  vacancy__btn" type="button" data-coreui-toggle="modal" data-coreui-target="#resume-modal">
+        <span class="text-roll"><span class="text-roll__line">Відправити резюме</span><span class="text-roll__line" aria-hidden="true">Відправити резюме</span></span>
+      </button>
+      <a class="btn-secondary  vacancy__btn" href="#">
+        <span class="text-roll"><span class="text-roll__line">Дивитись всі вакансії</span><span class="text-roll__line" aria-hidden="true">Дивитись всі вакансії</span></span>
+        <span class="btn-secondary__icon">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</article>
