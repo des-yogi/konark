@@ -1,0 +1,132 @@
+<!--DEV
+@@include('blocks/vacancies/vacancies.html')
+
+Vacancies: filters (sidebar from lg / drawer below) + the list of vacancy cards + pagination.
+The same structure as catalog, without the search and the chips. Put it in <main> after the page-head.
+
+- The "Фільтри (N)" button (below lg) opens the filters-form drawer.
+- #vacancies-results is the HTMX target: only the list and the pagination are replaced on filtering,
+  the filters form (#filter-form) lives outside of it.
+- STUBS: the filter groups (filters-form), the counter, the cards and the pagination are placeholders (in MODX: loops).
+-->
+<div class="container  vacancies">
+  <aside class="vacancies__filters">
+    @@include('../../blocks/filters-form/filters-form.html')
+  </aside>
+
+  <div class="vacancies__main">
+    <div class="vacancies__filter-btn">
+      <button class="btn-secondary  vacancies__filter-toggle" type="button" data-coreui-toggle="offcanvas" data-coreui-target="#filter-form" aria-controls="filter-form">
+        <span class="text-roll"><span class="text-roll__line">Фільтри (5)</span><span class="text-roll__line" aria-hidden="true">Фільтри (5)</span></span>
+        <span class="btn-secondary__icon">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#filter"></use></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="vacancies__results" id="vacancies-results">
+      <h2 class="visually-hidden">Список вакансій</h2>
+
+      <ul class="vacancies__list">
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+            <li class="vacancies__item">
+              @@include('../../blocks/vacancy-card/vacancy-card.html', {
+                "title": "Інженер департаменту розробки (R&D)",
+                "href": "#",
+                "direction": "Фахівці",
+                "employment": "Повний робочий день"
+              })
+            </li>
+      </ul>
+
+      @@include('../../blocks/pagination/pagination.html')
+    </div>
+  </div>
+</div>

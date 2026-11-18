@@ -1,111 +1,157 @@
 @use '../../scss/variables.scss' as *;
 @use '../../scss/mixins' as *;
 
+// File field (Figma: Input file, states Default / Hover / Focus / Filled / Error).
+// The name, the asterisk, the box and the help text repeat field-text, so both fields look the same in a form.
+// The native input is visually hidden: the box is drawn by __box, the states come from field-file.js.
 .field-file {
   $block-name: &; // #{$block-name}__element
 
   display: block;
-  margin-bottom: 32px;
 
   &__name {
-    @include field-name;
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--input-label);
+  }
+
+  // The red asterisk after the name of a required field (as field-text__required)
+  &__required {
+    display: inline-block;
+    vertical-align: top;
+    margin-inline-start: 2px;
   }
 
   &__input-wrap {
     display: block;
-    position: relative;
-    pointer-events: none;
   }
 
+  // Visually hidden, stays focusable (keyboard: Enter / Space open the file dialog)
   &__input {
     position: absolute;
     width: 1px;
     height: 1px;
-    opacity: 0;
-
-    &:active ~ .field-file__name-text,
-    &:focus-visible ~ .field-file__name-text {
-      // @include field-focus;
-
-      &::before {
-        @include field-focus;
-
-        color: $link-color-hover;
-        border-color: $link-color-hover;
-        background-image: svg-load('../blocks/field-file/bg-img/upload-simple.svg', fill=$main-color);
-
-        // background-color: darken($gray-lightest, 10%); // как у обычных кнопок
-      }
-    }
-  }
-
-  &__name-text {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    width: 100%;
+    margin: 0;
     padding: 0;
-    font-size: 16px;
-    background-color: $white;
-    border-radius: 0;
-    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
 
-    // overflow: hidden;
-    text-overflow: ellipsis;
-
-    &::before {
-      content: attr(data-button-text);
-      display: block;
-      width: 100%;
-      margin-right: 0;
-      padding: $field-padding-vertical $field-padding-horizontal;
-      padding-right: 60px;
-      line-height: $line-height;
-      color: $main-color;
-
-      // background-color: $white;
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-size: 24px;
-      background-image: svg-load('../blocks/field-file/bg-img/upload-simple.svg', fill=$link-color);
-      border: 1px solid $border-color;
-      border-radius: $border-radius;
-      transition: all $transition-time;
-      cursor: pointer;
-      pointer-events: auto;
-    }
-
-    &:hover,
-    &:focus {
-      // @include field-focus;
-
-      &::before {
-        color: $link-color-hover;
-        border-color: $link-color-hover;
-        background-image: svg-load('../blocks/field-file/bg-img/upload-simple.svg', fill=$link-color-hover);
-
-        // background-color: darken($gray-lightest, 10%); // как у обычных кнопок
-      }
-    }
-
-    span {
-      display: block;
-      width: 100%;
-      padding: 8px 16px;
-      font-size: $font-size-sm;
-      color: $text-muted;
+    // The focus ring of the hidden input is drawn on the box
+    &:focus-visible ~ #{$block-name}__box {
+      outline: 2px solid transparent; // stays visible in forced-colors mode
+      background-color: var(--input-bg-active);
+      border-color: var(--input-border-focus);
     }
   }
 
-  &__file-name {
-    font-weight: 500 !important;
-    color: $title-color !important;
+  &__box {
+    display: flex;
+    gap: $space-12;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 $space-16 0 $space-20;
+    border: 1px solid var(--input-border);
+    border-radius: $radius-16;
+    background-color: var(--input-bg);
+    backdrop-filter: blur(15px);
+    cursor: pointer;
+    transition: border-color $transition-time ease, background-color $transition-time ease;
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--input-border-hover);
+        background-color: var(--input-bg-active);
+      }
+    }
+  }
+
+  // Before a file is chosen: the button text (accent, semibold)
+  &__value {
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-accent);
+  }
+
+  // The green check of a valid file (drawn like the tick of field-checkbox)
+  &__check {
+    position: relative;
+    display: none;
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background-color: var(--tag-green);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 5px;
+      width: 10px;
+      height: 5px;
+      border-block-end: 2px solid var(--text-static-white);
+      border-inline-start: 2px solid var(--text-static-white);
+      transform: translateY(-70%) rotate(-45deg);
+    }
   }
 
   &__help-text {
-    @include field-help-text;
+    display: block;
+    margin-top: 9px;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
 
-    color: $color-danger;
+    &:empty {
+      display: none;
+    }
+  }
+
+  // A file is chosen: its name instead of the button text, the green check
+  &--selected {
+    #{$block-name}__value {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    #{$block-name}__check {
+      display: block;
+    }
+  }
+
+  // After --selected: an invalid file keeps its name but loses the check
+  &--error {
+    #{$block-name}__box {
+      &,
+      &:hover {
+        border-color: var(--input-border-error);
+      }
+    }
+
+    #{$block-name}__check {
+      display: none;
+    }
+
+    #{$block-name}__help-text {
+      color: var(--input-border-error);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__box {
+      transition: none;
+    }
   }
 }

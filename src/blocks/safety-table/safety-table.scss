@@ -1,0 +1,184 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Drug safety information: one large table in a rounded card.
+// From lg a real table, below lg a stack of records (labels from data-label, the header row is visually hidden).
+// Built like the table of applicant-modal.
+.safety-table {
+  $block-name: &; // #{$block-name}__element
+
+  $head-line: #e9ecef; // the line under the table header: from the design (border/subtle), no token, the same in both themes
+  $cell-gap: $space-20;
+  $cell-padding: $space-24;
+
+  padding-block: $space-16;
+
+  @include media-up('md') {
+    padding-block: $space-32;
+  }
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    overflow: hidden;
+    border-radius: $radius-24;
+    box-shadow: $shadow-s;
+  }
+
+  // The global table styles (table.scss: outer border, margin, cell borders, slashed zero) are reset here.
+  // The :first-child / :last-child / :not() variants are listed on purpose: they raise the specificity over the global rules.
+  &__table {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-variant-numeric: normal;
+    color: var(--text-secondary);
+
+    th,
+    td,
+    th:first-child,
+    td:first-child,
+    th:last-child,
+    td:last-child,
+    th:not(:first-child),
+    td:not(:first-child) {
+      border: 0;
+      text-align: start;
+    }
+
+    th,
+    td {
+      padding: $cell-gap calc(#{$cell-gap} / 2);
+      font-size: $font-size;
+      font-weight: 400;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    th:first-child,
+    td:first-child {
+      padding-inline-start: $cell-padding;
+    }
+
+    th:last-child,
+    td:last-child {
+      padding-inline-end: $cell-padding;
+    }
+
+    // Column widths from the design (120 / 200 / 200 / the rest / 220 + the gaps); only the table layout needs them
+    @include media-up('lg') {
+      th:nth-child(1) {
+        width: calc(#{$cell-padding} + 120px + #{$cell-gap} / 2);
+      }
+
+      th:nth-child(2),
+      th:nth-child(3) {
+        width: calc(200px + #{$cell-gap});
+      }
+
+      th:nth-child(5) {
+        width: calc(220px + #{$cell-gap} / 2 + #{$cell-padding});
+      }
+    }
+
+    tbody tr {
+      border-block-end: 1px solid var(--divider-subtle);
+      background-color: var(--bg-overlay-subtle);
+    }
+
+    // The date reads as the key of the record
+    td:first-child {
+      color: var(--text-primary);
+    }
+  }
+
+  &__head {
+    background-color: var(--bg-overlay-medium);
+
+    tr {
+      border-block-end: 1px solid $head-line;
+    }
+
+    th,
+    th:first-child,
+    th:last-child {
+      padding-block: $space-16;
+      font-weight: $font-weight-semibold;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+  }
+
+  // The download button and the external link, centered in the column
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    align-items: center;
+
+    @include media-down('sm') {
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+
+  // Below lg: a stack of records. The header row is only for assistive technologies, every cell shows its own label.
+  @include media-down('lg') {
+    &__head {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    &__table {
+      &,
+      tbody,
+      tr,
+      td {
+        display: block;
+      }
+
+      tbody tr {
+        display: flex;
+        flex-direction: column;
+        gap: $space-16;
+        padding: $space-32 $cell-padding;
+      }
+
+      td,
+      td:first-child,
+      td:last-child {
+        padding: 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: $font-weight-semibold;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+      }
+
+      // The document cell: the label, then the button and the link
+      td:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: $space-16;
+      }
+    }
+
+    &__actions {
+      align-items: flex-start;
+    }
+  }
+}

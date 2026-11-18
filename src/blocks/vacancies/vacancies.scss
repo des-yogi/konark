@@ -1,0 +1,82 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Vacancies: sidebar filters (from lg) + the list of vacancy cards + pagination.
+// The same structure as catalog, without the search and the chips. The filters-form block turns into
+// the sidebar by itself from lg, here we only give it a column.
+.vacancies {
+  $block-name: &; // #{$block-name}__element
+
+  // Minimal card width: the grid keeps 3 columns at wide screens and drops to fewer on narrow ones (as catalog)
+  --card-min: 280px;
+
+  padding-block: $space-16 $space-48;
+
+  @include media-up('lg') {
+    @include grid-12;
+
+    align-items: start;
+    padding-block-start: $space-48;
+  }
+
+  &__filters {
+    @include media-up('lg') {
+      grid-column: 1 / span 3;
+    }
+
+    // The sidebar has no visible heading (as in catalog)
+    .filters-form__head {
+      @include media-up('lg') {
+        @include visually-hidden;
+      }
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+    min-width: 0;
+
+    @include media-up('lg') {
+      grid-column: 4 / -1;
+    }
+  }
+
+  // The filter button opens the drawer, so it is not needed when the filters are a sidebar
+  &__filter-btn {
+    display: flex;
+
+    @include media-up('lg') {
+      display: none;
+    }
+  }
+
+  &__filter-toggle {
+    flex: 1;
+  }
+
+  // HTMX target: everything inside is replaced as a whole
+  &__results {
+    display: flex;
+    flex-direction: column;
+    gap: $space-32;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--card-min), calc((100% - 2 * 20px) / 3)), 1fr));
+    gap: $space-16;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('md') {
+      gap: $space-20;
+    }
+  }
+
+  &__item {
+    margin: 0; // resets the global `li + li` margin
+  }
+}

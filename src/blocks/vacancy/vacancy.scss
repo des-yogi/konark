@@ -1,0 +1,147 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Vacancy page content: one text column (max 910px, centered, as the article text).
+// The editor parts (__intro, __body) are plain tags; the vertical rhythm comes from the design:
+// sections 32 / 48 (lg), a heading to its text 12 / 16 (md) / 20 (lg).
+.vacancy {
+  $block-name: &; // #{$block-name}__element
+
+  $section-gap: $space-32;
+  $section-gap-lg: $space-48;
+
+  padding-block: $space-40;
+
+  &__inner {
+    max-width: 910px;
+    margin-inline: auto;
+  }
+
+  // "Фахівці | Повний робочий день" (Figma: Footnote)
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4 $space-12;
+    margin: 0 0 $space-12;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
+
+    @include media-up('md') {
+      margin-bottom: $space-16;
+    }
+
+    @include media-up('lg') {
+      margin-bottom: $space-20;
+    }
+  }
+
+  &__meta-item + &__meta-item::before {
+    content: '|';
+    margin-inline-end: $space-12;
+  }
+
+  &__title {
+    margin: 0 0 $space-12;
+
+    @include media-up('md') {
+      margin-bottom: $space-16;
+    }
+
+    @include media-up('lg') {
+      margin-bottom: $space-20;
+    }
+  }
+
+  // Editor text: the paragraph spacing comes from the global p rule
+  &__goal {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    margin-top: $space-16;
+    padding: $space-16 $space-20;
+    border-radius: $radius-16;
+    background-color: var(--tag-bg-hover);
+  }
+
+  &__goal-title,
+  &__goal-text {
+    margin: 0;
+  }
+
+  &__goal-title {
+    color: var(--text-primary);
+  }
+
+  &__body,
+  &__outro {
+    margin-top: $section-gap;
+
+    @include media-up('lg') {
+      margin-top: $section-gap-lg;
+    }
+  }
+
+  // Editor headings look like .h5; the first one starts the section without the top margin
+  &__body {
+    h2 {
+      @include heading-style('h5');
+
+      margin: $section-gap 0 $space-12;
+
+      @include media-up('md') {
+        margin-bottom: $space-16;
+      }
+
+      @include media-up('lg') {
+        margin: $section-gap-lg 0 $space-20;
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    li + li {
+      margin-top: $space-16;
+    }
+  }
+
+  &__outro-title {
+    margin: 0 0 $space-12;
+
+    @include media-up('md') {
+      margin-bottom: $space-16;
+    }
+
+    @include media-up('lg') {
+      margin-bottom: $space-20;
+    }
+  }
+
+  // Mobile: the buttons are full width one under the other; from md they sit in a row
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    margin-top: $section-gap;
+
+    @media (width >= 600px) {
+      flex-flow: row wrap;
+    }
+
+    @include media-up('lg') {
+      margin-top: $section-gap-lg;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+
+    @media (width >= 600px) {
+      width: auto;
+    }
+  }
+}

@@ -1,12 +1,40 @@
 <!--DEV
 @@include('blocks/field-file/field-file.html')
 
-<div class="field-file">
-  <div class="field-file__name">Выбор файлов</div>
-  <label class="field-file__input-wrap">
-    <input class="field-file__input" type="file" data-multiple-caption="файлов выбрано: {count}" multiple>
-    <span class="field-file__name-text" data-button-text="Выбрать файл(ы)">Ничего не выбрано</span>
-    <div class="field-file__help-text">Отображение выбранного файла(ов) требует Javascript-а. Стилизация — не требует.</div>
-  </label>
-</div>
+File field (Figma: Input file, states Default / Hover / Focus / Filled / Error). Built like field-text:
+the whole field is a <label>, so a click anywhere opens the file dialog; the native input is visually hidden but focusable.
+
+- __value shows the button text until a file is chosen, then the file name (field-file.js).
+- __help-text shows the hint; the script puts an error message there instead and returns the hint when the error is gone.
+- Checks (field-file.js): the type by the accept attribute and the size by data-max-size (bytes).
+  The messages come from data-msg-type / data-msg-size (no texts in the script, the CMS outputs them in any language);
+  an empty required field gets the browser message.
+- States set by the script: field-file--selected (a file is chosen: the name + the green check),
+  field-file--error (red border and message), aria-invalid on the input.
+- Required field: the required attribute on the input and the asterisk after the name (sprite icon "asterisk").
+- The id of the help text must be unique on the page (aria-describedby of the input).
+
+<label class="field-file">
+  <span class="field-file__name">CV<svg class="field-file__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+  <span class="field-file__input-wrap">
+    <input class="field-file__input" type="file" name="cv" accept=".pdf,.docx" data-max-size="10485760" data-msg-type="Лише файли PDF або DOCX" data-msg-size="Файл більший за 10 МБ" aria-describedby="cv-help" required>
+    <span class="field-file__box">
+      <span class="field-file__value">Завантажте CV</span>
+      <span class="field-file__check" aria-hidden="true"></span>
+    </span>
+    <span class="field-file__help-text" id="cv-help">PDF, DOCX (max 10MB)</span>
+  </span>
+</label>
 -->
+
+<label class="field-file">
+  <span class="field-file__name">CV<svg class="field-file__required" width="8" height="8" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#asterisk"></use></svg></span>
+  <span class="field-file__input-wrap">
+    <input class="field-file__input" type="file" name="cv" accept=".pdf,.docx" data-max-size="10485760" data-msg-type="Лише файли PDF або DOCX" data-msg-size="Файл більший за 10 МБ" aria-describedby="cv-help" required>
+    <span class="field-file__box">
+      <span class="field-file__value">Завантажте CV</span>
+      <span class="field-file__check" aria-hidden="true"></span>
+    </span>
+    <span class="field-file__help-text" id="cv-help">PDF, DOCX (max 10MB)</span>
+  </span>
+</label>

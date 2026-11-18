@@ -1,0 +1,31 @@
+<!--DEV
+@@include('blocks/search-card/search-card.html', {
+  "title": "Безпеки застосування лікарських засобів",
+  "href": "#",
+  "text": "Дата Лікарський засіб, якого стосується, Власник реєстраційного посвідчення, Короткий опис інформації з безпеки Документ Квітень 2026 ЄВРОФЛОКС, розчин для інфузій, 500 мг/100 мл ТОВ «Конарк Інтелмед» Інформаційний лист-звернення…"
+})
+
+Search result card, text version (pages, news, documents...). The product version is search-card--product.html
+(the same block with the modifier and the image). In MODX: two chunks, one per file.
+
+- The whole card is clickable: the link sits on the title and is stretched over the card with ::after,
+  so a screen reader gets one link named by the title.
+- "Читати далі" is only a picture of the btn-link button (a span, aria-hidden): it animates with the card hover.
+- The text is an extract that is already cut on the server (SimpleSearch: &showExtract / &extractLength), no CSS clamp.
+- The card is not a list item itself: wrap it in <li> (see search-results).
+-->
+
+<article class="search-card">
+  <div class="search-card__body">
+    <div class="search-card__content">
+      <h2 class="search-card__title  h6">
+        <a class="search-card__link" href="@@href">@@title</a>
+      </h2>
+      <p class="search-card__text">@@text</p>
+    </div>
+    <span class="search-card__more  btn-link" aria-hidden="true">
+      <span class="text-roll"><span class="text-roll__line">Читати далі</span><span class="text-roll__line">Читати далі</span></span>
+      <svg class="btn-link__icon" width="24" height="24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+    </span>
+  </div>
+</article>
