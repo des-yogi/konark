@@ -90,6 +90,15 @@
     <!-- <meta name="theme-color" content="#0b1020">
   Изменяет цвет элементов интерфейса браузера и операционной системы в соответствии с фирменным стилем вашей компании. Используйте атрибут media, чтобы задать один цвет для светлого режима и другой — для темного.
 -->
+    <script>
+      // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
+      if (
+        root.hasAttribute("data-access-gate") &&
+        !document.cookie.split("; ").includes("konark_access_gate=1")
+      ) {
+        root.classList.add("is-gate-pending");
+      }
+    </script>
   </head>
 
   <body>
@@ -1763,6 +1772,69 @@
               </button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="access-gate modal fade js-access-gate"
+      id="access-gate"
+      tabindex="-1"
+      aria-labelledby="access-gate-title"
+      aria-hidden="true"
+      data-coreui-backdrop="static"
+      data-coreui-keyboard="false">
+      <div class="access-gate__dialog modal-dialog">
+        <div class="access-gate__content modal-content">
+          <h2 class="access-gate__title h5" id="access-gate-title">
+            Правова угода про отримання інформації
+          </h2>
+
+          <div class="access-gate__text">
+            <p>
+              Цей розділ сайту ТОВ «Конарк Інтелмед» містить професійну спеціалізовану інформацію
+              про лікарські засоби, їх властивості, способи застосування, можливі протипоказання і
+              побічну дію, а також іншу професійну спеціалізовану інформацію, яка призначена
+              виключно для лікарів.
+            </p>
+            <p>
+              Інформація про лікарські засоби ТОВ «Конарк Інтелмед» призначена виключно для
+              ознайомлення із вищепереліченими характеристиками лікарських засобів, і не є
+              посібником для самостійної діагностики чи лікування, а також, не може бути використана
+              в якості порад або рекомендацій.
+            </p>
+            <p>
+              У разі, якщо Ви не є лікарем, але в порушення умов, зазначених в даній угоді
+              підписуєте її, як лікар, ТОВ «Конарк Інтелмед» не несе відповідальності за можливі
+              негативні наслідки, що можуть виникнути в результаті самостійного використання
+              інформації з цього розділу сайту. Ви робите це самостійно і усвідомлено, розуміючи, що
+              застосування лікарських засобів можливе тільки за призначенням лікаря та після
+              попередньої консультації з ним, а самолікування може завдати шкоди Вашому здоров’ю.
+            </p>
+          </div>
+
+          <div class="access-gate__panel">
+            <p class="access-gate__question">
+              Я підтверджую, що є лікарем, ознайомився з текстом даної Правової угоди, розумію її
+              зміст і підтверджую свою згоду з нею.
+            </p>
+
+            <div class="access-gate__actions">
+              <button class="btn access-gate__btn js-access-gate-confirm" type="button">
+                <span class="text-roll"
+                  ><span class="text-roll__line">Підтверджую</span
+                  ><span class="text-roll__line" aria-hidden="true">Підтверджую</span></span
+                >
+              </button>
+
+              <a class="btn access-gate__btn js-access-gate-decline" href="./">
+                <span class="text-roll"
+                  ><span class="text-roll__line">Не підтверджую</span
+                  ><span class="text-roll__line" aria-hidden="true">Не підтверджую</span></span
+                >
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

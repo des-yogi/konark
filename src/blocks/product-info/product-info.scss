@@ -6,8 +6,12 @@
 // Product info: the main parameters, the table of the properties, the long notes and the instruction buttons.
 // The groups are spaced by --product-gap (set by .product, 32 / 40 / 32).
 // Params: up to md three rows (name left, value right), from md one row of three cells with dividers.
-// The distance between a cell and a divider is the same on both sides and grows with the width of the row (container query units).
-// The names of the specs and the notes and the values of the params are semibold
+// The distance between a cell and a divider is the same on both sides and grows with the width of the row.
+// The names of the specs and the notes and the values of the params are semibold.
+// Overflow: no item is allowed to shrink narrower than its longest word (no min-inline-size: 0 on text). A long param grows in height
+// inside its cell; whatever does not fit at all goes to the next line (a value under its name, a button under the other one,
+// a cell of the params to the next line of the row - only when even the longest words of the cells do not fit side by side).
+// The global overflow-wrap: break-word (typo.scss) breaks a word only when it alone is wider than the whole line.
 @mixin product-info-strong {
   margin: 0;
   font-weight: $font-weight-semibold;
@@ -18,47 +22,73 @@
 .product-info {
   $block-name: &; // #{$block-name}__element
   $divider: 1px solid var(--divider-subtle);
-  $params-gap: clamp(#{$space-24}, 8cqi, #{$space-64});
+  // The space between a cell and a divider. The same value twice: cqi in the cells, % in the row itself
+  // (both are a share of the content box of the row; the row cannot use its own container units)
+  $params-gap: clamp(#{$space-16}, 4cqi, #{$space-32});
+  $params-gap-row: clamp(#{$space-16}, 4%, #{$space-32});
 
   display: flex;
   flex-direction: column;
   gap: var(--product-gap, #{$space-32});
   line-height: 1.5;
 
+  // From md a row of cells. The width is shared out as in a table with auto columns: the cells start from their longest word,
+  // grow equally and stop at their natural width, so the short cells stay in one line and a long one takes the rest
+  // and wraps inside (flex: 1 1 0 + max-inline-size: max-content). A cell goes to a new line of the row only when even
+  // the longest words of all cells do not fit. overflow: clip cuts the divider of the first cell of such a line (see __param::before)
   &__params {
     margin: 0;
 
     @include media-up('md') {
       display: flex;
+      flex-wrap: wrap;
+      gap: $space-16 calc(2 * #{$params-gap-row});
       padding-block: $space-8;
+      overflow: clip;
       container-type: inline-size;
+    }
+
+    @include media-up('lg') {
+      justify-content: space-between;
     }
   }
 
+  // Up to md the same as a spec: the value goes under the name (and stays whole) if it does not fit into the row
   &__param {
     display: flex;
-    gap: $space-8;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: $space-8;
     padding: $space-8 0 $space-4;
     border-bottom: $divider;
 
     @include media-up('md') {
+      position: relative;
       flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex: 1 1 0;
       gap: $space-4;
-      min-inline-size: 0;
+      max-inline-size: max-content;
       padding: 0;
       border-bottom: 0;
 
-      & + & {
-        margin-inline-start: $params-gap;
-        padding-inline-start: $params-gap;
-        border-inline-start: $divider;
+      // The divider in the middle of the gap before the cell; at the start of a line it is outside of the row and clipped
+      &::before {
+        content: '';
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: calc(-1 * #{$params-gap} - 0.5px);
+        inline-size: 1px;
+        background-color: var(--divider-subtle);
       }
     }
   }
 
   // dt is bold by default (typo.scss), in the mockup the name is regular
   &__param-name {
-    flex: none;
     margin: 0;
     font-weight: 400;
     color: var(--text-secondary);
@@ -67,12 +97,11 @@
   &__param-value {
     @include product-info-strong;
 
-    flex: 1;
-    min-inline-size: 0;
+    margin-inline-start: auto;
     text-align: end;
 
     @include media-up('md') {
-      flex: none;
+      margin-inline-start: 0;
       text-align: start;
     }
   }
@@ -156,8 +185,10 @@
     flex-direction: column;
     gap: $space-20;
 
+    // The second button goes under the first one when they do not fit side by side
     @include media-up('md') {
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
     }
   }

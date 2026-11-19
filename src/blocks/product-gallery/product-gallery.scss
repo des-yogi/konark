@@ -345,8 +345,13 @@
     visibility: visible;
   }
 
-  // Hover and focus are the same as on the product card (photo-mixins): zoom of the photo, light darkening, focus ring
+  // Hover and focus are the same as on the product card (photo-mixins): zoom of the photo, light darkening, focus ring.
+  // The light theme (the default) has no darkening: the background gets one step lighter instead (Always light 2 -> 1),
+  // the zoom stays. The dark theme keeps the darkening of the mixin
   &__thumb {
+    --product-gallery-thumb-bg-hover: var(--bg-overlay-medium);
+    --product-gallery-thumb-shade: 0;
+
     inline-size: 100%;
     margin: 0;
     padding: $space-2;
@@ -354,8 +359,24 @@
     border-radius: $radius-16;
     background-color: var(--bg-overlay-subtle);
     box-shadow: $shadow-s;
+    transition: background-color $transition-time ease;
 
     @include fancybox-photo(#{$block-name}__thumb-img);
+    @include button-reduced-motion;
+
+    @at-root :root[data-theme='dark'] & {
+      --product-gallery-thumb-bg-hover: var(--bg-overlay-subtle);
+      --product-gallery-thumb-shade: 1;
+    }
+
+    // After the mixin: its hover gives the darkening, here it depends on the theme
+    @include button-hover {
+      background-color: var(--product-gallery-thumb-bg-hover);
+
+      &::after {
+        opacity: var(--product-gallery-thumb-shade);
+      }
+    }
 
     @include media-up('md') {
       padding: $space-4;
@@ -367,14 +388,16 @@
       cursor: pointer;
     }
 
-    // Keyboard focus gets the same zoom and darkening as hover (the mixin gives only the ring)
+    // Keyboard focus gets the same as hover (the mixin gives only the ring)
     &:focus-visible {
+      background-color: var(--product-gallery-thumb-bg-hover);
+
       #{$block-name}__thumb-img {
         transform: scale(#{1 + $photo-zoom});
       }
 
       &::after {
-        opacity: 1;
+        opacity: var(--product-gallery-thumb-shade);
       }
     }
 
