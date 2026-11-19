@@ -126,6 +126,13 @@
 @use '../blocks/product-price/product-price';
 @use '../blocks/product-shops/product-shops';
 @use '../blocks/product-notice/product-notice';
+@use '../blocks/similar-drugs/similar-drugs';
+@use '../blocks/product-instruction/product-instruction';
+@use '../blocks/reviews/reviews';
+@use '../blocks/stars/stars';
+@use '../blocks/review-card/review-card';
+@use '../blocks/review-modal/review-modal';
+@use '../blocks/info-banner/info-banner';
 
 // Подключения из addCssAfter:
 @use './print' as *;

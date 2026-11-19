@@ -1,4 +1,6 @@
 // Product gallery: thumbnails switch the main photo (a fade), the main photo can be zoomed.
+// Thumbnail strip: the list scrolls when the thumbnails do not fit; the script marks the ends that hide thumbnails
+// (the fades and the arrows follow these modifiers), the arrows and a click / focus on a faded thumbnail scroll it out of the fade.
 // Zoom: where the device really hovers - by hover (the photo follows the pointer), elsewhere - by tap (the photo is scrolled with the finger).
 // The enlarged file is data-zoom of the frame (of the thumbnail for the other photos); the ratio is --zoom-scale in the scss,
 // data-scale on the root overrides it. Enter / Space toggle the zoom, Escape closes it, arrows move the photo.
@@ -19,6 +21,8 @@ function initProductGallery(root) {
   const source = viewport && viewport.querySelector('source');
   const img = viewport && viewport.querySelector('img');
   const thumbs = root.querySelectorAll('.js-product-gallery-thumb');
+  const strip = root.querySelector('.js-product-gallery-strip');
+  const list = strip && strip.querySelector('.js-product-gallery-thumbs');
 
   if (!viewport || !source || !img) {
     return;
@@ -239,8 +243,105 @@ function initProductGallery(root) {
   }
 
   thumbs.forEach((thumb) => {
-    thumb.addEventListener('click', () => showPhoto(thumb));
+    thumb.addEventListener('click', () => {
+      showPhoto(thumb);
+      revealItem(thumb.closest('.product-gallery__item'));
+    });
   });
+
+  if (!list) {
+    return;
+  }
+
+  // The list is a column from md to lg and a row elsewhere (product-gallery.scss)
+  function getAxis() {
+    const vertical = getComputedStyle(list).flexDirection === 'column';
+
+    return {
+      vertical,
+      scroll: vertical ? list.scrollTop : list.scrollLeft,
+      view: vertical ? list.clientHeight : list.clientWidth,
+      max: vertical ? list.scrollHeight - list.clientHeight : list.scrollWidth - list.clientWidth,
+      fade: parseFloat(getComputedStyle(list).getPropertyValue('--product-gallery-fade')) || 0,
+    };
+  }
+
+  // The position of an item in the scroll coordinates of the list; fractional (the thumbnails are not whole pixels at xl),
+  // offsetLeft / offsetWidth are rounded and would disagree with the scroll position
+  function getBounds(item, axis) {
+    const rect = item.getBoundingClientRect();
+    const listRect = list.getBoundingClientRect();
+    const start = axis.scroll + (axis.vertical ? rect.top - listRect.top : rect.left - listRect.left);
+
+    return { start, end: start + (axis.vertical ? rect.height : rect.width) };
+  }
+
+  // 1px of tolerance: the scroll positions are fractional
+  function updateEdges() {
+    const axis = getAxis();
+
+    strip.classList.toggle('product-gallery__strip--start', axis.scroll > 1);
+    strip.classList.toggle('product-gallery__strip--end', axis.max - axis.scroll > 1);
+  }
+
+  // Scrolls the list the least so that the item is out of the fades
+  function revealItem(item) {
+    if (!item || !list) {
+      return;
+    }
+
+    const axis = getAxis();
+    const bounds = getBounds(item, axis);
+    let target = axis.scroll;
+
+    if (bounds.start - axis.fade < axis.scroll) {
+      target = bounds.start - axis.fade;
+    } else if (bounds.end + axis.fade > axis.scroll + axis.view) {
+      target = bounds.end + axis.fade - axis.view;
+    }
+
+    // Closer to the end it moves to than a fade: go to the very end, its fade disappears there
+    if (target > axis.scroll && target > axis.max - axis.fade) {
+      target = axis.max;
+    } else if (target < axis.scroll && target < axis.fade) {
+      target = 0;
+    }
+
+    if (target !== axis.scroll) {
+      list.scrollTo({
+        [axis.vertical ? 'top' : 'left']: target,
+        behavior: reducedMotion.matches ? 'auto' : 'smooth',
+      });
+    }
+  }
+
+  // An arrow reveals the nearest thumbnail that is hidden or faded at its end, so it moves by one thumbnail
+  function step(direction) {
+    const axis = getAxis();
+    const items = [...list.children];
+    const hidden = direction > 0
+      ? items.find((item) => getBounds(item, axis).end + axis.fade > axis.scroll + axis.view + 1)
+      : items.findLast((item) => getBounds(item, axis).start - axis.fade < axis.scroll - 1);
+
+    revealItem(hidden);
+  }
+
+  const prev = strip.querySelector('.js-product-gallery-prev');
+  const next = strip.querySelector('.js-product-gallery-next');
+
+  if (prev) {
+    prev.addEventListener('click', () => step(-1));
+  }
+
+  if (next) {
+    next.addEventListener('click', () => step(1));
+  }
+
+  // The browser scrolls a focused thumbnail into view, but it may stay under the fade
+  list.addEventListener('focusin', (event) => revealItem(event.target.closest('.product-gallery__item')));
+  list.addEventListener('scroll', updateEdges, { passive: true });
+  // The size of the list changes with the screen and between the row and the column
+  new ResizeObserver(updateEdges).observe(list);
 }
 
 document.querySelectorAll('.js-product-gallery').forEach(initProductGallery);

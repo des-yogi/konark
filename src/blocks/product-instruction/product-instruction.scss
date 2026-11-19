@@ -1,0 +1,148 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins.scss' as *;
+
+// Needs in variables.scss: $space-8/12/16/20/24/40/48/64, $radius-14
+// Needs in grid-mixins.scss: @mixin grid-12
+
+// Product instruction: the layout of faq-section + the accordion of faq--plain (CoreUI Collapse, no numbers).
+// The .collapse / .collapsing rules come from CoreUI, nothing is duplicated here.
+// Differs from faq only in the vertical rhythm of the mockup: 20px above and below the title, 8px between the title and the text.
+.product-instruction {
+  $block-name: &; // #{$block-name}__element
+
+  --product-instruction-gap: 24px; // between the title and the icon
+  --product-instruction-padding-inline: 8px;
+  --product-instruction-title-gap: 8px; // between the title and the text of an open item
+
+  display: grid;
+  gap: $space-12;
+  padding-block: $space-48;
+
+  // Below md: heading and list in one column. md: the list takes 10 of 12 columns on the right. lg: 6 + 6
+  @include media-up('md') {
+    @include grid-12;
+
+    row-gap: $space-40;
+    padding-block: $space-64;
+  }
+
+  &__heading {
+    margin: 0;
+    color: var(--text-primary);
+
+    @include media-up('md') {
+      grid-column: 1 / -1;
+    }
+
+    // 492px is the heading width in the mockup: it breaks the heading into three lines without <br>
+    @include media-up('lg') {
+      grid-column: 1 / 7;
+      max-inline-size: 492px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    min-width: 0;
+
+    @include media-up('md') {
+      grid-column: 3 / -1;
+    }
+
+    @include media-up('lg') {
+      grid-column: 7 / -1;
+      grid-row: 1;
+    }
+  }
+
+  // The 20px under the title is split: the trigger keeps 8px (the gap to the text), the item adds the rest.
+  // So the closed item is 20 + title + 20 and the open one 20 + title + 8 + text + 20, without changing paddings on toggle
+  &__item {
+    padding-block-end: calc(#{$space-20} - var(--product-instruction-title-gap));
+    border-bottom: 1px solid var(--divider-subtle);
+  }
+
+  &__header {
+    margin: 0;
+    font: inherit;
+  }
+
+  &__trigger {
+    display: flex;
+    gap: var(--product-instruction-gap);
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: $space-20 var(--product-instruction-padding-inline) var(--product-instruction-title-gap);
+    border: 0;
+    border-radius: $radius-14;
+    font: inherit;
+    text-align: start;
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    // The arrow turns ↗ → → ↘ (hover, open); the rotation is one custom property so the states do not fight
+    --product-instruction-icon-rotate: 0deg;
+
+    &[aria-expanded='false'] {
+      @include button-hover {
+        --product-instruction-icon-rotate: 45deg;
+      }
+    }
+
+    &[aria-expanded='true'] {
+      --product-instruction-icon-rotate: 90deg;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), 2px);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+
+  &__icon {
+    flex: none;
+    rotate: var(--product-instruction-icon-rotate);
+    transition: rotate $transition-time ease;
+
+    @include button-reduced-motion;
+  }
+
+  // The panel is only a collapsing box (no padding, otherwise the height animation jumps); the spacing is inside
+  &__content {
+    padding: 0 var(--product-instruction-padding-inline) var(--product-instruction-title-gap);
+    color: var(--text-secondary);
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    > * + * {
+      margin-top: $space-16;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: $space-24;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    li + li {
+      margin-top: $space-16;
+    }
+  }
+}

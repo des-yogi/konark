@@ -2112,6 +2112,172 @@
       </div>
     </div>
 
+    <div
+      class="review-modal modal fade"
+      id="review-modal"
+      tabindex="-1"
+      aria-labelledby="review-modal-title"
+      aria-hidden="true">
+      <div class="review-modal__dialog modal-dialog">
+        <div class="review-modal__content modal-content">
+          <button
+            class="review-modal__close"
+            type="button"
+            aria-label="Закрити"
+            data-coreui-dismiss="modal">
+            <svg width="24" height="24" aria-hidden="true">
+              <use
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="img/sprite-svg.svg#close"></use>
+            </svg>
+          </button>
+
+          <h2 class="review-modal__title h5" id="review-modal-title">Додати відгук</h2>
+
+          <form class="review-modal__form" method="post" action="">
+            <fieldset class="review-modal__rating">
+              <legend class="review-modal__rating-name">Ваша оцінка</legend>
+              <div class="review-modal__stars">
+                <label class="review-modal__star">
+                  <input
+                    class="review-modal__star-input"
+                    type="radio"
+                    name="rating"
+                    value="1"
+                    required>
+                  <span class="stars review-modal__star-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">1 з 5</span>
+                </label>
+                <label class="review-modal__star">
+                  <input class="review-modal__star-input" type="radio" name="rating" value="2">
+                  <span class="stars review-modal__star-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">2 з 5</span>
+                </label>
+                <label class="review-modal__star">
+                  <input class="review-modal__star-input" type="radio" name="rating" value="3">
+                  <span class="stars review-modal__star-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">3 з 5</span>
+                </label>
+                <label class="review-modal__star">
+                  <input class="review-modal__star-input" type="radio" name="rating" value="4">
+                  <span class="stars review-modal__star-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">4 з 5</span>
+                </label>
+                <label class="review-modal__star">
+                  <input class="review-modal__star-input" type="radio" name="rating" value="5">
+                  <span class="stars review-modal__star-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">5 з 5</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="review-modal__fields">
+              <label class="field-text review-modal__field">
+                <span class="field-text__name"
+                  >Імʼя<svg class="field-text__required" width="8" height="8" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <input
+                    class="field-text__input"
+                    type="text"
+                    name="first_name"
+                    autocomplete="given-name"
+                    placeholder="Введіть ваше імʼя"
+                    required>
+                </span>
+              </label>
+              <label class="field-text review-modal__field">
+                <span class="field-text__name"
+                  >Прізвище<svg
+                    class="field-text__required"
+                    width="8"
+                    height="8"
+                    aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <input
+                    class="field-text__input"
+                    type="text"
+                    name="last_name"
+                    autocomplete="family-name"
+                    placeholder="Введіть ваше прізвище"
+                    required>
+                </span>
+              </label>
+              <label class="field-text review-modal__field review-modal__field--wide">
+                <span class="field-text__name"
+                  >E-mail<svg class="field-text__required" width="8" height="8" aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <input
+                    class="field-text__input"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="Введіть ваш e-mail"
+                    required>
+                </span>
+              </label>
+              <label class="field-text review-modal__field review-modal__field--wide">
+                <span class="field-text__name"
+                  >Ваш відгук<svg
+                    class="field-text__required"
+                    width="8"
+                    height="8"
+                    aria-hidden="true">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="img/sprite-svg.svg#asterisk"></use></svg
+                ></span>
+                <span class="field-text__input-wrap">
+                  <textarea
+                    class="field-text__input"
+                    name="review"
+                    rows="3"
+                    placeholder="Введіть ваш текст"
+                    required></textarea>
+                </span>
+              </label>
+
+              <div class="field-checkbox review-modal__consent">
+                <label class="field-checkbox__name">
+                  <input
+                    class="field-checkbox__input"
+                    type="checkbox"
+                    name="agreement"
+                    value="1"
+                    checked
+                    required>
+                  <span class="field-checkbox__name-text"
+                    >Я надаю згоду на обробку персональних даних згідно з
+                    <a class="review-modal__link" href="/privacy-policy/"
+                      >Політикою конфіденційності</a
+                    ></span
+                  >
+                </label>
+              </div>
+
+              <button class="btn review-modal__submit" type="submit">
+                <span class="text-roll"
+                  ><span class="text-roll__line">Відправити відгук</span
+                  ><span class="text-roll__line" aria-hidden="true">Відправити відгук</span></span
+                >
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script> -->
     <script src="js/script.min.js"></script>
   </body>

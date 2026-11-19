@@ -5,9 +5,24 @@
 
 // Needs in variables.scss: $space-2/4/8/16/24/40, $radius-12/14/16/24/28/full, $shadow-s, $header-height, $white
 // Product gallery: the main photo in a square frame (+ an optional label), thumbnails, zoom of the main photo.
-// Thumbnails: a row under the photo (a scrolling row below md), a column on the left from md to lg, a row of 4 from lg.
+// Thumbnails: a row under the photo below md, a column of the photo height from md to lg, a row of 4 from lg;
+// what does not fit scrolls. The ends that hide thumbnails fade out (the strip modifiers are set by the script),
+// from lg there are arrows too (the mouse wheel does not scroll a row).
 // Zoom (product-gallery.js): where the device really hovers, the photo grows and follows the pointer;
 // elsewhere a tap grows the photo and it is scrolled with the finger. The ratio is --zoom-scale (data-scale on the root overrides it).
+// The fades are animated: registered properties transition, plain custom properties would jump
+@property --product-gallery-fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --product-gallery-fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
 .product-gallery {
   $block-name: &; // #{$block-name}__element
 
@@ -20,6 +35,8 @@
   $gallery-max-md: 688px;
   $gallery-max-lg: 580px;
   $thumb-room: $space-24; // the shadow and the focus ring of the thumbnails must fit in the scrolling row
+  $thumb-gap-lg: $space-16;
+  $nav-size: 44px;
 
   --zoom-scale: 2.5;
 
@@ -198,29 +215,74 @@
     }
   }
 
-  // Below md a row that scrolls without the script; the negative margin and the padding keep the shadows and the focus ring
+  // The wrapper of the scrolling list and the arrows (the arrows must not scroll with the list).
+  // From md to lg it is a column as high as the photo: contain: size takes its content out of the height of the row,
+  // the stretch gives it the height of the photo
+  &__strip {
+    position: relative;
+
+    @include media-between('md', 'lg') {
+      flex: none;
+      align-self: stretch;
+      inline-size: $thumb-size;
+      contain: size;
+    }
+
+    // Hidden thumbnails at an end: the fade of that end (+ its arrow, see __nav)
+    &--start #{$block-name}__thumbs {
+      --product-gallery-fade-start: var(--product-gallery-fade);
+    }
+
+    &--end #{$block-name}__thumbs {
+      --product-gallery-fade-end: var(--product-gallery-fade);
+    }
+  }
+
+  // The scrolling list; the negative margin and the padding keep the shadows and the focus ring.
+  // --product-gallery-fade is the length of a fade from the edge of the list (with its padding), the script reads it too
   &__thumbs {
+    --product-gallery-fade: #{$space-8 + $space-40};
+    --product-gallery-fade-dir: to right;
+
     display: flex;
     gap: $space-8;
     margin: (-$thumb-room) (-$space-8);
     padding: $thumb-room $space-8;
     list-style: none;
     overflow-x: auto;
+    mask-image: linear-gradient(
+      var(--product-gallery-fade-dir),
+      transparent,
+      #000 var(--product-gallery-fade-start),
+      #000 calc(100% - var(--product-gallery-fade-end)),
+      transparent
+    );
+    transition:
+      --product-gallery-fade-start $transition-time ease,
+      --product-gallery-fade-end $transition-time ease;
 
-    @include media-up('md') {
-      flex: none;
+    // A column as high as the photo; the side room is the gap to the photo
+    @include media-between('md', 'lg') {
+      --product-gallery-fade: #{$thumb-room + 64px};
+      --product-gallery-fade-dir: to bottom;
+
       flex-direction: column;
       gap: $space-16;
-      margin: 0;
-      padding: 0;
-      overflow: visible;
+      block-size: calc(100% + #{2 * $thumb-room});
+      margin: (-$thumb-room) (-$space-16);
+      padding: $thumb-room $space-16;
+      overflow: hidden auto;
     }
 
-    // 4 thumbnails in a row, they shrink a little where the gallery is narrow (xl)
+    // A row of 4 that scrolls from the 5th; the fade is the arrow + 40px (the mockup fades almost two thumbnails,
+    // with fades at both ends that would leave less than two clear ones)
     @include media-up('lg') {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, $thumb-size));
+      --product-gallery-fade: #{$space-8 + $nav-size + $space-40};
+
+      gap: $thumb-gap-lg;
     }
+
+    @include button-reduced-motion;
   }
 
   &__item {
@@ -232,13 +294,55 @@
       inline-size: $thumb-size;
     }
 
+    // 4 in the row, they shrink a little where the gallery is narrow (xl)
     @include media-up('lg') {
-      inline-size: auto;
+      inline-size: min(#{$thumb-size}, calc((100% - #{3 * $thumb-gap-lg}) / 4));
     }
 
     &::before {
       content: none;
     }
+  }
+
+  // The arrows (from lg): at the ends of the row over the faded thumbnail, each one only while its end hides thumbnails.
+  // A thumbnail under the fade stays clickable outside the arrow, a click on it scrolls it out of the fade (the script),
+  // so the arrow and the thumbnail under it lead to the same
+  &__nav {
+    display: none;
+
+    @include media-up('lg') {
+      @include icon-button(
+        $bg: var(--tag-bg),
+        $bg-hover: var(--tag-bg-hover),
+        $bg-active: var(--tag-bg),
+        $bg-disabled: var(--tag-bg),
+        $icon: var(--text-primary),
+        $icon-disabled: var(--text-primary),
+        $ring-color: var(--btn-secondary-focus-ring),
+        $size: $nav-size,
+        $elevated: false
+      );
+
+      position: absolute;
+      inset-block-start: 50%;
+      z-index: 1;
+      visibility: hidden;
+      backdrop-filter: blur(20px);
+      translate: 0 -50%;
+    }
+
+    &--prev {
+      inset-inline-start: 0;
+    }
+
+    &--next {
+      inset-inline-end: 0;
+    }
+  }
+
+  &__strip--start &__nav--prev,
+  &__strip--end &__nav--next {
+    visibility: visible;
   }
 
   // Hover and focus are the same as on the product card (photo-mixins): zoom of the photo, light darkening, focus ring

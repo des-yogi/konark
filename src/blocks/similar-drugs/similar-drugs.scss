@@ -1,0 +1,88 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss: $space-20/24/40/48/64
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-slide classes below beat its rules regardless of the load order.
+
+// Similar drugs: .container > head (heading + arrows) and the Swiper slider under it.
+// Below xl the cards have a fixed width and run to the right screen edge; from xl Swiper shows exactly 4 of them
+// (breakpoints in the js), the slider is clipped at the container content, so nothing peeks.
+.similar-drugs {
+  $slide-width: 280px; // fixed by the design, like the carousel card of prod-card
+  $slide-width-md: 327px;
+  $gap: $space-20; // keep in sync with spaceBetween in the js
+  $title-min-width: 280px; // narrower than this the arrows wrap under the heading
+  $shadow-room: 64px; // the card shadows reach this far above and below the slider
+
+  overflow-x: clip; // the cards running out of the container must not scroll the page (clip keeps the vertical shadows)
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  // Heading and arrows in one row; the arrows wrap under the heading when both do not fit.
+  // The row stays above the slider (z-index: 1 in Swiper's CSS): the card shadows reach into it
+  &__head {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-24;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-block-end: $space-40;
+
+    @include media-up('lg') {
+      align-items: flex-start;
+    }
+  }
+
+  // Typography comes from the global .h5
+  &__title {
+    flex: 1 1 $title-min-width;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__nav {
+    display: flex;
+    flex: none;
+    gap: $space-40;
+  }
+
+  // Swiper's own overflow: hidden would cut the shadows and the peeking card, the clip-path cuts only the sides:
+  // on the left at the container content (+ half of the gap for the shadow of the first card),
+  // on the right below xl far away (the section clips at the screen edge), from xl the same as on the left.
+  &__slider.swiper {
+    --clip-end: -100vw;
+
+    overflow: visible;
+    clip-path: inset(-$shadow-room var(--clip-end) (-$shadow-room) (-$gap * 0.5));
+
+    @include media-up('xl') {
+      --clip-end: #{-$gap * 0.5};
+    }
+  }
+
+  // Swiper's CSS sets content-box on the wrapper and the global `box-sizing: inherit` passes it down to the cards
+  &__list.swiper-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The cards stretch to the tallest one: the slide is a flex box, prod-card takes the whole slide.
+  // From xl Swiper writes the width of the slide inline (slidesPerView: 4), it beats these widths
+  &__item.swiper-slide {
+    display: flex;
+    inline-size: $slide-width;
+    block-size: auto;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+
+    @include media-up('md') {
+      inline-size: $slide-width-md;
+    }
+  }
+}
