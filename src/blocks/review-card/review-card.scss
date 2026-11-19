@@ -1,0 +1,47 @@
+@use '../../scss/variables.scss' as *;
+
+// Needs in variables.scss: $space-8/16/24/32, $radius-24
+
+.review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: $space-32 $space-24;
+  border-radius: $radius-24;
+  background-color: var(--bg-overlay-medium);
+
+  &__name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    align-items: flex-start;
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__date {
+    position: absolute;
+    inset-block-start: $space-16;
+    inset-inline-end: $space-16;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
+  }
+}

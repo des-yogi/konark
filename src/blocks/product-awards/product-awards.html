@@ -1,0 +1,36 @@
+<!--DEV
+@@include('blocks/product-awards/product-awards.html')
+
+Product awards (a block of the details column on the product page, after product-info): cards with a medal and a caption.
+The number of columns follows the width of the column (1 / 2 / 3), there are no breakpoints: see product-awards.scss.
+The medal: img/award.png + img/award.webp (shown at 140x140, the files are 280x280 for retina). The caption repeats the meaning of the medal,
+so the image is decorative (alt is empty). The cards are hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop,
+and each award has its own medal file).
+-->
+
+<section>
+  <h2 class="visually-hidden">Нагороди</h2>
+  <ul class="product-awards">
+    <li class="product-awards__item">
+      <picture class="product-awards__picture">
+        <source srcset="img/award.webp" type="image/webp">
+        <img class="product-awards__img" src="img/award.png" width="140" height="140" alt="" loading="lazy" decoding="async">
+      </picture>
+      <p class="product-awards__title">№1 Знеболюючий лікарський засіб року 2026</p>
+    </li>
+    <li class="product-awards__item">
+      <picture class="product-awards__picture">
+        <source srcset="img/award.webp" type="image/webp">
+        <img class="product-awards__img" src="img/award.png" width="140" height="140" alt="" loading="lazy" decoding="async">
+      </picture>
+      <p class="product-awards__title">№1 Знеболюючий лікарський засіб року 2024</p>
+    </li>
+    <li class="product-awards__item">
+      <picture class="product-awards__picture">
+        <source srcset="img/award.webp" type="image/webp">
+        <img class="product-awards__img" src="img/award.png" width="140" height="140" alt="" loading="lazy" decoding="async">
+      </picture>
+      <p class="product-awards__title">№1 Знеболюючий лікарський засіб року 2026</p>
+    </li>
+  </ul>
+</section>

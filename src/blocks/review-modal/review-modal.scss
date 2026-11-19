@@ -1,0 +1,259 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in variables.scss: $space-8/12/16/24/32/40/64, $radius-14/24/48, $radius-button-3, $shadow-m, $focus-ring-width, $focus-ring-offset
+
+// Review modal (CoreUI Modal): a centred window with the form of a new review; on a low screen the whole modal scrolls.
+// The fields come from field-text / field-checkbox / btn, here only the layout. The backdrop is the global .modal-backdrop.
+// The background: Light BG in the light theme (the design), Dark BG in the dark one (as in applicant-modal).
+.review-modal {
+  $block-name: &; // #{$block-name}__element
+
+  $width: 628px; // the window from md (the design)
+  $field-min: 200px; // narrower than this the name and the surname stand one under the other
+
+  --gap: #{$space-16}; // from the viewport to the window
+
+  @include media-up('md') {
+    --gap: #{$space-40};
+  }
+
+  // The doubled class (.modal-dialog / .modal-content) beats the CoreUI rules regardless of the order of the stylesheets:
+  // CoreUI sets max-width: 500px on .modal-dialog from 576px and its own radius / background on .modal-content
+  &__dialog.modal-dialog {
+    display: flex;
+    align-items: center;
+    max-width: calc(#{$width} + 2 * var(--gap));
+    min-height: 100%;
+    margin: 0 auto;
+    padding: var(--gap);
+  }
+
+  &__content.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    width: 100%;
+    padding: $space-64 $space-16 $space-24;
+    border: 0;
+    border-radius: $radius-24;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    box-shadow: $shadow-m; // CoreUI emits no shadow while $enable-shadows is off
+
+    @include media-up('md') {
+      gap: $space-40;
+      // padding: 96px $space-64 $space-64;
+      padding: $space-64 $space-40 $space-40;
+      border-radius: $radius-48;
+    }
+
+    @at-root :root[data-theme='dark'] & {
+      background-color: var(--bg-secondary);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    inset-block-start: $space-16;
+    inset-inline-end: $space-16;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-14;
+    color: var(--nav-text);
+    background-color: var(--tag-bg);
+    transition: background-color $transition-time ease;
+    cursor: pointer;
+
+    @include media-up('md') {
+      inset-block-start: $space-32;
+      inset-inline-end: $space-32;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--tag-bg-hover);
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--nav-accent);
+      outline-offset: $focus-ring-offset;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // The size comes from the .h5 class
+  &__title {
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+
+    @include media-up('md') {
+      gap: $space-32;
+    }
+  }
+
+  // The legend floats: so it becomes an ordinary flex item and stands in the row with the stars
+  &__rating {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-8 $space-12; // below md the gaps are 4px tighter than in the design: the row must fit 296px (360px screen)
+    align-items: center;
+    min-inline-size: 0;
+
+    @include media-up('md') {
+      column-gap: $space-16;
+    }
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  // Caption (the same look as the field names)
+  &__rating-name {
+    float: left;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--input-label);
+  }
+
+  // --value is the number of the filled stars: the checked radio, on hover the star under the pointer (written later, so it wins).
+  // Every star knows its number (--i) and fills itself when it is not after the value
+  &__stars {
+    --value: 0;
+
+    display: flex;
+    gap: 6px;
+
+    @include media-up('md') {
+      gap: $space-8;
+    }
+
+    @for $i from 1 through 5 {
+      &:has(#{$block-name}__star-input[value='#{$i}']:checked) {
+        --value: #{$i};
+      }
+    }
+
+    @media (hover: hover) {
+      @for $i from 1 through 5 {
+        &:has(#{$block-name}__star:nth-child(#{$i}):hover) {
+          --value: #{$i};
+        }
+      }
+    }
+  }
+
+  &__star {
+    position: relative;
+    display: block;
+    border-radius: $radius-button-3;
+    cursor: pointer;
+
+    @for $i from 1 through 5 {
+      &:nth-child(#{$i}) {
+        --i: #{$i};
+      }
+    }
+
+    &:has(:focus-visible) {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  // The radio lies transparent over the star: it keeps the keyboard, the focus and the browser message of `required`
+  &__star-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  // The doubled class beats the defaults of .stars regardless of the order of the stylesheets
+  &__star-icon.stars {
+    --stars-count: 1;
+    --stars-size: 32px;
+    --stars-empty: var(--input-border);
+    --rating: clamp(0, var(--value) - var(--i) + 1, 1);
+
+    display: block;
+  }
+
+  // Two columns when both fields fit ($field-min each), the wide fields and the actions take the whole row
+  &__fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(#{$field-min}, 100%), 1fr));
+    gap: $space-16;
+  }
+
+  // Cancels the default bottom margins of the fields: the gaps come from the grid
+  &__field.field-text,
+  &__consent.field-checkbox {
+    margin-bottom: 0;
+  }
+
+  &__field--wide,
+  &__consent,
+  &__submit {
+    grid-column: 1 / -1;
+  }
+
+  // A long consent text: the box stays at the first line (as in patient-form)
+  &__consent {
+    .field-checkbox__name {
+      align-items: flex-start;
+    }
+
+    .field-checkbox__name-text::before,
+    .field-checkbox__name-text::after {
+      inset-block-start: 12px; // the middle of the first line (24px)
+    }
+  }
+
+  &__link {
+    border-radius: $radius-button-3;
+    color: var(--text-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: $focus-ring-offset;
+    }
+  }
+
+  &__submit {
+    width: 100%;
+  }
+}

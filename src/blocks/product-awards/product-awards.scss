@@ -1,0 +1,51 @@
+@use '../../scss/variables.scss' as *;
+
+// Needs in variables.scss: $space-8/12, $radius-24, $shadow-m
+// Product awards: cards with a medal and a caption. The number of columns depends only on the width of the column:
+// the card is at least $award-min-width wide, so a narrow column gets 1 column, then 2, then 3 (no breakpoints).
+// auto-fill (not auto-fit): with 1-2 awards the cards keep the size of a column and do not stretch.
+.product-awards {
+  $award-min-width: 176px;
+  $award-size: 140px; // the size of the medal
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($award-min-width, 1fr));
+  gap: $space-12;
+  margin: 0; // the global ul has a bottom margin
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    align-items: center;
+    min-inline-size: 0;
+    margin: 0; // the global `li + li` rule must not shift the cards
+    padding: $space-12 $space-8;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-medium);
+    box-shadow: $shadow-m;
+  }
+
+  &__picture {
+    display: block;
+    flex: none;
+  }
+
+  &__img {
+    display: block;
+    inline-size: $award-size;
+    block-size: $award-size;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: $font-weight-semibold;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--text-primary);
+  }
+}

@@ -1,0 +1,90 @@
+<!--DEV
+@@include('blocks/product-gallery/product-gallery.html', {
+  "title": "Цетрилев Нео",
+  "label": "Новинка",
+  "tone": "product-gallery__label--red",
+  "mix": "product__gallery"
+})
+
+Product gallery: the main photo, thumbnails, zoom of the main photo (see product-gallery.js).
+title: alt of the main photo (the product name). mix: a class from the parent block (the grid placement), empty when not needed.
+
+Photos: product-N.png/.webp (480x480, transparent background). A thumbnail uses the same file as the main photo,
+the enlarged version is product-N-zoom.webp (1200x1200), it is set in data-zoom of the thumbnail (of the frame for the first photo).
+Without data-zoom there is no zoom. The zoom ratio is data-scale on the root (2.5 here, change it per product).
+The markup of the thumbnails is hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop).
+There are 5 of them here (photos 3-5 repeat the files of 1-2) to show the overflow: 4 fit, then the row scrolls.
+
+Thumbnail strip: the list scrolls when the thumbnails do not fit (a row below md and from lg, a column of the photo height from md to lg).
+The ends that hide thumbnails fade out; from lg the arrows scroll by one thumbnail. The arrows are only a help for a mouse
+(the wheel does not scroll a row): out of the tab order and hidden from assistive technologies, the thumbnails themselves are reachable.
+
+Label (optional): <span class="product-gallery__label"></span> is hidden by :empty, so keep it EMPTY (no spaces/newlines inside)
+when there is nothing to show. The colour comes from a modifier class: product-gallery__label--red | --yellow | --blue | --grey.
+-->
+
+<div class="product-gallery  js-product-gallery  @@mix" data-scale="2.5">
+  <div class="product-gallery__stage">
+    <span class="product-gallery__label  @@tone">@@label</span>
+    <div class="product-gallery__viewport  js-product-gallery-viewport" role="button" tabindex="0" aria-pressed="false" aria-label="Збільшити фото" data-zoom="img/product-1-zoom.webp">
+      <picture class="product-gallery__picture">
+        <source srcset="img/product-1.webp" type="image/webp">
+        <img class="product-gallery__img" src="img/product-1.png" width="480" height="480" alt="@@title" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <span class="product-gallery__hint" aria-hidden="true">
+      <svg width="24" height="24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#search"></use></svg>
+    </span>
+  </div>
+
+  <div class="product-gallery__strip  js-product-gallery-strip">
+    <ul class="product-gallery__thumbs  invisible-scrollbar  js-product-gallery-thumbs" aria-label="Фото товару">
+      <li class="product-gallery__item">
+        <button class="product-gallery__thumb  js-product-gallery-thumb" type="button" aria-label="Фото 1" aria-pressed="true" data-zoom="img/product-1-zoom.webp">
+          <picture class="product-gallery__thumb-picture">
+            <source srcset="img/product-1.webp" type="image/webp">
+            <img class="product-gallery__thumb-img" src="img/product-1.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+          </picture>
+        </button>
+      </li>
+      <li class="product-gallery__item">
+        <button class="product-gallery__thumb  js-product-gallery-thumb" type="button" aria-label="Фото 2" aria-pressed="false" data-zoom="img/product-2-zoom.webp">
+          <picture class="product-gallery__thumb-picture">
+            <source srcset="img/product-2.webp" type="image/webp">
+            <img class="product-gallery__thumb-img" src="img/product-2.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+          </picture>
+        </button>
+      </li>
+      <li class="product-gallery__item">
+        <button class="product-gallery__thumb  js-product-gallery-thumb" type="button" aria-label="Фото 3" aria-pressed="false" data-zoom="img/product-1-zoom.webp">
+          <picture class="product-gallery__thumb-picture">
+            <source srcset="img/product-1.webp" type="image/webp">
+            <img class="product-gallery__thumb-img" src="img/product-1.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+          </picture>
+        </button>
+      </li>
+      <li class="product-gallery__item">
+        <button class="product-gallery__thumb  js-product-gallery-thumb" type="button" aria-label="Фото 4" aria-pressed="false" data-zoom="img/product-2-zoom.webp">
+          <picture class="product-gallery__thumb-picture">
+            <source srcset="img/product-2.webp" type="image/webp">
+            <img class="product-gallery__thumb-img" src="img/product-2.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+          </picture>
+        </button>
+      </li>
+      <li class="product-gallery__item">
+        <button class="product-gallery__thumb  js-product-gallery-thumb" type="button" aria-label="Фото 5" aria-pressed="false" data-zoom="img/product-1-zoom.webp">
+          <picture class="product-gallery__thumb-picture">
+            <source srcset="img/product-1.webp" type="image/webp">
+            <img class="product-gallery__thumb-img" src="img/product-1.png" width="480" height="480" alt="" loading="lazy" decoding="async">
+          </picture>
+        </button>
+      </li>
+    </ul>
+    <button class="product-gallery__nav  product-gallery__nav--prev  js-product-gallery-prev" type="button" tabindex="-1" aria-hidden="true">
+      <svg width="24" height="24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
+    </button>
+    <button class="product-gallery__nav  product-gallery__nav--next  js-product-gallery-next" type="button" tabindex="-1" aria-hidden="true">
+      <svg width="24" height="24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
+    </button>
+  </div>
+</div>

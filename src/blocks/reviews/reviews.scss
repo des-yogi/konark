@@ -1,0 +1,214 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in variables.scss: $space-4/8/12/16/24/32/40/64, $radius-24/48, $radius-full, $shadow-m
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-slide classes below beat its rules regardless of the load order.
+
+// Reviews: a panel with the top row (heading + statistics side by side when they fit, otherwise one under the other)
+// and the slider of the cards with the arrows under it.
+.reviews {
+  $bar-width: 156px;
+  $bar-width-lg: 240px;
+
+  padding-block: $space-40;
+
+  @include media-up('lg') {
+    padding-block: $space-64;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: $space-24;
+    padding: $space-40 $space-16;
+    border-radius: $radius-24;
+    background-color: var(--bg-overlay-subtle);
+    box-shadow: $shadow-m;
+
+    @include media-up('md') {
+      padding-inline: $space-32;
+    }
+
+    @include media-up('lg') {
+      gap: $space-64;
+      padding: $space-64;
+      border-radius: $radius-48;
+    }
+  }
+
+  &__top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-24;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    align-items: flex-start;
+  }
+
+  &__title,
+  &__source {
+    margin: 0;
+  }
+
+  &__source {
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  &__link {
+    color: var(--text-accent);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // Below lg the summary is above the bars, from lg they stand side by side, the bars behind a divider
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    min-width: 0;
+
+    @include media-up('lg') {
+      flex-direction: row;
+      gap: $space-32;
+      align-items: flex-start;
+    }
+  }
+
+  &__summary {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  &__score {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--tag-blue);
+
+    @include media-up('lg') {
+      font-size: 56px;
+    }
+  }
+
+  // Below lg the stars and the total are in a row, from lg the total is under the stars
+  &__summary-info {
+    display: flex;
+    gap: $space-12;
+    align-items: center;
+
+    @include media-up('lg') {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-block-start: $space-8;
+    }
+  }
+
+  &__total {
+    margin: 0;
+    line-height: 1.5;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  // One grid for all the rows (subgrid): the bars start and end at the same x in every row;
+  // the bar column shrinks when the panel is narrower than the row
+  &__bars {
+    display: grid;
+    grid-template-columns: auto minmax(0, $bar-width) auto;
+    column-gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include media-up('lg') {
+      grid-template-columns: auto minmax(0, $bar-width-lg) auto;
+      padding-inline-start: $space-16;
+      border-inline-start: 1px solid var(--divider-subtle);
+    }
+  }
+
+  &__bar {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+    margin-top: 0; // the global `li + li` rule must not shift the rows
+    padding-block: 6px;
+    line-height: 1.5;
+  }
+
+  &__bar-label {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    min-inline-size: 33px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  // The share of the row: --share (a percentage) is set on the row by reviews.js
+  &__bar-track {
+    block-size: 4px;
+    overflow: hidden;
+    border-radius: $radius-full;
+    background-color: var(--tag-bg-hover);
+
+    &::before {
+      content: '';
+      display: block;
+      inline-size: var(--share, 0%);
+      block-size: 100%;
+      border-radius: inherit;
+      background-color: var(--tag-blue);
+    }
+  }
+
+  &__bar-count {
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  &__slider.swiper {
+    inline-size: 100%;
+  }
+
+  // Swiper's CSS sets content-box on the wrapper and the global `box-sizing: inherit` passes it down to the cards
+  &__list.swiper-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The cards of one row are equal: the slide is a flex box, review-card takes the whole slide
+  &__item.swiper-slide {
+    display: flex;
+    block-size: auto;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+  }
+
+  &__nav {
+    display: flex;
+    gap: $space-40;
+    justify-content: center;
+    margin-block-start: -$space-4; // 20px under the slider (the panel gap is 24px)
+
+    @include media-up('lg') {
+      margin-block-start: -$space-32; // 32px under the slider (the panel gap is 64px)
+    }
+  }
+}

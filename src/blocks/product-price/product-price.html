@@ -1,0 +1,18 @@
+<!--DEV
+@@include('blocks/product-price/product-price.html')
+
+Product price (a block of the details column on the product page, after product-video): the approximate price in the pharmacies
+and the source of the data. Below md it is one column, from md the label stands on the left, the price and the source on the right.
+There is no heading element on purpose: the label is the heading of the block, so there is no section with a hidden h2 around it.
+The price is one string (a range or a single value), the spaces before the dash and before the currency are non-breaking,
+so the line breaks only after the dash. The source link leads to another site (href="#" is a placeholder).
+-->
+
+<div class="product-price">
+  <p class="product-price__label">Орієнтована ціна в аптеках:</p>
+
+  <div class="product-price__info">
+    <p class="product-price__value  h6">252,70&nbsp;— 662,50&nbsp;грн.</p>
+    <p class="product-price__source">За інформацією наданою <a class="product-price__link" href="#" target="_blank" rel="nofollow noopener">tabletli.ua</a></p>
+  </div>
+</div>

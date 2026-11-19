@@ -1,0 +1,45 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in variables.scss: the --tag-yellow and --tag-bg-hover tokens
+
+// Stars: the element is exactly as wide as the stars and the gaps; the mask tile is a star + a gap
+// (the star keeps its proportions and sticks to the left of the tile), the last gap is cut off by the width.
+.stars {
+  $star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' preserveAspectRatio='xMinYMid meet'%3E%3Cpath d='M12 .9l3.4 7 7.6 1.1-5.5 5.4 1.3 7.6L12 18.4 5.2 22l1.3-7.6L1 9l7.6-1.1z'/%3E%3C/svg%3E");
+
+  --stars-size: 16px;
+  --stars-gap: 2px;
+  --stars-count: 5;
+  --rating: 5;
+  --stars-empty: var(--tag-bg-hover); // the colour of the empty part (review-modal makes it stronger)
+
+  display: inline-block;
+  flex: none;
+  inline-size: calc(var(--stars-count) * var(--stars-size) + (var(--stars-count) - 1) * var(--stars-gap));
+  block-size: var(--stars-size);
+  vertical-align: middle;
+  // The edge of the fill: the whole stars with their gaps + the fraction of the next star (4.5 → 4 stars, 4 gaps, half a star).
+  // The first line is the fallback for browsers without round(): a share of the whole width (a fraction is a bit off)
+  background: linear-gradient(to right, var(--tag-yellow) calc(var(--rating) / var(--stars-count) * 100%), var(--stars-empty) 0);
+  background: linear-gradient(
+    to right,
+    var(--tag-yellow) calc(var(--rating) * var(--stars-size) + round(down, var(--rating), 1) * var(--stars-gap)),
+    var(--stars-empty) 0
+  );
+  mask: $star 0 0 / calc(var(--stars-size) + var(--stars-gap)) var(--stars-size) repeat-x;
+
+  &--sm {
+    --stars-size: 12px;
+    --stars-gap: 8px;
+  }
+
+  &--lg {
+    --stars-size: 12px;
+    --stars-gap: 8px;
+
+    @include media-up('lg') {
+      --stars-size: 20px;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Needs in variables.scss: $space-20/24/32/40/64
+// Top section of the product page: title, gallery, details. One DOM for all widths:
+// below lg it is one column (title, gallery, details), from lg the title and the details stand in the right column
+// and the gallery spans both rows. The columns: lg 6 + 6; xl 5 + gap of 1 + 6; xxl 5 + gap of 1 + 5 (as in the mockup).
+// --product-gap is the rhythm of the details column (the blocks inside it and the groups of product-info): 32 / 40 (md-lg) / 32.
+// The breadcrumbs above have their own 16px of bottom padding, so the top padding here is 16px smaller than in the mockup.
+.product {
+  $block-name: &; // #{$block-name}__element
+
+  --product-gap: #{$space-32};
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: $space-20;
+
+  @include media-up('md') {
+    padding-block-end: $space-64;
+  }
+
+  @include media-between('md', 'lg') {
+    --product-gap: #{$space-40};
+  }
+
+  @include media-up('lg') {
+    @include grid-12;
+
+    grid-template-rows: auto 1fr;
+    padding-block-start: $space-24;
+  }
+
+  &__title {
+    margin: 0 0 $space-20;
+
+    @include media-up('md') {
+      margin-block-end: $space-32;
+    }
+
+    @include media-up('lg') {
+      grid-row: 1;
+      grid-column: 7 / -1;
+    }
+
+    @include media-up('xxl') {
+      grid-column: 7 / span 5;
+    }
+  }
+
+  &__gallery {
+    @include media-up('lg') {
+      grid-row: 1 / span 2;
+      grid-column: 1 / span 6;
+      align-self: start; // the gallery is sticky: it must not be stretched over the rows
+    }
+
+    @include media-up('xl') {
+      grid-column: 1 / span 5;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--product-gap);
+    margin-block-start: $space-40;
+
+    @include media-up('lg') {
+      grid-row: 2;
+      grid-column: 7 / -1;
+      margin-block-start: 0;
+    }
+
+    @include media-up('xxl') {
+      grid-column: 7 / span 5;
+    }
+  }
+}

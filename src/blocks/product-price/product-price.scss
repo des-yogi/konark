@@ -1,0 +1,69 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Needs in variables.scss: $space-4/8/12/16/24/32, $radius-8/24, $font-size-sm, $focus-ring-offset
+// Product price: a light card. The label stands on the left and the price with the source on the right as long as both fit
+// into one row (min/max, no breakpoints: the row wraps by the width of the card itself), otherwise the price goes under the label.
+// Only the paddings and the gap in the price column follow the screen: 16px / 4px, from md 32px / 8px.
+// The price takes its size, weight and letter spacing from the .h6 text style (22px, from md 24px); the color is the one of the card.
+.product-price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-12 $space-24; // between the rows (when wrapped) / between the label and the price
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: $space-16;
+  border-radius: $radius-24;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  background-color: var(--bg-overlay-subtle);
+
+  @include media-up('md') {
+    padding: $space-32;
+  }
+
+  &__label {
+    margin: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+
+    @include media-up('md') {
+      gap: $space-8;
+    }
+  }
+
+  // .h6 gives a bottom margin and the heading color, the mockup has neither
+  &__value {
+    margin: 0;
+    color: inherit;
+  }
+
+  &__source {
+    margin: 0;
+    font-size: $font-size-sm;
+    letter-spacing: -0.02em;
+  }
+
+  // No hover in the mockup: the underline goes away; the focus is the standard ring
+  &__link {
+    border-radius: $radius-8;
+    color: var(--text-accent);
+    text-decoration: underline;
+    text-underline-position: from-font;
+
+    &:visited {
+      color: var(--text-accent);
+    }
+
+    @include button-hover {
+      text-decoration: none;
+    }
+
+    @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+  }
+}

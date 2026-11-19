@@ -1,0 +1,114 @@
+<!--DEV
+@@include('blocks/product-instruction/product-instruction.html')
+
+Product instruction (a section of the product page): the heading and an accordion of the instruction parts on CoreUI Collapse.
+A copy of faq-section + faq--plain (the same layout and mechanics, no numbers); a separate block because the product page has the FAQ section too
+and the ids of faq would repeat. Only one item is open at a time (data-coreui-parent="#product-instruction-list").
+The markup of the items is hardcoded on purpose (a placeholder, the templater has no loops; in MODX it becomes a loop).
+The ids (product-instruction-list, product-instruction-item-N) must be unique on the page. The texts are placeholders.
+The JS is the CoreUI collapse module from src/js/index.js, there is no own script.
+-->
+
+<section class="container  product-instruction">
+  <h2 class="product-instruction__heading  h1">Інструкція щодо <strong>застосування</strong></h2>
+  <div class="product-instruction__list" id="product-instruction-list">
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-1" aria-expanded="true" aria-controls="product-instruction-item-1">
+          <span class="product-instruction__title  subheading">Склад</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse  show" id="product-instruction-item-1" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>TIAB (мікрокристали титану діоксиду з ковалентно пов’язаними іонами срібла); натрію гіалуронат, екстракт алое барбаденського; каприловий/каприновий тригліцерид; стеарат ПЕГ-6 (та) гліколю стеарат (та) стеарат ПЕГ-32, гліцерил стеарат.</p>
+          <ul>
+            <li>небажані реакції, які виникли при застосуванні лікарських засобів компанії;</li>
+            <li>відсутність ефективності лікарського засобу;</li>
+            <li>застосування лікарського засобу не у відповідності до затвердженої інструкції для медичного застосування (не за показаннями, порушення дозування та способу введення, не дотримання особливостей застосування тощо);</li>
+            <li>помилки при призначенні та/або застосуванні лікарського засобу;</li>
+            <li>скарги на якість лікарських засобів, що стали причиною небажаної реакції.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-2" aria-expanded="false" aria-controls="product-instruction-item-2">
+          <span class="product-instruction__title  subheading">Показання щодо застосування</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-2" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-3" aria-expanded="false" aria-controls="product-instruction-item-3">
+          <span class="product-instruction__title  subheading">Протипоказання</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-3" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-4" aria-expanded="false" aria-controls="product-instruction-item-4">
+          <span class="product-instruction__title  subheading">Спосіб застосування</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-4" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-5" aria-expanded="false" aria-controls="product-instruction-item-5">
+          <span class="product-instruction__title  subheading">Застереження при використанні</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-5" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-6" aria-expanded="false" aria-controls="product-instruction-item-6">
+          <span class="product-instruction__title  subheading">Умови зберігання</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-6" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-instruction__item">
+      <h3 class="product-instruction__header">
+        <button class="product-instruction__trigger" type="button" data-coreui-toggle="collapse" data-coreui-target="#product-instruction-item-7" aria-expanded="false" aria-controls="product-instruction-item-7">
+          <span class="product-instruction__title  subheading">Упаковка</span>
+          <svg class="product-instruction__icon" width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-up"></use></svg>
+        </button>
+      </h3>
+      <div class="product-instruction__panel  collapse" id="product-instruction-item-7" data-coreui-parent="#product-instruction-list">
+        <div class="product-instruction__content">
+          <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

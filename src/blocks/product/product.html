@@ -1,0 +1,35 @@
+<!--DEV
+@@include('blocks/product/product.html')
+
+Product page, the top section: the title, the gallery (left) and the details column (right, from lg).
+One DOM for all widths: below lg everything is one column (title, gallery, details), from lg the title and the details
+stand in the right column and the gallery spans both rows (and is sticky).
+The product name is repeated on purpose in the h1 and in the gallery params (alt of the main photo): in MODX both become the same placeholder.
+The blocks of the details column (product-info, ...) are included into .product__details one by one.
+-->
+
+<div class="container  product">
+  <h1 class="product__title  h4">Цетрилев Нео</h1>
+
+  @@include('../../blocks/product-gallery/product-gallery.html', {
+    "title": "Цетрилев Нео",
+    "label": "Новинка",
+    "tone": "product-gallery__label--red",
+    "mix": "product__gallery"
+  })
+
+  <div class="product__details">
+
+    @@include('../../blocks/product-info/product-info.html')
+
+    @@include('../../blocks/product-awards/product-awards.html')
+
+    @@include('../../blocks/product-video/product-video.html')
+
+    @@include('../../blocks/product-price/product-price.html')
+
+    @@include('../../blocks/product-shops/product-shops.html')
+
+    @@include('../../blocks/product-notice/product-notice.html')
+  </div>
+</div>

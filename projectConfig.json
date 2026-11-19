@@ -113,7 +113,22 @@
     "field-file": [],
     "vacancy": [],
     "search-results": [],
-    "search-card": []
+    "search-card": [],
+    "product": [],
+    "product-gallery": [],
+    "product-info": [],
+    "product-awards": [],
+    "product-video": [],
+    "product-price": [],
+    "product-shops": [],
+    "product-notice": [],
+    "similar-drugs": [],
+    "product-instruction": [],
+    "reviews": [],
+    "stars": [],
+    "review-card": [],
+    "review-modal": [],
+    "info-banner": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

@@ -1,0 +1,38 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Needs in variables.scss: $space-16/32/40/48/64, $radius-24/48
+// Info banner: a tinted card with one large centered line of text.
+// The section keeps the page tone (the "Dark BG" of the mockup), the card is the Tag/BG tone and the text is Text/Blue 2.
+// The mockups: 16 / 32 paddings and 24 radius on a phone, 40 paddings and 48 radius on desktop; the tablet mockup has no banner,
+// so the desktop values start from md. The text size comes from the global .h3 (32 / 48 / 56px).
+.info-banner {
+  padding-block: $space-48;
+
+  @include media-up('md') {
+    padding-block: $space-64;
+  }
+
+  &__card {
+    padding: $space-32 $space-16;
+    border-radius: $radius-24;
+    background-color: var(--tag-bg);
+
+    @include media-up('md') {
+      padding: $space-40;
+      border-radius: $radius-48;
+    }
+  }
+
+  &__text {
+    margin: 0; // the global p / .h3 margin
+    text-align: center;
+    color: var(--text-accent-soft);
+  }
+
+  // The mockup breaks the text after "шкідливим"; each half wraps evenly on narrow screens (phone: 3 + 2 lines)
+  &__line {
+    display: block;
+    text-wrap: balance;
+  }
+}

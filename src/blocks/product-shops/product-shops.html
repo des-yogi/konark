@@ -1,0 +1,73 @@
+<!--DEV
+@@include('blocks/product-shops/product-shops.html')
+
+Product shops (a block of the details column on the product page, after product-price): where the product can be ordered.
+A section with its own visible heading (h2 in the style of .subheading) and a list of links to the shops.
+A shop is a logo picture (png + webp in img/), the logo file already has the color of the shop, so the picture fills the whole pill.
+The alt is the name of the shop and gives the name of the link. The links lead to other sites (href="#" is a placeholder).
+The shops are hardcoded on purpose (a placeholder, the templater has no loops; in MODX they become a loop,
+the three logos are repeated here only to show the full list).
+-->
+
+<section class="product-shops">
+  <h2 class="product-shops__title  subheading">Можна замовити:</h2>
+
+  <ul class="product-shops__list">
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/tabletki-ua.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/tabletki-ua.png" width="155" height="64" alt="Tabletki.ua" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/liki-24.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/liki-24.png" width="155" height="64" alt="Liki24" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/e-liki.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/e-liki.png" width="155" height="64" alt="Є-Ліки" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/tabletki-ua.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/tabletki-ua.png" width="155" height="64" alt="Tabletki.ua" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/liki-24.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/liki-24.png" width="155" height="64" alt="Liki24" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/e-liki.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/e-liki.png" width="155" height="64" alt="Є-Ліки" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+    <li class="product-shops__item">
+      <a class="product-shops__link" href="#" target="_blank" rel="nofollow noopener">
+        <picture>
+          <source srcset="img/tabletki-ua.webp" type="image/webp">
+          <img class="product-shops__logo" src="img/tabletki-ua.png" width="155" height="64" alt="Tabletki.ua" loading="lazy" decoding="async">
+        </picture>
+      </a>
+    </li>
+  </ul>
+</section>

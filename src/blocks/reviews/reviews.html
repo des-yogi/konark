@@ -1,0 +1,128 @@
+<!--DEV
+@@include('blocks/reviews/reviews.html')
+
+Reviews (a section of the product page): a panel with the heading, the source of the reviews and the "leave a review" button,
+the rating statistics and a Swiper slider of review-card cards (1 card below md, 2 from md, 3 from lg) with the arrows under it.
+The button opens the review modal (CoreUI Modal, data-coreui-target="#review-modal"; the modal is a separate block).
+Statistics: the CMS fills only the number of reviews for every rating (data-count on the rows of the bars).
+reviews.js counts the rest: the total ("678 відгуків"), the share of every bar, the average rating (rounded to 0.1,
+written to the score and the stars) and the texts of the counts. The words come from data-one / data-few / data-many
+of the section (the plural forms of the page language: 1 відгук, 2 відгуки, 5 відгуків), the CMS puts them from the lexicon.
+Without JS the bars are empty and the score is not shown.
+The cards and the numbers are hardcoded on purpose (a placeholder, the templater has no loops; in MODX they become loops).
+Needs in the build: stars (its CSS), review-card, btn-secondary, text-roll, btn-icon-secondary; Swiper and its CSS (see reviews.js).
+-->
+
+<section class="container  reviews  js-reviews" data-one="відгук" data-few="відгуки" data-many="відгуків">
+  <div class="reviews__panel">
+    <div class="reviews__top">
+      <div class="reviews__head">
+        <h2 class="h2  reviews__title">Відгуки</h2>
+        <p class="reviews__source">Відгуки взяті з сайту <a class="reviews__link" href="https://podorozhnyk.ua/" target="_blank" rel="noopener">podorozhnyk.ua</a></p>
+        <button class="btn-secondary" type="button" data-coreui-toggle="modal" data-coreui-target="#review-modal">
+          <span class="text-roll"><span class="text-roll__line">Залишити відгук</span><span class="text-roll__line" aria-hidden="true">Залишити відгук</span></span>
+          <span class="btn-secondary__icon">
+            <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#pen"></use></svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="reviews__stats">
+        <div class="reviews__summary">
+          <p class="reviews__score  js-reviews-score"></p>
+          <div class="reviews__summary-info">
+            <span class="stars  stars--lg  js-reviews-stars" style="--rating: 0" aria-hidden="true"></span>
+            <p class="reviews__total  js-reviews-total"></p>
+          </div>
+        </div>
+
+        <ul class="reviews__bars" aria-label="Розподіл оцінок">
+        <li class="reviews__bar  js-reviews-bar" data-stars="5" data-count="402">
+          <span class="reviews__bar-label">5<span class="visually-hidden"> зірок:</span> <span class="stars" style="--stars-count: 1; --stars-size: 14px" aria-hidden="true"></span></span>
+          <span class="reviews__bar-track"></span>
+          <span class="reviews__bar-count  js-reviews-bar-count"></span>
+        </li>
+        <li class="reviews__bar  js-reviews-bar" data-stars="4" data-count="200">
+          <span class="reviews__bar-label">4<span class="visually-hidden"> зірок:</span> <span class="stars" style="--stars-count: 1; --stars-size: 14px" aria-hidden="true"></span></span>
+          <span class="reviews__bar-track"></span>
+          <span class="reviews__bar-count  js-reviews-bar-count"></span>
+        </li>
+        <li class="reviews__bar  js-reviews-bar" data-stars="3" data-count="74">
+          <span class="reviews__bar-label">3<span class="visually-hidden"> зірок:</span> <span class="stars" style="--stars-count: 1; --stars-size: 14px" aria-hidden="true"></span></span>
+          <span class="reviews__bar-track"></span>
+          <span class="reviews__bar-count  js-reviews-bar-count"></span>
+        </li>
+        <li class="reviews__bar  js-reviews-bar" data-stars="2" data-count="2">
+          <span class="reviews__bar-label">2<span class="visually-hidden"> зірок:</span> <span class="stars" style="--stars-count: 1; --stars-size: 14px" aria-hidden="true"></span></span>
+          <span class="reviews__bar-track"></span>
+          <span class="reviews__bar-count  js-reviews-bar-count"></span>
+        </li>
+        <li class="reviews__bar  js-reviews-bar" data-stars="1" data-count="0">
+          <span class="reviews__bar-label">1<span class="visually-hidden"> зірок:</span> <span class="stars" style="--stars-count: 1; --stars-size: 14px" aria-hidden="true"></span></span>
+          <span class="reviews__bar-track"></span>
+          <span class="reviews__bar-count  js-reviews-bar-count"></span>
+        </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reviews__slider  swiper  js-reviews-slider">
+      <ul class="reviews__list  swiper-wrapper" id="reviews-list">
+        <li class="reviews__item  swiper-slide">
+          @@include('../../blocks/review-card/review-card.html', {
+            "name": "Ксенія",
+            "rating": "5",
+            "date": "07/18/26",
+            "datetime": "2026-07-18",
+            "text": "Упаковки на 100 таблеток вистачає мені майже на весь рік від моєї алергії, я можу нормально дихати та ходити без окулярів"
+          })
+        </li>
+        <li class="reviews__item  swiper-slide">
+          @@include('../../blocks/review-card/review-card.html', {
+            "name": "Надія",
+            "rating": "5",
+            "date": "07/18/26",
+            "datetime": "2026-07-18",
+            "text": "Зручно що є декілька варіантів по кількості, спочатку спробувала 10 таблеток, а зараз замовила одразу 100 штук, маю багато алергенів, тому часто треба приймати таблетки. Хороший препарат, легше дихати, і очі перестали тікти"
+          })
+        </li>
+        <li class="reviews__item  swiper-slide">
+          @@include('../../blocks/review-card/review-card.html', {
+            "name": "Надія",
+            "rating": "5",
+            "date": "07/18/26",
+            "datetime": "2026-07-18",
+            "text": "завжди тільки їх купую, інші навіть немає бажання пробувати."
+          })
+        </li>
+        <li class="reviews__item  swiper-slide">
+          @@include('../../blocks/review-card/review-card.html', {
+            "name": "Анастасія",
+            "rating": "5",
+            "date": "07/18/26",
+            "datetime": "2026-07-18",
+            "text": "Думала будут лучше чем L-Цет. но особой разницы не было."
+          })
+        </li>
+        <li class="reviews__item  swiper-slide">
+          @@include('../../blocks/review-card/review-card.html', {
+            "name": "Олег",
+            "rating": "5",
+            "date": "07/18/26",
+            "datetime": "2026-07-18",
+            "text": "Приймаю курсом навесні, допомагає добре, сонливості немає."
+          })
+        </li>
+      </ul>
+    </div>
+
+    <div class="reviews__nav">
+      <button class="btn-icon-secondary  js-reviews-prev" type="button" aria-label="Попередні відгуки" aria-controls="reviews-list">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
+      </button>
+      <button class="btn-icon-secondary  js-reviews-next" type="button" aria-label="Наступні відгуки" aria-controls="reviews-list">
+        <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
+      </button>
+    </div>
+  </div>
+</section>

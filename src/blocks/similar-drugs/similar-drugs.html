@@ -1,0 +1,74 @@
+<!--DEV
+@@include('blocks/similar-drugs/similar-drugs.html')
+
+Similar drugs (a section of the product page, after the product block): a Swiper slider of ready prod-card cards with the prev / next arrows.
+Structure: .container > head (h2 in the style of .h5 + the arrows) and .swiper under it. The arrows are always at the top, on the right of the heading;
+when both do not fit in one row the arrows wrap under the heading.
+Below xl the cards have a fixed width and run to the right screen edge (a peeking card); from xl exactly 4 cards fill the container, nothing peeks.
+
+Every slide is a <li class="similar-drugs__item swiper-slide"> with the prod-card inside (the params are the ones of prod-card: title, image, label, labelClass).
+The cards here are hardcoded on purpose (a placeholder, the templater has no loops; in MODX they become a loop over the similar products).
+Swiper and its CSS must be loaded (see similar-drugs.js), the block works with any number of slides, the arrows get disabled at the ends.
+-->
+
+<section class="container similar-drugs">
+  <!-- <div class=""> -->
+    <div class="similar-drugs__head">
+      <h2 class="h5  similar-drugs__title">Препарати тієї ж групи та схожі за своєю дією</h2>
+
+      <div class="similar-drugs__nav">
+        <button class="btn-icon-secondary  js-similar-drugs-prev" type="button" aria-label="Попередні препарати" aria-controls="similar-drugs-list">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-left"></use></svg>
+        </button>
+        <button class="btn-icon-secondary  js-similar-drugs-next" type="button" aria-label="Наступні препарати" aria-controls="similar-drugs-list">
+          <svg width="24" height="24" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/sprite-svg.svg#arrow-right"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="similar-drugs__slider  swiper  js-similar-drugs">
+      <ul class="similar-drugs__list  swiper-wrapper" id="similar-drugs-list">
+        <li class="similar-drugs__item  swiper-slide">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Поліфер",
+            "image": "product-1",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+        <li class="similar-drugs__item  swiper-slide">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Єврофаст",
+            "image": "product-2",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+        <li class="similar-drugs__item  swiper-slide">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Іоніка",
+            "image": "product-3",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+        <li class="similar-drugs__item  swiper-slide">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Єврофаст",
+            "image": "product-2",
+            "label": "Label",
+            "labelClass": "prod-card__label--grey"
+          })
+        </li>
+        <li class="similar-drugs__item  swiper-slide">
+          @@include('../../blocks/prod-card/prod-card.html', {
+            "title": "Іоніка",
+            "image": "product-3",
+            "label": "",
+            "labelClass": ""
+          })
+        </li>
+      </ul>
+    </div>
+  <!-- </div> -->
+</section>

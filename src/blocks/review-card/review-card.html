@@ -1,0 +1,26 @@
+<!--DEV
+@@include('../../blocks/review-card/review-card.html', {
+  "name": "Ксенія",
+  "rating": "5",
+  "date": "07/18/26",
+  "datetime": "2026-07-18",
+  "text": "Упаковки на 100 таблеток вистачає мені майже на весь рік від моєї алергії, я можу нормально дихати та ходити без окулярів"
+})
+
+Review card: the author, the date (top right), the stars and the text. The card takes the whole height of its parent
+(in a slider the cards of one row are equal). The stars are the stars block (it must be in the build too).
+rating: a number from 1 to 5. date: the date as shown, datetime: the same date as YYYY-MM-DD.
+-->
+
+<article class="review-card">
+  <p class="review-card__name">@@name</p>
+  <div class="review-card__body">
+    @@include('../../blocks/stars/stars.html', {
+      "rating": "@@rating",
+      "label": "Оцінка @@rating з 5",
+      "modifier": ""
+    })
+    <p class="review-card__text">@@text</p>
+  </div>
+  <time class="review-card__date" datetime="@@datetime">@@date</time>
+</article>

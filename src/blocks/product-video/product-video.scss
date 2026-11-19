@@ -1,0 +1,173 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+@use '../../scss/mixins/button-mixins' as *;
+
+// Swiper's own CSS (swiper/css) must be loaded; the extra .swiper / .swiper-slide classes below beat its rules regardless of the load order.
+// Below md the slider peeks out the next slide and the arrows (btn-icon-secondary) are used, from md the thumbnails are the navigation.
+// The thumbnail gaps (4px, 20px from md to lg) live in the js: keep them in sync with $screen-md / $screen-lg.
+.product-video {
+  $block-name: &; // #{$block-name}__element
+
+  $ring-room: $focus-ring-width + $focus-ring-offset; // the Swiper box clips everything outside, the focus ring of a thumbnail needs room
+  $peek: $space-32; // the part of the width left to the next slide below md
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-up('md') {
+    gap: $space-16;
+  }
+
+  &__player.swiper {
+    inline-size: 100%; // Swiper's own auto side margins would shrink it in a flex column
+  }
+
+  &__list.swiper-wrapper,
+  &__thumbs-list.swiper-wrapper {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item.swiper-slide {
+    position: relative;
+    inline-size: calc(100% - #{$peek});
+    block-size: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+    overflow: hidden;
+    border-radius: $radius-16;
+    background-color: var(--tag-bg-hover);
+
+    @include media-up('md') {
+      inline-size: 100%;
+      border-radius: $radius-24;
+    }
+  }
+
+  // The facade: the poster and the play button fill the slide. The hover color goes to the circle through the custom property
+  &__media {
+    --play-bg: var(--btn-primary-bg);
+
+    @include button-reset;
+
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    inline-size: 100%;
+    block-size: 100%;
+
+    // The slide clips the outside, so the ring is drawn inside
+    @include button-focus(var(--btn-secondary-focus-ring), -2 * $focus-ring-width);
+
+    @include button-hover {
+      --play-bg: var(--btn-primary-bg-hover);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  // The circle follows the theme: the primary button colors, the triangle is the inverse text color
+  &__play {
+    --play-size: 56px;
+
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--play-size);
+    block-size: var(--play-size);
+    translate: -50% -50%;
+    border-radius: 50%;
+    color: var(--text-inverse);
+    background-color: var(--play-bg, var(--btn-primary-bg));
+    transition: background-color $transition-time ease;
+    pointer-events: none;
+
+    &--sm {
+      --play-size: 40px;
+      --play-bg: color-mix(in srgb, var(--btn-primary-bg) 56%, transparent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    svg {
+      transform: translateX(1px);
+    }
+  }
+
+  &__iframe {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    inline-size: 100%;
+    block-size: 100%;
+    border: 0;
+  }
+
+  // Thumbnails: only from md. The negative margin takes back the room that the padding gives to the focus rings
+  &__thumbs.swiper {
+    display: none;
+    box-sizing: border-box;
+    inline-size: calc(100% + #{2 * $ring-room});
+    margin: -$ring-room;
+    padding: $ring-room;
+
+    @include media-up('md') {
+      display: block;
+    }
+  }
+
+  &__thumb.swiper-slide {
+    block-size: auto;
+    margin-top: 0; // the global `li + li` rule must not shift the slides
+  }
+
+  // The active thumbnail has the same ring as the keyboard focus (one outline, so they never double)
+  &__thumb-btn {
+    @include button-reset;
+
+    box-sizing: border-box;
+    inline-size: 100%;
+    padding: 4px; //4
+    border-radius: $radius-16;
+
+    @include button-focus(var(--btn-secondary-focus-ring), $focus-ring-offset);
+
+    &[aria-current='true'] {
+      outline: $focus-ring-width solid var(--btn-secondary-focus-ring);
+      outline-offset: 0;
+    }
+  }
+
+  &__thumb-media {
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: $radius-14;
+    background-color: var(--tag-bg-hover);
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: $space-40;
+
+    @include media-up('md') {
+      display: none;
+    }
+  }
+}
