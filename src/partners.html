@@ -27,9 +27,14 @@
           "text": "<p>Компанія «Конарк Інтелмед» створена в 1997 році як імпортер і дистриб’ютор фармацевтичної продукції відомих світових виробників.</p>"
         })
 
-        @@include('blocks/map-region/map-region.html', {
+        <!-- @@ include('blocks/map-region/map-region.html', {
           "gradient": ""
-        })
+        }) -->
+        <div class="container  map-values" style="padding-bottom: 0;">
+          @@include('blocks/map-animated/map-animated.html', {
+            "gradient": ""
+          })
+        </div>
 
         <div class="container  info-media">
           <article class="media-card  media-card--media-end">

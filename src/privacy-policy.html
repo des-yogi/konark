@@ -22,10 +22,14 @@
 
         @@include('blocks/breadcrumbs/breadcrumbs.html')
 
-        @@include('blocks/page-head/page-head.html', {
-          "title": "Політика конфіденційності",
-          "text": "<p>Дата останнього оновлення: 22 жовтня 2026 року</p>"
-        })
+        <div class="container  page-head">
+          <div class="page-head__inner">
+            <h1 class="h3  page-head__title">Політика конфіденційності</h1>
+            <div class="page-head__text">
+              <p>Дата останнього оновлення: 22 жовтня 2026 року</p>
+            </div>
+          </div>
+        </div>
 
         @@include('blocks/text-page/text-page.html')
 

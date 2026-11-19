@@ -16,13 +16,21 @@
   // From md the edges of the map fade out (elliptical mask, as in the mockup), so the page background shows through.
   // --map-fade-start: where the fading starts, a share of the ellipse radius.
   &__canvas {
-    --map-fade-start: 53.5%;
+    --map-fade-start: 60%; // 53.5
 
     width: 100%;
     aspect-ratio: 1374 / 737;
 
+    // @include media-up('md') {
+    //   mask-image: radial-gradient(closest-side, #000 var(--map-fade-start), transparent);
+    // }
+
+    // amCharts draws the map on canvas layer 0 and the tooltips on layer 30:
+    // only the map fades out, the tooltips stay solid over the faded edges
     @include media-up('md') {
-      mask-image: radial-gradient(closest-side, #000 var(--map-fade-start), transparent);
+      .am5-layer-0 {
+        mask-image: radial-gradient(closest-side, #000 var(--map-fade-start), transparent);
+      }
     }
   }
 }
