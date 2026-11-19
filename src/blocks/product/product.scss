@@ -72,7 +72,7 @@
       margin-block-start: 0;
     }
 
-    @include media-up('xxl') {
+    @include media-up('xl') {
       grid-column: 7 / span 5;
     }
   }

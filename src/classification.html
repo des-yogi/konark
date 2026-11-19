@@ -20,7 +20,20 @@
 
       <main id="main" class="main" tabindex="-1">
 
-        @@include('blocks/breadcrumbs/breadcrumbs.html')
+        <div class="container  breadcrumbs__wrapper">
+          <nav class="breadcrumbs" aria-label="Навігаційний ланцюжок">
+            <ol class="breadcrumbs__list  caption  invisible-scrollbar  js-breadcrumbs-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a class="breadcrumbs__link" href="#" itemprop="item"><span itemprop="name">Головна</span></a>
+                <meta itemprop="position" content="1">
+              </li>
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="breadcrumbs__link" aria-current="page"><span itemprop="name">ATC класифікація</span></span>
+                <meta itemprop="position" content="2">
+              </li>
+            </ol>
+          </nav>
+        </div>
 
         @@include('blocks/atc-page/atc-page.html')
 

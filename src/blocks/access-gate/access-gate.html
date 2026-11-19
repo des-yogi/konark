@@ -1,0 +1,42 @@
+<!--DEV
+@@include('blocks/access-gate/access-gate.html')
+
+Access gate (CoreUI Modal): the legal agreement for the pages with restricted information (for doctors only).
+Put the include AFTER div.page__inner (the page under the window is hidden while the choice is not made).
+The page is marked by the data-access-gate attribute on <html>; the inline script in _include/page_head.html
+sets the is-gate-pending class before the first paint, access-gate.js opens the window.
+The window cannot be closed by Esc, by a click on the backdrop or by a close button (there is none).
+"Підтверджую" saves the choice to the cookie konark_access_gate (max-age), "Не підтверджую" leads to the home page
+(location.replace: the Back button does not return to the restricted page).
+href="./" points to the home page in the flat build (local server and GitHub Pages);
+in MODX it becomes [[~[[++site_start]]]].
+The texts are from the design.
+-->
+
+<div class="access-gate  modal  fade  js-access-gate" id="access-gate" tabindex="-1" aria-labelledby="access-gate-title" aria-hidden="true" data-coreui-backdrop="static" data-coreui-keyboard="false">
+  <div class="access-gate__dialog  modal-dialog">
+    <div class="access-gate__content  modal-content">
+      <h2 class="access-gate__title  h5" id="access-gate-title">Правова угода про отримання інформації</h2>
+
+      <div class="access-gate__text">
+        <p>Цей розділ сайту ТОВ «Конарк Інтелмед» містить професійну спеціалізовану інформацію про лікарські засоби, їх властивості, способи застосування, можливі протипоказання і побічну дію, а також іншу професійну спеціалізовану інформацію, яка призначена виключно для лікарів.</p>
+        <p>Інформація про лікарські засоби ТОВ «Конарк Інтелмед» призначена виключно для ознайомлення із вищепереліченими характеристиками лікарських засобів, і не є посібником для самостійної діагностики чи лікування, а також, не може бути використана в якості порад або рекомендацій.</p>
+        <p>У разі, якщо Ви не є лікарем, але в порушення умов, зазначених в даній угоді підписуєте її, як лікар, ТОВ «Конарк Інтелмед» не несе відповідальності за можливі негативні наслідки, що можуть виникнути в результаті самостійного використання інформації з цього розділу сайту. Ви робите це самостійно і усвідомлено, розуміючи, що застосування лікарських засобів можливе тільки за призначенням лікаря та після попередньої консультації з ним, а самолікування може завдати шкоди Вашому здоров’ю.</p>
+      </div>
+
+      <div class="access-gate__panel">
+        <p class="access-gate__question">Я підтверджую, що є лікарем, ознайомився з текстом даної Правової угоди, розумію її зміст і підтверджую свою згоду з нею.</p>
+
+        <div class="access-gate__actions">
+          <button class="btn  access-gate__btn  js-access-gate-confirm" type="button">
+            <span class="text-roll"><span class="text-roll__line">Підтверджую</span><span class="text-roll__line" aria-hidden="true">Підтверджую</span></span>
+          </button>
+
+          <a class="btn  access-gate__btn  js-access-gate-decline" href="./">
+            <span class="text-roll"><span class="text-roll__line">Не підтверджую</span><span class="text-roll__line" aria-hidden="true">Не підтверджую</span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

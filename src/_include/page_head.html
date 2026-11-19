@@ -69,3 +69,9 @@
 <!-- <meta name="theme-color" content="#0b1020">
   Изменяет цвет элементов интерфейса браузера и операционной системы в соответствии с фирменным стилем вашей компании. Используйте атрибут media, чтобы задать один цвет для светлого режима и другой — для темного.
 -->
+<script>
+    // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
+    if (root.hasAttribute('data-access-gate') && !document.cookie.split('; ').includes('konark_access_gate=1')) {
+      root.classList.add('is-gate-pending');
+    }
+</script>

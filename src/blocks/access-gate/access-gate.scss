@@ -1,0 +1,126 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins.scss' as *;
+
+// Access gate (CoreUI Modal): the legal agreement window, it cannot be closed (no close button, static backdrop, no Esc).
+// Below md the window is the full viewport; from md it is centered with gaps (like applicant-modal / resume-modal).
+// The whole window scrolls (the native scroll of .modal), the text has no own scroll area.
+// The confirm panel is rebuilt by its content, not by breakpoints:
+// the question and the buttons stand in one row while they fit, then the buttons go under the question
+// and share the row equally, then each button takes its own row.
+// The backdrop is the global .modal-backdrop (see search-modal.scss).
+.access-gate {
+  $block-name: &; // #{$block-name}__element
+
+  $max-width: 910px; // the text column width from the design (the window is this plus the paddings)
+
+  // --gap: the distance from the viewport to the window; --stack-gap: the space between the title, the text and the panel
+  --gap: 0px;
+  --padding-block: #{$space-64};
+  --padding-inline: #{$space-16};
+  --stack-gap: #{$space-16};
+
+  @include media-up('md') {
+    --gap: #{$space-40};
+    --padding-block: #{$space-48};
+    --padding-inline: #{$space-48};
+    --stack-gap: #{$space-20};
+  }
+
+  @include media-up('lg') {
+    --gap: #{$space-48};
+    --padding-block: #{$space-64};
+    --padding-inline: #{$space-64};
+    --stack-gap: #{$space-24};
+  }
+
+  // The doubled class (.modal-dialog / .modal-content) beats the CoreUI rules regardless of the order of the stylesheets:
+  // CoreUI sets max-width: 500px on .modal-dialog from 576px and its own radius / background on .modal-content
+  &__dialog.modal-dialog {
+    display: flex;
+    align-items: center;
+    max-width: calc(#{$max-width} + 2 * var(--padding-inline) + 2 * var(--gap));
+    min-height: 100%;
+    margin: 0 auto;
+    padding: var(--gap);
+  }
+
+  &__content.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap);
+    width: 100%;
+    min-height: 100dvh; // below md: the full viewport (a longer text scrolls the whole window)
+    padding: var(--padding-block) var(--padding-inline);
+    border: 0;
+    border-radius: 0;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+
+    @include media-up('md') {
+      min-height: 0;
+      border-radius: $radius-40;
+      box-shadow: $shadow-m; // CoreUI emits no shadow while $enable-shadows is off
+    }
+
+    @include media-up('lg') {
+      border-radius: $radius-48;
+    }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  // Text from the editor: plain paragraphs, the spacing comes from the global p rule
+  &__text {
+    color: var(--text-secondary);
+
+    > :last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-20 $space-32;
+    padding: $space-16 $space-20;
+    border-radius: $radius-16;
+    background-color: var(--tag-bg-hover);
+
+    @include media-up('lg') {
+      border-radius: $radius-24;
+    }
+  }
+
+  // The huge grow factor gives almost all the free space of a shared row to the question,
+  // so the buttons keep their content width next to it
+  &__question {
+    flex: 999 1 20em;
+    margin: 0;
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+  }
+
+  // Alone in a row the group takes the full width
+  &__actions {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: $space-8;
+  }
+
+  // Basis 0 + min-width max-content: equal widths while both labels fit in one row, otherwise one button per row
+  &__btn {
+    flex: 1 1 0;
+    justify-content: center;
+    min-inline-size: max-content;
+  }
+}
+
+// While the choice is not made, the page under the window is hidden
+// (the class is set by the inline script in _include/page_head.html and removed by access-gate.js)
+.is-gate-pending .page__inner {
+  visibility: hidden;
+}

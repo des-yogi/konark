@@ -16,6 +16,24 @@
     padding-block-start: $space-48 - $ring-room;
   }
 
+  &__wrapper {
+
+    @include media-up('lg') {
+      @include grid-12;
+    }
+
+    #{$block-name} {
+
+      @include media-up('lg') {
+        grid-column: 2 / span 10;
+      }
+
+      @include media-up('xl') {
+        grid-column: 3 / span 8;
+      }
+    }
+  }
+
   // Vertical margins stay 0 on purpose: the global `ol:last-child` rule would override a negative bottom margin
   &__list {
     display: flex;

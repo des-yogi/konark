@@ -12,9 +12,21 @@
 
   padding-block: $space-40;
 
+  @include media-up('lg') {
+    @include grid-12;
+  }
+
   &__inner {
-    max-width: 910px;
-    margin-inline: auto;
+    grid-column: 1 / span 12;
+    // max-width: 910px;
+    // margin-inline: auto;
+    @include media-up('lg') {
+      grid-column: 2 / span 10;
+    }
+
+    @include media-up('xl') {
+      grid-column: 3 / span 8;
+    }
   }
 
   // "Фахівці | Повний робочий день" (Figma: Footnote)

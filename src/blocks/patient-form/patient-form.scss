@@ -27,6 +27,10 @@
     min-width: 0;
 
     @include media-up('lg') {
+      grid-column: 2 / span 10;
+    }
+
+    @include media-up('xl') {
       grid-column: 3 / span 8;
     }
   }

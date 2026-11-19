@@ -128,7 +128,8 @@
     "stars": [],
     "review-card": [],
     "review-modal": [],
-    "info-banner": []
+    "info-banner": [],
+    "access-gate": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",
