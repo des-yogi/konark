@@ -317,7 +317,8 @@ function createMap(el) {
   // Only the highlighted countries react to the pointer and show their names.
   landSeries.events.once('datavalidated', () => {
     countryIds.forEach((id) => {
-      landSeries.getDataItemById(id)?.get('mapPolygon').setAll({ interactive: true, tooltip, tooltipText: '{name}' });
+      // strokeWidth: the amCharts theme default is 0.2px, which makes the outline invisible
+      landSeries.getDataItemById(id)?.get('mapPolygon').setAll({ interactive: true, strokeWidth: 1, tooltip, tooltipText: '{name}' });
     });
 
     applyColors();

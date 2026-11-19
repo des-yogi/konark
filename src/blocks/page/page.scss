@@ -326,6 +326,10 @@ img {
     var(--bg-gradient-2-end) 100%);
 }
 
+.solid-bg {
+  background: var(--bg-secondary);
+}
+
 .text-plain {
   @include col(xs, 12);
   @include col-offset(lg, 1);

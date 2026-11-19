@@ -134,12 +134,24 @@
       align-items: center;
       justify-content: space-between;
     }
+
+    @include media-up('lg') {
+      gap: 0 $space-40;
+    }
+
+    @include media-up('xl') {
+      gap: 0 $space-64;
+    }
+
+    @include media-up('xxl') {
+      gap: 0 $space-96;
+    }
   }
 
   // A long consent text: the box stays at the first line
   &__consent {
     @include media-up('md') {
-      max-inline-size: 445px;
+      // max-inline-size: 445px;
     }
 
     .field-checkbox__name {
