@@ -1,0 +1,127 @@
+@use '../../scss/variables.scss' as *;
+@use '../../scss/mixins' as *;
+
+// Cookie consent banner: a fixed card at the bottom of the screen, not modal.
+// Mobile: centered; from md: bottom-left corner. Width is capped by the design (688px).
+// Scrolls inside when the screen is too low for the whole card.
+.cookie-consent {
+  $block-name: &; // #{$block-name}__element
+
+  $max-width: 688px;
+
+  position: fixed;
+  inset-block-end: $space-24;
+  inset-inline: $space-16;
+  z-index: 1035; // above the fixed header (CoreUI $zindex-fixed: 1030), below offcanvas and modals (1040+)
+  display: flex;
+  flex-direction: column;
+  gap: $space-20;
+  box-sizing: border-box; // the 688px cap includes the paddings
+  max-inline-size: $max-width;
+  max-block-size: calc(100dvh - 2 * $space-24);
+  margin-inline: auto;
+  padding: $space-32 $space-16;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: $radius-28;
+  background-color: var(--bg-primary);
+  box-shadow: $shadow-m-hover;
+  transition: opacity $transition-time ease, translate $transition-time ease;
+
+  // Entry animation without JS: the start state applies when the hidden attribute is removed
+  @starting-style {
+    opacity: 0;
+    translate: 0 $space-24;
+  }
+
+  @include media-up('md') {
+    inset-inline: $space-24;
+    margin-inline: 0 auto;
+    padding-inline: $space-24;
+  }
+
+  @include media-up('lg') {
+    inset-block-end: $space-40;
+    inset-inline: $space-40;
+    max-block-size: calc(100dvh - 2 * $space-40);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  // The card background disappears in forced-colors mode, the border keeps its edge
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+
+  @media print {
+    display: none;
+  }
+
+  // display: flex above would override the default hiding of the attribute
+  &[hidden] {
+    display: none;
+  }
+
+  // On a low screen the card must scroll, not squeeze its parts
+  & > * {
+    flex-shrink: 0;
+  }
+
+  // Figma "Body L Bold" (18/600/1.5): no global class for it
+  &__title {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height;
+    letter-spacing: 0;
+    color: var(--headings-color);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-block-start: calc($space-4 - $space-20); // title → text is 4px in the design, the card gap is 20px
+    color: var(--text-secondary);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: underline;
+
+    &:visited {
+      color: inherit;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+
+    @include media-up('md') {
+      flex-flow: row wrap;
+    }
+  }
+
+  // Mixed with btn / btn-secondary. The secondary button has no icon chip here,
+  // so its label is centered with the main button's padding
+  &__button {
+    &.btn-secondary {
+      justify-content: center;
+      padding: 0 $space-20;
+    }
+  }
+}

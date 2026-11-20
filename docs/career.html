@@ -19,8 +19,45 @@
           theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         }
         root.setAttribute("data-theme", theme);
+
+        // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
+        if (
+          root.hasAttribute("data-access-gate") &&
+          !document.cookie.split("; ").includes("konark_access_gate=1")
+        ) {
+          root.classList.add("is-gate-pending");
+        }
       })();
     </script>
+
+    <script>
+      (function () {
+        const GRANTED = {
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+          analytics_storage: "granted",
+        };
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+
+        window.gtag("consent", "default", {
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          analytics_storage: "denied",
+        });
+
+        // Returning visitor who accepted: apply the consent before GTM loads. Keep the cookie name in sync with cookie-consent.js
+        if (/(?:^|; )cookie_consent=granted/.test(document.cookie)) {
+          window.gtag("consent", "update", GRANTED);
+        }
+      })();
+    </script>
+    <!-- GTM snippet goes here -->
 
     <link
       rel="preload"
@@ -90,15 +127,6 @@
     <!-- <meta name="theme-color" content="#0b1020">
   Изменяет цвет элементов интерфейса браузера и операционной системы в соответствии с фирменным стилем вашей компании. Используйте атрибут media, чтобы задать один цвет для светлого режима и другой — для темного.
 -->
-    <script>
-      // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
-      if (
-        root.hasAttribute("data-access-gate") &&
-        !document.cookie.split("; ").includes("konark_access_gate=1")
-      ) {
-        root.classList.add("is-gate-pending");
-      }
-    </script>
   </head>
 
   <body>
@@ -438,7 +466,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value=""
                                     checked>
                                   <span class="field-checkbox__name-text">Option 1</span>
@@ -452,7 +480,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 2</span>
 
@@ -465,7 +493,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 3</span>
 
@@ -478,7 +506,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value=""
                                     checked>
                                   <span class="field-checkbox__name-text">Option 4</span>
@@ -492,7 +520,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 5</span>
 
@@ -505,7 +533,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 6</span>
 
@@ -518,7 +546,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 7</span>
 
@@ -531,7 +559,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 8</span>
 
@@ -544,7 +572,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 9</span>
 
@@ -580,7 +608,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 1</span>
 
@@ -593,7 +621,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 2</span>
 
@@ -606,7 +634,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 3</span>
 
@@ -619,7 +647,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 4</span>
 
@@ -655,7 +683,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 1</span>
 
@@ -668,7 +696,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 2</span>
 
@@ -681,7 +709,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 3</span>
 
@@ -694,7 +722,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 4</span>
 
@@ -730,7 +758,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 1</span>
 
@@ -743,7 +771,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 2</span>
 
@@ -756,7 +784,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 3</span>
 
@@ -769,7 +797,7 @@
                                   <input
                                     class="field-checkbox__input"
                                     type="checkbox"
-                                    name=""
+                                    name="any-10"
                                     value="">
                                   <span class="field-checkbox__name-text">Option 4</span>
 
@@ -1470,7 +1498,12 @@
       </div>
     </div>
 
-    <div class="mob-nav offcanvas offcanvas-start" id="mob-nav" tabindex="-1" aria-label="Меню">
+    <div
+      class="mob-nav offcanvas offcanvas-start"
+      id="mob-nav"
+      tabindex="-1"
+      role="dialog"
+      aria-label="Меню">
       <div class="mob-nav__top">
         <a class="logo" href="index.html" aria-label="КОНАРК, на головну">
           <svg
@@ -1683,6 +1716,7 @@
       class="search-modal modal fade js-search-modal"
       id="search-modal"
       tabindex="-1"
+      role="dialog"
       aria-label="Пошук"
       aria-hidden="true">
       <div class="search-modal__dialog modal-dialog container">
@@ -1712,6 +1746,7 @@
       class="resume-modal modal fade"
       id="resume-modal"
       tabindex="-1"
+      role="dialog"
       aria-labelledby="resume-modal-title"
       aria-hidden="true">
       <div class="resume-modal__dialog modal-dialog">
@@ -1730,7 +1765,7 @@
 
           <h2 class="resume-modal__title h5" id="resume-modal-title">Відправити резюме</h2>
 
-          <form class="resume-modal__form" action="" method="post" enctype="multipart/form-data">
+          <form class="resume-modal__form" action="#" method="post" enctype="multipart/form-data">
             <div class="resume-modal__fields">
               <div class="resume-modal__row">
                 <label class="field-text resume-modal__field">
@@ -1880,6 +1915,7 @@
       class="review-modal modal fade"
       id="review-modal"
       tabindex="-1"
+      role="dialog"
       aria-labelledby="review-modal-title"
       aria-hidden="true">
       <div class="review-modal__dialog modal-dialog">
@@ -1898,7 +1934,7 @@
 
           <h2 class="review-modal__title h5" id="review-modal-title">Додати відгук</h2>
 
-          <form class="review-modal__form" method="post" action="">
+          <form class="review-modal__form" action="#" method="post">
             <fieldset class="review-modal__rating">
               <legend class="review-modal__rating-name">Ваша оцінка</legend>
               <div class="review-modal__stars">
@@ -2046,6 +2082,7 @@
       class="access-gate modal fade js-access-gate"
       id="access-gate"
       tabindex="-1"
+      role="dialog"
       aria-labelledby="access-gate-title"
       aria-hidden="true"
       data-coreui-backdrop="static"
