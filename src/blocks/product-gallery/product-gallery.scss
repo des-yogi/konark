@@ -76,6 +76,25 @@
       inline-size: auto;
       min-inline-size: 0;
     }
+
+    &::after {
+      content: attr(data-info);
+      position: absolute;
+      bottom: 1em;
+      right: 1em;
+      left: 1em;
+      // font-family: $font-family;
+      font-size: $font-size-sm;
+      text-align: center;
+      line-height: 1.3em;
+      letter-spacing: 0.02em;
+      text-shadow:
+        -1px -1px 0 var(--text-shadow),
+         1px -1px 0 var(--text-shadow),
+        -1px  1px 0 var(--text-shadow),
+         1px  1px 0 var(--text-shadow);
+      // background-color: red;
+    }
   }
 
   // Optional tag at the top centre ("new", "sale"...), the same as prod-card__label but bigger from md. Empty label is hidden.
