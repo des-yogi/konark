@@ -134,6 +134,7 @@
 @use '../blocks/review-modal/review-modal';
 @use '../blocks/info-banner/info-banner';
 @use '../blocks/access-gate/access-gate';
+@use '../blocks/cookie-consent/cookie-consent';
 
 // Подключения из addCssAfter:
 @use './print' as *;

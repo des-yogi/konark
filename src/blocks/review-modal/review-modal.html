@@ -10,7 +10,7 @@ The consent checkbox is name="agreement", checked by default: field-actions.js l
 The form sending is up to the CMS (action / AJAX).
 -->
 
-<div class="review-modal  modal  fade" id="review-modal" tabindex="-1" aria-labelledby="review-modal-title" aria-hidden="true">
+<div class="review-modal  modal  fade" id="review-modal" tabindex="-1" role="dialog" aria-labelledby="review-modal-title" aria-hidden="true">
   <div class="review-modal__dialog  modal-dialog">
     <div class="review-modal__content  modal-content">
       <button class="review-modal__close" type="button" aria-label="Закрити" data-coreui-dismiss="modal">
@@ -19,7 +19,7 @@ The form sending is up to the CMS (action / AJAX).
 
       <h2 class="review-modal__title  h5" id="review-modal-title">Додати відгук</h2>
 
-      <form class="review-modal__form" method="post" action="">
+      <form class="review-modal__form" action="#" method="post">
         <fieldset class="review-modal__rating">
           <legend class="review-modal__rating-name">Ваша оцінка</legend>
           <div class="review-modal__stars">

@@ -129,7 +129,8 @@
     "review-card": [],
     "review-modal": [],
     "info-banner": [],
-    "access-gate": []
+    "access-gate": [],
+    "cookie-consent": []
   },
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",

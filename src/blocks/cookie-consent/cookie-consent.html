@@ -1,0 +1,57 @@
+<!--DEV
+@@include('blocks/cookie-consent/cookie-consent.html')
+
+Cookie consent banner (not modal: no backdrop, no focus trap).
+Place it in <body> right after the skip-link, so keyboard users reach it first.
+Hidden by default: cookie-consent.js shows it only when no choice is stored (without JS it never appears).
+
+Google Consent Mode v2 defaults live in an inline script in _include/page_head.html, BEFORE the GTM snippet:
+
+<script>
+  (function () {
+    const GRANTED = {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+    };
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+    });
+
+    // Returning visitor who accepted: apply the consent before GTM loads. Keep the cookie name in sync with cookie-consent.js
+    if (/(?:^|; )cookie_consent=granted/.test(document.cookie)) {
+      window.gtag('consent', 'update', GRANTED);
+    }
+  })();
+</script>
+
+-- GTM snippet goes here! --
+
+Replace href="#" with the privacy policy page.
+-->
+
+<section class="cookie-consent  js-cookie-consent" role="dialog" aria-labelledby="cookie-consent-title" aria-describedby="cookie-consent-text" hidden>
+  <h2 class="cookie-consent__title" id="cookie-consent-title">Ми використовуємо файли cookie</h2>
+  <div class="cookie-consent__text" id="cookie-consent-text">
+    <p>Ми використовуємо файли cookie, щоб забезпечити належну роботу сайту, покращувати його функціональність і аналізувати взаємодію відвідувачів із сайтом.</p>
+    <p>Ви можете прийняти всі файли cookie або відмовитися від необов’язкових. Детальніше&nbsp;— у нашій <a class="cookie-consent__link" href="#">Політиці конфіденційності</a>.</p>
+  </div>
+  <div class="cookie-consent__actions">
+    <button class="btn  cookie-consent__button  js-cookie-consent-accept" type="button">
+      <span class="text-roll"><span class="text-roll__line">Прийняти всі</span><span class="text-roll__line" aria-hidden="true">Прийняти всі</span></span>
+    </button>
+    <button class="btn-secondary  cookie-consent__button  js-cookie-consent-reject" type="button">
+      <span class="text-roll"><span class="text-roll__line">Відхилити необов’язкові</span><span class="text-roll__line" aria-hidden="true">Відхилити необов’язкові</span></span>
+    </button>
+  </div>
+</section>

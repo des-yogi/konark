@@ -13,8 +13,42 @@
       theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     root.setAttribute('data-theme', theme);
+
+    // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
+    if (root.hasAttribute('data-access-gate') && !document.cookie.split('; ').includes('konark_access_gate=1')) {
+      root.classList.add('is-gate-pending');
+    }
   })();
 </script>
+
+<script>
+  (function () {
+    const GRANTED = {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+    };
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+    });
+
+    // Returning visitor who accepted: apply the consent before GTM loads. Keep the cookie name in sync with cookie-consent.js
+    if (/(?:^|; )cookie_consent=granted/.test(document.cookie)) {
+      window.gtag('consent', 'update', GRANTED);
+    }
+  })();
+</script>
+<!-- GTM snippet goes here -->
 
 <link rel="preload" href="fonts/manrope-v23-cyrillic_latin-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/manrope-v23-cyrillic_latin-500.woff2" as="font" type="font/woff2" crossorigin>
@@ -69,9 +103,3 @@
 <!-- <meta name="theme-color" content="#0b1020">
   Изменяет цвет элементов интерфейса браузера и операционной системы в соответствии с фирменным стилем вашей компании. Используйте атрибут media, чтобы задать один цвет для светлого режима и другой — для темного.
 -->
-<script>
-    // Access gate: hide the restricted page until the choice is made (keep the cookie name in sync with access-gate.js)
-    if (root.hasAttribute('data-access-gate') && !document.cookie.split('; ').includes('konark_access_gate=1')) {
-      root.classList.add('is-gate-pending');
-    }
-</script>
