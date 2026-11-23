@@ -3,7 +3,7 @@
 @use '../../scss/mixins/button-mixins' as *;
 
 // Home page hero: 100svh from md and up (content grows on short screens), content pinned to the bottom.
-// The 3D emblem (WebGL canvas, later) is an absolute layer under the content: .hero__emblem
+// The 3D emblem (poster + WebGL canvas, see hero.js) is an absolute layer under the content: .hero__emblem
 .hero {
   $block-name: &; // #{$block-name}__element
 
@@ -35,12 +35,13 @@
     padding-bottom: 100px;
   }
 
-  // Placeholder for the WebGL canvas: mobile 320 centered, tablet 672, desktop ~39% at the right
+  // Emblem area (poster + WebGL canvas): mobile 320 centered, tablet 672, desktop ~39% at the right.
+  // No z-index here: a stacking context would isolate the poster's soft-light blend from the hero gradient.
+  // The content stays on top anyway: .hero__inner has z-index: 1.
   &__emblem {
     position: absolute;
     inset-block-start: 70px;
     inset-inline: 0;
-    z-index: 0;
     width: 320px;
     margin-inline: auto;
     aspect-ratio: 1;
@@ -53,9 +54,63 @@
 
     @include media-up('lg') {
       inset-block-start: 87px;
-      inset-inline: 47.5% auto;
+      inset-inline: 42% auto; // 47.5%
       width: 39%;
       margin-inline: 0;
+    }
+  }
+
+  // Static poster, soft light over the gradient (as the emblem in contact-us).
+  // Without JS it is always visible. With JS it is hidden: the 3D emblem fades in instead,
+  // and hero.js shows the poster (--static) only when 3D is off
+  &__poster {
+    --poster-opacity: 0.4; // fallback without the soft light blend
+
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: var(--poster-opacity);
+    transition: opacity $transition-time ease;
+
+    @supports (mix-blend-mode: soft-light) {
+      --poster-opacity: 1;
+
+      mix-blend-mode: soft-light;
+    }
+
+    .js & {
+      opacity: 0;
+    }
+  }
+
+  // WebGL canvas (added by hero-emblem.js) over the poster, fades in after its first frame
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    mix-blend-mode: luminosity;
+    transition: opacity $transition-time ease;
+
+    :root[data-theme="dark"] & {
+      mix-blend-mode: normal;
+    }
+  }
+
+  // Set by hero-emblem.js when the first 3D frame is drawn; removed if the WebGL context is lost
+  &__emblem--ready {
+    #{$block-name}__canvas {
+      opacity: 1;
+    }
+  }
+
+  // Set by hero.js / hero-emblem.js when 3D is off: the poster takes its place
+  &__emblem--static {
+    #{$block-name}__poster {
+      opacity: var(--poster-opacity);
     }
   }
 
@@ -185,7 +240,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     &__card,
-    &__card-img {
+    &__card-img,
+    &__poster {
       transition: none;
     }
 

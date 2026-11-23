@@ -19,12 +19,16 @@ const buildJsDir = path.join(buildDir, 'js');
  */
 
 export async function buildScripts({ mode = 'development' } = {}) {
+  const { js, projectConfig } = await getFilesList();
+  const { before, blocks, after, copied } = js;
+  const moduleJs = projectConfig.moduleJs ?? [];
+
   logInfo(`[scripts] Запуск сборки скриптов в режиме "${mode}"`);
 
   const isProd = mode === 'production';
 
-  const { js } = await getFilesList();
-  const { before, blocks, after, copied } = js;
+  // const { js } = await getFilesList();
+  // const { before, blocks, after, copied } = js;
 
   // 1. Фильтруем блоковые JS-файлы: включаем только существующие
   const existingBlocks = (
@@ -86,6 +90,30 @@ export async function buildScripts({ mode = 'development' } = {}) {
   });
 
   logInfo('[scripts] Скрипты собраны: ' + path.relative(rootDir, outFile));
+
+  // 2a. Separate ES modules (projectConfig "moduleJs"): heavy code that a page loads on demand with import().
+  // Each entry is bundled on its own (with its npm dependencies) and never gets into script.min.js:
+  // src/blocks/hero/hero-emblem.js → build/js/hero-emblem.min.js
+  for (const modulePath of moduleJs) {
+    const absPath = path.isAbsolute(modulePath) ? modulePath : path.join(rootDir, modulePath);
+    const moduleOutFile = path.join(buildJsDir, path.basename(absPath, '.js') + '.min.js');
+
+    await esbuild.build({
+      entryPoints: [absPath],
+      bundle: true,
+      outfile: moduleOutFile,
+      format: 'esm',
+      target: ['es2020'],
+      sourcemap: !isProd,
+      minify: isProd,
+      logLevel: 'info',
+      define: {
+        'process.env.NODE_ENV': JSON.stringify(mode),
+      },
+    });
+
+    logInfo('[scripts] Модуль собран: ' + path.relative(rootDir, moduleOutFile));
+  }
 
   // 3. Копирование "сырых" JS-файлов (copiedJs)
   if (copied && copied.length > 0) {

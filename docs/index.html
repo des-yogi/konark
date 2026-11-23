@@ -407,7 +407,22 @@
 
         <main id="main" tabindex="-1">
           <section class="container hero">
-            <div class="hero__emblem js-hero-emblem" aria-hidden="true"></div>
+            <div
+              class="hero__emblem js-hero-emblem"
+              data-module="js/hero-emblem.min.js"
+              data-model="img/logo.glb"
+              aria-hidden="true">
+              <picture>
+                <source srcset="img/hero-emblem.webp" type="image/webp">
+                <img
+                  class="hero__poster"
+                  src="img/hero-emblem.png"
+                  width="1096"
+                  height="1120"
+                  alt=""
+                  decoding="async">
+              </picture>
+            </div>
 
             <div class="hero__inner">
               <div class="hero__text">
