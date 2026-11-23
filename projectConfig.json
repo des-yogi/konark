@@ -132,6 +132,7 @@
     "access-gate": [],
     "cookie-consent": []
   },
+  "moduleJs": ["src/blocks/hero/hero-emblem.js"],
   "addCssBefore": [
     "../../node_modules/swiper/swiper-bundle.min.css",
     "../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css",
@@ -155,7 +156,8 @@
     "svg",
     "ico",
     "webp",
-    "avif"
+    "avif",
+    "glb"
   ],
   "allowedVideoExtensions": [
     "mp4",
